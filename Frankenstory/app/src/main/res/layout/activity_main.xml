@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/gradient_background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/Bangers_Regular"
+        android:shadowColor="@color/verde_letras"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:shadowRadius="1"
+        android:text=" Frankenstory "
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.118" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="220dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:orientation="vertical" >
+        <!---Nombre de usuario-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/Arial_Bold"
+            android:shadowColor="@color/verde_letras"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="1"
+            android:text="Nombre de usuario "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:inputType="text"
+            android:textSize="17sp"
+            android:fontFamily="@font/Arial_Regular"
+            android:hint="Nombre de usuario"
+            android:paddingStart="12dp"
+            android:layout_marginTop="6dp"/>
+        <!---Contraseña-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/Arial_Bold"
+            android:shadowColor="@color/verde_letras"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="1"
+            android:text="Contraseña "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:paddingTop="10dp"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:inputType="text"
+            android:textSize="17sp"
+            android:fontFamily="@font/Arial_Regular"
+            android:hint="Contraseña"
+            android:paddingStart="12dp"
+            android:layout_marginTop="6dp"/>
+        <!---Repita la Contraseña-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/Arial_Bold"
+            android:shadowColor="@color/verde_letras"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="1"
+            android:text="Repita la contraseña "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:paddingTop="10dp"/>
+        <EditText
+            android:id="@+id/secondpassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:inputType="text"
+            android:textSize="17sp"
+            android:fontFamily="@font/Arial_Regular"
+            android:hint="Repita la contraseña"
+            android:paddingStart="12dp"
+            android:layout_marginTop="6dp"/>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
