@@ -11,4 +11,5 @@
     <color name="degradado_arriba">#31ECCF</color>
     <color name="degradado_abajo">#AAEF5E</color>
     <color name="verde_letras">#0ca789</color>
+    <color name="verde_oscuro">#228b22</color>
 </resources>

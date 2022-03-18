@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Frankenstory</string>
+    <string name="createAccount">CREAR CUENTA</string>
+    <string name="insertUserName">Nombre de usuario</string>
+    <string name="insertPassWord">Contraseña</string>
+    <string name="insertPassWordAgain">Repita la contraseña</string>
+    <string name="log_in">Iniciar Sesión</string>
 </resources>
