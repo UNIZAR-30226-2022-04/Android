@@ -7,56 +7,73 @@
     tools:context=".MainActivity"
     android:background="@drawable/gradient_background">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/bangers_regular"
-        android:shadowColor="@color/verde_letras"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:shadowRadius="1"
-        android:text=" Frankenstory "
-        android:textColor="@color/white"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.118" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="60dp"
+        android:orientation="horizontal" >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/screw_left"/>
+        <TextView
+            android:id="@+id/frankenstoryletters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers_regular"
+            android:shadowColor="@color/verde_letras"
+            android:shadowDx="10"
+            android:shadowDy="10"
+            android:shadowRadius="1"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="50dp"
+            android:layout_marginLeft="49dp"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginLeft="289dp"
+            android:src="@drawable/screw_rigth"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="50dp"
-        android:paddingTop="220dp"
-        android:paddingRight="50dp"
+        android:paddingLeft="55dp"
+        android:paddingTop="200dp"
+        android:paddingRight="55dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp">
+
         <!---Nombre de usuario-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/arial_regular"
+            android:fontFamily="@font/arial_bold"
             android:shadowColor="@color/verde_letras"
-            android:shadowDx="5"
-            android:shadowDy="5"
+            android:shadowDx="4"
+            android:shadowDy="4"
             android:shadowRadius="1"
             android:text="@string/insertUserName"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:paddingRight="4dp"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_marginTop="6dp"
             android:background="@color/white"
             android:fontFamily="@font/arial_regular"
             android:hint="@string/insertUserName"
             android:inputType="text"
             android:paddingStart="12dp"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
         <!---Contraseña-->
         <TextView
             android:layout_width="wrap_content"
@@ -64,46 +81,50 @@
             android:fontFamily="@font/arial_bold"
             android:paddingTop="10dp"
             android:shadowColor="@color/verde_letras"
-            android:shadowDx="5"
-            android:shadowDy="5"
+            android:shadowDx="4"
+            android:shadowDy="4"
             android:shadowRadius="1"
             android:text="@string/insertPassWord"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:paddingRight="4dp"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_marginTop="6dp"
             android:background="@color/white"
             android:fontFamily="@font/arial_regular"
             android:hint="@string/insertPassWord"
             android:inputType="textPassword"
             android:paddingStart="12dp"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
         <!---Boton iniciar sesión-->
         <Button
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:fontFamily="@font/bangers_regular"
             android:text="@string/log_in"
-            android:textSize="30sp"
-            android:background="@drawable/button"/>
+            android:textColor="@color/white"
+            android:textSize="27sp"
+            android:background="@drawable/button" />
         <!---Boton crear cuenta-->
         <Button
+            android:id="@+id/createAccountButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:layout_marginStart="30dp"
-            android:background="none"
+            android:background="#"
             android:fontFamily="@font/bangers_regular"
             android:text="@string/createAccount"
             android:textSize="30sp"
-            android:textColor="@color/verde_oscuro"
+            android:textColor="@color/verde_letras"
             android:shadowColor="@color/white"
             android:shadowDx="3"
             android:shadowDy="5"
