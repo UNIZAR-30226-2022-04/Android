@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/Bangers_Regular"
+        android:fontFamily="@font/bangers_regular"
         android:shadowColor="@color/verde_letras"
         android:shadowDx="10"
         android:shadowDy="10"
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/Arial_Bold"
+            android:fontFamily="@font/arial_regular"
             android:shadowColor="@color/verde_letras"
             android:shadowDx="5"
             android:shadowDy="5"
@@ -50,15 +50,15 @@
             android:background="@color/white"
             android:inputType="text"
             android:textSize="17sp"
-            android:fontFamily="@font/Arial_Regular"
+            android:fontFamily="@font/arial_regular"
             android:hint="Nombre de usuario"
             android:paddingStart="12dp"
-            android:layout_marginTop="6dp"/>
+            android:layout_marginTop="6dp" />
         <!---Contraseña-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/Arial_Bold"
+            android:fontFamily="@font/arial_bold"
             android:shadowColor="@color/verde_letras"
             android:shadowDx="5"
             android:shadowDy="5"
@@ -72,9 +72,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textSize="17sp"
-            android:fontFamily="@font/Arial_Regular"
+            android:fontFamily="@font/arial_regular"
             android:hint="Contraseña"
             android:paddingStart="12dp"
             android:layout_marginTop="6dp"/>
@@ -82,7 +82,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/Arial_Bold"
+            android:fontFamily="@font/arial_bold"
             android:shadowColor="@color/verde_letras"
             android:shadowDx="5"
             android:shadowDy="5"
@@ -96,9 +96,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textSize="17sp"
-            android:fontFamily="@font/Arial_Regular"
+            android:fontFamily="@font/arial_regular"
             android:hint="Repita la contraseña"
             android:paddingStart="12dp"
             android:layout_marginTop="6dp"/>

@@ -8,5 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!---Creados-->
+    <color name="degradado_arriba">#31ECCF</color>
+    <color name="degradado_abajo">#AAEF5E</color>
     <color name="verde_letras">#0ca789</color>
 </resources>
