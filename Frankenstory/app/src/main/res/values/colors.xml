@@ -12,4 +12,9 @@
     <color name="degradado_abajo">#AAEF5E</color>
     <color name="verde_letras">#0ca789</color>
     <color name="verde_oscuro">#228b22</color>
+    <color name="negro_transparente">#80000000</color>
+    <color name="amarillo_claro">#FFFF33</color>
+    <color name="amarillo_oscuro">#FFBB33</color>
+    <color name="azul_claro">#89CFF0</color>
+    <color name="azul_oscuro">#36BCD0</color>
 </resources>

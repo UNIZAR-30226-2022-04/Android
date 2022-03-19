@@ -5,4 +5,7 @@
     <string name="insertPassWord">Contraseña</string>
     <string name="insertPassWordAgain">Repita la contraseña</string>
     <string name="log_in">Iniciar Sesión</string>
+    <string name="no_name">Nombre</string>
+    <string name="no_points">0</string>
+    <string name="statistics">Estadísticas</string>
 </resources>

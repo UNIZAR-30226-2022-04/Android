@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            tools:ignore="MissingConstraints">
+            <!---Indicador nombre de usuario-->
+            <TextView
+                android:layout_width="120dp"
+                android:backgroundTint="@color/verde_letras"
+                android:layout_height="match_parent"
+                android:background="@drawable/indicator"
+                android:layout_marginRight="10dp"
+                android:drawableLeft="@drawable/person"
+                android:text="@string/no_name"
+                android:gravity="center"
+                android:textSize="20sp" />
+                <!--android:drawableBottom="@drawable/flag"-->
+            <!---Indicador estrellas-->
+           <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/negro_transparente"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/indicator"
+                android:text="@string/no_points"
+                android:paddingEnd="5dp"
+                android:paddingStart="20dp"
+                android:gravity="right|center_vertical"
+                android:textSize="20sp"
+                />
+            <!---Indicador monedas-->
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/negro_transparente"
+                android:text="@string/no_points"
+                android:paddingEnd="5dp"
+                android:gravity="right|center_vertical"
+                android:background="@drawable/indicator"
+                android:textSize="20sp"
+                />
+            <!---Boton de opciones-->
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/settings">
+            </ImageButton>
+        </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
