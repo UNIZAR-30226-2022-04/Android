@@ -12,11 +12,11 @@
             tools:ignore="MissingConstraints">
             <!---Parte superior-->
             <include layout="@layout/top"
-                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content" />
+                android:layout_marginTop="12dp"/>
             <!---Titulo-->
-            <include layout="@layout/title" />
+            <include layout="@layout/title"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,8 +28,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="10"
-                    android:shadowDy="10"
+                    android:shadowDx="8"
+                    android:shadowDy="8"
                     android:shadowRadius="1"
                     android:text="@string/statistics"
                     android:textColor="@color/white"
@@ -57,6 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
+
                     android:background="@drawable/fast_game_button">
                 </Button>
             </LinearLayout>

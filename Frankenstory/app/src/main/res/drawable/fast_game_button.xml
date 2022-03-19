@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:height="190dp"
-        android:width="165dp">
+        android:width="155dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/white" />
             <corners android:radius="30dp" />
@@ -10,7 +10,7 @@
     </item>
     <item
         android:height="185dp"
-        android:width="165dp"
+        android:width="155dp"
         android:bottom="10dp">
         <shape  android:shape="rectangle">
             <padding android:bottom="15dp"
@@ -23,7 +23,7 @@
     </item>
     <item
         android:height="100dp"
-        android:width="140dp"
+        android:width="130dp"
         android:bottom="300dp"
         android:start="-8dp"
         android:top="10dp">
@@ -32,4 +32,8 @@
             <corners android:radius="20dp" />
         </shape>
     </item>
+    <item android:drawable="@drawable/hora"
+        android:height="100dp"
+        android:width="100dp"
+        android:gravity="center_horizontal"/>
 </layer-list>
