@@ -8,4 +8,7 @@
     <string name="no_name">Nombre</string>
     <string name="no_points">0</string>
     <string name="statistics">Estadísticas</string>
+    <string name="friends">Amigos</string>
+    <string name="House">Casa</string>
+    <string name="your_stories">Tus historias</string>
 </resources>
