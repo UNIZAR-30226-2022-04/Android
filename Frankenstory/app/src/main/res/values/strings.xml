@@ -11,4 +11,9 @@
     <string name="friends">Amigos</string>
     <string name="House">Casa</string>
     <string name="your_stories">Tus historias</string>
+    <string name="quick_game">Partida rápida</string>
+    <string name="create_room">CREAR SALA</string>
+    <string name="join_room">UNIRSE A SALA</string>
+    <string name="random_game">PARTIDA ALEATORIA</string>
+    <string name="code">Código</string>
 </resources>

@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#ffffff00</color>
     <!---Creados-->
     <color name="degradado_arriba">#31ECCF</color>
     <color name="degradado_abajo">#AAEF5E</color>
@@ -17,4 +18,5 @@
     <color name="amarillo_oscuro">#FFBB33</color>
     <color name="azul_claro">#89CFF0</color>
     <color name="azul_oscuro">#36BCD0</color>
+    <color name="amarillo_oro">#FFD700</color>
 </resources>
