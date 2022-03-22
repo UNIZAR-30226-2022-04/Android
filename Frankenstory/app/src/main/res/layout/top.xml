@@ -28,7 +28,7 @@
             <!---Icono persona-->
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="-241dp"
                 android:src="@drawable/man"/>
@@ -53,9 +53,11 @@
             <!---Icono estrella-->
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/username"
-                android:layout_marginLeft="-241dp"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/iconmooncoin"
+                android:layout_marginLeft="23dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="2dp"
                 android:src="@drawable/star"/>
 
             <!---Indicador monedas-->
@@ -75,8 +77,9 @@
 
             <!---Icono mooncoin-->
             <ImageView
+                android:id="@+id/iconmooncoin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/stars"
                 android:layout_marginLeft="-43dp"
                 android:src="@drawable/mooncoin2"/>

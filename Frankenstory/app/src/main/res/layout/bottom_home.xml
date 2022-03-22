@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <!--SHAPE-->
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,29 +16,69 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/bottom_circle"
             android:rotation="180"
-            tools:ignore="MissingConstraints">
+            android:clickable="false">
         </Button>
     </RelativeLayout>
+    <!--TEXTS-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="2dp"
+        tools:ignore="MissingConstraints">
+        <!--Texto amigos-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amigos"
+            android:textSize="12dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/arial_bold"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="51dp"/>
+        <!--Texto Casa-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casa"
+            android:textSize="12dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/arial_bold"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+        <!--Texto Tus historias-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tus historias"
+            android:textSize="12dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/arial_bold"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="38dp"/>
+    </RelativeLayout>
+    <!--BUTTONS-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="19dp"
         tools:ignore="MissingConstraints">
         <!--Boton Home-->
         <Button
             android:id="@+id/home"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:translationZ="1dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/home"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            >
         </Button>
         <!--Boton Amigos-->
         <Button
             android:id="@+id/friends"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:translationZ="1dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/friends"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="50dp">
@@ -46,15 +86,14 @@
         <!--Boton Tus historias-->
         <Button
             android:id="@+id/your_stories"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:translationZ="1dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/your_stories"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="50dp">
         </Button>
-
     </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

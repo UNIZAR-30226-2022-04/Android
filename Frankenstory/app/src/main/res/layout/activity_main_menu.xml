@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenuActivity"
     android:background="@drawable/gradient_background">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
-            <!---Parte superior-->
+            <!---TOP-->
             <include layout="@layout/top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"/>
-            <!---Titulo-->
-            <include layout="@layout/title"/>
+            <!---TITLE-->
+            <include layout="@layout/title" />
+            <!---STATISTICS-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,8 +28,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="8"
-                    android:shadowDy="8"
+                    android:shadowDx="6"
+                    android:shadowDy="6"
                     android:shadowRadius="1"
                     android:text="@string/statistics"
                     android:textColor="@color/white"
@@ -37,10 +37,10 @@
                 <ListView
                     android:id="@+id/statistics"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layoutMode="@layout/item_list">
+                    android:layout_height="150dp">
                 </ListView>
             </LinearLayout>
+            <!---BUTTONS MODE-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -53,20 +53,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/story_button">
+                    android:background="@drawable/story_button"
+                    android:text="Modo Relato"
+                    android:textSize="25dp"
+                    android:fontFamily="@font/bangers_regular"
+                    android:textColor="@color/white"
+                    android:gravity="bottom"
+                    android:paddingBottom="40dp"
+                    android:paddingLeft="18dp"
+                    android:singleLine="true">
                 </Button>
                 <Button
                     android:id="@+id/quick_game_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/fast_game_button">
+                    android:background="@drawable/fast_game_button"
+                    android:text="Partida Rápida"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/bangers_regular"
+                    android:textColor="@color/white"
+                    android:gravity="bottom"
+                    android:paddingBottom="40dp"
+                    android:paddingLeft="12dp"
+                    android:singleLine="true">
                 </Button>
             </LinearLayout>
-            <!---Parte inferior-->
-            <include layout="@layout/bottom_home"
+            <!---BOTTOM HOME-->
+            <include
+                layout="@layout/bottom_home"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

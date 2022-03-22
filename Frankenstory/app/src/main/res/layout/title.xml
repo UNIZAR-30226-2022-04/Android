@@ -1,43 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="60dp"
-            android:orientation="horizontal"
-        android:gravity="center_horizontal">
-        <!--tornillo izquierda -->
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_toRightOf="@id/frankenstoryletters"
-                    android:layout_marginLeft="-275dp"
-                    android:src="@drawable/screw_left"/>
-        <!-- FRANKENSTORY -->
-                <TextView
-                    android:id="@+id/frankenstoryletters"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/bangers_regular"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="10"
-                    android:shadowDy="10"
-                    android:shadowRadius="1"
-                    android:text="@string/app_name"
-                    android:textColor="@color/white"
-                    android:textSize="48dp"
-                    android:paddingRight="8dp"
-                    android:gravity="center_horizontal"/>
-        <!--tornillo derecha -->
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="-20dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_toRightOf="@+id/frankenstoryletters"
-                    android:src="@drawable/screw_rigth" />
-    </RelativeLayout>
+    android:layout_height="match_parent"
+    android:layout_marginTop="70dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/frankenstory_letters"
+        tools:ignore="MissingConstraints"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
