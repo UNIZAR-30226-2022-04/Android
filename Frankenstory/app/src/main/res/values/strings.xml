@@ -16,4 +16,10 @@
     <string name="join_room">UNIRSE A SALA</string>
     <string name="random_game">PARTIDA ALEATORIA</string>
     <string name="code">Código</string>
+    <string name="write_time">Tiempo de escritura</string>
+    <string name="game_type">Tipo de partida</string>
+    <string name="gamemode">Modo de juego</string>
+    <string name="random_words">PALABRAS\nOBLIGATORIAS</string>
+    <string name="twitter_trend">TENDENCIAS\nTWITTER</string>
+    <string name="private_game">Partida privada</string>
 </resources>
