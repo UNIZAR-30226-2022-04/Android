@@ -32,7 +32,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="-241dp"
                 android:src="@drawable/man"/>
-
             <!---Indicador estrellas-->
            <TextView
                 android:id="@+id/stars"

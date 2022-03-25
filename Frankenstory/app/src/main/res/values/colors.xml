@@ -19,4 +19,5 @@
     <color name="azul_claro">#89CFF0</color>
     <color name="azul_oscuro">#36BCD0</color>
     <color name="amarillo_oro">#FFD700</color>
+    <color name="rojo">#dd684d</color>
 </resources>

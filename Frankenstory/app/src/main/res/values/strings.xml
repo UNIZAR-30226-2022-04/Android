@@ -22,4 +22,9 @@
     <string name="random_words">PALABRAS\nOBLIGATORIAS</string>
     <string name="twitter_trend">TENDENCIAS\nTWITTER</string>
     <string name="private_game">Partida privada</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="settings">Ajustes</string>
+    <string name="change_pass">Cambiar contraseña</string>
+    <string name="elminate_acc">Eliminar cuenta</string>
 </resources>
