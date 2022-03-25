@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:backgroundTint="@color/white">
+    <!--Nombre usuario-->
+    <TextView
+        android:layout_width="292dp"
+        android:layout_height="match_parent"
+        android:text="@string/no_name"
+        android:gravity="center_vertical"
+        android:textSize="30sp" />
+    <!--Boton añadir amigo-->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/arial_bold"
+        android:shadowColor="@color/azul_oscuro"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="1"
+        android:text="@string/add_friends"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+</LinearLayout>

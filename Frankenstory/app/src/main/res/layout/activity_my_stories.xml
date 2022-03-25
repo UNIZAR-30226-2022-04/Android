@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+            <!---Parte superior-->
+            <include layout="@layout/top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="70dp"
+                android:layout_marginHorizontal="50dp">
+                <!--Texto buscar amigos-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="8"
+                    android:shadowDy="8"
+                    android:shadowRadius="1"
+                    android:text="@string/search_friends"
+                    android:textColor="@color/white"
+                    android:textSize="35sp" />
+                <!--Cuadro busqueda-->
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/white"
+                    android:layout_marginVertical="20dp"
+                    android:fontFamily="@font/arial_regular"
+                    android:hint="@string/insertUserName"
+                    android:inputType="text"
+                    android:paddingStart="12dp"
+                    android:textSize="15sp"
+                    tools:ignore="RtlSymmetry" />
+                <!--Lista resultados amigos-->
+                <ListView
+                    android:id="@+id/searched_friends"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"/>
+                <!--Texto peticiones-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="8"
+                    android:shadowDy="8"
+                    android:shadowRadius="1"
+                    android:text="@string/petitions"
+                    android:textColor="@color/white"
+                    android:textSize="35sp" />
+                <!--Lista solicitudes-->
+                <ListView
+                    android:id="@+id/petitions"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="100dp"/>
+            </LinearLayout>
+            <!---Parte inferior-->
+            <include
+                layout="@layout/bottom_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
