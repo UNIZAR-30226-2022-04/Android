@@ -1,30 +1,18 @@
-package es.unizar.eina.frankenstory;
+package es.unizar.eina.frankenstory.general;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
+        import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import es.unizar.eina.frankenstory.R;
+
+public class MainMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Button button = (Button)findViewById(R.id.createAccountButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, LogInActivity.class);
-                startActivity(i);
-            }
-        });
+        setContentView(R.layout.activity_general_main_menu);
     }
 
     // Para ocultar Navigation bar y lo de arriba.
@@ -41,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                            );
+            );
         }
     }
 

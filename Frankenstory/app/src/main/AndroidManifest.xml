@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Frankenstory">
         <activity
-            android:name=".MainActivity"
+            android:name=".general.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LogInActivity"
+            android:name=".general.LogInActivity"
             android:exported="false">
         </activity>
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".general.MainMenuActivity"
             android:exported="false">
         </activity>
     </application>

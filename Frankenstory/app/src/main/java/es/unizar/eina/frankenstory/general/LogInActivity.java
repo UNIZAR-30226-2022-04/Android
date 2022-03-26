@@ -1,22 +1,27 @@
-package es.unizar.eina.frankenstory;
+package es.unizar.eina.frankenstory.general;
 
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.app.AppCompatActivity;
         import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
+        import android.os.Bundle;
         import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
+        import android.widget.Button;
 
-import java.util.ArrayList;
+        import es.unizar.eina.frankenstory.R;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_general_log_in);
+
+        Button button = (Button)findViewById(R.id.login);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(LogInActivity.this, MainMenuActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     // Para ocultar Navigation bar y lo de arriba.
