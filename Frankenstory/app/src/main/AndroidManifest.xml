@@ -26,6 +26,10 @@
             android:name=".general.MainMenuActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".general.SettingsActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

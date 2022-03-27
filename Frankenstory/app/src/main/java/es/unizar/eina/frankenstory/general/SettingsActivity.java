@@ -8,20 +8,13 @@ import android.widget.Button;
 
 import es.unizar.eina.frankenstory.R;
 
-public class LogInActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_general_log_in);
+        setContentView(R.layout.activity_general_settings);
 
-        Button button = (Button)findViewById(R.id.login);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(LogInActivity.this, MainMenuActivity.class);
-                startActivity(i);
-            }
-        });
     }
 
     // Para ocultar Navigation bar y lo de arriba.

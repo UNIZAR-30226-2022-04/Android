@@ -2,8 +2,11 @@ package es.unizar.eina.frankenstory.general;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
         import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import es.unizar.eina.frankenstory.R;
 
@@ -13,6 +16,15 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_main_menu);
+
+        // BUTTON TO SettingsActivity
+        ImageButton button = (ImageButton)findViewById(R.id.configbutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(MainMenuActivity.this, SettingsActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     // Para ocultar Navigation bar y lo de arriba.
