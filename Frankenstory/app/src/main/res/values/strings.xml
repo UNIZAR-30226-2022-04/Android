@@ -42,4 +42,10 @@
     <string name="participants">0/10 Participantes</string>
     <string name="code_room">CODIGO DE SALA: #000000</string>
     <string name="mode">MODO DE JUEGO</string>
+    <string name="start_story">Empezar relato</string>
+    <string name="writings">Número de escrituras</string>
+    <string name="length">Número de caracteres</string>
+    <string name="story_name">Titulo del relato</string>
+    <string name="finish">Terminar</string>
+    <string name="write">Escribe tu párrafo</string>
 </resources>

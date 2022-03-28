@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+            <!---TOP-->
+            <include layout="@layout/top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical"
+                tools:ignore="UseSwitchCompatOrMaterialXml">
+                <EditText
+                    android:id="@+id/story_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/arial_regular"
+                    android:hint="@string/story_name"
+                    android:inputType="text"
+                    android:paddingStart="12dp"
+                    android:textSize="20sp"
+                    tools:ignore="RtlSymmetry" />
+
+                <!--Parte número de turnos-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="6"
+                    android:shadowDy="6"
+                    android:shadowRadius="1"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/writings"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end"
+                    android:layout_marginTop="20dp">
+                    <!--Número de turnos-->
+                    <TextView
+                        android:id="@+id/writings"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/no_points"
+                        android:fontFamily="@font/arial_bold"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical|end"
+                        android:layout_marginEnd="30sp"
+                        android:textSize="25sp" />
+                    <!--Botón más número turnos-->
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/button_plus_minus"
+                        android:textSize="30sp"
+                        android:layout_marginEnd="10dp"
+                        android:paddingHorizontal="0dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:text="@string/plus"
+                        tools:ignore="RtlCompat">
+                    </Button>
+                    <!--Botón más número turnos-->
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/button_plus_minus"
+                        android:textSize="30sp"
+                        android:paddingHorizontal="0dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:text="@string/minus"
+                        tools:ignore="RtlCompat">
+                    </Button>
+                </LinearLayout>
+                <!--Parte número de escrituras-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="6"
+                    android:shadowDy="6"
+                    android:shadowRadius="1"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/length"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end"
+                    android:layout_marginTop="20dp">
+                    <!--Número de caracteres-->
+                    <TextView
+                        android:id="@+id/length"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/no_points"
+                        android:fontFamily="@font/arial_bold"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical|end"
+                        android:layout_marginEnd="30sp"
+                        android:textSize="25sp" />
+                    <!--Botón más numero turnos-->
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/button_plus_minus"
+                        android:textSize="30sp"
+                        android:layout_marginRight="10dp"
+                        android:paddingHorizontal="0dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:text="@string/plus"
+                        tools:ignore="RtlCompat">
+                    </Button>
+                    <!--Botón más numero turnos-->
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/button_plus_minus"
+                        android:textSize="30sp"
+                        android:paddingHorizontal="0dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:text="@string/minus"
+                        tools:ignore="RtlCompat">
+                    </Button>
+                </LinearLayout>
+                <!--Tipo de partida-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="6"
+                    android:shadowDy="6"
+                    android:shadowRadius="1"
+                    android:text="@string/game_type"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+                <!--Selector de privacidad-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/private_game"
+                        android:fontFamily="@font/arial_bold"
+                        android:textColor="@color/white"
+                        android:textSize="25sp" />
+                    <Switch
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <!--Crear sala-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="400dp"
+                android:gravity="center_horizontal|bottom"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+
+                <Button
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_ingame"
+                    android:fontFamily="@font/bangers_regular"
+                    android:paddingHorizontal="100dp"
+                    android:text="@string/start_story"
+                    android:textColor="@color/white"
+                    android:textSize="27sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

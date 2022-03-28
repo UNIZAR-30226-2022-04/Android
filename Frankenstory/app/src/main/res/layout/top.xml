@@ -7,8 +7,8 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:orientation="horizontal"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             tools:ignore="MissingConstraints">
 
             <!---Indicador nombre de usuario-->
@@ -19,7 +19,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/indicator"
                 android:layout_marginRight="10dp"
-                android:paddingLeft="4dp"
+                android:paddingLeft="5dp"
                 android:text="@string/no_name"
                 android:fontFamily="@font/arial_bold"
                 android:textSize="15sp"
@@ -35,14 +35,14 @@
             <!---Indicador estrellas-->
            <TextView
                 android:id="@+id/stars"
-                android:layout_width="100dp"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/verde_letras"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/indicator"
                 android:text="@string/no_points"
                 android:paddingEnd="5dp"
-                android:paddingStart="20dp"
+                android:paddingStart="28dp"
                 android:gravity="right|center_vertical"
                 android:fontFamily="@font/arial_bold"
                 android:textSize="15sp"
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/iconmooncoin"
-                android:layout_marginLeft="23dp"
+                android:layout_marginLeft="38dp"
                 android:paddingTop="1dp"
                 android:paddingBottom="2dp"
                 android:src="@drawable/star"/>
@@ -62,7 +62,7 @@
             <!---Indicador monedas-->
             <TextView
                 android:id="@+id/coins"
-                android:layout_width="100dp"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/verde_letras"
                 android:text="@string/no_points"
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/stars"
-                android:layout_marginLeft="-43dp"
+                android:layout_marginLeft="-45dp"
                 android:src="@drawable/mooncoin2"/>
 
             <!---Boton de opciones-->
