@@ -54,22 +54,39 @@
                     android:id="@+id/participants"
                     android:layout_width="match_parent"
                     android:layout_marginTop="20dp"
-                    android:layout_height="400dp"/>
-                <!--Modo de juego-->
-                <TextView
+                    android:layout_height="400dp"
+                    tools:listitem="@layout/row_participants"/>
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/bangers_regular"
-                    android:shadowColor="@color/verde_letras"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
-                    android:shadowRadius="1"
-                    android:background="@color/azul_oscuro"
-                    android:text="@string/mode"
-                    android:textColor="@color/white"
-                    android:textSize="30sp" />
+                    android:layout_height="match_parent">
+                    <!--Modo de juego RANDOM WORDS-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers_regular"
+                        android:layout_marginTop="20dp"
+                        android:gravity="left"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="5dp"
+                        android:background="@drawable/button_yellow_random"
+                        android:text="@string/mode_random_words"
+                        android:textColor="@color/white"
+                        android:textSize="25sp" />
+                    <!--Modo de juego TWITTER-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bangers_regular"
+                        android:layout_marginTop="20dp"
+                        android:gravity="left"
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="5dp"
+                        android:background="@drawable/button_blue_twitter"
+                        android:text="@string/mode_twitter"
+                        android:textColor="@color/white"
+                        android:textSize="27sp" />
+                </RelativeLayout>
+
             </LinearLayout>
             <!--Crear sala-->
             <LinearLayout

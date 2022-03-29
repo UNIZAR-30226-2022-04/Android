@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/azul_oscuro" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/twitter_trend"
+        android:height="50dp"
+        android:width="50dp"
+        android:gravity="right"/>
+
+</layer-list>

@@ -41,7 +41,8 @@
     <string name="start_game">Empezar partida</string>
     <string name="participants">0/10 Participantes</string>
     <string name="code_room">CODIGO DE SALA: #000000</string>
-    <string name="mode">MODO DE JUEGO</string>
+    <string name="mode_twitter">MODO TENDENCIAS TWITTER</string>
+    <string name="mode_random_words">MODO PALABRAS ALEATORIAS</string>
     <string name="start_story">Empezar relato</string>
     <string name="writings">Número de escrituras</string>
     <string name="length">Número de caracteres</string>
