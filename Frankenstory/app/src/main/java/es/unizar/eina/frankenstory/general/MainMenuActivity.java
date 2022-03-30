@@ -1,8 +1,10 @@
 package es.unizar.eina.frankenstory.general;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
         import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,12 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        // BACKGROUND ANIMATION
+        ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
     }
 
     // Para ocultar Navigation bar y lo de arriba.

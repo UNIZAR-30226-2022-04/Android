@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background"
+    android:id="@+id/layoutmain">
 
     <!---Titulo-->
     <include layout="@layout/title" />
@@ -13,16 +14,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="55dp"
-        android:paddingTop="200dp"
-        android:paddingRight="55dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp">
+
+        <!---SIGN IN-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160dp"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/arial_bold"
+            android:shadowColor="@color/verde_letras"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="1"
+            android:text="REGISTER"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <!--- Animacion -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            app:lottie_rawRes="@raw/register"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            android:id="@+id/loginanimation"
+            android:layout_gravity="center_horizontal"/>
 
         <!---Nombre de usuario-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/arial_bold"
             android:shadowColor="@color/verde_letras"
             android:shadowDx="4"
@@ -36,13 +62,14 @@
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginTop="6dp"
             android:background="@color/white"
             android:fontFamily="@font/arial_regular"
             android:hint="@string/insertUserName"
             android:inputType="text"
             android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textSize="15sp" />
         <!---Contraseña-->
         <TextView
@@ -62,13 +89,14 @@
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginTop="6dp"
             android:background="@color/white"
             android:fontFamily="@font/arial_regular"
             android:hint="@string/insertPassWord"
             android:inputType="textPassword"
             android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textSize="15sp" />
         <!---Repita la Contraseña-->
         <TextView
@@ -88,20 +116,21 @@
         <EditText
             android:id="@+id/secondpassword"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginTop="6dp"
             android:background="@color/white"
             android:fontFamily="@font/arial_regular"
             android:hint="@string/insertPassWordAgain"
             android:inputType="textPassword"
             android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textSize="15sp" />
         <!---Boton crear cuenta-->
         <Button
             android:id="@+id/createAccountButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="25dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:fontFamily="@font/bangers_regular"
