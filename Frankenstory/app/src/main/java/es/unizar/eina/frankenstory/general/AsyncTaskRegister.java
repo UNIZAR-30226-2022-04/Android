@@ -2,7 +2,6 @@ package es.unizar.eina.frankenstory.general;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -12,26 +11,26 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AsyncTaskLogIn extends AsyncTask<String, Void, AsyncTaskLogIn.Result> {
+public class AsyncTaskRegister extends AsyncTask<String, Void, AsyncTaskRegister.ResultRegister> {
 
-    private LogInActivity mActivity = null;
+    private RegisterActivity mActivity = null;
 
-    static class Result {
+    static class ResultRegister {
         String result;
         String reason;
     }
 
-    public AsyncTaskLogIn(LogInActivity activity)
+    public AsyncTaskRegister(RegisterActivity activity)
     {
         mActivity = activity;
     }
 
-    protected Result doInBackground(String... params) {
+    protected ResultRegister doInBackground(String... params) {
         String username = params[0];
         String password = params[1];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/login").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/register").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
@@ -45,15 +44,16 @@ public class AsyncTaskLogIn extends AsyncTask<String, Void, AsyncTaskLogIn.Resul
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, Result.class);
+            return gson.fromJson(reader, ResultRegister.class);
 
         } catch (IOException e) {
-            Log.e("ERROR_AsyncTaskLogin",e.getMessage());
+            Log.e("ERROR_AsyncTaskRegister",e.getMessage());
         }
-        return new Result();
+        return new ResultRegister();
     }
 
-    protected void onPostExecute(Result resultado) {
+    protected void onPostExecute(ResultRegister resultado) {
         mActivity.setupAdapter(resultado.result.equals("success"), resultado.reason);
     }
+
 }

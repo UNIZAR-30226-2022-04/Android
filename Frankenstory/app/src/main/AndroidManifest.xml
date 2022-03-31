@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Frankenstory">
         <activity
-            android:name=".general.MainActivity"
+            android:name=".general.LogInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".general.LogInActivity"
+            android:name=".general.RegisterActivity"
             android:exported="false">
         </activity>
         <activity

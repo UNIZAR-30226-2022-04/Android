@@ -9,22 +9,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
 import es.unizar.eina.frankenstory.R;
 
-public class LogInActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private EditText mUserName;
     private EditText mPassword;
+    private EditText mRepeatPassword;
     private LottieAnimationView mchargeAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_general_log_in);
+        setContentView(R.layout.activity_general_register);
 
         // BACKGROUND ANIMATION
         ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
@@ -33,17 +33,19 @@ public class LogInActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-        mUserName = (EditText) findViewById(R.id.usernameLogIn);
-        mPassword = (EditText) findViewById(R.id.passwordLogIn);
-        mchargeAnimation = (LottieAnimationView) findViewById(R.id.charge);
+        mUserName = (EditText) findViewById(R.id.usernameRegister);
+        mPassword = (EditText) findViewById(R.id.passwordRegister);
+        mRepeatPassword = (EditText) findViewById(R.id.secondpasswordRegister);
+        mchargeAnimation = (LottieAnimationView) findViewById(R.id.chargeRegister);
 
-        // ON CLICK BUTTON "INICIAR SESIÓN"
-        Button button = (Button)findViewById(R.id.login);
+        // ON CLICK BUTTON CREAR CUENTA
+        Button button = (Button)findViewById(R.id.createAccountButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // LEER EDIT TEXTS
                 String username = mUserName.getText().toString();
                 String password = mPassword.getText().toString();
+                String repeatpassword = mRepeatPassword.getText().toString();
                 boolean camposLlenos = true;
                 if (username.equalsIgnoreCase("")){
                     mUserName.setError("Introduce un nombre de usuario");
@@ -53,28 +55,19 @@ public class LogInActivity extends AppCompatActivity {
                     mPassword.setError("Introduce una contraseña");
                     camposLlenos = false;
                 }
-
+                if (!repeatpassword.equals(password)){
+                    mRepeatPassword.setError("La contraseña no es la misma");
+                    camposLlenos = false;
+                }
                 // LLAMAR A LA TAREA ASINCRONA
                 if (camposLlenos){
-                    AsyncTaskLogIn myTask = new AsyncTaskLogIn(LogInActivity.this);
+                    AsyncTaskRegister myTask = new AsyncTaskRegister(RegisterActivity.this);
                     myTask.execute(username, password);
                     // INFORMAR CARGANDO
-                    //Toast.makeText(LogInActivity.this, "Preguntando a la web", Toast.LENGTH_LONG).show();
                     mchargeAnimation.setVisibility(View.VISIBLE);
                 }
             }
         });
-
-        // ON CLICK BUTTON "CREAR CUENTA"
-        Button buttonCreate = (Button)findViewById(R.id.createAccountLogIn);
-        buttonCreate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // CREAR CUENTA
-                Intent i = new Intent(LogInActivity.this, RegisterActivity.class);
-                startActivity(i);
-            }
-        });
-
 
     }
 
@@ -88,30 +81,21 @@ public class LogInActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                             | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-            );
+                            );
         }
     }
 
-    // ASYNC TASK ADAPTER
-    public void setupAdapter(boolean loggeadoCorrectamente, String error)
+    public void setupAdapter(boolean registradoCorrectamente, String error)
     {
         mchargeAnimation.setVisibility(View.INVISIBLE);
-        if (loggeadoCorrectamente) {
-            // START
-            Intent i = new Intent(LogInActivity.this, MainMenuActivity.class);
-            startActivity(i);
-        } else {
+        if (registradoCorrectamente) {
+            // It's closed -> LogInActivity where it was called
+            finish();
+        } else if (error.equals("user_already_registered")){
             // SHOW ERROR
-            //Toast.makeText(this, "ERROR:"+error, Toast.LENGTH_LONG).show();
-            if (error.equals("user_not_found")){
-                mUserName.setError("Usuario no encontrado");
-            } else if (error.equals("wrong_password")){
-                mPassword.setError("Contraseña incorrecta");
-            }
+            mUserName.setError("El nombre no está disponible");
         }
     }
 
