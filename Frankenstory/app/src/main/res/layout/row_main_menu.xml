@@ -41,14 +41,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mercuthio"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/verde_letras"
             android:fontFamily="@font/graduate"
             android:layout_marginLeft="25dp"
             android:layout_gravity="center_vertical"/>
         <!-- ESTRELLAS -->
         <TextView android:id="@+id/friendStars"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="match_parent"

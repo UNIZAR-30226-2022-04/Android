@@ -21,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mPassword;
     private EditText mRepeatPassword;
     private LottieAnimationView mchargeAnimation;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         mchargeAnimation = (LottieAnimationView) findViewById(R.id.chargeRegister);
 
         // ON CLICK BUTTON CREAR CUENTA
-        Button button = (Button)findViewById(R.id.createAccountButton);
+        button = (Button)findViewById(R.id.createAccountButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // LEER EDIT TEXTS
@@ -69,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                     myTask.execute(username, password);
                     // INFORMAR CARGANDO
                     mchargeAnimation.setVisibility(View.VISIBLE);
+                    button.setClickable(false);
                 }
             }
         });
@@ -94,6 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void setupAdapter(boolean registradoCorrectamente, String error)
     {
         mchargeAnimation.setVisibility(View.INVISIBLE);
+        button.setClickable(true);
         if (registradoCorrectamente) {
             // It's closed -> LogInActivity where it was called
             finish();

@@ -5,15 +5,30 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.database.MatrixCursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
         import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
+
+import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
 
 public class MainMenuActivity extends AppCompatActivity {
+
+    private TextView mUsername;
+    private TextView mStars;
+    private TextView mCoins;
+    private Button mNotifications;
+    private ListView mList;
+    String username;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +37,19 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        // GET USERNAME AND PASSWORD FROM LOGINACTIVITY
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
+
+        // GET VIEWS
+        mUsername = (TextView) findViewById(R.id.usernameTop);
+        mStars = (TextView) findViewById(R.id.starsTop);
+        mCoins = (TextView) findViewById(R.id.coinsTop);
+        mNotifications = (Button) findViewById(R.id.notifications);
+        mNotifications.setVisibility(View.INVISIBLE);
+        mList = (ListView) findViewById(R.id.statistics);
 
         // BUTTON TO SettingsActivity
         ImageButton button = (ImageButton)findViewById(R.id.configbutton);
@@ -37,6 +65,10 @@ public class MainMenuActivity extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
+
+        // CALL ASYNC TASK
+        AsyncTaskMainMenu myTask = new AsyncTaskMainMenu(this);
+        myTask.execute(username, password);
     }
 
     // Para ocultar Navigation bar y lo de arriba.
@@ -55,6 +87,47 @@ public class MainMenuActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
         }
+    }
+
+    // ASYNC TASK ADAPTER
+    public void setupAdapter(AsyncTaskMainMenu.Result resultado)
+    {
+        if (resultado.result.equals("success")){
+            // TOP INFORMATION
+            mUsername.setText(username);
+            mCoins.setText(resultado.coins.toString());
+            mStars.setText(resultado.stars.toString());
+            // NOTIFICATIONS
+            if (resultado.notifications > 0){
+                mNotifications.setText(resultado.notifications.toString());
+                mNotifications.setVisibility(View.VISIBLE);
+            }
+            // STATISTICS
+            fillData(resultado.bestFour);
+        } else {
+            // IF USER/PASSW IS NOT OKAY COME BACK TO LOGIN
+            finish();
+        }
+    }
+
+    private void fillData(List<AsyncTaskMainMenu.Statistic> list) {
+        // CREANDO CURSOR CON LOS RESULTADOS
+        String[] columns = new String[] { "_id", "position", "friendName", "friendStars"};
+        MatrixCursor matrixCursor= new MatrixCursor(columns);
+
+        Integer i=1;
+        for(AsyncTaskMainMenu.Statistic p : list){
+            matrixCursor.addRow(new Object[]{i-1,i.toString()+"º",p.username,"x "+p.stars.toString()});
+            i++;
+        }
+
+        // PARSEANDO CURSOR A LISTVIEW
+        String[] from = new String[] { "position", "friendName", "friendStars" };
+        int[] to = new int[] { R.id.position, R.id.friendName, R.id.friendStars };
+
+        SimpleCursorAdapter photos =
+                new SimpleCursorAdapter(this, R.layout.row_main_menu, matrixCursor, from, to);
+        mList.setAdapter(photos);
     }
 
 }

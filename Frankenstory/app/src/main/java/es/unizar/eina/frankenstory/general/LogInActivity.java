@@ -22,6 +22,8 @@ public class LogInActivity extends AppCompatActivity {
     private EditText mPassword;
     private LottieAnimationView mchargeAnimation;
     private Button button;
+    String username;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,8 @@ public class LogInActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // LEER EDIT TEXTS
-                String username = mUserName.getText().toString();
-                String password = mPassword.getText().toString();
+                username = mUserName.getText().toString();
+                password = mPassword.getText().toString();
                 boolean camposLlenos = true;
                 if (username.equalsIgnoreCase("")){
                     mUserName.setError("Introduce un nombre de usuario");
@@ -110,6 +112,8 @@ public class LogInActivity extends AppCompatActivity {
         if (loggeadoCorrectamente) {
             // START
             Intent i = new Intent(LogInActivity.this, MainMenuActivity.class);
+            i.putExtra("username",username);
+            i.putExtra("password",password);
             startActivity(i);
         } else {
             // SHOW ERROR
