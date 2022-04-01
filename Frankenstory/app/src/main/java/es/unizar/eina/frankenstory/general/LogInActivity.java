@@ -21,6 +21,7 @@ public class LogInActivity extends AppCompatActivity {
     private EditText mUserName;
     private EditText mPassword;
     private LottieAnimationView mchargeAnimation;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class LogInActivity extends AppCompatActivity {
         mchargeAnimation = (LottieAnimationView) findViewById(R.id.charge);
 
         // ON CLICK BUTTON "INICIAR SESIÓN"
-        Button button = (Button)findViewById(R.id.login);
+        button = (Button)findViewById(R.id.login);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // LEER EDIT TEXTS
@@ -65,6 +66,7 @@ public class LogInActivity extends AppCompatActivity {
                     // INFORMAR CARGANDO
                     //Toast.makeText(LogInActivity.this, "Preguntando a la web", Toast.LENGTH_LONG).show();
                     mchargeAnimation.setVisibility(View.VISIBLE);
+                    button.setClickable(false);
                 }
             }
         });
@@ -104,6 +106,7 @@ public class LogInActivity extends AppCompatActivity {
     public void setupAdapter(boolean loggeadoCorrectamente, String error)
     {
         mchargeAnimation.setVisibility(View.INVISIBLE);
+        button.setClickable(true);
         if (loggeadoCorrectamente) {
             // START
             Intent i = new Intent(LogInActivity.this, MainMenuActivity.class);
