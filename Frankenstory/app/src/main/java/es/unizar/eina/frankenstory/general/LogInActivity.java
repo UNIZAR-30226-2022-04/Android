@@ -1,6 +1,7 @@
 package es.unizar.eina.frankenstory.general;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
@@ -25,6 +26,9 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_log_in);
+
+        // MODE NIGHT OFF
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         // BACKGROUND ANIMATION
         ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);

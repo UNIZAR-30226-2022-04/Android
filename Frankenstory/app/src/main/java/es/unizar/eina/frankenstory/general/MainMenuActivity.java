@@ -1,6 +1,7 @@
 package es.unizar.eina.frankenstory.general;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
@@ -18,6 +19,9 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_main_menu);
+
+        // MODE NIGHT OFF
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         // BUTTON TO SettingsActivity
         ImageButton button = (ImageButton)findViewById(R.id.configbutton);

@@ -1,31 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:backgroundTint="@color/white">
-    <!--Posicion-->
-    <TextView
-        android:layout_width="20dp"
-        android:layout_height="match_parent"
-        android:text="@string/no_points"
-        android:gravity="start"
-        android:textSize="30sp"/>
-    <!--Nombre amigo-->
-    <TextView
-        android:layout_width="292dp"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/no_name"
-        android:textSize="30sp" />
-    <!--Puntuacion-->
-    <TextView
+    android:layout_height="wrap_content">
+    <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/no_points"
-        android:gravity="end"
-        android:paddingEnd="75dp"
-        android:textSize="30sp"/>
+        android:layout_height="22dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="@color/gris_claro">
+    </com.google.android.material.imageview.ShapeableImageView>
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+        <!-- POSICION -->
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1º"
+            android:textSize="19sp"
+            android:textColor="@color/verde_letras"
+            android:textStyle="bold"
+            android:fontFamily="@font/graduate"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"/>
+        <!-- IMAGEN -->
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="3dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/crown" />
+        <!-- NOMBRE -->
+        <TextView
+            android:id="@+id/friendName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mercuthio"
+            android:textSize="16sp"
+            android:textColor="@color/verde_letras"
+            android:fontFamily="@font/graduate"
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="center_vertical"/>
+        <!-- ESTRELLAS -->
+        <TextView android:id="@+id/friendStars"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="x6575"
+            android:textColor="@color/verde_letras"
+            android:fontFamily="@font/graduate"
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="8dp"/>
+        <!-- IMAGEN -->
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/star" />
+    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
+
