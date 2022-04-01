@@ -7,6 +7,9 @@
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable-v23/button_plus.xml" value="0.403125" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable-v23/story_button.xml" value="0.403125" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable/bottom_circle.xml" value="0.403125" />
+        <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable/buttom_change_icon.xml" value="0.403125" />
+        <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable/buttom_change_password.xml" value="0.403125" />
+        <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable/buttom_close_session.xml" value="0.403125" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable/buttom_eliminate_acc.xml" value="0.403125" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable/button.xml" value="0.403125" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/drawable/button_ingame.xml" value="0.403125" />
@@ -28,6 +31,8 @@
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/layout/activity_general_library_story.xml" value="0.35054347826086957" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/layout/activity_general_log_in.xml" value="0.35054347826086957" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/layout/activity_general_main_menu.xml" value="0.35054347826086957" />
+        <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/layout/activity_general_register.xml" value="0.3795289855072464" />
+        <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/layout/activity_general_settings.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/layout/activity_log_in.xml" value="0.3804347826086957" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/layout/activity_main.xml" value="0.3401268115942029" />
         <entry key="..\:/Users/adria/OneDrive/Escritorio/Tercero/2-Proyecto software/Practicas/Android/Frankenstory/app/src/main/res/layout/activity_main_menu.xml" value="0.3546195652173913" />

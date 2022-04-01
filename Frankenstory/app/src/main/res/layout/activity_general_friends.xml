@@ -51,8 +51,25 @@
                 <ListView
                     android:id="@+id/searched_friends"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"/>
-                <!--Texto peticiones-->
+                    android:layout_height="50dp"/>
+                <!--Texto tus amigos-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="8"
+                    android:shadowDy="8"
+                    android:shadowRadius="1"
+                    android:text="@string/your_friends"
+                    android:textColor="@color/white"
+                    android:textSize="35sp" />
+                <!--Lista solicitudes-->
+                <ListView
+                    android:id="@+id/your_friends"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="100dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -20,4 +20,6 @@
     <color name="azul_oscuro">#36BCD0</color>
     <color name="amarillo_oro">#FFD700</color>
     <color name="rojo">#dd684d</color>
+    <color name="rojo_oscuro">#C9386C</color>
+    <color name="gris">#676567</color>
 </resources>

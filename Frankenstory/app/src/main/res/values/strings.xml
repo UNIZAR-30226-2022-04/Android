@@ -49,4 +49,8 @@
     <string name="story_name">Titulo del relato</string>
     <string name="finish">Terminar</string>
     <string name="write">Escribe tu párrafo</string>
+    <string name="change_icon">CAMBIAR ICONO</string>
+    <string name="close_session">CERRAR SESIÓN</string>
+    <string name="eliminate_account">ELIMINAR CUENTA</string>
+    <string name="your_friends">Tus amigos</string>
 </resources>

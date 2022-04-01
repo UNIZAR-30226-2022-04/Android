@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginHorizontal="50dp">
                 <TextView
                     android:layout_width="match_parent"
@@ -32,61 +32,101 @@
                     android:text="@string/settings"
                     android:textColor="@color/white"
                     android:textSize="35sp" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal"
-                    tools:ignore="UseSwitchCompatOrMaterialXml">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Ajuste1"
-                        android:fontFamily="@font/arial_bold"
-                        android:textColor="@color/white"
-                        android:textSize="25sp" />
-                    <Switch
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="20dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal"
-                    tools:ignore="UseSwitchCompatOrMaterialXml">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Ajuste2"
-                        android:fontFamily="@font/arial_bold"
-                        android:textColor="@color/white"
-                        android:textSize="25sp" />
-                    <Switch
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="20dp"/>
-                </LinearLayout>
+                <!---Contraseña-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arial_bold"
+                android:paddingTop="10dp"
+                android:shadowColor="@color/verde_letras"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="1"
+                android:text="@string/insertPassWord"
+                android:textColor="@color/white"
+                android:paddingRight="4dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/passwordRegister"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:fontFamily="@font/arial_regular"
+                android:hint="@string/insertPassWord"
+                android:inputType="textPassword"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textSize="15sp" />
+            <!---Repita la Contraseña-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arial_bold"
+                android:paddingTop="10dp"
+                android:shadowColor="@color/verde_letras"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="1"
+                android:text="@string/insertPassWordAgain"
+                android:textColor="@color/white"
+                android:paddingRight="4dp"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/secondpasswordRegister"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:fontFamily="@font/arial_regular"
+                android:hint="@string/insertPassWordAgain"
+                android:inputType="textPassword"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textSize="15sp" />
                 <Button
                     android:id="@+id/change_pass"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-
-                    android:layout_marginTop="40sp"
+                    android:layout_marginTop="5sp"
                     android:paddingHorizontal="55sp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/change_pass"
                     android:textColor="@color/white"
                     android:textSize="27sp"
-                    android:background="@drawable/button" />
+                    android:background="@drawable/buttom_change_password" />
                 <Button
-                    android:id="@+id/eliminate_acc"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/change_icon"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="40sp"
+                    android:layout_marginTop="5sp"
+                    android:paddingHorizontal="55sp"
+                    android:fontFamily="@font/bangers_regular"
+                    android:text="@string/change_icon"
+                    android:textColor="@color/white"
+                    android:textSize="27sp"
+                    android:background="@drawable/buttom_change_icon" />
+                <Button
+                    android:id="@+id/close_session"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5sp"
+                    android:paddingHorizontal="55sp"
+                    android:fontFamily="@font/bangers_regular"
+                    android:text="@string/close_session"
+                    android:textColor="@color/white"
+                    android:textSize="27sp"
+                    android:background="@drawable/buttom_close_session" />
+                <Button
+                    android:id="@+id/eliminate_acc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5sp"
                     android:paddingHorizontal="80sp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/elminate_acc"
