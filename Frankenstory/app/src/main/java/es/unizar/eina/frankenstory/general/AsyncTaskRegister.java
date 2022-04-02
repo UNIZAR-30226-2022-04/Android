@@ -28,6 +28,7 @@ public class AsyncTaskRegister extends AsyncTask<String, Void, AsyncTaskRegister
     protected ResultRegister doInBackground(String... params) {
         String username = params[0];
         String password = params[1];
+        String email = params[2];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/register").openConnection();
@@ -36,7 +37,7 @@ public class AsyncTaskRegister extends AsyncTask<String, Void, AsyncTaskRegister
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"email\":\""+email+"\"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);

@@ -1,21 +1,21 @@
 package es.unizar.eina.frankenstory.general;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.app.AppCompatDelegate;
+        import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
+        import android.content.Intent;
+        import android.graphics.drawable.AnimationDrawable;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.ImageButton;
+        import android.widget.TextView;
 
-import es.unizar.eina.frankenstory.R;
+        import es.unizar.eina.frankenstory.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class FriendsActivity extends AppCompatActivity {
+
     private TextView mUsername;
     private TextView mStars;
     private TextView mCoins;
@@ -29,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_general_settings);
+        setContentView(R.layout.activity_general_friends);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -63,15 +63,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
-
     }
 
     public void setNavegavilidad(){
-        // BUTTON TO MainMenuActivity
-        Button buttonHome = (Button)findViewById(R.id.home);
-        buttonHome.setOnClickListener(new View.OnClickListener() {
+        // BUTTON TO SettingsActivity
+        ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(SettingsActivity.this, MainMenuActivity.class);
+                Intent i = new Intent(FriendsActivity.this, SettingsActivity.class);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
                 i.putExtra("stars", stars);
@@ -82,11 +81,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        // BUTTON TO FriendsActivity
-        Button buttonFriends = (Button)findViewById(R.id.friends);
-        buttonFriends.setOnClickListener(new View.OnClickListener() {
+        // BUTTON TO MainMenuActivity
+        Button buttonHome = (Button)findViewById(R.id.home);
+        buttonHome.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(SettingsActivity.this, FriendsActivity.class);
+                Intent i = new Intent(FriendsActivity.this, MainMenuActivity.class);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
                 i.putExtra("stars", stars);

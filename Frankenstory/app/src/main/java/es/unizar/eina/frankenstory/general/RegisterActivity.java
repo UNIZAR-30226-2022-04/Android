@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import es.unizar.eina.frankenstory.R;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText mUserName;
+    private EditText mEmail;
     private EditText mPassword;
     private EditText mRepeatPassword;
     private LottieAnimationView mchargeAnimation;
@@ -39,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         animationDrawable.start();
 
         mUserName = (EditText) findViewById(R.id.usernameRegister);
+        mEmail = (EditText) findViewById(R.id.emailRegister);
         mPassword = (EditText) findViewById(R.id.passwordRegister);
         mRepeatPassword = (EditText) findViewById(R.id.secondpasswordRegister);
         mchargeAnimation = (LottieAnimationView) findViewById(R.id.chargeRegister);
@@ -50,10 +53,15 @@ public class RegisterActivity extends AppCompatActivity {
                 // LEER EDIT TEXTS
                 String username = mUserName.getText().toString();
                 String password = mPassword.getText().toString();
+                String email = mEmail.getText().toString();
                 String repeatpassword = mRepeatPassword.getText().toString();
                 boolean camposLlenos = true;
                 if (username.equalsIgnoreCase("")){
                     mUserName.setError("Introduce un nombre de usuario");
+                    camposLlenos = false;
+                }
+                if (email.equalsIgnoreCase("") || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    mEmail.setError("Introduce un email válido");
                     camposLlenos = false;
                 }
                 if (password.equalsIgnoreCase("")){
@@ -67,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
                 // LLAMAR A LA TAREA ASINCRONA
                 if (camposLlenos){
                     AsyncTaskRegister myTask = new AsyncTaskRegister(RegisterActivity.this);
-                    myTask.execute(username, password);
+                    myTask.execute(username, password, email);
                     // INFORMAR CARGANDO
                     mchargeAnimation.setVisibility(View.VISIBLE);
                     button.setClickable(false);
@@ -100,6 +108,9 @@ public class RegisterActivity extends AppCompatActivity {
         if (registradoCorrectamente) {
             // It's closed -> LogInActivity where it was called
             finish();
+        } else if (error.equals("email_already_registered")){
+            // SHOW ERROR
+            mEmail.setError("Ya estás registrado con este email");
         } else if (error.equals("user_already_registered")){
             // SHOW ERROR
             mUserName.setError("El nombre no está disponible");

@@ -22,10 +22,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="5dp">
                 <!---Indicador nombre de usuario-->
                 <TextView
-                    android:id="@+id/username"
+                    android:id="@+id/usernameTop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/indicator"
@@ -35,10 +35,10 @@
                     android:text="@string/no_name"
                     android:textColor="@color/white"
                     android:textSize="15sp"
-                    android:paddingLeft="34dp"/>
+                    android:paddingLeft="30dp"/>
                 <!---Icono persona-->
                 <ImageView
-                    android:layout_width="28dp"
+                    android:layout_width="26dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:src="@drawable/man"/>
@@ -47,37 +47,55 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
-                <!---Indicador nombre de usuario-->
+                android:layout_weight="1"
+                android:layout_marginRight="5dp">
+                <!---Indicador nº estrellas-->
                 <TextView
-                    android:id="@+id/stars"
+                    android:id="@+id/starsTop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/indicator"
-                    android:backgroundTint="@color/verde_top"
+                    android:backgroundTint="@color/verde_letras"
                     android:fontFamily="@font/arial_bold"
-                    android:gravity="center"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="9dp"
                     android:text="0"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
+                <!---Icono estrella-->
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingBottom="2dp"
+                    android:src="@drawable/starshadow"/>
             </RelativeLayout>
             <!-- MONEDAS -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <!---Indicador nombre de usuario-->
+                <!---Indicador nº monedas-->
                 <TextView
-                    android:id="@+id/coins"
+                    android:id="@+id/coinsTop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/indicator"
-                    android:backgroundTint="@color/verde_top"
+                    android:backgroundTint="@color/verde_letras"
                     android:fontFamily="@font/arial_bold"
-                    android:gravity="center"
-                    android:text="dfdffd"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="9dp"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
+                <!---Icono moneda-->
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="2dp"
+                    android:src="@drawable/mooncoin2"/>
             </RelativeLayout>
             <!-- SETTINGS -->
             <RelativeLayout
@@ -87,7 +105,7 @@
                 <!---Boton de settings-->
                 <ImageButton
                     android:id="@+id/configbutton"
-                    android:layout_width="28dp"
+                    android:layout_width="26dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:background="@drawable/settings_icon">

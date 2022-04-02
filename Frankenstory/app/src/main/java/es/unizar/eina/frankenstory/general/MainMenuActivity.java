@@ -29,6 +29,9 @@ public class MainMenuActivity extends AppCompatActivity {
     private ListView mList;
     String username;
     String password;
+    String stars;
+    String coins;
+    String notifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +54,9 @@ public class MainMenuActivity extends AppCompatActivity {
         mNotifications.setVisibility(View.INVISIBLE);
         mList = (ListView) findViewById(R.id.statistics);
 
-        // BUTTON TO SettingsActivity
-        ImageButton button = (ImageButton)findViewById(R.id.configbutton);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(MainMenuActivity.this, SettingsActivity.class);
-                startActivity(i);
-            }
-        });
+        // BUTTONS FROM TOP AND BOTTOM
+        setNavegavilidad();
+
         // BACKGROUND ANIMATION
         ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
@@ -69,6 +67,38 @@ public class MainMenuActivity extends AppCompatActivity {
         // CALL ASYNC TASK
         AsyncTaskMainMenu myTask = new AsyncTaskMainMenu(this);
         myTask.execute(username, password);
+    }
+
+    public void setNavegavilidad(){
+        // BUTTON TO SettingsActivity
+        ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(MainMenuActivity.this, SettingsActivity.class);
+                i.putExtra("username",username);
+                i.putExtra("password",password);
+                i.putExtra("stars", stars);
+                i.putExtra("coins", coins);
+                i.putExtra("notifications", notifications);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+        });
+
+        // BUTTON TO FriendsActivity
+        Button buttonFriends = (Button)findViewById(R.id.friends);
+        buttonFriends.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(MainMenuActivity.this, FriendsActivity.class);
+                i.putExtra("username",username);
+                i.putExtra("password",password);
+                i.putExtra("stars", stars);
+                i.putExtra("coins", coins);
+                i.putExtra("notifications", notifications);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+        });
     }
 
     // Para ocultar Navigation bar y lo de arriba.
@@ -92,6 +122,10 @@ public class MainMenuActivity extends AppCompatActivity {
     // ASYNC TASK ADAPTER
     public void setupAdapter(AsyncTaskMainMenu.Result resultado)
     {
+        // Saved to send to other activities
+        stars = resultado.stars.toString();
+        coins = resultado.coins.toString();
+        notifications = resultado.notifications.toString();
         if (resultado.result.equals("success")){
             // TOP INFORMATION
             mUsername.setText(username);

@@ -57,7 +57,7 @@
                 android:layout_marginLeft="38dp"
                 android:paddingTop="1dp"
                 android:paddingBottom="2dp"
-                android:src="@drawable/star"/>
+                android:src="@drawable/starshadow"/>
 
             <!---Indicador monedas-->
             <TextView

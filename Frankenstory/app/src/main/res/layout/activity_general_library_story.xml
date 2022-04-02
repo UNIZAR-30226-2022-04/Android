@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
             <!---Parte superior-->
-            <include layout="@layout/top"
+            <include layout="@layout/top2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"/>

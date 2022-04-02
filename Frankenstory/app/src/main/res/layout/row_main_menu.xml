@@ -63,7 +63,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center_vertical"
             android:scaleType="fitXY"
-            android:src="@drawable/star" />
+            android:src="@drawable/starshadow" />
     </LinearLayout>
 
 </RelativeLayout>

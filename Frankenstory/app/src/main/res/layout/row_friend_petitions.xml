@@ -26,11 +26,21 @@
         android:layout_marginRight="10dp"/>
     <!-- IMAGEN -->
     <ImageButton
-        android:id="@+id/addfriend"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:id="@+id/cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:src="@drawable/cancel"/>
+    <!-- IMAGEN -->
+    <ImageButton
+        android:id="@+id/accept"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="center_vertical"
         android:scaleType="fitXY"
         android:background="@null"
-        android:src="@drawable/add_friend"/>
+        android:src="@drawable/accept"/>
 </LinearLayout>

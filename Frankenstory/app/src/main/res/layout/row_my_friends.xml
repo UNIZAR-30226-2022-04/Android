@@ -26,11 +26,11 @@
         android:layout_marginRight="10dp"/>
     <!-- IMAGEN -->
     <ImageButton
-        android:id="@+id/addfriend"
+        android:id="@+id/deletefriend"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="center_vertical"
         android:scaleType="fitXY"
         android:background="@null"
-        android:src="@drawable/add_friend"/>
+        android:src="@drawable/delete_friend"/>
 </LinearLayout>
