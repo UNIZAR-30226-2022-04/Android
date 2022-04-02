@@ -47,10 +47,18 @@
     <string name="writings">Número de escrituras</string>
     <string name="length">Número de caracteres</string>
     <string name="story_name">Titulo del relato</string>
-    <string name="finish">Terminar</string>
+    <string name="finish_story">TERMINAR RELATO</string>
+    <string name="finish_game">TERMINAR HISTORIA</string>
+    <string name="finish_text">ENVIAR PÁRRAFO</string>
     <string name="write">Escribe tu párrafo</string>
     <string name="change_icon">CAMBIAR ICONO</string>
     <string name="close_session">CERRAR SESIÓN</string>
     <string name="eliminate_account">ELIMINAR CUENTA</string>
     <string name="your_friends">Tus amigos</string>
+    <string name="story_begins">Comienza la historia…</string>
+    <string name="story_theme">TEMA DE LA HISTORIA</string>
+    <string name="votations">VOTACIONES</string>
+    <string name="vote">VOTAR</string>
+    <string name="next">SIGUIENTE</string>
+    <string name="choose">ELIGE EL PÁRRAFO QUE MÁS TE GUSTE</string>
 </resources>
