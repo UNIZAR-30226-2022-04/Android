@@ -56,8 +56,16 @@ public class LogInActivity extends AppCompatActivity {
                     mUserName.setError("Introduce un nombre de usuario");
                     camposLlenos = false;
                 }
+                if (username.length()>=30){
+                    mUserName.setError("El nombre es demasiado largo");
+                    camposLlenos = false;
+                }
                 if (password.equalsIgnoreCase("")){
                     mPassword.setError("Introduce una contraseña");
+                    camposLlenos = false;
+                }
+                if (password.length()>=30){
+                    mPassword.setError("La contraseña es demasiado larga");
                     camposLlenos = false;
                 }
 
@@ -122,6 +130,8 @@ public class LogInActivity extends AppCompatActivity {
                 mUserName.setError("Usuario no encontrado");
             } else if (error.equals("wrong_password")){
                 mPassword.setError("Contraseña incorrecta");
+            } else {
+                mUserName.setError("ERROR EN EL LOGIN");
             }
         }
     }

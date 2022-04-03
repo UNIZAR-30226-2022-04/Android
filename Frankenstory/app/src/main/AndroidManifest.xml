@@ -12,6 +12,10 @@
         android:theme="@style/Theme.Frankenstory">
         <activity
             android:name=".general.LogInActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".general.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

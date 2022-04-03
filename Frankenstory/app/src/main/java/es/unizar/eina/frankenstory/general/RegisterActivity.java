@@ -60,12 +60,24 @@ public class RegisterActivity extends AppCompatActivity {
                     mUserName.setError("Introduce un nombre de usuario");
                     camposLlenos = false;
                 }
+                if (username.length()>=30){
+                    mUserName.setError("El nombre es demasiado largo");
+                    camposLlenos = false;
+                }
                 if (email.equalsIgnoreCase("") || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     mEmail.setError("Introduce un email válido");
                     camposLlenos = false;
                 }
+                if (email.length()>=40){
+                    mEmail.setError("El email es demasiado largo");
+                    camposLlenos = false;
+                }
                 if (password.equalsIgnoreCase("")){
                     mPassword.setError("Introduce una contraseña");
+                    camposLlenos = false;
+                }
+                if (password.length()>=30){
+                    mPassword.setError("La contraseña es demasiado larga");
                     camposLlenos = false;
                 }
                 if (!repeatpassword.equals(password)){
@@ -114,6 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (error.equals("user_already_registered")){
             // SHOW ERROR
             mUserName.setError("El nombre no está disponible");
+        } else {
+            mUserName.setError("ERROR EN EL REGISTRO");
         }
     }
 
