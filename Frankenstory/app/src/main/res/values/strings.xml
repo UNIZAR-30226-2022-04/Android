@@ -60,5 +60,9 @@
     <string name="votations">VOTACIONES</string>
     <string name="vote">VOTAR</string>
     <string name="next">SIGUIENTE</string>
+    <string name="score">PUNTUACIÓN</string>
+    <string name="clasification">Clasificación</string>
+    <string name="previous_text">Párrafo anterior</string>
+    <string name="words_to_write">PALABRAS A INTRODUCIR</string>
     <string name="choose">ELIGE EL PÁRRAFO QUE MÁS TE GUSTE</string>
 </resources>
