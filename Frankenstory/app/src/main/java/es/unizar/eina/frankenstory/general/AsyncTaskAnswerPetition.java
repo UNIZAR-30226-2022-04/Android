@@ -10,38 +10,33 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
-public class AsyncTaskFriends extends AsyncTask<String, Void, AsyncTaskFriends.Result> {
+public class AsyncTaskAnswerPetition extends AsyncTask<String, Void, AsyncTaskAnswerPetition.Result> {
     private FriendsActivity mActivity = null;
 
-    static class Friend {
-        String username;
-        String hola;
-    }
     static class Result {
         String result;
-        List<String> friends;
-        List<Friend> notifications;
     }
 
-    public AsyncTaskFriends(FriendsActivity activity)
+    public AsyncTaskAnswerPetition(FriendsActivity activity)
     {
         mActivity = activity;
     }
 
-    protected AsyncTaskFriends.Result doInBackground(String... params) {
+    protected AsyncTaskAnswerPetition.Result doInBackground(String... params) {
         String username = params[0];
         String password = params[1];
+        String targetUser = params[2];
+        String answer = params[3];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/friends").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/answer_petition").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"targetUser\":\""+targetUser+"\",\"answer\":"+answer.equals("true")+"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -49,19 +44,19 @@ public class AsyncTaskFriends extends AsyncTask<String, Void, AsyncTaskFriends.R
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, AsyncTaskFriends.Result.class);
+            return gson.fromJson(reader, AsyncTaskAnswerPetition.Result.class);
 
         } catch (IOException e) {
-            Log.e("ERROR_AsyncTaskFriends",e.getMessage());
+            Log.e("AsyncTaskAnswerPetition",e.getMessage());
         } catch (Exception e) {
-            Log.e("ERROR_AsyncTaskFriends",e.getMessage());
+            Log.e("AsyncTaskAnswerPetition",e.getMessage());
         }
-        Result erroneo = new Result();
+        AsyncTaskAnswerPetition.Result erroneo = new AsyncTaskAnswerPetition.Result();
         erroneo.result = "error";
         return erroneo;
     }
 
-    protected void onPostExecute(AsyncTaskFriends.Result resultado) {
-        mActivity.setupAdapter(resultado);
+    protected void onPostExecute(AsyncTaskAnswerPetition.Result resultado) {
+        mActivity.refreshPage();
     }
 }

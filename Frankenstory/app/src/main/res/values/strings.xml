@@ -8,7 +8,7 @@
     <string name="no_name">Nombre</string>
     <string name="no_points">0</string>
     <string name="statistics">Estadísticas</string>
-    <string name="friends">Amigos</string>
+    <string name="friends">Amig@s</string>
     <string name="House">Casa</string>
     <string name="your_stories">Tus historias</string>
     <string name="quick_game">Partida rápida</string>
@@ -27,13 +27,13 @@
     <string name="settings">Ajustes</string>
     <string name="change_pass">Cambiar contraseña</string>
     <string name="elminate_acc">Eliminar cuenta</string>
-    <string name="search_friends">Buscar amigxs</string>
+    <string name="search_friends">Buscar amig@s</string>
     <string name="petitions">Peticiones</string>
     <string name="add_friends">Añadir</string>
     <string name="refuse_friend">Rechazar</string>
     <string name="story">Relato</string>
     <string name="my_games">Mis partidas</string>
-    <string name="friend_games">Partidas de amigos</string>
+    <string name="friend_games">Partidas de amig@s</string>
     <string name="public_games">Partidas públicas</string>
     <string name="create_sotry">Crear relato</string>
     <string name="my_stories">Biblioteca</string>
@@ -54,7 +54,7 @@
     <string name="change_icon">CAMBIAR ICONO</string>
     <string name="close_session">CERRAR SESIÓN</string>
     <string name="eliminate_account">ELIMINAR CUENTA</string>
-    <string name="your_friends">Tus amigos</string>
+    <string name="your_friends">Tus amig@s</string>
     <string name="story_begins">Comienza la historia…</string>
     <string name="story_theme">TEMA DE LA HISTORIA</string>
     <string name="votations">VOTACIONES</string>

@@ -12,36 +12,35 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class AsyncTaskFriends extends AsyncTask<String, Void, AsyncTaskFriends.Result> {
+public class AsyncTaskSearchFriends extends AsyncTask<String, Void, AsyncTaskSearchFriends.Result> {
     private FriendsActivity mActivity = null;
 
-    static class Friend {
-        String username;
-        String hola;
-    }
     static class Result {
         String result;
-        List<String> friends;
-        List<Friend> notifications;
+        String reason;
+        Boolean isFound;
+        Integer picture;
+        Boolean isFriend;
     }
 
-    public AsyncTaskFriends(FriendsActivity activity)
+    public AsyncTaskSearchFriends(FriendsActivity activity)
     {
         mActivity = activity;
     }
 
-    protected AsyncTaskFriends.Result doInBackground(String... params) {
+    protected AsyncTaskSearchFriends.Result doInBackground(String... params) {
         String username = params[0];
         String password = params[1];
+        String searchedName = params[2];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/friends").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/search_friends").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"searchedName\":\""+searchedName+"\"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -49,19 +48,19 @@ public class AsyncTaskFriends extends AsyncTask<String, Void, AsyncTaskFriends.R
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, AsyncTaskFriends.Result.class);
+            return gson.fromJson(reader, AsyncTaskSearchFriends.Result.class);
 
         } catch (IOException e) {
-            Log.e("ERROR_AsyncTaskFriends",e.getMessage());
+            Log.e("AsyncTaskSearchFriends",e.getMessage());
         } catch (Exception e) {
-            Log.e("ERROR_AsyncTaskFriends",e.getMessage());
+            Log.e("AsyncTaskSearchFriends",e.getMessage());
         }
         Result erroneo = new Result();
         erroneo.result = "error";
         return erroneo;
     }
 
-    protected void onPostExecute(AsyncTaskFriends.Result resultado) {
-        mActivity.setupAdapter(resultado);
+    protected void onPostExecute(AsyncTaskSearchFriends.Result resultado) {
+        mActivity.setupAdapterSearch(resultado);
     }
 }

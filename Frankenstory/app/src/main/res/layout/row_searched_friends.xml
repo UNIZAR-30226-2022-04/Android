@@ -5,10 +5,11 @@
     android:layout_height="wrap_content"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/rowsearchedfriend">
     <!-- NOMBRE PARTICIPANTE -->
     <TextView
-        android:id="@+id/friendName"
+        android:id="@+id/friendNameSearched"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mercuthio"
@@ -16,7 +17,7 @@
         android:fontFamily="@font/arial_bold"
         android:layout_marginLeft="10dp"
         android:layout_gravity="center_vertical"/>
-    <!-- ESTRELLAS PARTICIPANTE -->
+    <!-- WHITE SPACE -->
     <TextView
         android:textSize="15sp"
         android:layout_width="match_parent"
