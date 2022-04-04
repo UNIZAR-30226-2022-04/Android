@@ -5,12 +5,17 @@ package es.unizar.eina.frankenstory.general;
         import androidx.constraintlayout.widget.ConstraintLayout;
 
         import android.content.Intent;
+        import android.database.MatrixCursor;
         import android.graphics.drawable.AnimationDrawable;
         import android.os.Bundle;
         import android.view.View;
         import android.widget.Button;
         import android.widget.ImageButton;
+        import android.widget.ListView;
+        import android.widget.SimpleCursorAdapter;
         import android.widget.TextView;
+
+        import java.util.List;
 
         import es.unizar.eina.frankenstory.R;
 
@@ -20,6 +25,8 @@ public class FriendsActivity extends AppCompatActivity {
     private TextView mStars;
     private TextView mCoins;
     private Button mNotifications;
+    private ListView mListFriends;
+    private ListView mListNotifications;
     String username;
     String password;
     String stars;
@@ -54,6 +61,8 @@ public class FriendsActivity extends AppCompatActivity {
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mNotifications = (Button) findViewById(R.id.notifications);
+        mListFriends = (ListView) findViewById(R.id.your_friends);
+        mListNotifications = (ListView) findViewById(R.id.petitions);
         mUsername.setText(username);
         mStars.setText(stars);
         mCoins.setText(coins);
@@ -63,6 +72,10 @@ public class FriendsActivity extends AppCompatActivity {
 
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
+
+        // CALL ASYNC TASK FRIENDS
+        AsyncTaskFriends myTask = new AsyncTaskFriends(this);
+        myTask.execute(username, password);
     }
 
     public void setNavegavilidad(){
@@ -113,6 +126,43 @@ public class FriendsActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
         }
+    }
+
+    // ASYNC TASK FRIENDS ADAPTER
+    public void setupAdapter(AsyncTaskFriends.Result resultado)
+    {
+        if (resultado.result.equals("success")){
+            // NOTIFICATIONS NUMBER
+            if (resultado.notifications.size() > 0){
+                notifications = Integer.valueOf(resultado.notifications.size()).toString();
+                mNotifications.setText(notifications);
+                mNotifications.setVisibility(View.VISIBLE);
+            }
+            // NOTIFICATIONS
+            fillData(resultado);
+
+        }
+    }
+
+    private void fillData(AsyncTaskFriends.Result resultado) {
+        // AMIGOS
+        // CREANDO CURSOR CON LOS RESULTADOS
+        String[] columns = new String[] { "_id", "friendName"};
+        MatrixCursor matrixCursor= new MatrixCursor(columns);
+
+        Integer i=0;
+        for(String p : resultado.friends){
+            matrixCursor.addRow(new Object[]{i,p});
+            i++;
+        }
+
+        // PARSEANDO CURSOR A LISTVIEW
+        String[] from = new String[] { "friendName"};
+        int[] to = new int[] { R.id.friendName};
+
+        SimpleCursorAdapter photos =
+                new SimpleCursorAdapter(this, R.layout.row_my_friends, matrixCursor, from, to);
+        mListFriends.setAdapter(photos);
     }
 
 }
