@@ -113,26 +113,25 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     // ASYNC TASK ADAPTER
-    public void setupAdapter(boolean loggeadoCorrectamente, String error)
+    public void setupAdapter(AsyncTaskLogIn.Result resultado)
     {
         mchargeAnimation.setVisibility(View.INVISIBLE);
         button.setClickable(true);
-        if (loggeadoCorrectamente) {
-            // START
+        if (resultado.result != null && resultado.result.equals("success")) {
+            // RECEIVED SUCCESS -> START
             Intent i = new Intent(LogInActivity.this, MainMenuActivity.class);
             i.putExtra("username",username);
             i.putExtra("password",password);
             startActivity(i);
+        } else if (resultado.result != null && resultado.reason.equals("user_not_found")) {
+            // RECEIVED ERROR USERNAME -> SHOW ERROR
+            mUserName.setError("Usuario no encontrado");
+        } else if (resultado.result != null && resultado.reason.equals("wrong_password")) {
+            // RECEIVED ERROR PASSWD -> SHOW ERROR
+            mPassword.setError("Contraseña incorrecta");
         } else {
-            // SHOW ERROR
-            //Toast.makeText(this, "ERROR:"+error, Toast.LENGTH_LONG).show();
-            if (error.equals("user_not_found")){
-                mUserName.setError("Usuario no encontrado");
-            } else if (error.equals("wrong_password")) {
-                mPassword.setError("Contraseña incorrecta");
-            } else {
-                mUserName.setError("ERROR EN EL LOGIN");
-            }
+            // COULDN'T CONNECT
+            mUserName.setError("ERROR EN EL LOGIN");
         }
     }
 

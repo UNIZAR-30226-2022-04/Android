@@ -18,7 +18,6 @@ public class AsyncTaskChangePassw extends AsyncTask<String, Void, AsyncTaskChang
 
     static class Result {
         String result;
-        String reason;
     }
 
     public AsyncTaskChangePassw(SettingsActivity activity)
@@ -29,7 +28,7 @@ public class AsyncTaskChangePassw extends AsyncTask<String, Void, AsyncTaskChang
     protected Result doInBackground(String... params) {
         String username = params[0];
         String password = params[1];
-        String newPassw = params[2];
+        String newPassword = params[2];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/change_password").openConnection();
@@ -38,7 +37,7 @@ public class AsyncTaskChangePassw extends AsyncTask<String, Void, AsyncTaskChang
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\""+newPassw+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"newPassword\":\""+newPassword+"\"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -49,17 +48,13 @@ public class AsyncTaskChangePassw extends AsyncTask<String, Void, AsyncTaskChang
             return gson.fromJson(reader, Result.class);
 
         } catch (IOException e) {
-            Log.e("ERROR_AsyncTaskLogin",e.getMessage());
+            Log.e("ERROR_AsyncTaskChPasswd",e.getMessage());
         }
 
         return new Result();
     }
 
     protected void onPostExecute(Result resultado) {
-        if (resultado.result != null) {
-            mActivity.setupAdapter(resultado.result.equals("success"), resultado.reason);
-        }else {
-           mActivity.setupAdapter(false, "error");
-        }
+        mActivity.setupAdapter(resultado);
     }
 }

@@ -127,7 +127,7 @@ public class MainMenuActivity extends AppCompatActivity {
         stars = resultado.stars.toString();
         coins = resultado.coins.toString();
         notifications = resultado.notifications.toString();
-        if (resultado.result.equals("success")){
+        if (resultado.result != null && resultado.result.equals("success")){
             // TOP INFORMATION
             mUsername.setText(username);
             mCoins.setText(resultado.coins.toString());

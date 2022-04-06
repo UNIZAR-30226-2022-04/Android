@@ -52,12 +52,8 @@ public class AsyncTaskSearchFriends extends AsyncTask<String, Void, AsyncTaskSea
 
         } catch (IOException e) {
             Log.e("AsyncTaskSearchFriends",e.getMessage());
-        } catch (Exception e) {
-            Log.e("AsyncTaskSearchFriends",e.getMessage());
         }
-        Result erroneo = new Result();
-        erroneo.result = "error";
-        return erroneo;
+        return new Result();
     }
 
     protected void onPostExecute(AsyncTaskSearchFriends.Result resultado) {

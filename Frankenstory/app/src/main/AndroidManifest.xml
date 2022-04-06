@@ -12,11 +12,13 @@
         android:theme="@style/Theme.Frankenstory">
         <activity
             android:name=".general.LogInActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".general.SplashScreenActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,19 +27,23 @@
         </activity>
         <activity
             android:name=".general.RegisterActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".general.MainMenuActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".general.SettingsActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".general.FriendsActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

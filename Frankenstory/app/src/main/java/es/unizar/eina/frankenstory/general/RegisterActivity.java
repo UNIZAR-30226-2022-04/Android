@@ -113,20 +113,21 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public void setupAdapter(boolean registradoCorrectamente, String error)
+    public void setupAdapter(AsyncTaskRegister.ResultRegister resultado)
     {
         mchargeAnimation.setVisibility(View.INVISIBLE);
         button.setClickable(true);
-        if (registradoCorrectamente) {
-            // It's closed -> LogInActivity where it was called
+        if (resultado.result != null && resultado.result.equals("success")) {
+            // RECEIVED SUCCESS -> return LogInActivity where it was called
             finish();
-        } else if (error.equals("email_already_registered")){
-            // SHOW ERROR
+        } else if (resultado.result != null && resultado.reason.equals("email_already_registered")){
+            // RECEIVED ERROR EMAIL -> SHOW ERROR
             mEmail.setError("Ya estás registrado con este email");
-        } else if (error.equals("user_already_registered")){
-            // SHOW ERROR
+        } else if (resultado.result != null && resultado.reason.equals("user_already_registered")){
+            // RECEIVED ERROR USERNAME -> SHOW ERROR
             mUserName.setError("El nombre no está disponible");
         } else {
+            // COULDN'T CONNECT
             mUserName.setError("ERROR EN EL REGISTRO");
         }
     }

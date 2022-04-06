@@ -27,14 +27,12 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mCloseSession;
     private EditText mNewPassw;
     private EditText mNewPassw2;
-    private LottieAnimationView mchargeAnimation;
     String username;
     String password;
     String stars;
     String coins;
     String notifications;
     String newPassw;
-    String newPassw2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,6 @@ public class SettingsActivity extends AppCompatActivity {
         mCoins.setText(coins);
         mNewPassw = (EditText) findViewById(R.id.passwordRegister);
         mNewPassw2 = (EditText) findViewById(R.id.secondpasswordRegister);
-        mchargeAnimation = (LottieAnimationView) findViewById(R.id.charge);
         if (Integer.parseInt(notifications)>0){
             mNotifications.setText(notifications);
         } else mNotifications.setVisibility(View.INVISIBLE);
@@ -84,7 +81,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // LEER EDIT TEXTS
                 newPassw = mNewPassw.getText().toString();
-                newPassw2 = mNewPassw2.getText().toString();
+                String newPassw2 = mNewPassw2.getText().toString();
                 boolean camposLlenos = true;
                 if (newPassw.equalsIgnoreCase("")){
                     mNewPassw.setError("Introduce una contraseña");
@@ -94,16 +91,8 @@ public class SettingsActivity extends AppCompatActivity {
                     mNewPassw.setError("La contraseña es demasiado larga");
                     camposLlenos = false;
                 }
-                if (newPassw2.equalsIgnoreCase("")){
-                    mNewPassw2.setError("Introduce una contraseña");
-                    camposLlenos = false;
-                }
-                if (newPassw2.length()>=30){
-                    mNewPassw2.setError("La contraseña es demasiado larga");
-                    camposLlenos = false;
-                }
-                if (newPassw != newPassw2){
-                    mNewPassw.setError("Las contraseñas deben ser iguales");
+                if (!newPassw.equals(newPassw2)){
+                    mNewPassw2.setError("Las contraseñas deben ser iguales");
                     camposLlenos = false;
                 }
 
@@ -111,9 +100,6 @@ public class SettingsActivity extends AppCompatActivity {
                 if (camposLlenos){
                     AsyncTaskChangePassw myTask = new AsyncTaskChangePassw(SettingsActivity.this);
                     myTask.execute(username, password, newPassw);
-                    // INFORMAR CARGANDO
-                    //Toast.makeText(LogInActivity.this, "Preguntando a la web", Toast.LENGTH_LONG).show();
-                    mchargeAnimation.setVisibility(View.VISIBLE);
                     mChangePassw.setClickable(false);
                 }
             }
@@ -181,16 +167,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     // ASYNC TASK ADAPTER
-    public void setupAdapter(boolean  cambiadaCorrectamente, String error)
+    public void setupAdapter(AsyncTaskChangePassw.Result resultado)
     {
-        mchargeAnimation.setVisibility(View.INVISIBLE);
         mChangePassw.setClickable(true);
-        if (!cambiadaCorrectamente) {
-            // SHOW ERROR
-            //Toast.makeText(this, "ERROR:"+error, Toast.LENGTH_LONG).show();
-            if (!error.equals("")){
-                mChangePassw.setError("ERROR CAMBIANDO CONTRASEÑA");
-            }
+        if (resultado.result!=null && !resultado.result.equals("success")) {
+            mChangePassw.setError("ERROR CAMBIANDO CONTRASEÑA");
         }
     }
 

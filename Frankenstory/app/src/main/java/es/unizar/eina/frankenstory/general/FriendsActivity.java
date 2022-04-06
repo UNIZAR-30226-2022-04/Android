@@ -88,7 +88,7 @@ public class FriendsActivity extends AppCompatActivity {
         mSearchFriendButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 searchedName = mSearchFriend.getText().toString();
-                if (!searchedName.equals(username)){ // IF its not me
+                if (!searchedName.equals(username) && !searchedName.equals("")){ // IF its not me
                     AsyncTaskSearchFriends myTaskSearch = new AsyncTaskSearchFriends(FriendsActivity.this);
                     myTaskSearch.execute(username, password, searchedName);
                     mSearchFriendButton.setClickable(false);
@@ -170,7 +170,7 @@ public class FriendsActivity extends AppCompatActivity {
     // ASYNC TASK FRIENDS ADAPTER
     public void setupAdapter(AsyncTaskFriends.Result resultado)
     {
-        if (resultado.result.equals("success")){
+        if (resultado.result!=null && resultado.result.equals("success")){
             // NOTIFICATIONS NUMBER
             if (resultado.notifications.size() > 0){
                 notifications = Integer.valueOf(resultado.notifications.size()).toString();
@@ -194,24 +194,6 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
     private void fillDataPetitions(AsyncTaskFriends.Result resultado) {
-        /*
-        // CREANDO CURSOR CON LOS RESULTADOS
-        String[] columns = new String[] { "_id", "friendName"};
-        MatrixCursor matrixCursor= new MatrixCursor(columns);
-
-        Integer i=0;
-        for(AsyncTaskFriends.Friend p : resultado.notifications){
-            matrixCursor.addRow(new Object[]{i,p.username});
-            i++;
-        }
-
-        // PARSEANDO CURSOR A LISTVIEW
-        String[] from = new String[] { "friendName"};
-        int[] to = new int[] { R.id.friendName};
-
-        SimpleCursorAdapter photos =
-                new SimpleCursorAdapter(this, R.layout.row_friend_petitions, matrixCursor, from, to);
-        mListNotifications.setAdapter(photos);*/
         // instantiate the custom list adapter
         ListPetitionsAdapter adapter = new ListPetitionsAdapter(this, resultado.notifications);
 
@@ -223,7 +205,7 @@ public class FriendsActivity extends AppCompatActivity {
     public void setupAdapterSearch(AsyncTaskSearchFriends.Result resultado)
     {
         mSearchFriendButton.setClickable(true);
-        if (resultado.result.equals("success")){
+        if (resultado.result!=null && resultado.result.equals("success")){
             // NOTIFICATIONS NUMBER
             if (resultado.isFound && !resultado.isFriend){
                 mSeachedFound.setText(searchedName);

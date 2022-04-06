@@ -56,9 +56,7 @@ public class AsyncTaskFriends extends AsyncTask<String, Void, AsyncTaskFriends.R
         } catch (Exception e) {
             Log.e("ERROR_AsyncTaskFriends",e.getMessage());
         }
-        Result erroneo = new Result();
-        erroneo.result = "error";
-        return erroneo;
+        return new Result();
     }
 
     protected void onPostExecute(AsyncTaskFriends.Result resultado) {

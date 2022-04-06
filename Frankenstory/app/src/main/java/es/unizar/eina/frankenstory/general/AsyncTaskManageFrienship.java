@@ -52,9 +52,7 @@ public class AsyncTaskManageFrienship extends AsyncTask<String, Void, AsyncTaskM
         } catch (Exception e) {
             Log.e("AsyncTaskManageFriend",e.getMessage());
         }
-        Result erroneo = new Result();
-        erroneo.result = "error";
-        return erroneo;
+        return new Result();
     }
 
     protected void onPostExecute(AsyncTaskManageFrienship.Result resultado) {

@@ -18,6 +18,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        // MODE NIGHT OFF
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        // CALLS LOGIN ACTIVITY AFTER FEW SECONDS
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
@@ -28,6 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         }, 6000);
 
+        // SOUND
         final MediaPlayer sound = MediaPlayer.create(this, R.raw.splash_sound);
         sound.start();
 

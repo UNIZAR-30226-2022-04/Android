@@ -51,9 +51,7 @@ public class AsyncTaskAnswerPetition extends AsyncTask<String, Void, AsyncTaskAn
         } catch (Exception e) {
             Log.e("AsyncTaskAnswerPetition",e.getMessage());
         }
-        AsyncTaskAnswerPetition.Result erroneo = new AsyncTaskAnswerPetition.Result();
-        erroneo.result = "error";
-        return erroneo;
+        return new Result();
     }
 
     protected void onPostExecute(AsyncTaskAnswerPetition.Result resultado) {

@@ -54,7 +54,7 @@ public class AsyncTaskRegister extends AsyncTask<String, Void, AsyncTaskRegister
     }
 
     protected void onPostExecute(ResultRegister resultado) {
-        mActivity.setupAdapter(resultado.result.equals("success"), resultado.reason);
+        mActivity.setupAdapter(resultado);
     }
 
 }

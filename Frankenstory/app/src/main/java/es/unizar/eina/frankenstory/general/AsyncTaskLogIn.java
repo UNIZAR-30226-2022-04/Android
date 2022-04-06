@@ -50,15 +50,10 @@ public class AsyncTaskLogIn extends AsyncTask<String, Void, AsyncTaskLogIn.Resul
         } catch (IOException e) {
             Log.e("ERROR_AsyncTaskLogin",e.getMessage());
         }
-
         return new Result();
     }
 
     protected void onPostExecute(Result resultado) {
-        if (resultado.result != null) {
-            mActivity.setupAdapter(resultado.result.equals("success"), resultado.reason);
-        }else {
-           mActivity.setupAdapter(false, "error");
-        }
+        mActivity.setupAdapter(resultado);
     }
 }
