@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     android:id="@+id/layoutmain">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
+
             <!---Parte superior-->
             <include layout="@layout/top2"
                 android:layout_width="match_parent"
@@ -50,7 +52,7 @@
             <EditText
                 android:id="@+id/passwordRegister"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="6dp"
                 android:background="@color/white"
                 android:fontFamily="@font/arial_regular"
@@ -64,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arial_bold"
-                android:paddingTop="10dp"
+                android:paddingTop="5dp"
                 android:shadowColor="@color/verde_letras"
                 android:shadowDx="4"
                 android:shadowDy="4"
@@ -76,7 +78,7 @@
             <EditText
                 android:id="@+id/secondpasswordRegister"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="6dp"
                 android:background="@color/white"
                 android:fontFamily="@font/arial_regular"
@@ -90,48 +92,162 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5sp"
+                    android:layout_marginTop="10sp"
                     android:paddingHorizontal="55sp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/change_pass"
                     android:textColor="@color/white"
-                    android:textSize="27sp"
+                    android:textSize="20sp"
                     android:background="@drawable/buttom_change_password" />
+                <!-- ICONS-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+                    <ImageButton
+                        android:id="@+id/icon0"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon0"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp"/>
+                    <ImageButton
+                        android:id="@+id/icon1"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon1"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp"/>
+                    <ImageButton
+                        android:id="@+id/icon2"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon2"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp" />
+                    <ImageButton
+                        android:id="@+id/icon3"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon3"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp" />
+                    <ImageButton
+                        android:id="@+id/icon4"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon4"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+                    <ImageButton
+                        android:id="@+id/icon5"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon5"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp"/>
+                    <ImageButton
+                        android:id="@+id/icon6"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon6"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp"/>
+                    <ImageButton
+                        android:id="@+id/icon7"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon7"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp" />
+                    <ImageButton
+                        android:id="@+id/icon8"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon8"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp" />
+                    <ImageButton
+                        android:id="@+id/icon9"
+                        android:layout_height="70dp"
+                        app:srcCompat="@raw/icon9"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:background="@null"
+                        android:layout_gravity="fill"
+                        android:padding="5dp" />
+                </LinearLayout>
+                <!-- BUTTON CAMBIAR ICONO -->
                 <Button
                     android:id="@+id/change_icon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5sp"
+                    android:layout_marginTop="10sp"
                     android:paddingHorizontal="55sp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/change_icon"
                     android:textColor="@color/white"
-                    android:textSize="27sp"
-                    android:background="@drawable/buttom_change_icon" />
+                    android:textSize="20sp"
+                    android:background="@drawable/buttom_change_icon"/>
                 <Button
                     android:id="@+id/close_session"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5sp"
+                    android:layout_marginTop="10sp"
                     android:paddingHorizontal="55sp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/close_session"
                     android:textColor="@color/white"
-                    android:textSize="27sp"
+                    android:textSize="20sp"
                     android:background="@drawable/buttom_close_session" />
                 <Button
                     android:id="@+id/eliminate_acc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5sp"
+                    android:layout_marginTop="10sp"
                     android:paddingHorizontal="80sp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/elminate_acc"
                     android:textColor="@color/white"
-                    android:textSize="27sp"
+                    android:textSize="18sp"
                     android:background="@drawable/buttom_eliminate_acc" />
             </LinearLayout>
             <!---Parte inferior-->

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.MatrixCursor;
 import android.graphics.drawable.AnimationDrawable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -27,6 +29,7 @@ public class FriendsActivity extends AppCompatActivity {
     private TextView mStars;
     private TextView mCoins;
     private Button mNotifications;
+    private ImageView mIconUser;
     private ListView mListFriends;
     private ListView mListNotifications;
     private EditText mSearchFriend;
@@ -39,7 +42,9 @@ public class FriendsActivity extends AppCompatActivity {
     String stars;
     String coins;
     String notifications;
+    String iconUser;
     String searchedName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +68,14 @@ public class FriendsActivity extends AppCompatActivity {
         stars = intent.getStringExtra("stars");
         coins = intent.getStringExtra("coins");
         notifications = intent.getStringExtra("notifications");
+        iconUser = intent.getStringExtra("iconUser");
 
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mNotifications = (Button) findViewById(R.id.notifications);
+        mIconUser = (ImageView) findViewById(R.id.iconUser);
         mListFriends = (ListView) findViewById(R.id.your_friends);
         mListNotifications = (ListView) findViewById(R.id.petitions);
         mSearchFriend = (EditText) findViewById(R.id.usernameSearch);
@@ -78,6 +85,7 @@ public class FriendsActivity extends AppCompatActivity {
         mUsername.setText(username);
         mStars.setText(stars);
         mCoins.setText(coins);
+        chooseIconUser(mIconUser, iconUser);
         if (Integer.parseInt(notifications)>0){
             mNotifications.setText(notifications);
         } else mNotifications.setVisibility(View.INVISIBLE);
@@ -128,6 +136,7 @@ public class FriendsActivity extends AppCompatActivity {
                 i.putExtra("stars", stars);
                 i.putExtra("coins", coins);
                 i.putExtra("notifications", notifications);
+                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -143,6 +152,7 @@ public class FriendsActivity extends AppCompatActivity {
                 i.putExtra("stars", stars);
                 i.putExtra("coins", coins);
                 i.putExtra("notifications", notifications);
+                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -213,5 +223,21 @@ public class FriendsActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    // SET ICON USER
+    @SuppressLint("ResourceType")
+    public void chooseIconUser(ImageView imagen, String picture){
+        if (picture.equals("0")) imagen.setImageResource(R.raw.icon0);
+        else if (picture.equals("1")) imagen.setImageResource(R.raw.icon1);
+        else if (picture.equals("2")) imagen.setImageResource(R.raw.icon2);
+        else if (picture.equals("3")) imagen.setImageResource(R.raw.icon3);
+        else if (picture.equals("4")) imagen.setImageResource(R.raw.icon4);
+        else if (picture.equals("5")) imagen.setImageResource(R.raw.icon5);
+        else if (picture.equals("6")) imagen.setImageResource(R.raw.icon6);
+        else if (picture.equals("7")) imagen.setImageResource(R.raw.icon7);
+        else if (picture.equals("8")) imagen.setImageResource(R.raw.icon8);
+        else if (picture.equals("9")) imagen.setImageResource(R.raw.icon9);
+        imagen.setVisibility(View.VISIBLE);
     }
 }

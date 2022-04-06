@@ -123,6 +123,7 @@ public class LogInActivity extends AppCompatActivity {
             i.putExtra("username",username);
             i.putExtra("password",password);
             startActivity(i);
+            finish();
         } else if (resultado.result != null && resultado.reason.equals("user_not_found")) {
             // RECEIVED ERROR USERNAME -> SHOW ERROR
             mUserName.setError("Usuario no encontrado");

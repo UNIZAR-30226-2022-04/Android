@@ -38,10 +38,12 @@
                     android:paddingLeft="30dp"/>
                 <!---Icono persona-->
                 <ImageView
+                    android:id="@+id/iconUser"
                     android:layout_width="26dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/man"/>
+                    android:src="@raw/icon1"
+                    android:visibility="invisible"/>
             </RelativeLayout>
             <!-- ESTRELLAS -->
             <RelativeLayout
@@ -59,9 +61,9 @@
                     android:fontFamily="@font/arial_bold"
                     android:gravity="center_vertical|right"
                     android:paddingRight="9dp"
-                    android:text="0"
+                    android:text=""
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
                 <!---Icono estrella-->
                 <ImageView
                     android:layout_width="24dp"
@@ -86,7 +88,7 @@
                     android:fontFamily="@font/arial_bold"
                     android:gravity="center_vertical|right"
                     android:paddingRight="9dp"
-                    android:text="0"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="15sp" />
                 <!---Icono moneda-->
