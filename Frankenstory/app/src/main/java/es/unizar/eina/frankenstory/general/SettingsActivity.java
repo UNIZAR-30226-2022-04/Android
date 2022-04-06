@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -25,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mNotifications;
     private Button mChangePassw;
     private Button mCloseSession;
+    private Button mDeleteAccount;
     private EditText mNewPassw;
     private EditText mNewPassw2;
     String username;
@@ -64,6 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
         mNotifications = (Button) findViewById(R.id.notifications);
         mChangePassw = (Button) findViewById(R.id.change_pass);
         mCloseSession = (Button) findViewById(R.id.close_session);
+        mDeleteAccount = (Button) findViewById(R.id.eliminate_acc);
         mUsername.setText(username);
         mStars.setText(stars);
         mCoins.setText(coins);
@@ -83,26 +86,27 @@ public class SettingsActivity extends AppCompatActivity {
                 newPassw = mNewPassw.getText().toString();
                 String newPassw2 = mNewPassw2.getText().toString();
                 boolean camposLlenos = true;
-                if (newPassw.equalsIgnoreCase("")){
+                if (newPassw.equalsIgnoreCase("")) {
                     mNewPassw.setError("Introduce una contraseña");
                     camposLlenos = false;
                 }
-                if (newPassw.length()>=30){
+                if (newPassw.length() >= 30) {
                     mNewPassw.setError("La contraseña es demasiado larga");
                     camposLlenos = false;
                 }
-                if (!newPassw.equals(newPassw2)){
+                if (!newPassw.equals(newPassw2)) {
                     mNewPassw2.setError("Las contraseñas deben ser iguales");
                     camposLlenos = false;
                 }
 
                 // LLAMAR A LA TAREA ASINCRONA
-                if (camposLlenos){
+                if (camposLlenos) {
                     AsyncTaskChangePassw myTask = new AsyncTaskChangePassw(SettingsActivity.this);
                     myTask.execute(username, password, newPassw);
                     mChangePassw.setClickable(false);
                 }
             }
+
         });
 
         // ON CLICK BUTTON "CERRAR SESIÓN"
@@ -111,6 +115,16 @@ public class SettingsActivity extends AppCompatActivity {
                 // ENVIAR A ACTIVITY LOGIN
                 Intent i = new Intent(SettingsActivity.this, LogInActivity.class);
                 startActivity(i);
+            }
+        });
+
+        // ON CLICK BUTTON "ELIMINAR CUENTA"
+        mDeleteAccount.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // LLAMAR A LA TAREA ASINCRONA
+                AsyncTaskDeleterUser myTask = new AsyncTaskDeleterUser(SettingsActivity.this);
+                myTask.execute(username, password);
+                mDeleteAccount.setClickable(false);
             }
         });
 
@@ -166,13 +180,26 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    // ASYNC TASK ADAPTER
+    // ASYNC TASK ADAPTER CHANGE PASSWORD
     public void setupAdapter(AsyncTaskChangePassw.Result resultado)
     {
         mChangePassw.setClickable(true);
         if (resultado.result!=null && !resultado.result.equals("success")) {
             mChangePassw.setError("ERROR CAMBIANDO CONTRASEÑA");
         }
+    }
+
+    // ASYNC TASK ADAPTER DELETE ACCOUNT
+    public void setupAdapter(AsyncTaskDeleterUser.Result resultado)
+    {
+        mDeleteAccount.setClickable(true);
+        if (resultado.result!=null && !resultado.result.equals("success")) {
+            Toast.makeText(getApplicationContext(),"ERROR ELIMINANDO CUENTA",Toast.LENGTH_SHORT).show();
+        } else {
+             Intent i = new Intent(SettingsActivity.this, LogInActivity.class);
+             startActivity(i);
+        }
+
     }
 
 }
