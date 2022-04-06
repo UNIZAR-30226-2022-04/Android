@@ -12,16 +12,16 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AsyncTaskLogIn extends AsyncTask<String, Void, AsyncTaskLogIn.Result> {
+public class AsyncTaskChangePassw extends AsyncTask<String, Void, AsyncTaskChangePassw.Result> {
 
-    private LogInActivity mActivity = null;
+    private SettingsActivity mActivity = null;
 
     static class Result {
         String result;
         String reason;
     }
 
-    public AsyncTaskLogIn(LogInActivity activity)
+    public AsyncTaskChangePassw(SettingsActivity activity)
     {
         mActivity = activity;
     }
@@ -29,15 +29,16 @@ public class AsyncTaskLogIn extends AsyncTask<String, Void, AsyncTaskLogIn.Resul
     protected Result doInBackground(String... params) {
         String username = params[0];
         String password = params[1];
+        String newPassw = params[2];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/login").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/change_password").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\""+newPassw+"\"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);

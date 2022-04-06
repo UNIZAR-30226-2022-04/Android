@@ -9,9 +9,12 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import es.unizar.eina.frankenstory.R;
 
@@ -20,11 +23,18 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView mStars;
     private TextView mCoins;
     private Button mNotifications;
+    private Button mChangePassw;
+    private Button mCloseSession;
+    private EditText mNewPassw;
+    private EditText mNewPassw2;
+    private LottieAnimationView mchargeAnimation;
     String username;
     String password;
     String stars;
     String coins;
     String notifications;
+    String newPassw;
+    String newPassw2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +64,69 @@ public class SettingsActivity extends AppCompatActivity {
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mNotifications = (Button) findViewById(R.id.notifications);
+        mChangePassw = (Button) findViewById(R.id.change_pass);
+        mCloseSession = (Button) findViewById(R.id.close_session);
         mUsername.setText(username);
         mStars.setText(stars);
         mCoins.setText(coins);
+        mNewPassw = (EditText) findViewById(R.id.passwordRegister);
+        mNewPassw2 = (EditText) findViewById(R.id.secondpasswordRegister);
+        mchargeAnimation = (LottieAnimationView) findViewById(R.id.charge);
         if (Integer.parseInt(notifications)>0){
             mNotifications.setText(notifications);
         } else mNotifications.setVisibility(View.INVISIBLE);
 
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
+
+        // ON CLICK BUTTON "CAMBIAR CONTRASEÑA"
+        mChangePassw.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // LEER EDIT TEXTS
+                newPassw = mNewPassw.getText().toString();
+                newPassw2 = mNewPassw2.getText().toString();
+                boolean camposLlenos = true;
+                if (newPassw.equalsIgnoreCase("")){
+                    mNewPassw.setError("Introduce una contraseña");
+                    camposLlenos = false;
+                }
+                if (newPassw.length()>=30){
+                    mNewPassw.setError("La contraseña es demasiado larga");
+                    camposLlenos = false;
+                }
+                if (newPassw2.equalsIgnoreCase("")){
+                    mNewPassw2.setError("Introduce una contraseña");
+                    camposLlenos = false;
+                }
+                if (newPassw2.length()>=30){
+                    mNewPassw2.setError("La contraseña es demasiado larga");
+                    camposLlenos = false;
+                }
+                if (newPassw != newPassw2){
+                    mNewPassw.setError("Las contraseñas deben ser iguales");
+                    camposLlenos = false;
+                }
+
+                // LLAMAR A LA TAREA ASINCRONA
+                if (camposLlenos){
+                    AsyncTaskChangePassw myTask = new AsyncTaskChangePassw(SettingsActivity.this);
+                    myTask.execute(username, password, newPassw);
+                    // INFORMAR CARGANDO
+                    //Toast.makeText(LogInActivity.this, "Preguntando a la web", Toast.LENGTH_LONG).show();
+                    mchargeAnimation.setVisibility(View.VISIBLE);
+                    mChangePassw.setClickable(false);
+                }
+            }
+        });
+
+        // ON CLICK BUTTON "CERRAR SESIÓN"
+        mCloseSession.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // ENVIAR A ACTIVITY LOGIN
+                Intent i = new Intent(SettingsActivity.this, LogInActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -113,6 +177,20 @@ public class SettingsActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
+        }
+    }
+
+    // ASYNC TASK ADAPTER
+    public void setupAdapter(boolean  cambiadaCorrectamente, String error)
+    {
+        mchargeAnimation.setVisibility(View.INVISIBLE);
+        mChangePassw.setClickable(true);
+        if (!cambiadaCorrectamente) {
+            // SHOW ERROR
+            //Toast.makeText(this, "ERROR:"+error, Toast.LENGTH_LONG).show();
+            if (!error.equals("")){
+                mChangePassw.setError("ERROR CAMBIANDO CONTRASEÑA");
+            }
         }
     }
 

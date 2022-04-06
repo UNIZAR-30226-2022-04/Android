@@ -128,7 +128,7 @@ public class LogInActivity extends AppCompatActivity {
             //Toast.makeText(this, "ERROR:"+error, Toast.LENGTH_LONG).show();
             if (error.equals("user_not_found")){
                 mUserName.setError("Usuario no encontrado");
-            } else if (error.equals("wrong_password")){
+            } else if (error.equals("wrong_password")) {
                 mPassword.setError("Contraseña incorrecta");
             } else {
                 mUserName.setError("ERROR EN EL LOGIN");
