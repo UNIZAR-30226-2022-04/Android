@@ -35,7 +35,7 @@
                     android:textSize="35sp" />
                 <!---Boton crear relato-->
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/create_story"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

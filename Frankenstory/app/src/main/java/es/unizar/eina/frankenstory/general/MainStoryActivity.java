@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.MatrixCursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -14,14 +13,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
-import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainStoryActivity extends AppCompatActivity {
 
     private TextView mUsername;
     private TextView mStars;
@@ -39,15 +35,19 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_general_main_menu);
+        setContentView(R.layout.activity_story);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        // GET USERNAME AND PASSWORD FROM LOGINACTIVITY
+        // GET DATA FROM MAINACTIVITY
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
+        stars = intent.getStringExtra("stars");
+        coins = intent.getStringExtra("coins");
+        notifications = intent.getStringExtra("notifications");
+        iconUser = intent.getStringExtra("iconUser");
 
         // GET VIEWS
         mUsername = (TextView) findViewById(R.id.usernameTop);
@@ -57,7 +57,10 @@ public class MainMenuActivity extends AppCompatActivity {
         mNotifications.setVisibility(View.INVISIBLE);
         mList = (ListView) findViewById(R.id.statistics);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-
+        mUsername.setText(username);
+        mStars.setText(stars);
+        mCoins.setText(coins);
+        chooseIconUser(mIconUser, iconUser);
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
 
@@ -69,16 +72,16 @@ public class MainMenuActivity extends AppCompatActivity {
         animationDrawable.start();
 
         // CALL ASYNC TASK
-        AsyncTaskMainMenu myTask = new AsyncTaskMainMenu(this);
-        myTask.execute(username, password);
+        //AsyncTaskStory myTask = new AsyncTaskStory(this);
+        //myTask.execute(username, password);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // CALL ASYNC TASK
-        AsyncTaskMainMenu myTask = new AsyncTaskMainMenu(this);
-        myTask.execute(username, password);
+        //AsyncTaskStory myTask = new AsyncTaskStory(this);
+        //myTask.execute(username, password);
     }
 
     public void setNavegavilidad(){
@@ -86,7 +89,7 @@ public class MainMenuActivity extends AppCompatActivity {
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainMenuActivity.this, SettingsActivity.class);
+                Intent i = new Intent(MainStoryActivity.this, SettingsActivity.class);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
                 i.putExtra("stars", stars);
@@ -99,10 +102,10 @@ public class MainMenuActivity extends AppCompatActivity {
         });
 
         // BUTTON TO FriendsActivity
-        Button buttonFriends = (Button) findViewById(R.id.friends);
+        Button buttonFriends = (Button)findViewById(R.id.friends);
         buttonFriends.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainMenuActivity.this, FriendsActivity.class);
+                Intent i = new Intent(MainStoryActivity.this, FriendsActivity.class);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
                 i.putExtra("stars", stars);
@@ -114,11 +117,11 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        // BUTTON TO activity_story
-        Button story = (Button)findViewById(R.id.story_game_main);
-        story.setOnClickListener(new View.OnClickListener() {
+        // BUTTON TO MainMenuActivity
+        Button buttonHome = (Button)findViewById(R.id.home);
+        buttonHome.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainMenuActivity.this, MainStoryActivity.class);
+                Intent i = new Intent(MainStoryActivity.this, MainMenuActivity.class);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
                 i.putExtra("stars", stars);
@@ -129,6 +132,23 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        // BUTTON TO CreateStoryActivity
+        Button createStory = (Button)findViewById(R.id.create_story);
+        createStory.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(MainStoryActivity.this, CreateStoryActivity.class);
+                i.putExtra("username",username);
+                i.putExtra("password",password);
+                i.putExtra("stars", stars);
+                i.putExtra("coins", coins);
+                i.putExtra("notifications", notifications);
+                i.putExtra("iconUser", iconUser);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+        });
+
     }
 
     // Para ocultar Navigation bar y lo de arriba.
@@ -148,34 +168,12 @@ public class MainMenuActivity extends AppCompatActivity {
             );
         }
     }
-
+    /*
     // ASYNC TASK ADAPTER
     public void setupAdapter(AsyncTaskMainMenu.Result resultado)
     {
-        if (resultado.result != null && resultado.result.equals("success")){
-            // Saved to send to other activities
-            stars = resultado.stars.toString();
-            coins = resultado.coins.toString();
-            notifications = resultado.notifications.toString();
-            iconUser = resultado.picture.toString();
-            // TOP INFORMATION
-            mUsername.setText(username);
-            mCoins.setText(resultado.coins.toString());
-            mStars.setText(resultado.stars.toString());
-            chooseIconUser(mIconUser, iconUser);
-            // NOTIFICATIONS
-            if (resultado.notifications > 0){
-                mNotifications.setText(resultado.notifications.toString());
-                mNotifications.setVisibility(View.VISIBLE);
-            }
-            // STATISTICS
-            fillData(resultado.bestFour);
-        } else {
-            // IF USER/PASSW IS NOT OKAY COME BACK TO LOGIN
-            finish();
-        }
     }
-
+    */
     // SET ICON USER
     @SuppressLint("ResourceType")
     public void chooseIconUser(ImageView imagen, String picture){
@@ -190,26 +188,6 @@ public class MainMenuActivity extends AppCompatActivity {
         else if (picture.equals("8")) imagen.setImageResource(R.raw.icon8);
         else if (picture.equals("9")) imagen.setImageResource(R.raw.icon9);
         imagen.setVisibility(View.VISIBLE);
-    }
-
-    private void fillData(List<AsyncTaskMainMenu.Statistic> list) {
-        // CREANDO CURSOR CON LOS RESULTADOS
-        String[] columns = new String[] { "_id", "position", "friendName", "friendStars"};
-        MatrixCursor matrixCursor= new MatrixCursor(columns);
-
-        Integer i=1;
-        for(AsyncTaskMainMenu.Statistic p : list){
-            matrixCursor.addRow(new Object[]{i-1,i.toString()+"º",p.username,"x "+p.stars.toString()});
-            i++;
-        }
-
-        // PARSEANDO CURSOR A LISTVIEW
-        String[] from = new String[] { "position", "friendName", "friendStars" };
-        int[] to = new int[] { R.id.position, R.id.friendName, R.id.friendStars };
-
-        SimpleCursorAdapter photos =
-                new SimpleCursorAdapter(this, R.layout.row_main_menu, matrixCursor, from, to);
-        mList.setAdapter(photos);
     }
 
 }

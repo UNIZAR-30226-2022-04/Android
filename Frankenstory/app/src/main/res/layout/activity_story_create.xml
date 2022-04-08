@@ -68,6 +68,7 @@
                         android:textSize="25sp" />
                     <!--Botón más número turnos-->
                     <Button
+                        android:id="@+id/plus_writings"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/button_plus_minus"
@@ -81,6 +82,7 @@
                     </Button>
                     <!--Botón más número turnos-->
                     <Button
+                        android:id="@+id/minus_writings"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/button_plus_minus"
@@ -124,6 +126,7 @@
                         android:textSize="25sp" />
                     <!--Botón más numero turnos-->
                     <Button
+                        android:id="@+id/plus_lenght"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/button_plus_minus"
@@ -137,6 +140,7 @@
                     </Button>
                     <!--Botón más numero turnos-->
                     <Button
+                        android:id="@+id/minus_length"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/button_plus_minus"
@@ -176,6 +180,7 @@
                         android:textColor="@color/white"
                         android:textSize="25sp" />
                     <Switch
+                        android:id="@+id/private_game"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"/>
@@ -191,7 +196,7 @@
                 android:paddingBottom="20dp">
 
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/start_story"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_ingame"

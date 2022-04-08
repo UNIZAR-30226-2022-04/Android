@@ -45,6 +45,16 @@
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".general.MainStoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".general.CreateStoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
