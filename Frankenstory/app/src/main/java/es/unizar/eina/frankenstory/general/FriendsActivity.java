@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
 public class FriendsActivity extends AppCompatActivity {
@@ -37,12 +38,6 @@ public class FriendsActivity extends AppCompatActivity {
     private LinearLayout mrowsearchedfriend;
     private TextView mSeachedFound;
     private ImageButton mAddFriend;
-    String username;
-    String password;
-    String stars;
-    String coins;
-    String notifications;
-    String iconUser;
     String searchedName;
 
 
@@ -61,15 +56,6 @@ public class FriendsActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-        // GET PARAMETERS
-        Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
-        stars = intent.getStringExtra("stars");
-        coins = intent.getStringExtra("coins");
-        notifications = intent.getStringExtra("notifications");
-        iconUser = intent.getStringExtra("iconUser");
-
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
@@ -82,13 +68,7 @@ public class FriendsActivity extends AppCompatActivity {
         mSearchFriendButton = (ImageButton) findViewById(R.id.searchfriend);
         mSeachedFound = (TextView) findViewById(R.id.friendNameSearched);
         mAddFriend = (ImageButton) findViewById(R.id.addfriend);
-        mUsername.setText(username);
-        mStars.setText(stars);
-        mCoins.setText(coins);
-        chooseIconUser(mIconUser, iconUser);
-        if (Integer.parseInt(notifications)>0){
-            mNotifications.setText(notifications);
-        } else mNotifications.setVisibility(View.INVISIBLE);
+        updateData();
 
         // BUTTON SEARCH
         mrowsearchedfriend = (LinearLayout) findViewById(R.id.rowsearchedfriend);
@@ -96,9 +76,10 @@ public class FriendsActivity extends AppCompatActivity {
         mSearchFriendButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 searchedName = mSearchFriend.getText().toString();
+                String username = ((MyApplication) FriendsActivity.this.getApplication()).getUsername();
                 if (!searchedName.equals(username) && !searchedName.equals("")){ // IF its not me
                     AsyncTaskSearchFriends myTaskSearch = new AsyncTaskSearchFriends(FriendsActivity.this);
-                    myTaskSearch.execute(username, password, searchedName);
+                    myTaskSearch.execute(searchedName);
                     mSearchFriendButton.setClickable(false);
                 }
             }
@@ -108,7 +89,7 @@ public class FriendsActivity extends AppCompatActivity {
         mAddFriend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AsyncTaskManageFrienship myTaskSearch = new AsyncTaskManageFrienship(FriendsActivity.this);
-                myTaskSearch.execute(username, password, searchedName, "add");
+                myTaskSearch.execute(searchedName, "add");
                 mrowsearchedfriend.setVisibility(View.GONE);
             }
         });
@@ -120,10 +101,26 @@ public class FriendsActivity extends AppCompatActivity {
         refreshPage();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateData();
+    }
+
+    // UPDATE DATA
+    public void updateData(){
+        mUsername.setText(((MyApplication) this.getApplication()).getUsername());
+        mStars.setText(((MyApplication) this.getApplication()).getStars());
+        mCoins.setText(((MyApplication) this.getApplication()).getCoins());
+        chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
+        if (Integer.parseInt(((MyApplication) this.getApplication()).getNotifications())>0){
+            mNotifications.setText(((MyApplication) this.getApplication()).getNotifications());
+        } else mNotifications.setVisibility(View.INVISIBLE);
+    }
+
     public void refreshPage(){
         AsyncTaskFriends myTask = new AsyncTaskFriends(this);
-        myTask.execute(username, password);
-
+        myTask.execute();
     }
 
     public void setNavegavilidad(){
@@ -133,12 +130,6 @@ public class FriendsActivity extends AppCompatActivity {
         buttonHome.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(FriendsActivity.this, MainMenuActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -149,12 +140,6 @@ public class FriendsActivity extends AppCompatActivity {
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(FriendsActivity.this, SettingsActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -186,7 +171,8 @@ public class FriendsActivity extends AppCompatActivity {
         if (resultado.result!=null && resultado.result.equals("success")){
             // NOTIFICATIONS NUMBER
             if (resultado.notifications.size() > 0){
-                notifications = Integer.valueOf(resultado.notifications.size()).toString();
+                String notifications = Integer.valueOf(resultado.notifications.size()).toString();
+                ((MyApplication) this.getApplication()).setNotifications(notifications);
                 mNotifications.setText(notifications);
                 mNotifications.setVisibility(View.VISIBLE);
             } else mNotifications.setVisibility(View.INVISIBLE);

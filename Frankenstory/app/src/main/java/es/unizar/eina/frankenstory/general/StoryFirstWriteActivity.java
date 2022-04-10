@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.MatrixCursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -14,14 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
+import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
 public class StoryFirstWriteActivity extends AppCompatActivity{
@@ -36,12 +31,6 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
     String number_chars;
     String isPrivate_game;
     String title;
-    String username;
-    String password;
-    String stars;
-    String coins;
-    String notifications;
-    String iconUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,32 +49,21 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
 
         // GET PARAMETERS
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
-        stars = intent.getStringExtra("stars");
-        coins = intent.getStringExtra("coins");
-        notifications = intent.getStringExtra("notifications");
-        iconUser = intent.getStringExtra("iconUser");
         number_writings = intent.getStringExtra("number_writings");
         number_chars = intent.getStringExtra("number_chars");
         isPrivate_game = intent.getStringExtra("isPrivate_game");
         title = intent.getStringExtra("title");
-                System.out.println(username);
-                System.out.println(password);
-                System.out.println(title);
-                System.out.println(number_writings);
-                System.out.println(number_chars);
-                System.out.println(isPrivate_game);
+
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mNotifications = (Button) findViewById(R.id.notifications);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-        mUsername.setText(username);
-        mStars.setText(stars);
-        mCoins.setText(coins);
-        chooseIconUser(mIconUser, iconUser);
+        mUsername.setText(((MyApplication) this.getApplication()).getUsername());
+        mStars.setText(((MyApplication) this.getApplication()).getStars());
+        mCoins.setText(((MyApplication) this.getApplication()).getCoins());
+        chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
         //Rellenar el titulo
         setContenido();
@@ -107,12 +85,6 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(StoryFirstWriteActivity.this, SettingsActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -128,15 +100,9 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
 
                 // CALL ASYNC TASK
                 AsyncTaskCreateTale myTask = new AsyncTaskCreateTale(StoryFirstWriteActivity.this);
-                myTask.execute(username, password, title, number_writings, number_chars, isPrivate_game, first_paragraph);
+                myTask.execute(title, number_writings, number_chars, isPrivate_game, first_paragraph);
 
-                Intent i = new Intent(StoryFirstWriteActivity.this, MainStoryActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
+                Intent i = new Intent(StoryFirstWriteActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }

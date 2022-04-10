@@ -14,6 +14,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import es.unizar.eina.frankenstory.MyApplication;
+
 public class AsyncTaskCreateTale extends AsyncTask<String, Void, AsyncTaskCreateTale.Result> {
 
     private StoryFirstWriteActivity mActivity = null;
@@ -25,13 +27,13 @@ public class AsyncTaskCreateTale extends AsyncTask<String, Void, AsyncTaskCreate
     public AsyncTaskCreateTale(StoryFirstWriteActivity activity){mActivity = activity; }
 
     protected Result doInBackground(String... params) {
-        String username = params[0];
-        String password = params[1];
-        String title = params[2];
-        int num_writings = Integer.parseInt(params[3]);
-        int num_chars = Integer.parseInt(params[4]);
-        boolean isPrivate_game = Boolean.parseBoolean(params[5]);
-        String first_paragraph = params[6];
+        String username = ((MyApplication) mActivity.getApplication()).getUsername();
+        String password = ((MyApplication) mActivity.getApplication()).getPassword();
+        String title = params[0];
+        int num_writings = Integer.parseInt(params[1]);
+        int num_chars = Integer.parseInt(params[2]);
+        boolean isPrivate_game = Boolean.parseBoolean(params[3]);
+        String first_paragraph = params[4];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/create_tale").openConnection();
@@ -40,8 +42,8 @@ public class AsyncTaskCreateTale extends AsyncTask<String, Void, AsyncTaskCreate
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
-                    "\"title\":\"" + title + "\"," + "\"maxTurns\":\"" + num_writings + "\"," +
-                    "\"maxCharacters\":\"" + num_chars + "\"," + "\"privacy\":\"" + isPrivate_game + "\"," +
+                    "\"title\":\"" + title + "\"," + "\"maxTurns\":" + num_writings + "," +
+                    "\"maxCharacters\":" + num_chars + "," + "\"privacy\":" + isPrivate_game + "," +
                     "\"first_paragraph\":\"" + first_paragraph + "\"}";
             System.out.println(jsonInputString);
             try (OutputStream os = con.getOutputStream()) {

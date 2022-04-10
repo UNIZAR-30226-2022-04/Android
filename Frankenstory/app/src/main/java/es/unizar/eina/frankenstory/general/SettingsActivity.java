@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -39,12 +40,6 @@ public class SettingsActivity extends AppCompatActivity {
     private ImageButton mIcon6; private ImageButton mIcon7;
     private ImageButton mIcon8; private ImageButton mIcon9;
     private Button mchangeIcon;
-    String username;
-    String password;
-    String stars;
-    String coins;
-    String notifications;
-    String iconUser;
     String newPassw;
     Integer iconSelected;
 
@@ -63,15 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-        // GET PARAMETERS
-        Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
-        stars = intent.getStringExtra("stars");
-        coins = intent.getStringExtra("coins");
-        notifications = intent.getStringExtra("notifications");
-        iconUser = intent.getStringExtra("iconUser");
-        iconSelected = Integer.parseInt(iconUser);
+        // GET ICON
+        iconSelected = Integer.parseInt(((MyApplication) this.getApplication()).getIconUser());
 
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
@@ -88,15 +76,9 @@ public class SettingsActivity extends AppCompatActivity {
         mIcon6 = (ImageButton) findViewById(R.id.icon6); mIcon7 = (ImageButton) findViewById(R.id.icon7);
         mIcon8 = (ImageButton) findViewById(R.id.icon8); mIcon9 = (ImageButton) findViewById(R.id.icon9);
         mchangeIcon = (Button) findViewById(R.id.change_icon);
-        mUsername.setText(username);
-        mStars.setText(stars);
-        mCoins.setText(coins);
-        chooseIconUser(mIconUser, iconUser);
         mNewPassw = (EditText) findViewById(R.id.passwordRegister);
         mNewPassw2 = (EditText) findViewById(R.id.secondpasswordRegister);
-        if (Integer.parseInt(notifications)>0){
-            mNotifications.setText(notifications);
-        } else mNotifications.setVisibility(View.INVISIBLE);
+        updateData();
 
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
@@ -124,7 +106,7 @@ public class SettingsActivity extends AppCompatActivity {
                 // LLAMAR A LA TAREA ASINCRONA
                 if (camposLlenos) {
                     AsyncTaskChangePassw myTask = new AsyncTaskChangePassw(SettingsActivity.this);
-                    myTask.execute(username, password, newPassw);
+                    myTask.execute(newPassw);
                     mChangePassw.setClickable(false);
                 }
             }
@@ -146,7 +128,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // LLAMAR A LA TAREA ASINCRONA
                 AsyncTaskDeleterUser myTask = new AsyncTaskDeleterUser(SettingsActivity.this);
-                myTask.execute(username, password);
+                myTask.execute();
                 mDeleteAccount.setClickable(false);
             }
         });
@@ -159,10 +141,27 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // LLAMAR A LA TAREA ASINCRONA
                 AsyncTaskChangeIcon myTask = new AsyncTaskChangeIcon(SettingsActivity.this);
-                myTask.execute(username, password, iconSelected.toString());
+                myTask.execute(iconSelected.toString());
                 mchangeIcon.setClickable(false);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateData();
+    }
+
+    // UPDATE DATA
+    public void updateData(){
+        mUsername.setText(((MyApplication) this.getApplication()).getUsername());
+        mStars.setText(((MyApplication) this.getApplication()).getStars());
+        mCoins.setText(((MyApplication) this.getApplication()).getCoins());
+        chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
+        if (Integer.parseInt(((MyApplication) this.getApplication()).getNotifications())>0){
+            mNotifications.setText(((MyApplication) this.getApplication()).getNotifications());
+        } else mNotifications.setVisibility(View.INVISIBLE);
     }
 
     public void setNavegavilidad(){
@@ -171,12 +170,6 @@ public class SettingsActivity extends AppCompatActivity {
         buttonHome.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(SettingsActivity.this, MainMenuActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -187,12 +180,6 @@ public class SettingsActivity extends AppCompatActivity {
         buttonFriends.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(SettingsActivity.this, FriendsActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -221,7 +208,11 @@ public class SettingsActivity extends AppCompatActivity {
     public void setupAdapter(AsyncTaskChangePassw.Result resultado)
     {
         mChangePassw.setClickable(true);
-        if (resultado.result!=null && !resultado.result.equals("success")) {
+        if (resultado.result!=null && resultado.result.equals("success")){
+            ((MyApplication) this.getApplication()).setPassword(newPassw);
+            Toast.makeText(getApplicationContext(),"Contraseña cambiada correctamente",Toast.LENGTH_SHORT).show();
+        }
+        else {
             mChangePassw.setError("ERROR CAMBIANDO CONTRASEÑA");
         }
     }
@@ -244,7 +235,10 @@ public class SettingsActivity extends AppCompatActivity {
     public void setupAdapter(AsyncTaskChangeIcon.Result resultado)
     {
         mchangeIcon.setClickable(true);
-        if (resultado.result!=null && !resultado.result.equals("success")) {
+        if (resultado.result!=null && resultado.result.equals("success")) {
+            chooseIconUser(mIconUser, iconSelected.toString());
+            ((MyApplication) this.getApplication()).setIconUser(iconSelected.toString());
+        } else {
             mchangeIcon.setError("ERROR CAMBIANDO EL ICONO");
         }
     }

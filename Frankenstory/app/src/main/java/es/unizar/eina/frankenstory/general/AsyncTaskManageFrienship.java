@@ -12,6 +12,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import es.unizar.eina.frankenstory.MyApplication;
+
 public class AsyncTaskManageFrienship extends AsyncTask<String, Void, AsyncTaskManageFrienship.Result> {
     private FriendsActivity mActivity = null;
 
@@ -25,10 +27,10 @@ public class AsyncTaskManageFrienship extends AsyncTask<String, Void, AsyncTaskM
     }
 
     protected AsyncTaskManageFrienship.Result doInBackground(String... params) {
-        String username = params[0];
-        String password = params[1];
-        String targetUser = params[2];
-        String type = params[3];
+        String username = ((MyApplication) mActivity.getApplication()).getUsername();
+        String password = ((MyApplication) mActivity.getApplication()).getPassword();
+        String targetUser = params[0];
+        String type = params[1];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/manage_friendship").openConnection();

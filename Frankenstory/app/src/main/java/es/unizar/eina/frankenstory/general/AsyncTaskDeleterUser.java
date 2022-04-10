@@ -12,6 +12,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import es.unizar.eina.frankenstory.MyApplication;
+
 public class AsyncTaskDeleterUser extends AsyncTask<String, Void, AsyncTaskDeleterUser.Result> {
 
     private SettingsActivity mActivity = null;
@@ -26,8 +28,8 @@ public class AsyncTaskDeleterUser extends AsyncTask<String, Void, AsyncTaskDelet
     }
 
     protected Result doInBackground(String... params) {
-        String username = params[0];
-        String password = params[1];
+        String username = ((MyApplication) mActivity.getApplication()).getUsername();
+        String password = ((MyApplication) mActivity.getApplication()).getPassword();
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/delete_user").openConnection();

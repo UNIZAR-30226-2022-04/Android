@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import es.unizar.eina.frankenstory.MyApplication;
+
 public class AsyncTaskAnswerPetition extends AsyncTask<String, Void, AsyncTaskAnswerPetition.Result> {
     private FriendsActivity mActivity = null;
 
@@ -24,10 +26,10 @@ public class AsyncTaskAnswerPetition extends AsyncTask<String, Void, AsyncTaskAn
     }
 
     protected AsyncTaskAnswerPetition.Result doInBackground(String... params) {
-        String username = params[0];
-        String password = params[1];
-        String targetUser = params[2];
-        String answer = params[3];
+        String username = ((MyApplication) mActivity.getApplication()).getUsername();
+        String password = ((MyApplication) mActivity.getApplication()).getPassword();
+        String targetUser = params[0];
+        String answer = params[1];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/answer_petition").openConnection();

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -29,12 +30,6 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button mNotifications;
     private ListView mList;
     private ImageView mIconUser;
-    String username;
-    String password;
-    String stars;
-    String coins;
-    String notifications;
-    String iconUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +38,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-        // GET USERNAME AND PASSWORD FROM LOGINACTIVITY
-        Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
 
         // GET VIEWS
         mUsername = (TextView) findViewById(R.id.usernameTop);
@@ -70,7 +60,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // CALL ASYNC TASK
         AsyncTaskMainMenu myTask = new AsyncTaskMainMenu(this);
-        myTask.execute(username, password);
+        myTask.execute();
     }
 
     @Override
@@ -78,7 +68,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onResume();
         // CALL ASYNC TASK
         AsyncTaskMainMenu myTask = new AsyncTaskMainMenu(this);
-        myTask.execute(username, password);
+        myTask.execute();
     }
 
     public void setNavegavilidad(){
@@ -87,12 +77,6 @@ public class MainMenuActivity extends AppCompatActivity {
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(MainMenuActivity.this, SettingsActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -103,12 +87,6 @@ public class MainMenuActivity extends AppCompatActivity {
         buttonFriends.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(MainMenuActivity.this, FriendsActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -118,13 +96,7 @@ public class MainMenuActivity extends AppCompatActivity {
         Button story = (Button)findViewById(R.id.story_game_main);
         story.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainMenuActivity.this, MainStoryActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
+                Intent i = new Intent(MainMenuActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -154,20 +126,20 @@ public class MainMenuActivity extends AppCompatActivity {
     {
         if (resultado.result != null && resultado.result.equals("success")){
             // Saved to send to other activities
-            stars = resultado.stars.toString();
-            coins = resultado.coins.toString();
-            notifications = resultado.notifications.toString();
-            iconUser = resultado.picture.toString();
+            ((MyApplication) this.getApplication()).setStars(resultado.stars.toString());
+            ((MyApplication) this.getApplication()).setCoins(resultado.coins.toString());
+            ((MyApplication) this.getApplication()).setNotifications(resultado.notifications.toString());
+            ((MyApplication) this.getApplication()).setIconUser(resultado.picture.toString());
             // TOP INFORMATION
-            mUsername.setText(username);
+            mUsername.setText(((MyApplication) this.getApplication()).getUsername());
             mCoins.setText(resultado.coins.toString());
             mStars.setText(resultado.stars.toString());
-            chooseIconUser(mIconUser, iconUser);
+            chooseIconUser(mIconUser, resultado.picture.toString());
             // NOTIFICATIONS
             if (resultado.notifications > 0){
                 mNotifications.setText(resultado.notifications.toString());
                 mNotifications.setVisibility(View.VISIBLE);
-            }
+            } else mNotifications.setVisibility(View.INVISIBLE);
             // STATISTICS
             fillData(resultado.bestFour);
         } else {

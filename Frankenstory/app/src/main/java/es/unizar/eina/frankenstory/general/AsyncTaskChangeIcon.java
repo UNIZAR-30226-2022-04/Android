@@ -12,6 +12,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import es.unizar.eina.frankenstory.MyApplication;
+
 public class AsyncTaskChangeIcon extends AsyncTask<String, Void, AsyncTaskChangeIcon.Result> {
 
     private SettingsActivity mActivity = null;
@@ -26,9 +28,9 @@ public class AsyncTaskChangeIcon extends AsyncTask<String, Void, AsyncTaskChange
     }
 
     protected Result doInBackground(String... params) {
-        String username = params[0];
-        String password = params[1];
-        String newPicture = params[2];
+        String username = ((MyApplication) mActivity.getApplication()).getUsername();
+        String password = ((MyApplication) mActivity.getApplication()).getPassword();
+        String newPicture = params[0];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/change_picture").openConnection();

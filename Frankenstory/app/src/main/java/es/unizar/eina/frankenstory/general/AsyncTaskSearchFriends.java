@@ -12,6 +12,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import es.unizar.eina.frankenstory.MyApplication;
+
 public class AsyncTaskSearchFriends extends AsyncTask<String, Void, AsyncTaskSearchFriends.Result> {
     private FriendsActivity mActivity = null;
 
@@ -29,9 +31,9 @@ public class AsyncTaskSearchFriends extends AsyncTask<String, Void, AsyncTaskSea
     }
 
     protected AsyncTaskSearchFriends.Result doInBackground(String... params) {
-        String username = params[0];
-        String password = params[1];
-        String searchedName = params[2];
+        String username = ((MyApplication) mActivity.getApplication()).getUsername();
+        String password = ((MyApplication) mActivity.getApplication()).getPassword();
+        String searchedName = params[0];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/search_friends").openConnection();

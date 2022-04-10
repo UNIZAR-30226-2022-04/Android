@@ -64,7 +64,7 @@ public class ListPetitionsAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //--- CANCEL PETITION
                 AsyncTaskAnswerPetition myTaskSearch = new AsyncTaskAnswerPetition(context);
-                myTaskSearch.execute(context.username, context.password, currentItem, "false");
+                myTaskSearch.execute(currentItem, "false");
             }
         });
 
@@ -75,7 +75,7 @@ public class ListPetitionsAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //--- ACCEPT PETITION
                 AsyncTaskAnswerPetition myTaskSearch = new AsyncTaskAnswerPetition(context);
-                myTaskSearch.execute(context.username, context.password, currentItem, "true");
+                myTaskSearch.execute(currentItem, "true");
             }
         });
 

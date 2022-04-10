@@ -13,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import es.unizar.eina.frankenstory.MyApplication;
+
 public class AsyncTaskMainMenu extends AsyncTask<String, Void, AsyncTaskMainMenu.Result> {
 
     private MainMenuActivity mActivity = null;
@@ -36,8 +38,8 @@ public class AsyncTaskMainMenu extends AsyncTask<String, Void, AsyncTaskMainMenu
     }
 
     protected Result doInBackground(String... params) {
-        String username = params[0];
-        String password = params[1];
+        String username = ((MyApplication) mActivity.getApplication()).getUsername();
+        String password = ((MyApplication) mActivity.getApplication()).getPassword();
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/home").openConnection();

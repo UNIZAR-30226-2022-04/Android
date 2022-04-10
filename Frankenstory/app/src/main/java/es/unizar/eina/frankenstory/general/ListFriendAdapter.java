@@ -63,7 +63,7 @@ public class ListFriendAdapter extends BaseAdapter {
         deletefriend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AsyncTaskManageFrienship myTaskSearch = new AsyncTaskManageFrienship(context);
-                myTaskSearch.execute(context.username, context.password, currentItem, "delete");
+                myTaskSearch.execute(currentItem, "delete");
             }
         });
 

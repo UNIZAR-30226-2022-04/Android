@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
 public class LogInActivity extends AppCompatActivity {
@@ -120,8 +121,9 @@ public class LogInActivity extends AppCompatActivity {
         if (resultado.result != null && resultado.result.equals("success")) {
             // RECEIVED SUCCESS -> START
             Intent i = new Intent(LogInActivity.this, MainMenuActivity.class);
-            i.putExtra("username",username);
-            i.putExtra("password",password);
+            // Set global variables username and password
+            ((MyApplication) this.getApplication()).setUsername(username);
+            ((MyApplication) this.getApplication()).setPassword(password);
             startActivity(i);
             finish();
         } else if (resultado.result != null && resultado.reason.equals("user_not_found")) {
