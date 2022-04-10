@@ -79,7 +79,7 @@
                 <ListView
                     android:id="@+id/friends_games"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"/>
+                    android:layout_height="50dp"/>
                 <!--Texto partidas públicas-->
                 <TextView
                     android:layout_width="match_parent"
@@ -97,6 +97,23 @@
                     android:id="@+id/public_games"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"/>
+                <!--Texto partidas públicas-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="8"
+                    android:shadowDy="8"
+                    android:shadowRadius="1"
+                    android:text="@string/no_voted"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+                <!--Lista partidas públicas-->
+                <ListView
+                    android:id="@+id/noVoted_games"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
             </LinearLayout>
             <!---Parte inferior-->
             <include

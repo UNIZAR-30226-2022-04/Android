@@ -6,30 +6,35 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.MatrixCursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
-public class CreateStoryActivity extends AppCompatActivity{
+
+public class StoryFirstWriteActivity extends AppCompatActivity{
+
 
     private TextView mUsername;
     private TextView mStars;
     private TextView mCoins;
-    private TextView mTitle;
-    private ListView mList;
+    private Button mNotifications;
     private ImageView mIconUser;
-    int number_writings;
-    int number_chars;
-    boolean isPrivate_game;
+    String number_writings;
+    String number_chars;
+    String isPrivate_game;
     String title;
     String username;
     String password;
@@ -41,33 +46,10 @@ public class CreateStoryActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_story_create);
+        setContentView(R.layout.activity_story_first_write);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-        // GET DATA FROM MAINSTORYACTIVITY
-        Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
-        stars = intent.getStringExtra("stars");
-        coins = intent.getStringExtra("coins");
-        notifications = intent.getStringExtra("notifications");
-        iconUser = intent.getStringExtra("iconUser");
-
-        // GET VIEWS
-        mUsername = (TextView) findViewById(R.id.usernameTop);
-        mStars = (TextView) findViewById(R.id.starsTop);
-        mCoins = (TextView) findViewById(R.id.coinsTop);
-        mTitle = (TextView) findViewById(R.id.story_name);
-        mList = (ListView) findViewById(R.id.statistics);
-        mIconUser = (ImageView) findViewById(R.id.iconUser);
-        mUsername.setText(username);
-        mStars.setText(stars);
-        mCoins.setText(coins);
-        chooseIconUser(mIconUser, iconUser);
-        // BUTTONS FROM TOP AND BOTTOM
-        setNavegavilidad();
 
         // BACKGROUND ANIMATION
         ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
@@ -76,74 +58,55 @@ public class CreateStoryActivity extends AppCompatActivity{
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-    }
+        // GET PARAMETERS
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
+        stars = intent.getStringExtra("stars");
+        coins = intent.getStringExtra("coins");
+        notifications = intent.getStringExtra("notifications");
+        iconUser = intent.getStringExtra("iconUser");
+        number_writings = intent.getStringExtra("number_writings");
+        number_chars = intent.getStringExtra("number_chars");
+        isPrivate_game = intent.getStringExtra("isPrivate_game");
+        title = intent.getStringExtra("title");
+                System.out.println(username);
+                System.out.println(password);
+                System.out.println(title);
+                System.out.println(number_writings);
+                System.out.println(number_chars);
+                System.out.println(isPrivate_game);
+        // GET VIEWS AND SET DATA
+        mUsername = (TextView) findViewById(R.id.usernameTop);
+        mStars = (TextView) findViewById(R.id.starsTop);
+        mCoins = (TextView) findViewById(R.id.coinsTop);
+        mNotifications = (Button) findViewById(R.id.notifications);
+        mIconUser = (ImageView) findViewById(R.id.iconUser);
+        mUsername.setText(username);
+        mStars.setText(stars);
+        mCoins.setText(coins);
+        chooseIconUser(mIconUser, iconUser);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        title = "";
-        mTitle.setText("");
-
-        number_writings = 1;
-        number_chars = 1;
+        //Rellenar el titulo
         setContenido();
 
-        isPrivate_game = false;
-        Switch private_game = (Switch) findViewById(R.id.private_game);
-        private_game.setChecked(false);
+        // BUTTONS FROM TOP AND BOTTOM
+        setNavegavilidad();
 
+    }
+
+    public void setContenido() {
+        TextView story_title = (TextView) findViewById(R.id.story_name);
+        story_title.setText(String.valueOf(title));
     }
 
     public void setNavegavilidad(){
-        //BUTTON PLUS WRITINGS
-        Button plusWritings = (Button)findViewById(R.id.plus_writings);
-        plusWritings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                number_writings++;
-                setContenido();
-            }
-        });
-
-        //BUTTON MINUS WRITINGS
-        Button minusWritings = (Button)findViewById(R.id.minus_writings);
-        minusWritings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (number_writings > 1) number_writings--;
-                setContenido();
-            }
-        });
-
-        //BUTTON PLUS LENGTH
-        Button plusLength = (Button)findViewById(R.id.plus_lenght);
-        plusLength.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                number_chars++;
-                setContenido();
-            }
-        });
-
-        //BUTTON MINUS LENGTH
-        Button minusLenght = (Button)findViewById(R.id.minus_length);
-        minusLenght.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (number_chars > 1) number_chars--;
-                setContenido();
-            }
-        });
-
-        //SWITCH PRIVATE GAME
-        Switch private_game = (Switch) findViewById(R.id.private_game);
-        private_game.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                isPrivate_game = !isPrivate_game;
-            }
-        });
 
         // BUTTON TO SettingsActivity
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(CreateStoryActivity.this, SettingsActivity.class);
+                Intent i = new Intent(StoryFirstWriteActivity.this, SettingsActivity.class);
                 i.putExtra("username",username);
                 i.putExtra("password",password);
                 i.putExtra("stars", stars);
@@ -155,38 +118,38 @@ public class CreateStoryActivity extends AppCompatActivity{
             }
         });
 
-        // BUTTON TO CreateStoryActivity
-        Button startStory = (Button)findViewById(R.id.start_story);
-        startStory.setOnClickListener(new View.OnClickListener() {
+        // BUTTON SEND TEXT
+        Button send_text = (Button)findViewById(R.id.finish);
+        send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                title = mTitle.getText().toString();
-                if (title.equalsIgnoreCase("")){
-                    mTitle.setError("Introduce un titulo");
-                }else  {
-                    Intent i = new Intent(CreateStoryActivity.this, StoryFirstWriteActivity.class);
-                    i.putExtra("username",username);
-                    i.putExtra("password",password);
-                    i.putExtra("stars", stars);
-                    i.putExtra("coins", coins);
-                    i.putExtra("notifications", notifications);
-                    i.putExtra("iconUser", iconUser);
-                    i.putExtra("number_writings", String.valueOf(number_writings));
-                    i.putExtra("number_chars", String.valueOf(number_chars));
-                    i.putExtra("isPrivate_game", String.valueOf(isPrivate_game));
-                    i.putExtra("title", title);
-                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(i);
-                }
+
+                EditText content = (EditText) findViewById(R.id.story_content);
+                String first_paragraph = String.valueOf(content.getText());
+
+                // CALL ASYNC TASK
+                AsyncTaskCreateTale myTask = new AsyncTaskCreateTale(StoryFirstWriteActivity.this);
+                myTask.execute(username, password, title, number_writings, number_chars, isPrivate_game, first_paragraph);
+
+                Intent i = new Intent(StoryFirstWriteActivity.this, MainStoryActivity.class);
+                i.putExtra("username",username);
+                i.putExtra("password",password);
+                i.putExtra("stars", stars);
+                i.putExtra("coins", coins);
+                i.putExtra("notifications", notifications);
+                i.putExtra("iconUser", iconUser);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
             }
         });
 
     }
 
-    public void setContenido() {
-        TextView writings = (TextView) findViewById(R.id.writings);
-        writings.setText(String.valueOf(number_writings));
-        TextView length = (TextView) findViewById(R.id.length);
-        length.setText(String.valueOf(number_chars));
+    // ASYNC TASK ADAPTER
+    public void setupAdapter(AsyncTaskCreateTale.Result resultado)
+    {
+        if (resultado.result==null || resultado.result.equals("error")) {
+            Toast.makeText(getApplicationContext(),"ERROR CREANDO RELATO",Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Para ocultar Navigation bar y lo de arriba.
@@ -222,6 +185,5 @@ public class CreateStoryActivity extends AppCompatActivity{
         else if (picture.equals("9")) imagen.setImageResource(R.raw.icon9);
         imagen.setVisibility(View.VISIBLE);
     }
-
 
 }

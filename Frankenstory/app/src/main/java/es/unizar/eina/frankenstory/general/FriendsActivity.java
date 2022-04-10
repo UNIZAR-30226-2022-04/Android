@@ -123,24 +123,10 @@ public class FriendsActivity extends AppCompatActivity {
     public void refreshPage(){
         AsyncTaskFriends myTask = new AsyncTaskFriends(this);
         myTask.execute(username, password);
+
     }
 
     public void setNavegavilidad(){
-        // BUTTON TO SettingsActivity
-        ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(FriendsActivity.this, SettingsActivity.class);
-                i.putExtra("username",username);
-                i.putExtra("password",password);
-                i.putExtra("stars", stars);
-                i.putExtra("coins", coins);
-                i.putExtra("notifications", notifications);
-                i.putExtra("iconUser", iconUser);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
 
         // BUTTON TO MainMenuActivity
         Button buttonHome = (Button)findViewById(R.id.home);
@@ -157,6 +143,23 @@ public class FriendsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        // BUTTON TO SettingsActivity
+        ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(FriendsActivity.this, SettingsActivity.class);
+                i.putExtra("username",username);
+                i.putExtra("password",password);
+                i.putExtra("stars", stars);
+                i.putExtra("coins", coins);
+                i.putExtra("notifications", notifications);
+                i.putExtra("iconUser", iconUser);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+        });
+
     }
 
     // Para ocultar Navigation bar y lo de arriba.

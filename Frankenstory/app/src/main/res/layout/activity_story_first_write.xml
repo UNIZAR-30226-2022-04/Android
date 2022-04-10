@@ -69,7 +69,7 @@
                     android:background="@drawable/button_ingame"
                     android:fontFamily="@font/bangers_regular"
                     android:paddingHorizontal="100dp"
-                    android:text="@string/finish_game"
+                    android:text="@string/finish_text"
                     android:textColor="@color/white"
                     android:textSize="27sp" />
             </LinearLayout>
