@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
@@ -93,8 +95,8 @@ public class MainMenuActivity extends AppCompatActivity {
         });
 
         // BUTTON TO activity_story
-        Button story = (Button)findViewById(R.id.story_game_main);
-        story.setOnClickListener(new View.OnClickListener() {
+        LottieAnimationView lottie = (LottieAnimationView) findViewById(R.id.buttonStory_mode);
+        lottie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(MainMenuActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

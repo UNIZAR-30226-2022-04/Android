@@ -50,7 +50,9 @@
                 android:layout_marginTop="400dp"
                 android:layout_marginBottom="130dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <!--
                 <Button
                     android:id="@+id/story_game_main"
                     android:layout_width="wrap_content"
@@ -80,7 +82,27 @@
                     android:paddingBottom="40dp"
                     android:paddingLeft="12dp"
                     android:singleLine="true">
-                </Button>
+                </Button>-->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/buttonStory_mode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    app:lottie_rawRes="@raw/boton_amarillo"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"
+                    android:layout_gravity="fill"/>
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/buttonQuick_game"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    app:lottie_rawRes="@raw/boton_azul"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"
+                    android:layout_gravity="fill"/>
             </LinearLayout>
             <!---BOTTOM HOME-->
             <include
