@@ -26,6 +26,12 @@ public class StoryActivity extends AppCompatActivity {
     private Button mNotifications;
     private ListView mList;
     private ImageView mIconUser;
+    private ListView mListMyGames;
+    private ListView mListFriendsGames;
+    private ListView mPublicGames;
+    private ListView mVotingGames;
+    private ImageButton mJoinGame;
+    private ImageButton mVoteGame;
 
 
     @Override
@@ -39,7 +45,7 @@ public class StoryActivity extends AppCompatActivity {
         // GET DATA FROM MAINACTIVITY
         Intent intent = getIntent();
 
-        // GET VIEWS
+        // GET VIEWS AND UPDATE DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
@@ -47,10 +53,14 @@ public class StoryActivity extends AppCompatActivity {
         mNotifications.setVisibility(View.INVISIBLE);
         mList = (ListView) findViewById(R.id.statistics);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-        mUsername.setText(((MyApplication) this.getApplication()).getUsername());
-        mStars.setText(((MyApplication) this.getApplication()).getStars());
-        mCoins.setText(((MyApplication) this.getApplication()).getCoins());
-        chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
+        mListMyGames = (ListView) findViewById(R.id.my_stories);
+        mListFriendsGames = (ListView) findViewById(R.id.friends_games);
+        mPublicGames = (ListView) findViewById(R.id.public_games);
+        mVotingGames = (ListView) findViewById(R.id.VoteGames);
+        mJoinGame = (ImageButton) findViewById(R.id.joinGame);
+        mVoteGame = (ImageButton) findViewById(R.id.vote);
+        updateData();
+
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
 
@@ -72,6 +82,17 @@ public class StoryActivity extends AppCompatActivity {
         // CALL ASYNC TASK
         //AsyncTaskStory myTask = new AsyncTaskStory(this);
         //myTask.execute();
+    }
+
+    // UPDATE DATA
+    public void updateData(){
+        mUsername.setText(((MyApplication) this.getApplication()).getUsername());
+        mStars.setText(((MyApplication) this.getApplication()).getStars());
+        mCoins.setText(((MyApplication) this.getApplication()).getCoins());
+        chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
+        if (Integer.parseInt(((MyApplication) this.getApplication()).getNotifications())>0){
+            mNotifications.setText(((MyApplication) this.getApplication()).getNotifications());
+        } else mNotifications.setVisibility(View.INVISIBLE);
     }
 
     public void setNavegavilidad(){
@@ -134,12 +155,50 @@ public class StoryActivity extends AppCompatActivity {
             );
         }
     }
-    /*
-    // ASYNC TASK ADAPTER
-    public void setupAdapter(AsyncTaskMainMenu.Result resultado)
+
+    // ASYNC TASK STORIES ADAPTER
+    public void setupAdapter(AsyncTaskStories.Result resultado)
     {
+        if (resultado.result!=null && resultado.result.equals("success")){
+            fillDataMyGames(resultado);
+            fillDataFriendGames(resultado);
+            fillDataPublicGames(resultado);
+            fillDataVoteGames(resultado);
+        }
     }
-    */
+
+   private void fillDataMyGames(AsyncTaskStories.Result resultado) {
+        // instantiate the custom list adapter
+        ListStoriesAdapter adapter = new ListStoriesAdapter(this, resultado.stories);
+
+        // get the ListView and attach the adapter
+        mListMyGames.setAdapter(adapter);
+    }
+
+    private void fillDataFriendGames(AsyncTaskStories.Result resultado) {
+        // instantiate the custom list adapter
+        ListStoriesAdapter adapter = new ListStoriesAdapter(this, resultado.stories);
+
+        // get the ListView and attach the adapter
+        mListFriendsGames.setAdapter(adapter);
+    }
+
+    private void fillDataPublicGames(AsyncTaskStories.Result resultado) {
+        // instantiate the custom list adapter
+        ListStoriesAdapter adapter = new ListStoriesAdapter(this, resultado.stories);
+
+        // get the ListView and attach the adapter
+        mPublicGames.setAdapter(adapter);
+    }
+
+    private void fillDataVoteGames(AsyncTaskStories.Result resultado) {
+        // instantiate the custom list adapter
+        ListVoteStoriesAdapter adapter = new ListVoteStoriesAdapter(this, resultado.stories);
+
+        // get the ListView and attach the adapter
+        mVotingGames.setAdapter(adapter);
+    }
+
     // SET ICON USER
     @SuppressLint("ResourceType")
     public void chooseIconUser(ImageView imagen, String picture){
