@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,8 +53,8 @@ public class SettingsActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         // BACKGROUND ANIMATION
-        ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        RelativeLayout relativeLayout = findViewById(R.id.layoutmain);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();

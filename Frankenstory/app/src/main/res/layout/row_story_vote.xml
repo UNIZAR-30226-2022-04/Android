@@ -7,43 +7,71 @@
     android:paddingBottom="5dp"
     android:orientation="horizontal"
     android:id="@+id/rowStory"
-    android:background="@color/gris_claro">
-    <!-- TITULO HISTORIA -->
-    <TextView
-        android:id="@+id/titleStory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mercuthio"
-        android:textSize="20sp"
-        android:fontFamily="@font/arial_bold"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="center_vertical"/>
-    <!-- NOMBRE PROPIETARIO -->
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_name"
-        android:textSize="15sp"
-        android:fontFamily="@font/arial_bold"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="center_vertical"/>
-    <!-- NUMBER SPACES -->
-    <TextView
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
+    android:background="@color/verde_top">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical|right"
-        android:layout_marginRight="10dp"
-        android:text="@string/vote"/>
-    <!-- IMAGEN -->
-    <ImageButton
-        android:id="@+id/vote"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center_vertical"
-        android:scaleType="fitXY"
-        android:background="@null"
-        android:src="@drawable/vote"/>
+        android:orientation="horizontal"
+
+        android:layout_gravity="center_vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- TITULO HISTORIA -->
+            <TextView
+                android:id="@+id/titleStory"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:text="Nombre de la Historia"
+                android:textSize="15sp"
+                android:fontFamily="@font/arial_bold"
+                android:layout_gravity="center_vertical"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- CREADA POR -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Creada por"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/arial_bold"
+                    />
+                <!-- NOMBRE PROPIETARIO -->
+                <TextView
+                    android:id="@+id/creator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_name"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/arial_regular"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <!-- state -->
+        <TextView
+            android:id="@+id/numberTurns"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="10dp"
+            android:text="VOTAR"/>
+        <!-- IMAGEN -->
+        <ImageButton
+            android:id="@+id/vote"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:background="@null"
+            android:src="@drawable/vote"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
 </LinearLayout>

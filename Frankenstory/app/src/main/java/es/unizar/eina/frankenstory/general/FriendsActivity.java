@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -38,6 +39,8 @@ public class FriendsActivity extends AppCompatActivity {
     private LinearLayout mrowsearchedfriend;
     private TextView mSeachedFound;
     private ImageButton mAddFriend;
+    private TextView mNoFriends;
+    private TextView mNoPetitions;
     String searchedName;
 
 
@@ -50,8 +53,8 @@ public class FriendsActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         // BACKGROUND ANIMATION
-        ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        RelativeLayout relativeLayout = findViewById(R.id.layoutmain);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
@@ -68,6 +71,8 @@ public class FriendsActivity extends AppCompatActivity {
         mSearchFriendButton = (ImageButton) findViewById(R.id.searchfriend);
         mSeachedFound = (TextView) findViewById(R.id.friendNameSearched);
         mAddFriend = (ImageButton) findViewById(R.id.addfriend);
+        mNoFriends = (TextView) findViewById(R.id.noFriends);
+        mNoPetitions = (TextView) findViewById(R.id.noPetitions);
         updateData();
 
         // BUTTON SEARCH
@@ -190,6 +195,10 @@ public class FriendsActivity extends AppCompatActivity {
 
         // get the ListView and attach the adapter
         mListFriends.setAdapter(adapter);
+
+        // Message no friends
+        if (resultado.friends.isEmpty()) mNoFriends.setVisibility(View.VISIBLE);
+        else mNoFriends.setVisibility(View.GONE);
     }
 
     private void fillDataPetitions(AsyncTaskFriends.Result resultado) {
@@ -198,6 +207,10 @@ public class FriendsActivity extends AppCompatActivity {
 
         // get the ListView and attach the adapter
         mListNotifications.setAdapter(adapter);
+
+        // Message no petitions
+        if (resultado.notifications.isEmpty()) mNoPetitions.setVisibility(View.VISIBLE);
+        else mNoPetitions.setVisibility(View.GONE);
     }
 
     // ASYNC TASK FRIENDS ADAPTER

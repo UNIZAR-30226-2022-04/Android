@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mercuthio"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:fontFamily="@font/arial_bold"
         android:layout_marginLeft="10dp"
         android:layout_gravity="center_vertical"/>
@@ -28,10 +28,11 @@
     <!-- IMAGEN -->
     <ImageButton
         android:id="@+id/deletefriend"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="center_vertical"
         android:scaleType="fitXY"
         android:background="@null"
-        android:src="@drawable/delete_friend"/>
+        android:src="@drawable/delete_friend"
+        android:layout_marginRight="10dp"/>
 </LinearLayout>

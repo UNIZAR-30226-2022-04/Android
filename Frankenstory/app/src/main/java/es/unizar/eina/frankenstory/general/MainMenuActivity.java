@@ -2,7 +2,6 @@ package es.unizar.eina.frankenstory.general;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -54,8 +54,8 @@ public class MainMenuActivity extends AppCompatActivity {
         setNavegavilidad();
 
         // BACKGROUND ANIMATION
-        ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        RelativeLayout relativeLayout = findViewById(R.id.layoutmain);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();

@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     android:id="@+id/layoutmain">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
             <!---Parte superior-->
             <include layout="@layout/top2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"/>
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginTop="70dp"
                     android:layout_marginHorizontal="40dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arial_bold"
+                        android:shadowColor="@color/verde_letras"
+                        android:shadowDx="5"
+                        android:shadowDy="5"
+                        android:shadowRadius="1"
+                        android:text="Amig@s"
+                        android:textColor="@color/white"
+                        android:textSize="35sp" />
                     <!--Texto buscar amigos-->
                     <TextView
                         android:layout_width="match_parent"
@@ -35,7 +40,8 @@
                         android:shadowRadius="1"
                         android:text="@string/search_friends"
                         android:textColor="@color/white"
-                        android:textSize="30sp" />
+                        android:textSize="20sp" />
+                    <!--Línea amigo encontrado-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -44,10 +50,10 @@
                         <EditText
                             android:id="@+id/usernameSearch"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="40dp"
                             android:layout_marginTop="6dp"
                             android:background="@color/white"
-                            android:layout_marginVertical="20dp"
+                            android:layout_marginVertical="15dp"
                             android:fontFamily="@font/arial_regular"
                             android:hint="@string/insertUserName"
                             android:inputType="text"
@@ -66,7 +72,7 @@
                             android:src="@drawable/buscar"/>
                     </LinearLayout>
                     <!--Lista resultados amigos-->
-                    <include layout="@layout/row_searched_friends" />
+                    <include layout="@layout/row_searched_friends"/>
                     <!--Texto tus amigos-->
                     <TextView
                         android:layout_width="match_parent"
@@ -78,14 +84,26 @@
                         android:shadowRadius="1"
                         android:text="@string/your_friends"
                         android:textColor="@color/white"
-                        android:textSize="30sp" />
+                        android:textSize="20sp" />
+                    <!-- Message no friends -->
+                    <TextView
+                        android:id="@+id/noFriends"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Parece que no tienes amig@s todavía :)"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/arial_bold"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"/>
                     <!--Lista amigos-->
                     <ListView
                         android:id="@+id/your_friends"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_height="130dp"
-                        tools:listitem="@layout/row_my_friends"/>
+                        android:layout_marginTop="10dp"
+                        android:layout_height="140dp"
+                        tools:listitem="@layout/row_my_friends"
+                        android:dividerHeight="3sp" />
                     <!--Texto Peticiones -->
                     <TextView
                         android:layout_width="match_parent"
@@ -97,22 +115,32 @@
                         android:shadowRadius="1"
                         android:text="@string/petitions"
                         android:textColor="@color/white"
-                        android:textSize="30sp" />
+                        android:textSize="20sp"
+                        android:layout_marginTop="10dp"/>
+                    <!-- Message no friends -->
+                    <TextView
+                        android:id="@+id/noPetitions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No hay peticiones nuevas"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/arial_bold"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"/>
                     <!--Lista solicitudes-->
                     <ListView
                         android:id="@+id/petitions"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_height="110dp"
-                        tools:listitem="@layout/row_friend_petitions"/>
+                        android:layout_marginTop="10dp"
+                        android:layout_height="140dp"
+                        tools:listitem="@layout/row_friend_petitions"
+                        android:dividerHeight="3sp"/>
                 </LinearLayout>
-            </ScrollView>
-
             <!---Parte inferior-->
             <include
                 layout="@layout/bottom_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

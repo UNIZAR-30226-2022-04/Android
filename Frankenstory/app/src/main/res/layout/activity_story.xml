@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     android:id="@+id/layoutmain">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
             <!---Parte superior-->
             <include layout="@layout/top2"
                 android:layout_width="match_parent"
@@ -27,8 +23,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="8"
-                    android:shadowDy="8"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
                     android:shadowRadius="1"
                     android:text="@string/story"
                     android:textColor="@color/white"
@@ -39,17 +35,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/create_sotry"
                     android:textColor="@color/white"
                     android:textSize="27sp"
-                    android:background="@drawable/button" />
+                    android:background="@drawable/button_crear_relato" />
                 <!--Texto mis partidas-->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
                     android:shadowDx="8"
@@ -57,7 +52,7 @@
                     android:shadowRadius="1"
                     android:text="@string/my_games"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
                 <!--Lista mis partidas-->
                 <ListView
                     android:id="@+id/my_stories"
@@ -68,6 +63,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
                     android:shadowDx="8"
@@ -75,7 +71,7 @@
                     android:shadowRadius="1"
                     android:text="@string/friend_games"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
                 <!--Lista partidas de amigos-->
                 <ListView
                     android:id="@+id/friends_games"
@@ -86,6 +82,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
                     android:shadowDx="8"
@@ -93,7 +90,7 @@
                     android:shadowRadius="1"
                     android:text="@string/public_games"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
                 <!--Lista partidas públicas-->
                 <ListView
                     android:id="@+id/public_games"
@@ -104,6 +101,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
                     android:shadowDx="8"
@@ -111,7 +109,7 @@
                     android:shadowRadius="1"
                     android:text="@string/no_voted"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
                 <!--Lista partidas públicas-->
                 <ListView
                     android:id="@+id/VoteGames"
@@ -120,10 +118,10 @@
                     tools:listitem="@layout/row_story_vote"/>
             </LinearLayout>
             <!---Parte inferior-->
-            <include
-                layout="@layout/bottom_home"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+    <include
+        layout="@layout/bottom_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

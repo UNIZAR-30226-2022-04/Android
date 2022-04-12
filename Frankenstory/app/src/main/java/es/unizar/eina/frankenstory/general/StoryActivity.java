@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import es.unizar.eina.frankenstory.MyApplication;
@@ -32,6 +33,7 @@ public class StoryActivity extends AppCompatActivity {
     private ListView mVotingGames;
     private ImageButton mJoinGame;
     private ImageButton mVoteGame;
+    private Button mButtonCreateStory;
 
 
     @Override
@@ -59,17 +61,24 @@ public class StoryActivity extends AppCompatActivity {
         mVotingGames = (ListView) findViewById(R.id.VoteGames);
         mJoinGame = (ImageButton) findViewById(R.id.joinGame);
         mVoteGame = (ImageButton) findViewById(R.id.vote);
+        mButtonCreateStory = (Button)findViewById(R.id.create_story);
         updateData();
 
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
 
         // BACKGROUND ANIMATION
-        ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        RelativeLayout relativeLayout = findViewById(R.id.layoutmain);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
+
+        // BUTTON ANIMATION
+        AnimationDrawable animationButton = (AnimationDrawable) mButtonCreateStory.getBackground();
+        animationButton.setEnterFadeDuration(2000);
+        animationButton.setExitFadeDuration(2000);
+        animationButton.start();
 
         // CALL ASYNC TASK
         //AsyncTaskStory myTask = new AsyncTaskStory(this);
@@ -127,8 +136,8 @@ public class StoryActivity extends AppCompatActivity {
         });
 
         // BUTTON TO CreateStoryActivity
-        Button createStory = (Button)findViewById(R.id.create_story);
-        createStory.setOnClickListener(new View.OnClickListener() {
+
+        mButtonCreateStory.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(StoryActivity.this, CreateStoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

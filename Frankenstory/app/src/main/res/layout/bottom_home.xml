@@ -15,9 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/bottom_circle"
-            android:rotation="180"
-            android:clickable="false">
-        </Button>
+            android:clickable="false"
+            android:rotation="180"></Button>
     </RelativeLayout>
     <!--TEXTS-->
     <RelativeLayout

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mercuthio"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:fontFamily="@font/arial_bold"
         android:layout_marginLeft="10dp"
         android:layout_gravity="center_vertical"/>
@@ -43,5 +43,6 @@
         android:layout_gravity="center_vertical"
         android:scaleType="fitXY"
         android:background="@null"
-        android:src="@drawable/accept"/>
+        android:src="@drawable/accept"
+        android:layout_marginRight="10dp"/>
 </LinearLayout>

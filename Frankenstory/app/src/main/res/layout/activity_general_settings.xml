@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     android:id="@+id/layoutmain">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
 
             <!---Parte superior-->
             <include layout="@layout/top2"
@@ -21,15 +16,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginHorizontal="50dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="8"
-                    android:shadowDy="8"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
                     android:shadowRadius="1"
                     android:text="@string/settings"
                     android:textColor="@color/white"
@@ -44,7 +39,7 @@
                 android:shadowDx="4"
                 android:shadowDy="4"
                 android:shadowRadius="1"
-                android:text="@string/insertPassWord"
+                android:text="Cambiar contraseña"
                 android:textColor="@color/white"
                 android:paddingRight="4dp"
                 android:textSize="18sp" />
@@ -61,20 +56,7 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:textSize="15sp" />
-            <!---Repita la Contraseña-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/arial_bold"
-                android:paddingTop="5dp"
-                android:shadowColor="@color/verde_letras"
-                android:shadowDx="4"
-                android:shadowDy="4"
-                android:shadowRadius="1"
-                android:text="@string/insertPassWordAgain"
-                android:textColor="@color/white"
-                android:paddingRight="4dp"
-                android:textSize="18sp" />
+
             <EditText
                 android:id="@+id/secondpasswordRegister"
                 android:layout_width="match_parent"
@@ -97,8 +79,22 @@
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/change_pass"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:background="@drawable/buttom_change_password" />
+                <!---Repita la Contraseña-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_bold"
+                    android:paddingTop="5dp"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowRadius="1"
+                    android:text="Cambiar icono"
+                    android:textColor="@color/white"
+                    android:paddingRight="4dp"
+                    android:textSize="18sp" />
                 <!-- ICONS-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -223,7 +219,7 @@
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/change_icon"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:background="@drawable/buttom_change_icon"/>
                 <Button
                     android:id="@+id/close_session"
@@ -235,7 +231,7 @@
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/close_session"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:background="@drawable/buttom_close_session" />
                 <Button
                     android:id="@+id/eliminate_acc"
@@ -251,10 +247,10 @@
                     android:background="@drawable/buttom_eliminate_acc" />
             </LinearLayout>
             <!---Parte inferior-->
-            <include
-                layout="@layout/bottom_home"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+    <include
+        layout="@layout/bottom_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
