@@ -1,6 +1,5 @@
 package es.unizar.eina.frankenstory.general;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,18 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
+public class ListParagraphsAdapter extends BaseAdapter {
 
-public class ListVoteStoriesAdapter extends BaseAdapter{
 
-    private StoryActivity context; //context
-    private List<AsyncTaskStories.Story> items; //data source of the list adapter
+    private VoteTaleActivity context; //context
+    private List<AsyncTaskGetParagraphs.Paragraph> items; //data source of the list adapter
 
     //public constructor
-    public ListVoteStoriesAdapter(StoryActivity context, List<AsyncTaskStories.Story> items) {
+    public ListParagraphsAdapter(VoteTaleActivity context, List<AsyncTaskGetParagraphs.Paragraph> items) {
         this.context = context;
         this.items = items;
     }
@@ -63,15 +61,11 @@ public class ListVoteStoriesAdapter extends BaseAdapter{
                 convertView.findViewById(R.id.joinGame);
         joinGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), StoryFirstWriteActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                i.putExtra("id", position);
-                context.startActivity(i);
+                //
             }
         });
 
         // returns the view for the current row
         return convertView;
     }
-
 }

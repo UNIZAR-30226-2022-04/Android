@@ -53,6 +53,16 @@
                     android:text="@string/my_games"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
+                <TextView
+                        android:id="@+id/noMyGames"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prueba a crear un relato"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/arial_bold"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"/>
                 <!--Lista mis partidas-->
                 <ListView
                     android:id="@+id/my_stories"
@@ -72,6 +82,16 @@
                     android:text="@string/friend_games"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
+                <TextView
+                        android:id="@+id/noFriendsGames"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Parece que tus amigos no tiene relatos"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/arial_bold"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"/>
                 <!--Lista partidas de amigos-->
                 <ListView
                     android:id="@+id/friends_games"
@@ -91,6 +111,16 @@
                     android:text="@string/public_games"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
+                <TextView
+                        android:id="@+id/noPublicGames"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Parece que no hay nadie jugando :("
+                        android:textSize="14sp"
+                        android:fontFamily="@font/arial_bold"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"/>
                 <!--Lista partidas públicas-->
                 <ListView
                     android:id="@+id/public_games"
@@ -110,6 +140,16 @@
                     android:text="@string/no_voted"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
+                 <TextView
+                        android:id="@+id/noVoteGames"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No hay relatos que votar"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/arial_bold"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"/>
                 <!--Lista partidas públicas-->
                 <ListView
                     android:id="@+id/VoteGames"

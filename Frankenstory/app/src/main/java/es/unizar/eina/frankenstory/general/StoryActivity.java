@@ -16,6 +16,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
@@ -34,6 +38,10 @@ public class StoryActivity extends AppCompatActivity {
     private ImageButton mJoinGame;
     private ImageButton mVoteGame;
     private Button mButtonCreateStory;
+    private TextView mNoMyGames;
+    private TextView mNoFriendsGames;
+    private TextView mNoPublicGames;
+    private TextView mNoVoteGames;
 
 
     @Override
@@ -62,6 +70,10 @@ public class StoryActivity extends AppCompatActivity {
         mJoinGame = (ImageButton) findViewById(R.id.joinGame);
         mVoteGame = (ImageButton) findViewById(R.id.vote);
         mButtonCreateStory = (Button)findViewById(R.id.create_story);
+        mNoMyGames = (TextView) findViewById(R.id.noMyGames);
+        mNoFriendsGames = (TextView) findViewById(R.id.noFriendsGames);
+        mNoPublicGames = (TextView) findViewById(R.id.noPublicGames);
+        mNoVoteGames = (TextView) findViewById(R.id.noVoteGames);
         updateData();
 
         // BUTTONS FROM TOP AND BOTTOM
@@ -169,43 +181,60 @@ public class StoryActivity extends AppCompatActivity {
     public void setupAdapter(AsyncTaskStories.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
-            fillDataMyGames(resultado);
-            fillDataFriendGames(resultado);
-            fillDataPublicGames(resultado);
-            fillDataVoteGames(resultado);
+
+            fillDataMyGames(resultado.myTales);
+            fillDataFriendGames(resultado.friendTales);
+            fillDataPublicGames(resultado.publicTales);
+            fillDataVoteGames(resultado.talesForVote);
         }
     }
 
-   private void fillDataMyGames(AsyncTaskStories.Result resultado) {
+   private void fillDataMyGames(List<AsyncTaskStories.Story> stories) {
         // instantiate the custom list adapter
-        ListStoriesAdapter adapter = new ListStoriesAdapter(this, resultado.stories);
+        ListStoriesAdapter adapter = new ListStoriesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mListMyGames.setAdapter(adapter);
+
+        // Message no my games
+        if (stories.isEmpty()) mNoMyGames.setVisibility(View.VISIBLE);
+        else mNoMyGames.setVisibility(View.GONE);
     }
 
-    private void fillDataFriendGames(AsyncTaskStories.Result resultado) {
+    private void fillDataFriendGames(List<AsyncTaskStories.Story> stories) {
         // instantiate the custom list adapter
-        ListStoriesAdapter adapter = new ListStoriesAdapter(this, resultado.stories);
+        ListStoriesAdapter adapter = new ListStoriesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mListFriendsGames.setAdapter(adapter);
+
+        // Message no friends games
+        if (stories.isEmpty()) mNoFriendsGames.setVisibility(View.VISIBLE);
+        else mNoFriendsGames.setVisibility(View.GONE);
     }
 
-    private void fillDataPublicGames(AsyncTaskStories.Result resultado) {
+    private void fillDataPublicGames(List<AsyncTaskStories.Story> stories) {
         // instantiate the custom list adapter
-        ListStoriesAdapter adapter = new ListStoriesAdapter(this, resultado.stories);
+        ListStoriesAdapter adapter = new ListStoriesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mPublicGames.setAdapter(adapter);
+
+        // Message no public games
+        if (stories.isEmpty()) mNoPublicGames.setVisibility(View.VISIBLE);
+        else mNoPublicGames.setVisibility(View.GONE);
     }
 
-    private void fillDataVoteGames(AsyncTaskStories.Result resultado) {
+    private void fillDataVoteGames(List<AsyncTaskStories.Story> stories) {
         // instantiate the custom list adapter
-        ListVoteStoriesAdapter adapter = new ListVoteStoriesAdapter(this, resultado.stories);
+        ListVoteStoriesAdapter adapter = new ListVoteStoriesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mVotingGames.setAdapter(adapter);
+
+        // Message no vote games
+        if (stories.isEmpty()) mNoVoteGames.setVisibility(View.VISIBLE);
+        else mNoVoteGames.setVisibility(View.GONE);
     }
 
     // SET ICON USER

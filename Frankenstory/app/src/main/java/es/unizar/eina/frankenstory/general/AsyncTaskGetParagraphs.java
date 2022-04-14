@@ -2,6 +2,7 @@ package es.unizar.eina.frankenstory.general;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -14,41 +15,36 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.Result> {
-    private StoryActivity mActivity = null;
+public class AsyncTaskGetParagraphs extends AsyncTask<String, Void, AsyncTaskGetParagraphs.Result>{
 
-    static class Story {
-        int story_id;
-        String title;
+    private VoteTaleActivity mActivity = null;
+
+   static class Paragraph {
+        String body;
         String creator;
-        String max_turns;
-        int turn;
+        int index;
     }
     static class Result {
         String result;
-        List<Story> myTales;
-        List<Story> friendTales;
-        List<Story> publicTales;
-        List<Story> talesForVote;
+        String title;
+        List<Paragraph> paragraphs;
     }
 
-    public AsyncTaskStories(StoryActivity activity)
-    {
-        mActivity = activity;
-    }
+    public AsyncTaskGetParagraphs(VoteTaleActivity activity) { mActivity = activity; }
 
-    protected AsyncTaskStories.Result doInBackground(String... params) {
+    protected Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
+        int id = Integer.parseInt(params[0]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/get_tales").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/get_paragraphs").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"," + "\"id\":\"" + id + "\"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -56,15 +52,16 @@ public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.R
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, AsyncTaskStories.Result.class);
+            return gson.fromJson(reader, Result.class);
 
         } catch (IOException e) {
-            Log.e("AsyncTaskStories",e.getMessage());
+            Log.e("ERROR_AsyncGetParagraph",e.getMessage());
         }
+
         return new Result();
     }
 
-    protected void onPostExecute(AsyncTaskStories.Result resultado) {
+    protected void onPostExecute(Result resultado) {
         mActivity.setupAdapter(resultado);
     }
 }
