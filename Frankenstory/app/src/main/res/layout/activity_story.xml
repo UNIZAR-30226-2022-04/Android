@@ -86,7 +86,7 @@
                         android:id="@+id/noFriendsGames"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Parece que tus amigos no tiene relatos"
+                        android:text="Parece que tus amigos no tienen relatos"
                         android:textSize="14sp"
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="@color/verde_letras">
+    </com.google.android.material.imageview.ShapeableImageView>
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+        <!-- POSICION -->
+        <TextView
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/story_begins"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/arial_bold"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"/>
+        <!-- IMAGEN -->
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="-25dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/heart" />
+    </LinearLayout>
+
+</RelativeLayout>
+

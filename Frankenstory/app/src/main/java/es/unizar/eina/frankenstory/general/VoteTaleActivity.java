@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -46,7 +47,7 @@ public class VoteTaleActivity extends AppCompatActivity{
 
         Intent i = getIntent();
         id = i.getStringExtra("id");
-        
+
         setNavegavilidad();
 
         // BACKGROUND ANIMATION
@@ -74,6 +75,7 @@ public class VoteTaleActivity extends AppCompatActivity{
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.vote);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //ASYNC TASK VOTE PARAGRAPH
                 Intent i = new Intent(VoteTaleActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);

@@ -85,7 +85,9 @@
                     android:id="@+id/paragraphs"
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"/>
+                    android:layout_height="400dp"
+                    tools:listitem="@layout/row_paragraphs_vote"
+                    android:dividerHeight="15.0sp"/>
 
             </LinearLayout>
             <!--Terminar escritura-->

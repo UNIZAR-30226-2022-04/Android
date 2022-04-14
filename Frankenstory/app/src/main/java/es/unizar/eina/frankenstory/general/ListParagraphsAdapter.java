@@ -43,7 +43,7 @@ public class ListParagraphsAdapter extends BaseAdapter {
         // inflate the layout for each list row
         if (convertView == null) {
             convertView = LayoutInflater.from(context).
-                    inflate(R.layout.row_story_games, parent, false);
+                    inflate(R.layout.row_paragraphs_vote, parent, false);
         }
 
         // get current item to be displayed
@@ -51,19 +51,10 @@ public class ListParagraphsAdapter extends BaseAdapter {
 
         // get the TextView for item name and item description
         TextView textViewItemName = (TextView)
-                convertView.findViewById(R.id.titleStory);
+                convertView.findViewById(R.id.body);
 
         //sets the text for item name and item description from the current item object
         textViewItemName.setText(currentItem);
-
-        // ON CLICK ON BUTTON JOIN GAME
-        ImageButton joinGame = (ImageButton)
-                convertView.findViewById(R.id.joinGame);
-        joinGame.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //
-            }
-        });
 
         // returns the view for the current row
         return convertView;
