@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
@@ -31,7 +33,9 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
 
     String title;
     String body;
-    boolean myHistory;
+    String id;
+    String previous_content;
+    boolean myStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,8 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
 
         // GET PARAMETERS
         Intent intent = getIntent();
-        myHistory = intent.getBooleanExtra("myHistory",false);
+        myStory = intent.getBooleanExtra("myStory",false);
+        id = intent.getStringExtra("id");
 
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
@@ -75,8 +80,8 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     public void setContenido() {
 
         //ASYNC TASK RESUME_TALE
-        //
-        //
+        AsyncTaskResumeTale myTask = new AsyncTaskResumeTale(this);
+        myTask.execute(id);
 
         TextView story_title = (TextView) findViewById(R.id.story_name);
         story_title.setText(String.valueOf(title));
@@ -105,9 +110,9 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                 EditText content = (EditText) findViewById(R.id.story_content);
                 String new_paragraph = String.valueOf(content.getText());
 
-                // CALL ASYNC TASK
-                //AsyncTaskAddParagraphTale myTask = new AsyncTaskAddParagraphTale(StoryFirstWriteActivity.this);
-                //myTask.execute(id, new_paragraph, isLast);
+                // CALL ASYNC TASK ADD PARAGRAPH
+                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                myTask.execute(id, new_paragraph, String.valueOf(false));
 
                 Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -123,9 +128,9 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                 EditText content = (EditText) findViewById(R.id.story_content);
                 String new_paragraph = String.valueOf(content.getText());
 
-                // CALL ASYNC TASK END TALE
-                //
-                //
+                // CALL ASYNC TASK ADD PARAGRAPH
+                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                myTask.execute(id, new_paragraph, String.valueOf(true));
 
                 Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -136,28 +141,37 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     }
 
     // ASYNC TASK ADAPTER ADD PARAGRAPH
-    /*public void setupAdapter(AsyncTaskAddParagraphTale.Result resultado)
+    public void setupAdapter(AsyncTaskAddParagraph.Result resultado)
     {
         if (resultado.result==null || resultado.result.equals("error")) {
             Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO",Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 
     // ASYNC TASK ADAPTER RESUME TALE
-    /*public void setupAdapter(AsyncTaskAddParagraphTale.Result resultado)
+    public void setupAdapter(AsyncTaskResumeTale.Result resultado)
     {
         if (resultado.result==null || resultado.result.equals("error")) {
             Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO",Toast.LENGTH_SHORT).show();
+        } else {
+            previous_content = setPreviousContent(resultado.paragraphs);
         }
-    }*/
+    }
 
-    // ASYNC TASK ADAPTER END TALE
-    /*public void setupAdapter(AsyncTaskAddParagraphTale.Result resultado)
+    public String setPreviousContent (List<AsyncTaskResumeTale.Story> paragraphs)
     {
-        if (resultado.result==null || resultado.result.equals("error")) {
-            Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO",Toast.LENGTH_SHORT).show();
+        String aux = "";
+        int i = 0;
+        while ( i < paragraphs.size()) {
+            for (AsyncTaskResumeTale.Story paragraph : paragraphs) {
+                if (paragraph.orden == i) {
+                    aux += "\n" + paragraph.body;
+                    i++;
+                }
+            }
         }
-    }*/
+        return aux;
+    }
 
     // Para ocultar Navigation bar y lo de arriba.
     @Override

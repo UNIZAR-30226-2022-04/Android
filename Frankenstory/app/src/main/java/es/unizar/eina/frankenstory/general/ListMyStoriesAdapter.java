@@ -14,13 +14,13 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
 
-public class ListStoriesAdapter extends BaseAdapter{
+public class ListMyStoriesAdapter extends BaseAdapter{
 
     private StoryActivity context; //context
     private List<AsyncTaskStories.Story> items; //data source of the list adapter
 
     //public constructor
-    public ListStoriesAdapter(StoryActivity context, List<AsyncTaskStories.Story> items) {
+    public ListMyStoriesAdapter(StoryActivity context, List<AsyncTaskStories.Story> items) {
         this.context = context;
         this.items = items;
     }
@@ -58,17 +58,16 @@ public class ListStoriesAdapter extends BaseAdapter{
         //sets the text for item name and item description from the current item object
         textViewItemName.setText(currentItem);
 
-        // ON CLICK ON BUTTON JOIN GAME
+        // ON CLICK ON VOTE GAME
         ImageButton vote = (ImageButton)
                 convertView.findViewById(R.id.vote);
         vote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // ASYNC TASK VOTE GAME
-                //AsyncTaskManageFrienship myTaskSearch = new AsyncTaskManageFrienship(context);
-                //myTaskSearch.execute(currentItem, "delete");
-                //Intent i = new Intent(v.getContext(), StoryFirstWriteActivity.class);
-                //i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                //context.startActivity(i);
+                Intent i = new Intent(v.getContext(), StoryFirstWriteActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                i.putExtra("myStory", true);
+                i.putExtra("id", position);
+                context.startActivity(i);
             }
         });
 

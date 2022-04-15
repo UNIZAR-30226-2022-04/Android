@@ -2,7 +2,6 @@ package es.unizar.eina.frankenstory.general;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,9 +15,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
@@ -51,9 +48,6 @@ public class StoryActivity extends AppCompatActivity {
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-        // GET DATA FROM MAINACTIVITY
-        Intent intent = getIntent();
 
         // GET VIEWS AND UPDATE DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
@@ -93,16 +87,16 @@ public class StoryActivity extends AppCompatActivity {
         animationButton.start();
 
         // CALL ASYNC TASK
-        //AsyncTaskStory myTask = new AsyncTaskStory(this);
-        //myTask.execute();
+        AsyncTaskStories myTask = new AsyncTaskStories(this);
+        myTask.execute();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // CALL ASYNC TASK
-        //AsyncTaskStory myTask = new AsyncTaskStory(this);
-        //myTask.execute();
+        AsyncTaskStories myTask = new AsyncTaskStories(this);
+        myTask.execute();
     }
 
     // UPDATE DATA
@@ -191,7 +185,7 @@ public class StoryActivity extends AppCompatActivity {
 
    private void fillDataMyGames(List<AsyncTaskStories.Story> stories) {
         // instantiate the custom list adapter
-        ListStoriesAdapter adapter = new ListStoriesAdapter(this, stories);
+        ListMyStoriesAdapter adapter = new ListMyStoriesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mListMyGames.setAdapter(adapter);
@@ -203,7 +197,7 @@ public class StoryActivity extends AppCompatActivity {
 
     private void fillDataFriendGames(List<AsyncTaskStories.Story> stories) {
         // instantiate the custom list adapter
-        ListStoriesAdapter adapter = new ListStoriesAdapter(this, stories);
+        ListOtherStoriesAdapter adapter = new ListOtherStoriesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mListFriendsGames.setAdapter(adapter);
@@ -215,7 +209,7 @@ public class StoryActivity extends AppCompatActivity {
 
     private void fillDataPublicGames(List<AsyncTaskStories.Story> stories) {
         // instantiate the custom list adapter
-        ListStoriesAdapter adapter = new ListStoriesAdapter(this, stories);
+        ListOtherStoriesAdapter adapter = new ListOtherStoriesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mPublicGames.setAdapter(adapter);

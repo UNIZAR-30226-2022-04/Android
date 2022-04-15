@@ -14,41 +14,39 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.Result> {
-    private StoryActivity mActivity = null;
+public class AsyncTaskResumeTale extends AsyncTask<String, Void, AsyncTaskResumeTale.Result>{
+
+        private StoryNotFirstWriteActivity mActivity = null;
 
     static class Story {
-        int id;
-        String title;
-        String creator;
-        String max_turns;
-        int turn;
+        String body;
+        int orden;
     }
     static class Result {
         String result;
-        List<Story> myTales;
-        List<Story> friendTales;
-        List<Story> publicTales;
-        List<Story> talesForVote;
+        String title;
+        List<Story> paragraphs;
+        int maxCharacters;
     }
 
-    public AsyncTaskStories(StoryActivity activity)
+    public AsyncTaskResumeTale(StoryNotFirstWriteActivity activity)
     {
         mActivity = activity;
     }
 
-    protected AsyncTaskStories.Result doInBackground(String... params) {
+    protected AsyncTaskResumeTale.Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
+        int id = Integer.parseInt(params[0]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/get_tales").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/resume_tale").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":\""+id+"\"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -56,15 +54,16 @@ public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.R
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, AsyncTaskStories.Result.class);
+            return gson.fromJson(reader, AsyncTaskResumeTale.Result.class);
 
         } catch (IOException e) {
-            Log.e("AsyncTaskStories",e.getMessage());
+            Log.e("AsyncTaskResumeTale",e.getMessage());
         } catch (Exception e) {
-            Log.e("AsyncTaskStories",e.getMessage());
+            Log.e("AsyncTaskResumeTale",e.getMessage());
         }
         return new Result();
     }
 
-    protected void onPostExecute(AsyncTaskStories.Result resultado) { mActivity.setupAdapter(resultado); }
+    protected void onPostExecute(AsyncTaskResumeTale.Result resultado) { mActivity.setupAdapter(resultado); }
+
 }
