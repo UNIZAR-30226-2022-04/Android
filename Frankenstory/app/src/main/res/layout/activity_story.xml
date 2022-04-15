@@ -62,7 +62,7 @@
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="5dp"/>
                 <!--Lista mis partidas-->
                 <ListView
                     android:id="@+id/my_stories"
@@ -91,7 +91,7 @@
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="5dp"/>
                 <!--Lista partidas de amigos-->
                 <ListView
                     android:id="@+id/friends_games"
@@ -120,12 +120,12 @@
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="5dp"/>
                 <!--Lista partidas públicas-->
                 <ListView
                     android:id="@+id/public_games"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
+                    android:layout_height="45dp"
                     tools:listitem="@layout/row_story_games"/>
                 <!--Texto partidas públicas-->
                 <TextView
@@ -149,7 +149,7 @@
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="5dp"/>
                 <!--Lista partidas públicas-->
                 <ListView
                     android:id="@+id/VoteGames"

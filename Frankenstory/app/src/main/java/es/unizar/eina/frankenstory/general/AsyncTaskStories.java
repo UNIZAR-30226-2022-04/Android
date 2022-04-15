@@ -18,18 +18,19 @@ public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.R
     private StoryActivity mActivity = null;
 
     static class Story {
-        int id;
+        Integer story_id;
         String title;
         String creator;
-        String max_turns;
-        int turn;
+        Integer max_turns;
+        Integer turn;
     }
     static class Result {
         String result;
+        String reason;
         List<Story> myTales;
-        List<Story> friendTales;
-        List<Story> publicTales;
-        List<Story> talesForVote;
+        //List<Story> friendTales;
+        //List<Story> publicTales;
+        //List<Story> talesForVote;
     }
 
     public AsyncTaskStories(StoryActivity activity)
