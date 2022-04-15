@@ -1,6 +1,5 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.story.AsyncTaskStories;
+import es.unizar.eina.frankenstory.story.StoryActivity;
+import es.unizar.eina.frankenstory.story.VoteStoryActivity;
 
 public class ListVoteStoriesAdapter extends BaseAdapter{
 
@@ -45,26 +46,26 @@ public class ListVoteStoriesAdapter extends BaseAdapter{
         // inflate the layout for each list row
         if (convertView == null) {
             convertView = LayoutInflater.from(context).
-                    inflate(R.layout.row_story_games, parent, false);
+                    inflate(R.layout.row_story_vote, parent, false);
         }
 
         // get current item to be displayed
-        String currentItem = (String) getItem(position);
+        AsyncTaskStories.Story currentItem = (AsyncTaskStories.Story) getItem(position);
 
-        // get the TextView for item name and item description
-        TextView textViewItemName = (TextView)
-                convertView.findViewById(R.id.titleStory);
+        // get VIEWS
+        TextView textViewItemName = (TextView) convertView.findViewById(R.id.titleStory);
+        TextView textViewItemCreator = (TextView) convertView.findViewById(R.id.creator);
 
-        //sets the text for item name and item description from the current item object
-        textViewItemName.setText(currentItem);
+        // set DATA
+        textViewItemName.setText(currentItem.title);
+        textViewItemCreator.setText(currentItem.creator);
 
         // ON CLICK ON BUTTON JOIN GAME
         ImageButton joinGame = (ImageButton)
-                convertView.findViewById(R.id.joinGame);
+                convertView.findViewById(R.id.vote);
         joinGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), VoteTaleActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                Intent i = new Intent(v.getContext(), VoteStoryActivity.class);
                 context.startActivity(i);
             }
         });

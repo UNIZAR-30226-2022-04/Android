@@ -1,6 +1,5 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,18 +8,20 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.story.AsyncTaskStories;
+import es.unizar.eina.frankenstory.story.StoryActivity;
+import es.unizar.eina.frankenstory.story.StoryFirstWriteActivity;
 
-public class ListMyStoriesAdapter extends BaseAdapter{
+public class ListOtherStoriesAdapter extends BaseAdapter{
 
     private StoryActivity context; //context
     private List<AsyncTaskStories.Story> items; //data source of the list adapter
 
     //public constructor
-    public ListMyStoriesAdapter(StoryActivity context, List<AsyncTaskStories.Story> items) {
+    public ListOtherStoriesAdapter(StoryActivity context, List<AsyncTaskStories.Story> items) {
         this.context = context;
         this.items = items;
     }
@@ -67,7 +68,7 @@ public class ListMyStoriesAdapter extends BaseAdapter{
         vote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), StoryFirstWriteActivity.class);
-                i.putExtra("myStory", true);
+                i.putExtra("myStory", false);
                 i.putExtra("id", position);
                 context.startActivity(i);
             }

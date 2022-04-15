@@ -1,4 +1,4 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,10 +18,10 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.general.SettingsActivity;
+
 public class CreateStoryActivity extends AppCompatActivity{
 
     private TextView mUsername;
@@ -31,7 +33,10 @@ public class CreateStoryActivity extends AppCompatActivity{
     int number_writings;
     int number_chars;
     boolean isPrivate_game;
-    String title;
+    private String title;
+    private TextView writings;
+    private TextView length;
+    public static Handler handlerTofinish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +53,13 @@ public class CreateStoryActivity extends AppCompatActivity{
         mTitle = (TextView) findViewById(R.id.story_name);
         mList = (ListView) findViewById(R.id.statistics);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
+        writings = (TextView) findViewById(R.id.writings);
+        length = (TextView) findViewById(R.id.length);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
+
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
 
@@ -62,25 +70,12 @@ public class CreateStoryActivity extends AppCompatActivity{
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        title = "";
-        mTitle.setText("");
-
-        number_writings = 1;
-        number_chars = 1;
+        // INITIALIZE VARIABLES
+        number_writings = 10;
+        number_chars = 120;
+        isPrivate_game = false;
         setContenido();
 
-        isPrivate_game = false;
-        Switch private_game = (Switch) findViewById(R.id.private_game);
-        private_game.setChecked(false);
-
-    }
-
-    public void setNavegavilidad(){
         //BUTTON PLUS WRITINGS
         Button plusWritings = (Button)findViewById(R.id.plus_writings);
         plusWritings.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +89,7 @@ public class CreateStoryActivity extends AppCompatActivity{
         Button minusWritings = (Button)findViewById(R.id.minus_writings);
         minusWritings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (number_writings > 1) number_writings--;
+                if (number_writings > 3) number_writings--;
                 setContenido();
             }
         });
@@ -112,7 +107,7 @@ public class CreateStoryActivity extends AppCompatActivity{
         Button minusLenght = (Button)findViewById(R.id.minus_length);
         minusLenght.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (number_chars > 1) number_chars--;
+                if (number_chars > 30) number_chars--;
                 setContenido();
             }
         });
@@ -125,15 +120,23 @@ public class CreateStoryActivity extends AppCompatActivity{
             }
         });
 
+        // FINISHER
+        handlerTofinish = new Handler() {
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch(msg.what) {
+                    case 0:
+                        finish();
+                        break;
+                }
+            }
+        };
+    }
+
+    public void setNavegavilidad(){
         // BUTTON TO SettingsActivity
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(CreateStoryActivity.this, SettingsActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
+        buttonSettings.setVisibility(View.GONE);
 
         // BUTTON TO CreateStoryActivity
         Button startStory = (Button)findViewById(R.id.start_story);
@@ -148,7 +151,6 @@ public class CreateStoryActivity extends AppCompatActivity{
                     i.putExtra("number_chars", String.valueOf(number_chars));
                     i.putExtra("isPrivate_game", String.valueOf(isPrivate_game));
                     i.putExtra("title", title);
-                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(i);
                 }
             }
@@ -157,9 +159,7 @@ public class CreateStoryActivity extends AppCompatActivity{
     }
 
     public void setContenido() {
-        TextView writings = (TextView) findViewById(R.id.writings);
         writings.setText(String.valueOf(number_writings));
-        TextView length = (TextView) findViewById(R.id.length);
         length.setText(String.valueOf(number_chars));
     }
 
@@ -196,6 +196,5 @@ public class CreateStoryActivity extends AppCompatActivity{
         else if (picture.equals("9")) imagen.setImageResource(R.raw.icon9);
         imagen.setVisibility(View.VISIBLE);
     }
-
 
 }

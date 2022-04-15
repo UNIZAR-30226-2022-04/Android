@@ -1,24 +1,25 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.story.AsyncTaskGetParagraphs;
+import es.unizar.eina.frankenstory.story.VoteStoryActivity;
+
 public class ListParagraphsAdapter extends BaseAdapter {
 
 
-    private VoteTaleActivity context; //context
+    private VoteStoryActivity context; //context
     private List<AsyncTaskGetParagraphs.Paragraph> items; //data source of the list adapter
 
     //public constructor
-    public ListParagraphsAdapter(VoteTaleActivity context, List<AsyncTaskGetParagraphs.Paragraph> items) {
+    public ListParagraphsAdapter(VoteStoryActivity context, List<AsyncTaskGetParagraphs.Paragraph> items) {
         this.context = context;
         this.items = items;
     }

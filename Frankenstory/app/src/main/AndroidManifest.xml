@@ -47,17 +47,17 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".general.StoryActivity"
+            android:name=".story.StoryActivity"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".general.CreateStoryActivity"
+            android:name=".story.CreateStoryActivity"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".general.StoryFirstWriteActivity"
+            android:name=".story.StoryFirstWriteActivity"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>

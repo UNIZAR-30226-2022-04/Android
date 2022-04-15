@@ -1,22 +1,20 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
 import java.net.HttpURLConnection;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskCreateTale extends AsyncTask<String, Void, AsyncTaskCreateTale.Result> {
+public class AsyncTaskCreateStory extends AsyncTask<String, Void, AsyncTaskCreateStory.Result> {
 
     private StoryFirstWriteActivity mActivity = null;
 
@@ -24,7 +22,7 @@ public class AsyncTaskCreateTale extends AsyncTask<String, Void, AsyncTaskCreate
         String result;
     }
 
-    public AsyncTaskCreateTale(StoryFirstWriteActivity activity){mActivity = activity; }
+    public AsyncTaskCreateStory(StoryFirstWriteActivity activity){mActivity = activity; }
 
     protected Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();

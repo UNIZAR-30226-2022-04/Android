@@ -1,4 +1,4 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -19,6 +19,9 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.general.FriendsActivity;
+import es.unizar.eina.frankenstory.general.MainMenuActivity;
+import es.unizar.eina.frankenstory.general.SettingsActivity;
 
 public class StoryActivity extends AppCompatActivity {
 

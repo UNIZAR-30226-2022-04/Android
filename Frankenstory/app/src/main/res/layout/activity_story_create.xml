@@ -19,158 +19,168 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="100dp"
                 android:orientation="vertical"
                 tools:ignore="UseSwitchCompatOrMaterialXml">
-                <EditText
-                    android:id="@+id/story_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/white"
-                    android:fontFamily="@font/arial_regular"
-                    android:hint="@string/story_name"
-                    android:inputType="text"
-                    android:paddingStart="12dp"
-                    android:textSize="20sp"
-                    tools:ignore="RtlSymmetry" />
 
-                <!--Parte número de turnos-->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
                     android:shadowRadius="1"
-                    android:layout_marginTop="30dp"
+                    android:text="Título del relato"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/story_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/arial_regular"
+                    android:hint="Título del relato"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:textSize="18sp"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="40dp"
                     android:text="@string/writings"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowRadius="1"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/arial_bold"/>
+
+                <!-- NUMBER WRITTINGS -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:gravity="end"
-                    android:layout_marginTop="20dp">
-                    <!--Número de turnos-->
-                    <TextView
-                        android:id="@+id/writings"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/no_points"
-                        android:fontFamily="@font/arial_bold"
-                        android:textColor="@color/white"
-                        android:gravity="center_vertical|end"
-                        android:layout_marginEnd="30sp"
-                        android:textSize="25sp" />
-                    <!--Botón más número turnos-->
-                    <Button
-                        android:id="@+id/plus_writings"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/button_plus_minus"
-                        android:textSize="30sp"
-                        android:layout_marginEnd="10dp"
-                        android:paddingHorizontal="0dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:text="@string/plus"
-                        tools:ignore="RtlCompat">
-                    </Button>
-                    <!--Botón más número turnos-->
+                    android:gravity="center_horizontal">
+                    <!-- - -->
                     <Button
                         android:id="@+id/minus_writings"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/button_plus_minus"
                         android:textSize="30sp"
-                        android:paddingHorizontal="0dp"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:text="@string/minus"
-                        tools:ignore="RtlCompat">
-                    </Button>
-                </LinearLayout>
-                <!--Parte número de escrituras-->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
-                    android:shadowRadius="1"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/length"
-                    android:textColor="@color/white"
-                    android:textSize="25sp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="end"
-                    android:layout_marginTop="20dp">
-                    <!--Número de caracteres-->
+                        tools:ignore="RtlCompat"/>
                     <TextView
-                        android:id="@+id/length"
-                        android:layout_width="match_parent"
+                        android:id="@+id/writings"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/no_points"
                         android:fontFamily="@font/arial_bold"
                         android:textColor="@color/white"
-                        android:gravity="center_vertical|end"
-                        android:layout_marginEnd="30sp"
-                        android:textSize="25sp" />
-                    <!--Botón más numero turnos-->
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="20sp" />
+                    <!-- + -->
                     <Button
-                        android:id="@+id/plus_lenght"
+                        android:id="@+id/plus_writings"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/button_plus_minus"
                         android:textSize="30sp"
-                        android:layout_marginRight="10dp"
                         android:paddingHorizontal="0dp"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:text="@string/plus"
-                        tools:ignore="RtlCompat">
-                    </Button>
-                    <!--Botón más numero turnos-->
+                        tools:ignore="RtlCompat"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="40dp"
+                    android:text="@string/length"
+                    android:textColor="@color/white"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowRadius="1"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/arial_bold"/>
+
+                <!-- NUMBER CHARACTERS -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+                    <!-- - -->
                     <Button
                         android:id="@+id/minus_length"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/button_plus_minus"
                         android:textSize="30sp"
-                        android:paddingHorizontal="0dp"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:text="@string/minus"
-                        tools:ignore="RtlCompat">
-                    </Button>
+                        tools:ignore="RtlCompat"/>
+                    <TextView
+                        android:id="@+id/length"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/no_points"
+                        android:fontFamily="@font/arial_bold"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="20sp" />
+                    <!-- + -->
+                    <Button
+                        android:id="@+id/plus_lenght"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/button_plus_minus"
+                        android:textSize="30sp"
+                        android:paddingHorizontal="0dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:text="@string/plus"
+                        tools:ignore="RtlCompat"/>
+
                 </LinearLayout>
+
                 <!--Tipo de partida-->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="40dp"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
                     android:shadowRadius="1"
-                    android:text="@string/game_type"
+                    android:text="Tipo de partida"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
                 <!--Selector de privacidad-->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="match_parent"
@@ -178,7 +188,8 @@
                         android:text="@string/private_game"
                         android:fontFamily="@font/arial_bold"
                         android:textColor="@color/white"
-                        android:textSize="25sp" />
+                        android:layout_marginLeft="10dp"
+                        android:textSize="20sp" />
                     <Switch
                         android:id="@+id/private_game"
                         android:layout_width="match_parent"
@@ -186,22 +197,21 @@
                         android:layout_marginLeft="20dp"/>
                 </LinearLayout>
             </LinearLayout>
-            <!--Crear sala-->
+            <!-- BUTTON CREAR RELATO -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="400dp"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="30dp"
                 android:gravity="center_horizontal|bottom"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp">
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/start_story"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_ingame"
                     android:fontFamily="@font/bangers_regular"
-                    android:paddingHorizontal="100dp"
                     android:text="@string/start_story"
                     android:textColor="@color/white"
                     android:textSize="27sp" />

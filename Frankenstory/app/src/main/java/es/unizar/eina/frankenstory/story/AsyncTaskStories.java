@@ -1,4 +1,4 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
 import android.os.AsyncTask;
 import android.util.Log;

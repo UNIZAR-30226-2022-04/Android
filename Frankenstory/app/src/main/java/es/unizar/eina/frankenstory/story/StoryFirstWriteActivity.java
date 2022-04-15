@@ -1,4 +1,4 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -8,6 +8,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.general.SettingsActivity;
 
-public class StoryNotFirstWriteActivity extends AppCompatActivity{
+public class StoryFirstWriteActivity extends AppCompatActivity{
 
 
     private TextView mUsername;
@@ -29,13 +31,14 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     private TextView mCoins;
     private Button mNotifications;
     private ImageView mIconUser;
-    private EditText mParagraph;
+    private EditText content;
+    private TextView mcharactersToUse;
+    private Button send_text;
+    private String number_writings;
+    private String number_chars;
+    private String isPrivate_game;
+    private String title;
 
-    String title;
-    String body;
-    String id;
-    String previous_content;
-    boolean myStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +57,10 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
 
         // GET PARAMETERS
         Intent intent = getIntent();
-        myStory = intent.getBooleanExtra("myStory",false);
-        id = intent.getStringExtra("id");
+        number_writings = intent.getStringExtra("number_writings");
+        number_chars = intent.getStringExtra("number_chars");
+        isPrivate_game = intent.getStringExtra("isPrivate_game");
+        title = intent.getStringExtra("title");
 
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
@@ -63,114 +68,82 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mNotifications = (Button) findViewById(R.id.notifications);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-        mParagraph = (EditText) findViewById(R.id.story_content);
+        content = (EditText) findViewById(R.id.story_content);
+        mcharactersToUse = (TextView) findViewById(R.id.charactersToUse);
+        send_text = (Button)findViewById(R.id.finish);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
+
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
-        //Rellenar el titulo y el anterior párrafo
-        setContenido();
+        // SET MAX CHAR
+        mcharactersToUse.setText(number_chars.toString()+" caracteres");
+        content.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Integer chars = Integer.parseInt(number_chars)-content.length();
+                mcharactersToUse.setText(chars.toString()+" caracteres");
+                if (chars < 0) {
+                    mcharactersToUse.setTextColor(getResources().getColor(R.color.rojo));
+                    send_text.setEnabled(false);
+                }
+                else {
+                    mcharactersToUse.setTextColor(getResources().getColor(R.color.white));
+                    send_text.setEnabled(true);
+                }
+            }
+        });
+
+        // FILL TITLE
+        TextView story_title = (TextView) findViewById(R.id.story_name);
+        story_title.setText(String.valueOf(title));
 
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
 
     }
 
-    public void setContenido() {
-
-        //ASYNC TASK RESUME_TALE
-        AsyncTaskResumeTale myTask = new AsyncTaskResumeTale(this);
-        myTask.execute(id);
-
-        TextView story_title = (TextView) findViewById(R.id.story_name);
-        story_title.setText(String.valueOf(title));
-
-        TextView previous_content = (TextView) findViewById(R.id.previous_content);
-        previous_content.setText(String.valueOf(body));
-    }
-
     public void setNavegavilidad(){
-
         // BUTTON TO SettingsActivity
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(StoryNotFirstWriteActivity.this, SettingsActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
+        buttonSettings.setVisibility(View.GONE);
 
         // BUTTON SEND TEXT
-        Button send_text = (Button)findViewById(R.id.sendText);
         send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                String first_paragraph = String.valueOf(content.getText());
 
-                EditText content = (EditText) findViewById(R.id.story_content);
-                String new_paragraph = String.valueOf(content.getText());
-
-                // CALL ASYNC TASK ADD PARAGRAPH
-                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                myTask.execute(id, new_paragraph, String.valueOf(false));
-
-                Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
+                // CALL ASYNC TASK
+                AsyncTaskCreateStory myTask = new AsyncTaskCreateStory(StoryFirstWriteActivity.this);
+                myTask.execute(title, number_writings, number_chars, isPrivate_game, first_paragraph);
+                Intent i = new Intent(StoryFirstWriteActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
-            }
-        });
+                CreateStoryActivity.handlerTofinish.sendEmptyMessage(0);
+                finish();
 
-        // BUTTON FINISH TALE
-        Button end_tale = (Button)findViewById(R.id.finishStory);
-        send_text.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                EditText content = (EditText) findViewById(R.id.story_content);
-                String new_paragraph = String.valueOf(content.getText());
-
-                // CALL ASYNC TASK ADD PARAGRAPH
-                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                myTask.execute(id, new_paragraph, String.valueOf(true));
-
-                Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
             }
         });
 
     }
 
-    // ASYNC TASK ADAPTER ADD PARAGRAPH
-    public void setupAdapter(AsyncTaskAddParagraph.Result resultado)
+    // ASYNC TASK ADAPTER
+    public void setupAdapter(AsyncTaskCreateStory.Result resultado)
     {
         if (resultado.result==null || resultado.result.equals("error")) {
-            Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"ERROR CREANDO RELATO",Toast.LENGTH_SHORT).show();
         }
-    }
-
-    // ASYNC TASK ADAPTER RESUME TALE
-    public void setupAdapter(AsyncTaskResumeTale.Result resultado)
-    {
-        if (resultado.result==null || resultado.result.equals("error")) {
-            Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO",Toast.LENGTH_SHORT).show();
-        } else {
-            previous_content = setPreviousContent(resultado.paragraphs);
-        }
-    }
-
-    public String setPreviousContent (List<AsyncTaskResumeTale.Story> paragraphs)
-    {
-        String aux = "";
-        int i = 0;
-        while ( i < paragraphs.size()) {
-            for (AsyncTaskResumeTale.Story paragraph : paragraphs) {
-                if (paragraph.orden == i) {
-                    aux += "\n" + paragraph.body;
-                    i++;
-                }
-            }
-        }
-        return aux;
     }
 
     // Para ocultar Navigation bar y lo de arriba.

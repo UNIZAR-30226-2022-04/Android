@@ -1,4 +1,4 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import es.unizar.eina.frankenstory.R;
 
 
-public class VoteTaleActivity extends AppCompatActivity{
+public class VoteStoryActivity extends AppCompatActivity{
 
     private TextView mUsername;
     private TextView mCoins;
@@ -66,7 +65,7 @@ public class VoteTaleActivity extends AppCompatActivity{
     protected void onResume() {
         super.onResume();
         // CALL ASYNC TASK
-        AsyncTaskGetParagraphs myTask = new AsyncTaskGetParagraphs(VoteTaleActivity.this);
+        AsyncTaskGetParagraphs myTask = new AsyncTaskGetParagraphs(VoteStoryActivity.this);
         myTask.execute(id);
     }
 
@@ -76,7 +75,7 @@ public class VoteTaleActivity extends AppCompatActivity{
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //ASYNC TASK VOTE PARAGRAPH
-                Intent i = new Intent(VoteTaleActivity.this, StoryActivity.class);
+                Intent i = new Intent(VoteStoryActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }

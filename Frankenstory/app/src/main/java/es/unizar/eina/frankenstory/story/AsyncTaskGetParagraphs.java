@@ -1,4 +1,4 @@
-package es.unizar.eina.frankenstory.general;
+package es.unizar.eina.frankenstory.story;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -14,39 +14,36 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskResumeTale extends AsyncTask<String, Void, AsyncTaskResumeTale.Result>{
+public class AsyncTaskGetParagraphs extends AsyncTask<String, Void, AsyncTaskGetParagraphs.Result>{
 
-        private StoryNotFirstWriteActivity mActivity = null;
+    private VoteStoryActivity mActivity = null;
 
-    static class Story {
+   static class Paragraph {
         String body;
-        int orden;
+        String creator;
+        int index;
     }
     static class Result {
         String result;
         String title;
-        List<Story> paragraphs;
-        int maxCharacters;
+        List<Paragraph> paragraphs;
     }
 
-    public AsyncTaskResumeTale(StoryNotFirstWriteActivity activity)
-    {
-        mActivity = activity;
-    }
+    public AsyncTaskGetParagraphs(VoteStoryActivity activity) { mActivity = activity; }
 
-    protected AsyncTaskResumeTale.Result doInBackground(String... params) {
+    protected Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         int id = Integer.parseInt(params[0]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/resume_tale").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/get_paragraphs").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":\""+id+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"," + "\"id\":\"" + id + "\"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -54,16 +51,16 @@ public class AsyncTaskResumeTale extends AsyncTask<String, Void, AsyncTaskResume
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, AsyncTaskResumeTale.Result.class);
+            return gson.fromJson(reader, Result.class);
 
         } catch (IOException e) {
-            Log.e("AsyncTaskResumeTale",e.getMessage());
-        } catch (Exception e) {
-            Log.e("AsyncTaskResumeTale",e.getMessage());
+            Log.e("ERROR_AsyncGetParagraph",e.getMessage());
         }
+
         return new Result();
     }
 
-    protected void onPostExecute(AsyncTaskResumeTale.Result resultado) { mActivity.setupAdapter(resultado); }
-
+    protected void onPostExecute(Result resultado) {
+        mActivity.setupAdapter(resultado);
+    }
 }

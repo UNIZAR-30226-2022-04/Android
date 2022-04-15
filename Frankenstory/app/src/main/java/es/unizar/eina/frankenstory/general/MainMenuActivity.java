@@ -23,6 +23,7 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.story.StoryActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
 
