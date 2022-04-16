@@ -47,9 +47,9 @@
     <string name="writings">Número de escrituras</string>
     <string name="length">Número de caracteres</string>
     <string name="story_name">Titulo del relato</string>
-    <string name="finish_story">TERMINAR RELATO</string>
+    <string name="finish_story">TERMINAR</string>
     <string name="finish_game">TERMINAR HISTORIA</string>
-    <string name="finish_text">ENVIAR PÁRRAFO</string>
+    <string name="finish_text">ENVIAR</string>
     <string name="write">Escribe tu párrafo</string>
     <string name="change_icon">CAMBIAR ICONO</string>
     <string name="close_session">CERRAR SESIÓN</string>

@@ -43,7 +43,6 @@ public class AsyncTaskCreateStory extends AsyncTask<String, Void, AsyncTaskCreat
                     "\"title\":\"" + title + "\"," + "\"maxTurns\":" + num_writings + "," +
                     "\"maxCharacters\":" + num_chars + "," + "\"privacy\":" + isPrivate_game + "," +
                     "\"first_paragraph\":\"" + first_paragraph + "\"}";
-            System.out.println(jsonInputString);
             try (OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);

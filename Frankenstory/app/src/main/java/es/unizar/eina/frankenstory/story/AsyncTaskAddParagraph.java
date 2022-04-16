@@ -41,7 +41,7 @@ public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddP
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
-                    "\"id\":\"" + id + "\"," + "\"body\":" + body + "," + "\"isLast\":" + isLast + "\"}";
+                    "\"id\":\"" + id + "\"," + "\"body\":\"" + body + "\"," + "\"isLast\":\"" + isLast + "\"}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -49,7 +49,7 @@ public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddP
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, AsyncTaskAddParagraph.Result.class);
+            return gson.fromJson(reader, Result.class);
 
         } catch (IOException e) {
             Log.e("AsyncTaskAddParagraph",e.getMessage());

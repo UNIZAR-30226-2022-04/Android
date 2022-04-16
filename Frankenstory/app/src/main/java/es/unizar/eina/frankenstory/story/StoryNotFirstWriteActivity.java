@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +22,10 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.general.FriendsActivity;
+import es.unizar.eina.frankenstory.general.MainMenuActivity;
 import es.unizar.eina.frankenstory.general.SettingsActivity;
+
 
 public class StoryNotFirstWriteActivity extends AppCompatActivity{
 
@@ -28,9 +33,7 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     private TextView mUsername;
     private TextView mStars;
     private TextView mCoins;
-    private Button mNotifications;
     private ImageView mIconUser;
-    private EditText mParagraph;
 
     String title;
     String body;
@@ -41,7 +44,7 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_story_first_write);
+        setContentView(R.layout.activity_story_not_first_write);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -57,14 +60,13 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         Intent intent = getIntent();
         myStory = intent.getBooleanExtra("myStory",false);
         id = intent.getStringExtra("id");
+        title = intent.getStringExtra("title");
 
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
-        mNotifications = (Button) findViewById(R.id.notifications);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-        mParagraph = (EditText) findViewById(R.id.story_content);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
@@ -72,23 +74,21 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
 
         //Rellenar el titulo y el anterior párrafo
         setContenido();
-
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
-
     }
 
     public void setContenido() {
 
         //ASYNC TASK RESUME_TALE
-        AsyncTaskResumeStory myTask = new AsyncTaskResumeStory(this);
-        myTask.execute(id);
+        //AsyncTaskResumeStory myTask = new AsyncTaskResumeStory(this);
+        //myTask.execute(id);
 
         TextView story_title = (TextView) findViewById(R.id.story_name);
         story_title.setText(String.valueOf(title));
 
-        TextView previous_content = (TextView) findViewById(R.id.previous_content);
-        previous_content.setText(String.valueOf(body));
+        //TextView previous_content = (TextView) findViewById(R.id.previous_content);
+        //previous_content.setText(String.valueOf(body));
     }
 
     public void setNavegavilidad(){
@@ -111,41 +111,46 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                 EditText content = (EditText) findViewById(R.id.story_content);
                 String new_paragraph = String.valueOf(content.getText());
 
-                // CALL ASYNC TASK ADD PARAGRAPH
-                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                myTask.execute(id, new_paragraph, String.valueOf(false));
+                if (!new_paragraph.equals("")) {
+                    // CALL ASYNC TASK ADD PARAGRAPH
+                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                    myTask.execute(id, new_paragraph, String.valueOf(false));
 
-                Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
+                    Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(i);
+                }
             }
         });
 
         // BUTTON FINISH TALE
         Button end_tale = (Button)findViewById(R.id.finishStory);
-        send_text.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        if (myStory) {
+            end_tale.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
 
-                EditText content = (EditText) findViewById(R.id.story_content);
-                String new_paragraph = String.valueOf(content.getText());
+                    EditText content = (EditText) findViewById(R.id.story_content);
+                    String new_paragraph = String.valueOf(content.getText());
 
-                // CALL ASYNC TASK ADD PARAGRAPH
-                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                myTask.execute(id, new_paragraph, String.valueOf(true));
+                    // CALL ASYNC TASK ADD PARAGRAPH
+                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                    myTask.execute(id, new_paragraph, String.valueOf(true));
 
-                Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
-
+                    Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(i);
+                }
+            });
+        }else{
+            end_tale.setVisibility(View.GONE);
+        }
     }
 
     // ASYNC TASK ADAPTER ADD PARAGRAPH
     public void setupAdapter(AsyncTaskAddParagraph.Result resultado)
     {
         if (resultado.result==null || resultado.result.equals("error")) {
-            Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -195,6 +200,8 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     // SET ICON USER
     @SuppressLint("ResourceType")
     public void chooseIconUser(ImageView imagen, String picture){
+        picture = "5";
+
         if (picture.equals("0")) imagen.setImageResource(R.raw.icon0);
         else if (picture.equals("1")) imagen.setImageResource(R.raw.icon1);
         else if (picture.equals("2")) imagen.setImageResource(R.raw.icon2);

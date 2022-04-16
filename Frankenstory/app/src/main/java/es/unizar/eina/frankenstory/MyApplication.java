@@ -1,6 +1,7 @@
 package es.unizar.eina.frankenstory;
 
 import android.app.Application;
+import android.util.Log;
 
 public class MyApplication extends Application {
     String username;
@@ -51,9 +52,7 @@ public class MyApplication extends Application {
         this.notifications = notifications;
     }
     // ICONUSER
-    public String getIconUser() {
-        return iconUser;
-    }
+    public String getIconUser() {return iconUser;}
 
     public void setIconUser(String iconUser) {
         this.iconUser = iconUser;
