@@ -34,6 +34,7 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
     private EditText content;
     private TextView mcharactersToUse;
     private Button send_text;
+
     private String number_writings;
     private String number_chars;
     private String isPrivate_game;
@@ -124,14 +125,14 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
             public void onClick(View v) {
                 String first_paragraph = String.valueOf(content.getText());
 
-                // CALL ASYNC TASK
-                AsyncTaskCreateStory myTask = new AsyncTaskCreateStory(StoryFirstWriteActivity.this);
-                myTask.execute(title, number_writings, number_chars, isPrivate_game, first_paragraph);
-                Intent i = new Intent(StoryFirstWriteActivity.this, StoryActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-                CreateStoryActivity.handlerTofinish.sendEmptyMessage(0);
-                finish();
+                    // CALL ASYNC TASK
+                    AsyncTaskCreateStory myTask = new AsyncTaskCreateStory(StoryFirstWriteActivity.this);
+                    myTask.execute(title, number_writings, number_chars, isPrivate_game, first_paragraph);
+                    Intent i = new Intent(StoryFirstWriteActivity.this, StoryActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(i);
+                    CreateStoryActivity.handlerTofinish.sendEmptyMessage(0);
+                    finish();
 
             }
         });

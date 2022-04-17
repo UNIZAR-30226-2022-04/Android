@@ -65,9 +65,9 @@ public class ListMyStoriesAdapter extends BaseAdapter{
                 convertView.findViewById(R.id.joinGame);
         vote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), StoryNotFirstWriteActivity.class);
+                Intent i = new Intent(context, StoryNotFirstWriteActivity.class);
                 i.putExtra("myStory", true);
-                i.putExtra("id", position);
+                i.putExtra("id", String.valueOf(position));
                 i.putExtra("title",currentItem.title );
                 context.startActivity(i);
             }

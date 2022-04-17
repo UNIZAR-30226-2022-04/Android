@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,12 +36,17 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     private TextView mStars;
     private TextView mCoins;
     private ImageView mIconUser;
+    private EditText content;
+    private TextView mcharactersToUse;
+    private Button send_text;
+    private Button end_tale;
 
-    String title;
-    String body;
-    String id;
-    String previous_content;
-    boolean myStory;
+    private String number_chars;
+    private String title;
+    private String body;
+    private String id;
+    private String previous_content;
+    private boolean myStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +73,57 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
+        content = (EditText) findViewById(R.id.story_content);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
+        send_text = (Button)findViewById(R.id.sendText);
+        mcharactersToUse = (TextView) findViewById(R.id.charactersToUse);
+        end_tale = (Button)findViewById(R.id.finishStory);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
-        //Rellenar el titulo y el anterior párrafo
+        //FILL CONTENT
         setContenido();
+
+         // SET MAX CHAR
+        mcharactersToUse.setText(number_chars.toString()+" caracteres");
+        content.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Integer chars = Integer.parseInt(number_chars)-content.length();
+                mcharactersToUse.setText(chars.toString()+" caracteres");
+                if (chars < 0) {
+                    mcharactersToUse.setTextColor(getResources().getColor(R.color.rojo));
+                    send_text.setEnabled(false);
+                    end_tale.setEnabled(false);
+                }
+                else {
+                    mcharactersToUse.setTextColor(getResources().getColor(R.color.white));
+                    send_text.setEnabled(true);
+                    end_tale.setEnabled(true);
+                }
+            }
+        });
+
         // BUTTONS FROM TOP AND BOTTOM
         setNavegavilidad();
     }
 
     public void setContenido() {
+
+        //Rellenar variables number_chars y number_writings
+        number_chars = "120";
 
         //ASYNC TASK RESUME_TALE
         //AsyncTaskResumeStory myTask = new AsyncTaskResumeStory(this);
@@ -95,41 +140,31 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
 
         // BUTTON TO SettingsActivity
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(StoryNotFirstWriteActivity.this, SettingsActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
+        buttonSettings.setVisibility(View.GONE);
 
         // BUTTON SEND TEXT
-        Button send_text = (Button)findViewById(R.id.sendText);
         send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                EditText content = (EditText) findViewById(R.id.story_content);
                 String new_paragraph = String.valueOf(content.getText());
 
-                if (!new_paragraph.equals("")) {
-                    // CALL ASYNC TASK ADD PARAGRAPH
-                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                    myTask.execute(id, new_paragraph, String.valueOf(false));
+                // CALL ASYNC TASK ADD PARAGRAPH
+                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                myTask.execute(id, new_paragraph, String.valueOf(false));
 
-                    Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(i);
-                }
+                Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+                finish();
             }
         });
 
         // BUTTON FINISH TALE
-        Button end_tale = (Button)findViewById(R.id.finishStory);
         if (myStory) {
+            end_tale.setVisibility(View.VISIBLE);
             end_tale.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    EditText content = (EditText) findViewById(R.id.story_content);
                     String new_paragraph = String.valueOf(content.getText());
 
                     // CALL ASYNC TASK ADD PARAGRAPH
@@ -139,6 +174,7 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                     Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(i);
+                    finish();
                 }
             });
         }else{
@@ -200,7 +236,6 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     // SET ICON USER
     @SuppressLint("ResourceType")
     public void chooseIconUser(ImageView imagen, String picture){
-        picture = "5";
 
         if (picture.equals("0")) imagen.setImageResource(R.raw.icon0);
         else if (picture.equals("1")) imagen.setImageResource(R.raw.icon1);
