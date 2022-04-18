@@ -31,7 +31,7 @@ public class AsyncTaskCreateStory extends AsyncTask<String, Void, AsyncTaskCreat
         int num_writings = Integer.parseInt(params[1]);
         int num_chars = Integer.parseInt(params[2]);
         boolean isPrivate_game = Boolean.parseBoolean(params[3]);
-        String first_paragraph = params[4];
+        String first_paragraph = params[4].replaceAll("\n","\\\\n");
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/create_tale").openConnection();
@@ -43,6 +43,7 @@ public class AsyncTaskCreateStory extends AsyncTask<String, Void, AsyncTaskCreat
                     "\"title\":\"" + title + "\"," + "\"maxTurns\":" + num_writings + "," +
                     "\"maxCharacters\":" + num_chars + "," + "\"privacy\":" + isPrivate_game + "," +
                     "\"first_paragraph\":\"" + first_paragraph + "\"}";
+            Log.d("CreateStory",jsonInputString.toString());
             try (OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -53,7 +54,7 @@ public class AsyncTaskCreateStory extends AsyncTask<String, Void, AsyncTaskCreat
             return gson.fromJson(reader, Result.class);
 
         } catch (IOException e) {
-            Log.e("ERROR_CreateTale", e.getMessage());
+            Log.e("ERROR_CreateStory", e.getMessage());
         }
 
         return new Result();

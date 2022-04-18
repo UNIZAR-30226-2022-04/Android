@@ -18,15 +18,16 @@ public class AsyncTaskResumeStory extends AsyncTask<String, Void, AsyncTaskResum
 
         private StoryNotFirstWriteActivity mActivity = null;
 
-    static class Story {
-        String body;
-        int orden;
+    static class Paragraph {
+        String text;
+        String username;
+        Integer turn_number;
     }
     static class Result {
         String result;
         String title;
-        List<Story> paragraphs;
-        int maxCharacters;
+        List<Paragraph> paragraphs;
+        Integer maxCharacters;
     }
 
     public AsyncTaskResumeStory(StoryNotFirstWriteActivity activity)
@@ -46,7 +47,8 @@ public class AsyncTaskResumeStory extends AsyncTask<String, Void, AsyncTaskResum
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":\""+id+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":"+id+"}";
+            Log.d("ResumeStory",jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -57,9 +59,9 @@ public class AsyncTaskResumeStory extends AsyncTask<String, Void, AsyncTaskResum
             return gson.fromJson(reader, AsyncTaskResumeStory.Result.class);
 
         } catch (IOException e) {
-            Log.e("AsyncTaskResumeTale",e.getMessage());
+            Log.e("AsyncTaskResumeStory",e.getMessage());
         } catch (Exception e) {
-            Log.e("AsyncTaskResumeTale",e.getMessage());
+            Log.e("AsyncTaskResumeStory",e.getMessage());
         }
         return new Result();
     }

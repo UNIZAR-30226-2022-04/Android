@@ -42,11 +42,10 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     private Button end_tale;
 
     private String number_chars;
-    private String title;
     private String body;
     private String id;
-    private String previous_content;
     private boolean myStory;
+    private boolean isLast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         Intent intent = getIntent();
         myStory = intent.getBooleanExtra("myStory",false);
         id = intent.getStringExtra("id");
-        title = intent.getStringExtra("title");
+        isLast = intent.getBooleanExtra("isLast",false);
 
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
@@ -83,10 +82,16 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
-        //FILL CONTENT
-        setContenido();
+        //ASYNC TASK RESUME_TALE
+        AsyncTaskResumeStory myTask = new AsyncTaskResumeStory(this);
+        myTask.execute(id);
 
-         // SET MAX CHAR
+        // BUTTONS FROM TOP AND BOTTOM
+        setNavegavilidad();
+    }
+
+    public void updateCharacters () {
+        // SET MAX CHAR
         mcharactersToUse.setText(number_chars.toString()+" caracteres");
         content.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,25 +120,6 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                 }
             }
         });
-
-        // BUTTONS FROM TOP AND BOTTOM
-        setNavegavilidad();
-    }
-
-    public void setContenido() {
-
-        //Rellenar variables number_chars y number_writings
-        number_chars = "120";
-
-        //ASYNC TASK RESUME_TALE
-        //AsyncTaskResumeStory myTask = new AsyncTaskResumeStory(this);
-        //myTask.execute(id);
-
-        TextView story_title = (TextView) findViewById(R.id.story_name);
-        story_title.setText(String.valueOf(title));
-
-        //TextView previous_content = (TextView) findViewById(R.id.previous_content);
-        //previous_content.setText(String.valueOf(body));
     }
 
     public void setNavegavilidad(){
@@ -142,25 +128,24 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
         buttonSettings.setVisibility(View.GONE);
 
-        // BUTTON SEND TEXT
-        send_text.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        if (!isLast){
+            // BUTTON SEND TEXT
+            send_text.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
 
-                String new_paragraph = String.valueOf(content.getText());
+                    String new_paragraph = String.valueOf(content.getText());
 
-                // CALL ASYNC TASK ADD PARAGRAPH
-                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                myTask.execute(id, new_paragraph, String.valueOf(false));
-
-                Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-                finish();
-            }
-        });
+                    // CALL ASYNC TASK ADD PARAGRAPH
+                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                    myTask.execute(id, new_paragraph, String.valueOf(false));
+                }
+            });
+        } else {
+            send_text.setVisibility(View.GONE);
+        }
 
         // BUTTON FINISH TALE
-        if (myStory) {
+        if (isLast || myStory) {
             end_tale.setVisibility(View.VISIBLE);
             end_tale.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -170,11 +155,6 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                     // CALL ASYNC TASK ADD PARAGRAPH
                     AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
                     myTask.execute(id, new_paragraph, String.valueOf(true));
-
-                    Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(i);
-                    finish();
                 }
             });
         }else{
@@ -187,6 +167,11 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     {
         if (resultado.result==null || resultado.result.equals("error")) {
             Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent(StoryNotFirstWriteActivity.this, StoryActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(i);
+            finish();
         }
     }
 
@@ -194,26 +179,23 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     public void setupAdapter(AsyncTaskResumeStory.Result resultado)
     {
         if (resultado.result==null || resultado.result.equals("error")) {
-            Toast.makeText(getApplicationContext(),"ERROR AÑADIENDO PÁRRAFO",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"ERROR LEYENDO HISTORIA PÁRRAFO",Toast.LENGTH_SHORT).show();
+            finish();
         } else {
-            previous_content = setPreviousContent(resultado.paragraphs);
+            TextView story_title = (TextView) findViewById(R.id.story_name);
+            story_title.setText(String.valueOf(resultado.title));
+
+            // update characters
+            number_chars = resultado.maxCharacters.toString();
+            updateCharacters();
+
+            // FALTARA ACTUALIZAR EL CONTENIDO PREVIO, LO QUE PASA
+            // ES QUE LO HABÍAS PUESTO COMO UN TEXTO TODO Y LO SUYO
+            // SERÍA EN ESTE CASO HACER UNA LISTA PARA PODER VER LOS PARRAFOS
+            // SEPARADOS Y QUIÉN LOS HA CREADO COMO SE VE EN LA PARTIDA RÁPIDA
         }
     }
 
-    public String setPreviousContent (List<AsyncTaskResumeStory.Story> paragraphs)
-    {
-        String aux = "";
-        int i = 0;
-        while ( i < paragraphs.size()) {
-            for (AsyncTaskResumeStory.Story paragraph : paragraphs) {
-                if (paragraph.orden == i) {
-                    aux += "\n" + paragraph.body;
-                    i++;
-                }
-            }
-        }
-        return aux;
-    }
 
     // Para ocultar Navigation bar y lo de arriba.
     @Override

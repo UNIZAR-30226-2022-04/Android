@@ -28,9 +28,9 @@ public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.R
         String result;
         String reason;
         List<Story> myTales;
-        //List<Story> friendTales;
-        //List<Story> publicTales;
-        //List<Story> talesForVote;
+        List<Story> friendTales;
+        List<Story> publicTales;
+        List<Story> talesForVote;
     }
 
     public AsyncTaskStories(StoryActivity activity)

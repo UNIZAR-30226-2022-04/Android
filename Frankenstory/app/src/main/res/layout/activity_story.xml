@@ -111,17 +111,19 @@
                     android:text="@string/public_games"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
-                <TextView
-                        android:id="@+id/noPublicGames"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Parece que no hay nadie jugando :("
-                        android:textSize="14sp"
-                        android:fontFamily="@font/arial_bold"
-                        android:layout_marginLeft="8dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="5dp"/>
+
                 <!--Lista partidas públicas-->
+                <TextView
+                    android:id="@+id/noPublicGames"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/arial_bold"
+                    android:text="Parece que no hay relatos públicos"
+                    android:textSize="14sp" />
+
                 <ListView
                     android:id="@+id/public_games"
                     android:layout_width="match_parent"

@@ -46,7 +46,7 @@
     <string name="start_story">Crear relato</string>
     <string name="writings">Número de escrituras</string>
     <string name="length">Número de caracteres</string>
-    <string name="story_name">Titulo del relato</string>
+    <string name="story_name">Título del relato</string>
     <string name="finish_story">TERMINAR</string>
     <string name="finish_game">TERMINAR HISTORIA</string>
     <string name="finish_text">ENVIAR</string>

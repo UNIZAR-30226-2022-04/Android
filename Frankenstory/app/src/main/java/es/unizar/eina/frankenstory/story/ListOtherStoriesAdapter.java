@@ -60,16 +60,18 @@ public class ListOtherStoriesAdapter extends BaseAdapter{
         // set DATA
         textViewItemName.setText(currentItem.title);
         textViewItemCreator.setText(currentItem.creator);
-        textViewItemNumberTurns.setText(currentItem.turn.toString()+"/"+currentItem.max_turns.toString());
+        Integer turnoActual = currentItem.turn + 1;
+        textViewItemNumberTurns.setText(turnoActual.toString()+"/"+currentItem.max_turns.toString());
 
         // ON CLICK ON VOTE GAME
         ImageButton vote = (ImageButton)
                 convertView.findViewById(R.id.joinGame);
         vote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), StoryFirstWriteActivity.class);
+                Intent i = new Intent(v.getContext(), StoryNotFirstWriteActivity.class);
                 i.putExtra("myStory", false);
-                i.putExtra("id", position);
+                i.putExtra("id", currentItem.story_id.toString());
+                i.putExtra("isLast",currentItem.turn + 2 == currentItem.max_turns );
                 context.startActivity(i);
             }
         });

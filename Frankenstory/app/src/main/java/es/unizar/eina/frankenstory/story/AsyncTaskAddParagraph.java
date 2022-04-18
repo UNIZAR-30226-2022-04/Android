@@ -29,9 +29,9 @@ public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddP
     protected AsyncTaskAddParagraph.Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
-        int id = Integer.parseInt(params[0]);
-        String body = params[1];
-        boolean isLast = Boolean.parseBoolean(params[2]);
+        String id = params[0];
+        String body = params[1].replaceAll("\n","\\\\n");
+        String isLast = params[2];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/add_tale_paragraph").openConnection();
@@ -41,7 +41,8 @@ public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddP
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
-                    "\"id\":\"" + id + "\"," + "\"body\":\"" + body + "\"," + "\"isLast\":\"" + isLast + "\"}";
+                    "\"id\":" + id + "," + "\"body\":\"" + body + "\"," + "\"isLast\":" + isLast + "}";
+            Log.d("AddPargraph", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);

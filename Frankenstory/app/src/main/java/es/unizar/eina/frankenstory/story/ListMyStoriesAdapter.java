@@ -58,7 +58,8 @@ public class ListMyStoriesAdapter extends BaseAdapter{
         // set DATA
         textViewItemName.setText(currentItem.title);
         textViewItemCreator.setText(currentItem.creator);
-        textViewItemNumberTurns.setText(currentItem.turn.toString()+"/"+currentItem.max_turns.toString());
+        Integer turnoActual = currentItem.turn + 1;
+        textViewItemNumberTurns.setText(turnoActual.toString()+"/"+currentItem.max_turns.toString());
 
         // ON CLICK ON VOTE GAME
         ImageButton vote = (ImageButton)
@@ -67,8 +68,9 @@ public class ListMyStoriesAdapter extends BaseAdapter{
             public void onClick(View v) {
                 Intent i = new Intent(context, StoryNotFirstWriteActivity.class);
                 i.putExtra("myStory", true);
-                i.putExtra("id", String.valueOf(position));
+                i.putExtra("id", currentItem.story_id.toString());
                 i.putExtra("title",currentItem.title );
+                i.putExtra("isLast",currentItem.turn + 2 == currentItem.max_turns );
                 context.startActivity(i);
             }
         });

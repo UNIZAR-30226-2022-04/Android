@@ -181,9 +181,9 @@ public class StoryActivity extends AppCompatActivity {
         if (resultado.result!=null && resultado.result.equals("success")){
 
             fillDataMyGames(resultado.myTales);
-            //fillDataFriendGames(resultado.friendTales);
-            //fillDataPublicGames(resultado.publicTales);
-            //fillDataVoteGames(resultado.talesForVote);
+            fillDataFriendGames(resultado.friendTales);
+            fillDataPublicGames(resultado.publicTales);
+            fillDataVoteGames(resultado.talesForVote);
         }
     }
 
