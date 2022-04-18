@@ -60,12 +60,13 @@ public class ListVoteStoriesAdapter extends BaseAdapter{
         textViewItemName.setText(currentItem.title);
         textViewItemCreator.setText(currentItem.creator);
 
-        // ON CLICK ON BUTTON JOIN GAME
+        // ON CLICK ON BUTTON VOTE GAME
         ImageButton joinGame = (ImageButton)
                 convertView.findViewById(R.id.vote);
         joinGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), VoteStoryActivity.class);
+                i.putExtra("id", currentItem.story_id.toString());
                 context.startActivity(i);
             }
         });

@@ -40,6 +40,7 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     private TextView mcharactersToUse;
     private Button send_text;
     private Button end_tale;
+    private ListView mListPreviousContent;
 
     private String number_chars;
     private String body;
@@ -77,6 +78,7 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         send_text = (Button)findViewById(R.id.sendText);
         mcharactersToUse = (TextView) findViewById(R.id.charactersToUse);
         end_tale = (Button)findViewById(R.id.finishStory);
+        mListPreviousContent = (ListView) findViewById(R.id.paragraphs);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
@@ -178,8 +180,9 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
     // ASYNC TASK ADAPTER RESUME TALE
     public void setupAdapter(AsyncTaskResumeStory.Result resultado)
     {
+
         if (resultado.result==null || resultado.result.equals("error")) {
-            Toast.makeText(getApplicationContext(),"ERROR LEYENDO HISTORIA PÁRRAFO",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"ERROR LEYENDO HISTORIA",Toast.LENGTH_SHORT).show();
             finish();
         } else {
             TextView story_title = (TextView) findViewById(R.id.story_name);
@@ -189,13 +192,18 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
             number_chars = resultado.maxCharacters.toString();
             updateCharacters();
 
-            // FALTARA ACTUALIZAR EL CONTENIDO PREVIO, LO QUE PASA
-            // ES QUE LO HABÍAS PUESTO COMO UN TEXTO TODO Y LO SUYO
-            // SERÍA EN ESTE CASO HACER UNA LISTA PARA PODER VER LOS PARRAFOS
-            // SEPARADOS Y QUIÉN LOS HA CREADO COMO SE VE EN LA PARTIDA RÁPIDA
+            fillDataParagraphs(resultado.paragraphs);
+
         }
     }
 
+    public void fillDataParagraphs(List<AsyncTaskResumeStory.Paragraph> paragraphs){
+
+        ListPreviousContentAdapter adapter = new ListPreviousContentAdapter(this, paragraphs);
+
+        mListPreviousContent.setAdapter(adapter);
+
+    }
 
     // Para ocultar Navigation bar y lo de arriba.
     @Override

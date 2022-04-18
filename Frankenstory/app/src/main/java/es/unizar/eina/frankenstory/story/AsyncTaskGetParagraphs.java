@@ -19,9 +19,9 @@ public class AsyncTaskGetParagraphs extends AsyncTask<String, Void, AsyncTaskGet
     private VoteStoryActivity mActivity = null;
 
    static class Paragraph {
-        String body;
-        String creator;
-        int index;
+        String text;
+        String username;
+        int turn_number;
     }
     static class Result {
         String result;
@@ -43,7 +43,7 @@ public class AsyncTaskGetParagraphs extends AsyncTask<String, Void, AsyncTaskGet
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"," + "\"id\":\"" + id + "\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"," + "\"id\":" + id + "}";
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);

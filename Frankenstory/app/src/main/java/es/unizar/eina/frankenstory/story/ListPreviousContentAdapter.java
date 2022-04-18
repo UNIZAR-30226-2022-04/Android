@@ -1,28 +1,24 @@
 package es.unizar.eina.frankenstory.story;
 
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
-import es.unizar.eina.frankenstory.story.AsyncTaskGetParagraphs;
-import es.unizar.eina.frankenstory.story.VoteStoryActivity;
 
-public class ListParagraphsAdapter extends BaseAdapter {
+public class ListPreviousContentAdapter extends BaseAdapter{
 
-    private VoteStoryActivity context; //context
-    private List<AsyncTaskGetParagraphs.Paragraph> items; //data source of the list adapter
+    private StoryNotFirstWriteActivity context; //context
+    private List<AsyncTaskResumeStory.Paragraph> items; //data source of the list adapter
 
     //public constructor
-    public ListParagraphsAdapter(VoteStoryActivity context, List<AsyncTaskGetParagraphs.Paragraph> items) {
+    public ListPreviousContentAdapter(StoryNotFirstWriteActivity context, List<AsyncTaskResumeStory.Paragraph> items) {
         this.context = context;
         this.items = items;
     }
@@ -47,24 +43,19 @@ public class ListParagraphsAdapter extends BaseAdapter {
         // inflate the layout for each list row
         if (convertView == null) {
             convertView = LayoutInflater.from(context).
-                    inflate(R.layout.row_paragraphs_vote, parent, false);
+                    inflate(R.layout.row_previous_paragraphs, parent, false);
         }
 
         // get current item to be displayed
-        AsyncTaskGetParagraphs.Paragraph currentItem = (AsyncTaskGetParagraphs.Paragraph) getItem(position);
+        AsyncTaskResumeStory.Paragraph currentItem = (AsyncTaskResumeStory.Paragraph) getItem(position);
 
-        /// get VIEWS
-        TextView textViewItemName = (TextView) convertView.findViewById(R.id.body);
-        ImageView heart = (ImageView) convertView.findViewById(R.id.imageVote);
+        // get VIEWS
+        TextView textContent = (TextView) convertView.findViewById(R.id.body);
+        TextView textAutor = (TextView) convertView.findViewById(R.id.autor);
 
         // set DATA
-        textViewItemName.setText(currentItem.text);
-
-        if (context.votedParagraph == position) {
-            heart.setVisibility(View.VISIBLE);
-        } else {
-            heart.setVisibility(View.GONE);
-        }
+        textContent.setText(currentItem.text);
+        textAutor.setText(currentItem.username);
 
         // returns the view for the current row
         return convertView;

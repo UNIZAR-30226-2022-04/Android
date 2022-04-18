@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -87,7 +87,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     tools:listitem="@layout/row_paragraphs_vote"
-                    android:dividerHeight="15.0sp"/>
+                    android:dividerHeight="5.0sp"
+                    android:divider="@android:color/transparent"/>
 
             </LinearLayout>
             <!--Terminar escritura-->
@@ -113,4 +114,4 @@
             </LinearLayout>
         </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

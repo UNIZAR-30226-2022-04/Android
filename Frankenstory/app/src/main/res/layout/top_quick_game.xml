@@ -26,12 +26,13 @@
                 android:textColor="@color/white"
                 android:gravity="center" />
             <!---Icono persona-->
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="-241dp"
-                android:src="@drawable/man"/>
+        <ImageView
+            android:id="@+id/iconUser"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="-241dp"
+            android:src="@drawable/man" />
 
             <!---Indicador monedas-->
             <TextView

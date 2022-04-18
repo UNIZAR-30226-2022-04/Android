@@ -8,12 +8,17 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
+import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
 
@@ -27,6 +32,7 @@ public class VoteStoryActivity extends AppCompatActivity{
     private TextView mTitle;
 
     private String id;
+    int votedParagraph;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +42,16 @@ public class VoteStoryActivity extends AppCompatActivity{
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        // GET VIEWS
+        // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mParagraphs = (ListView) findViewById(R.id.paragraphs);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         mCreator = (TextView) findViewById(R.id.creator);
         mTitle = (TextView) findViewById(R.id.title);
+
+        updateData();
+        votedParagraph = 0;
 
         Intent i = getIntent();
         id = i.getStringExtra("id");
@@ -59,6 +68,7 @@ public class VoteStoryActivity extends AppCompatActivity{
         // CALL ASYNC TASK
         AsyncTaskGetParagraphs myTask = new AsyncTaskGetParagraphs(this);
         myTask.execute(id);
+
     }
 
     @Override
@@ -69,12 +79,22 @@ public class VoteStoryActivity extends AppCompatActivity{
         myTask.execute(id);
     }
 
+    // UPDATE DATA
+    public void updateData(){
+        mUsername.setText(((MyApplication) this.getApplication()).getUsername());
+        mCoins.setText(((MyApplication) this.getApplication()).getCoins());
+        chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
+    }
+
     public void setNavegavilidad(){
         // BUTTON VOTE
-        ImageButton buttonSettings = (ImageButton)findViewById(R.id.vote);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
+        Button ButtonVote = (Button)findViewById(R.id.vote);
+        ButtonVote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //ASYNC TASK VOTE PARAGRAPH
+                //
+                //
+
                 Intent i = new Intent(VoteStoryActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
@@ -105,16 +125,27 @@ public class VoteStoryActivity extends AppCompatActivity{
     public void setupAdapter(AsyncTaskGetParagraphs.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
-            fillDataTale(resultado);
+
+            mTitle.setText(resultado.title);
+            mCreator.setText(resultado.paragraphs.get(0).username);
+
+            fillParagraphs(resultado.paragraphs);
         }
     }
 
-    private void fillDataTale(AsyncTaskGetParagraphs.Result resultado) {
-        // instantiate the custom list adapter
-        ListParagraphsAdapter adapter = new ListParagraphsAdapter(this, resultado.paragraphs);
+    private void fillParagraphs(List<AsyncTaskGetParagraphs.Paragraph> paragraphs) {
 
-        // get the ListView and attach the adapter
+        ListParagraphsAdapter adapter = new ListParagraphsAdapter(this, paragraphs);
+
         mParagraphs.setAdapter(adapter);
+
+        mParagraphs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            votedParagraph = position;
+            adapter.notifyDataSetChanged();
+        }
+    });
 
     }
 

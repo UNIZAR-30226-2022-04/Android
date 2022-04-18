@@ -66,6 +66,11 @@
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".story.VoteStoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

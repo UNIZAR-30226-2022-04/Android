@@ -39,14 +39,12 @@
                     android:textSize="22sp" />
 
                 <!--Aportación previa-->
-                <TextView
-                    android:id="@+id/previous_content"
+                <ListView
+                    android:id="@+id/paragraphs"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arial_bold"
-                    android:text="@string/story_content"
-                    android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:layout_height="120dp"
+                    tools:listitem="@layout/row_previous_paragraphs"/>
 
                 <TextView
                     android:id="@+id/charactersToUse"
