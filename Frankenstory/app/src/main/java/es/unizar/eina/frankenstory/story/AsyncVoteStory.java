@@ -14,43 +14,34 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.Result> {
-    private StoryActivity mActivity = null;
+public class AsyncVoteStory extends AsyncTask<String, Void, AsyncVoteStory.Result>{
 
-    static class Story {
-        Integer story_id;
-        String title;
-        String creator;
-        Integer max_turns;
-        Integer turn;
-        Boolean meVoted;
-    }
+        private VoteStoryActivity mActivity = null;
+
     static class Result {
         String result;
-        String reason;
-        List<Story> myTales;
-        List<Story> friendTales;
-        List<Story> publicTales;
-        List<Story> talesForVote;
     }
 
-    public AsyncTaskStories(StoryActivity activity)
+    public AsyncVoteStory(VoteStoryActivity activity)
     {
         mActivity = activity;
     }
 
-    protected AsyncTaskStories.Result doInBackground(String... params) {
+    protected AsyncVoteStory.Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
+        int id = Integer.parseInt(params[0]);
+        int indexParagraph = Integer.parseInt(params[1]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/get_tales").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/vote_story").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":"+id+"\",\"indexParagraph\":"+indexParagraph+"}";
+            Log.d("VoteStory",jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -58,15 +49,16 @@ public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.R
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, AsyncTaskStories.Result.class);
+            return gson.fromJson(reader, AsyncVoteStory.Result.class);
 
         } catch (IOException e) {
-            Log.e("AsyncTaskStories",e.getMessage());
+            Log.e("AsyncTaskVoteStory",e.getMessage());
         } catch (Exception e) {
-            Log.e("AsyncTaskStories",e.getMessage());
+            Log.e("AsyncTaskVoteStory",e.getMessage());
         }
         return new Result();
     }
 
-    protected void onPostExecute(AsyncTaskStories.Result resultado) { mActivity.setupAdapter(resultado); }
+    protected void onPostExecute(AsyncVoteStory.Result resultado) { mActivity.setupAdapter(resultado); }
+
 }

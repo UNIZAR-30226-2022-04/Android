@@ -16,13 +16,13 @@ import es.unizar.eina.frankenstory.R;
 import es.unizar.eina.frankenstory.story.AsyncTaskGetParagraphs;
 import es.unizar.eina.frankenstory.story.VoteStoryActivity;
 
-public class ListParagraphsAdapter extends BaseAdapter {
+public class ListVoteParagraphsAdapter extends BaseAdapter {
 
     private VoteStoryActivity context; //context
     private List<AsyncTaskGetParagraphs.Paragraph> items; //data source of the list adapter
 
     //public constructor
-    public ListParagraphsAdapter(VoteStoryActivity context, List<AsyncTaskGetParagraphs.Paragraph> items) {
+    public ListVoteParagraphsAdapter(VoteStoryActivity context, List<AsyncTaskGetParagraphs.Paragraph> items) {
         this.context = context;
         this.items = items;
     }

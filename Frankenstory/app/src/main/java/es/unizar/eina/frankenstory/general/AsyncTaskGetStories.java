@@ -1,4 +1,4 @@
-package es.unizar.eina.frankenstory.story;
+package es.unizar.eina.frankenstory.general;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -14,37 +14,31 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.Result> {
-    private StoryActivity mActivity = null;
+public class AsyncTaskGetStories extends AsyncTask<String, Void, AsyncTaskGetStories.Result> {
+    private LibraryActivity mActivity = null;
 
     static class Story {
-        Integer story_id;
+        Integer id;
         String title;
-        String creator;
-        Integer max_turns;
-        Integer turn;
-        Boolean meVoted;
+        String date;
+        String type;
     }
     static class Result {
         String result;
-        String reason;
-        List<Story> myTales;
-        List<Story> friendTales;
-        List<Story> publicTales;
-        List<Story> talesForVote;
+        List<Story> stories;
     }
 
-    public AsyncTaskStories(StoryActivity activity)
+    public AsyncTaskGetStories(LibraryActivity activity)
     {
         mActivity = activity;
     }
 
-    protected AsyncTaskStories.Result doInBackground(String... params) {
+    protected AsyncTaskGetStories.Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/get_tales").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/get_stories").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
@@ -58,15 +52,15 @@ public class AsyncTaskStories extends AsyncTask<String, Void, AsyncTaskStories.R
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, AsyncTaskStories.Result.class);
+            return gson.fromJson(reader, AsyncTaskGetStories.Result.class);
 
         } catch (IOException e) {
-            Log.e("AsyncTaskStories",e.getMessage());
+            Log.e("AsyncTaskGetStories",e.getMessage());
         } catch (Exception e) {
-            Log.e("AsyncTaskStories",e.getMessage());
+            Log.e("AsyncTaskGetStories",e.getMessage());
         }
         return new Result();
     }
 
-    protected void onPostExecute(AsyncTaskStories.Result resultado) { mActivity.setupAdapter(resultado); }
+    protected void onPostExecute(AsyncTaskGetStories.Result resultado) { mActivity.setupAdapter(resultado); }
 }

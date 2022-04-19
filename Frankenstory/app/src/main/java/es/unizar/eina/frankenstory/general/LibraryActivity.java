@@ -1,7 +1,4 @@
-package es.unizar.eina.frankenstory.story;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+package es.unizar.eina.frankenstory.general;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,16 +12,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
-import es.unizar.eina.frankenstory.general.FriendsActivity;
-import es.unizar.eina.frankenstory.general.LibraryActivity;
-import es.unizar.eina.frankenstory.general.MainMenuActivity;
-import es.unizar.eina.frankenstory.general.SettingsActivity;
 
-public class StoryActivity extends AppCompatActivity {
+public class LibraryActivity extends AppCompatActivity {
 
     private TextView mUsername;
     private TextView mStars;
@@ -32,23 +28,18 @@ public class StoryActivity extends AppCompatActivity {
     private Button mNotifications;
     private ListView mList;
     private ImageView mIconUser;
-    private ListView mListMyGames;
-    private ListView mListFriendsGames;
-    private ListView mPublicGames;
-    private ListView mVotingGames;
-    private ImageButton mJoinGame;
-    private ImageButton mVoteGame;
-    private Button mButtonCreateStory;
-    private TextView mNoMyGames;
-    private TextView mNoFriendsGames;
-    private TextView mNoPublicGames;
-    private TextView mNoVoteGames;
+    private ListView mListQuickGames;
+    private ListView mListStoryGames;
+    private ImageButton mSeeQuickGame;
+    private ImageButton mSeeStoryGame;
+    private TextView mNoQuickGames;
+    private TextView mNoStoryGames;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_story);
+        setContentView(R.layout.activity_general_library);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -61,17 +52,14 @@ public class StoryActivity extends AppCompatActivity {
         mNotifications.setVisibility(View.INVISIBLE);
         mList = (ListView) findViewById(R.id.statistics);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-        mListMyGames = (ListView) findViewById(R.id.my_stories);
-        mListFriendsGames = (ListView) findViewById(R.id.friends_games);
-        mPublicGames = (ListView) findViewById(R.id.public_games);
-        mVotingGames = (ListView) findViewById(R.id.VoteGames);
-        mJoinGame = (ImageButton) findViewById(R.id.joinGame);
-        mVoteGame = (ImageButton) findViewById(R.id.vote);
-        mButtonCreateStory = (Button)findViewById(R.id.create_story);
-        mNoMyGames = (TextView) findViewById(R.id.noMyGames);
-        mNoFriendsGames = (TextView) findViewById(R.id.noFriendsGames);
-        mNoPublicGames = (TextView) findViewById(R.id.noPublicGames);
-        mNoVoteGames = (TextView) findViewById(R.id.noVoteGames);
+
+        mListQuickGames = (ListView) findViewById(R.id.quick_games);
+        mListStoryGames = (ListView) findViewById(R.id.story_games);
+        mSeeQuickGame = (ImageButton) findViewById(R.id.read_quick);
+        mSeeStoryGame = (ImageButton) findViewById(R.id.read_story);
+        mNoQuickGames = (TextView) findViewById(R.id.noQuickGames);
+        mNoStoryGames = (TextView) findViewById(R.id.noStoryGames);
+
         updateData();
 
         // BUTTONS FROM TOP AND BOTTOM
@@ -84,14 +72,8 @@ public class StoryActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-        // BUTTON ANIMATION
-        AnimationDrawable animationButton = (AnimationDrawable) mButtonCreateStory.getBackground();
-        animationButton.setEnterFadeDuration(2000);
-        animationButton.setExitFadeDuration(2000);
-        animationButton.start();
-
         // CALL ASYNC TASK
-        AsyncTaskStories myTask = new AsyncTaskStories(this);
+        AsyncTaskGetStories myTask = new AsyncTaskGetStories(this);
         myTask.execute();
     }
 
@@ -99,8 +81,9 @@ public class StoryActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // CALL ASYNC TASK
-        AsyncTaskStories myTask = new AsyncTaskStories(this);
+        AsyncTaskGetStories myTask = new AsyncTaskGetStories(this);
         myTask.execute();
+
         updateData();
     }
 
@@ -120,7 +103,7 @@ public class StoryActivity extends AppCompatActivity {
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(StoryActivity.this, SettingsActivity.class);
+                Intent i = new Intent(LibraryActivity.this, SettingsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -130,7 +113,7 @@ public class StoryActivity extends AppCompatActivity {
         Button buttonFriends = (Button)findViewById(R.id.friends);
         buttonFriends.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(StoryActivity.this, FriendsActivity.class);
+                Intent i = new Intent(LibraryActivity.this, FriendsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -140,31 +123,31 @@ public class StoryActivity extends AppCompatActivity {
         Button buttonHome = (Button)findViewById(R.id.home);
         buttonHome.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(StoryActivity.this, MainMenuActivity.class);
+                Intent i = new Intent(LibraryActivity.this, MainMenuActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
         });
 
-        // BUTTON TO LibraryActivity
-        Button Buttomlibrary = (Button) findViewById(R.id.your_stories);
-        Buttomlibrary.setOnClickListener(new View.OnClickListener() {
+        // BUTTON TO READ QUICK GAME
+
+        /*mSeeQuickGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(StoryActivity.this, LibraryActivity.class);
+                Intent i = new Intent(LibraryActivity.this, CreateStoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
-        });
+        });*/
 
-        // BUTTON TO CreateStoryActivity
+        // BUTTON TO READ STORY GAME
 
-        mButtonCreateStory.setOnClickListener(new View.OnClickListener() {
+        /*mSeeStoryGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(StoryActivity.this, CreateStoryActivity.class);
+                Intent i = new Intent(LibraryActivity.this, CreateStoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
-        });
+        });*/
 
     }
 
@@ -186,65 +169,50 @@ public class StoryActivity extends AppCompatActivity {
         }
     }
 
-    // ASYNC TASK STORIES ADAPTER
-    public void setupAdapter(AsyncTaskStories.Result resultado)
+    // ASYNC TASK GET STORIES ADAPTER
+    public void setupAdapter(AsyncTaskGetStories.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
 
-            fillDataMyGames(resultado.myTales);
-            fillDataFriendGames(resultado.friendTales);
-            fillDataPublicGames(resultado.publicTales);
-            fillDataVoteGames(resultado.talesForVote);
+            List<AsyncTaskGetStories.Story> quickStories = null;
+            List<AsyncTaskGetStories.Story> storyStories = null;
+
+            for (int i = 0; i < resultado.stories.size(); i++ ) {
+                AsyncTaskGetStories.Story aux = resultado.stories.get(i);
+                if (aux.type == "story") { storyStories.add(aux);
+                }else { quickStories.add(aux); }
+            }
+
+            fillDataQuickGames(quickStories);
+            fillDataStoryGames(storyStories);
+
         }
     }
 
-   private void fillDataMyGames(List<AsyncTaskStories.Story> stories) {
+   private void fillDataQuickGames(List<AsyncTaskGetStories.Story> stories) {
         // instantiate the custom list adapter
-        ListMyStoriesAdapter adapter = new ListMyStoriesAdapter(this, stories);
+        ListLibraryGamesAdapter adapter = new ListLibraryGamesAdapter(this, stories);
 
         // get the ListView and attach the adapter
-        mListMyGames.setAdapter(adapter);
+        mListQuickGames.setAdapter(adapter);
 
         // Message no my games
-        if (stories.isEmpty()) mNoMyGames.setVisibility(View.VISIBLE);
-        else mNoMyGames.setVisibility(View.GONE);
+        if (stories.isEmpty()) mNoQuickGames.setVisibility(View.VISIBLE);
+        else mNoQuickGames.setVisibility(View.GONE);
     }
 
-    private void fillDataFriendGames(List<AsyncTaskStories.Story> stories) {
+    private void fillDataStoryGames(List<AsyncTaskGetStories.Story> stories) {
         // instantiate the custom list adapter
-        ListOtherStoriesAdapter adapter = new ListOtherStoriesAdapter(this, stories);
+        ListLibraryGamesAdapter adapter = new ListLibraryGamesAdapter(this, stories);
 
         // get the ListView and attach the adapter
-        mListFriendsGames.setAdapter(adapter);
+        mListStoryGames.setAdapter(adapter);
 
-        // Message no friends games
-        if (stories.isEmpty()) mNoFriendsGames.setVisibility(View.VISIBLE);
-        else mNoFriendsGames.setVisibility(View.GONE);
+        // Message no my games
+        if (stories.isEmpty()) mNoStoryGames.setVisibility(View.VISIBLE);
+        else mNoStoryGames.setVisibility(View.GONE);
     }
 
-    private void fillDataPublicGames(List<AsyncTaskStories.Story> stories) {
-        // instantiate the custom list adapter
-        ListOtherStoriesAdapter adapter = new ListOtherStoriesAdapter(this, stories);
-
-        // get the ListView and attach the adapter
-        mPublicGames.setAdapter(adapter);
-
-        // Message no public games
-        if (stories.isEmpty()) mNoPublicGames.setVisibility(View.VISIBLE);
-        else mNoPublicGames.setVisibility(View.GONE);
-    }
-
-    private void fillDataVoteGames(List<AsyncTaskStories.Story> stories) {
-        // instantiate the custom list adapter
-        ListVoteStoriesAdapter adapter = new ListVoteStoriesAdapter(this, stories);
-
-        // get the ListView and attach the adapter
-        mVotingGames.setAdapter(adapter);
-
-        // Message no vote games
-        if (stories.isEmpty()) mNoVoteGames.setVisibility(View.VISIBLE);
-        else mNoVoteGames.setVisibility(View.GONE);
-    }
 
     // SET ICON USER
     @SuppressLint("ResourceType")

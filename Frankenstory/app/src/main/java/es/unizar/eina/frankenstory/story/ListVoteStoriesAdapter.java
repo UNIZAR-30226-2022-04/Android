@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -55,21 +56,30 @@ public class ListVoteStoriesAdapter extends BaseAdapter{
         // get VIEWS
         TextView textViewItemName = (TextView) convertView.findViewById(R.id.titleStory);
         TextView textViewItemCreator = (TextView) convertView.findViewById(R.id.creator);
+        TextView textVote = (TextView) convertView.findViewById(R.id.voteText);
+        ImageView imageVote = (ImageView) convertView.findViewById(R.id.vote);
 
         // set DATA
         textViewItemName.setText(currentItem.title);
         textViewItemCreator.setText(currentItem.creator);
 
-        // ON CLICK ON BUTTON VOTE GAME
-        ImageButton joinGame = (ImageButton)
-                convertView.findViewById(R.id.vote);
-        joinGame.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), VoteStoryActivity.class);
-                i.putExtra("id", currentItem.story_id.toString());
-                context.startActivity(i);
-            }
-        });
+        if (currentItem.meVoted) {
+            imageVote.setImageResource(R.drawable.wait);
+            textVote.setTextSize(9);
+            textVote.setText("ESPERANDO");
+        } else {
+
+            // ON CLICK ON BUTTON VOTE GAME
+            ImageButton joinGame = (ImageButton)
+                    convertView.findViewById(R.id.vote);
+            joinGame.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), VoteStoryActivity.class);
+                    i.putExtra("id", currentItem.story_id.toString());
+                    context.startActivity(i);
+                }
+            });
+        }
 
         // returns the view for the current row
         return convertView;

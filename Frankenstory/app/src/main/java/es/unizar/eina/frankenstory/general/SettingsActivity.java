@@ -185,6 +185,16 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        // BUTTON TO LibraryActivity
+        Button Buttomlibrary = (Button) findViewById(R.id.your_stories);
+        Buttomlibrary.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(SettingsActivity.this, LibraryActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+        });
     }
 
     // Para ocultar Navigation bar y lo de arriba.

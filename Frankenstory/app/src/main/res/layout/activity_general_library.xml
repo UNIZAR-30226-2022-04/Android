@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -33,11 +33,64 @@
                     android:text="@string/my_stories"
                     android:textColor="@color/white"
                     android:textSize="35sp" />
+                <!--Texto Partidas rapidas-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowRadius="1"
+                    android:text="Partidas rapidas"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+                <TextView
+                        android:id="@+id/noQuickGames"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Juega una partida rapida"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/arial_bold"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dp"/>
+                <!--Lista mis partidas rapidas-->
+                <ListView
+                    android:id="@+id/quick_games"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    tools:listitem="@layout/row_quick_library"/>
+                <!--Texto Partidas rapidas-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/arial_bold"
+                    android:shadowColor="@color/verde_letras"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowRadius="1"
+                    android:text="Relatos"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+                <TextView
+                        android:id="@+id/noStoryGames"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Juega un relato"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/arial_bold"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dp"/>
                 <!--Lista mis historias-->
                 <ListView
-                    android:id="@+id/searched_friends"
+                    android:id="@+id/story_games"
                     android:layout_width="match_parent"
-                    android:layout_height="450dp"/>
+                    android:layout_height="250dp"
+                    tools:listitem="@layout/row_story_library"/>
 
             </LinearLayout>
             <!---Parte inferior-->
@@ -47,4 +100,4 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

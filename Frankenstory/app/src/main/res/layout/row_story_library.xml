@@ -32,17 +32,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <!-- CREADA POR -->
+                <!-- FECHA -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Creado por"
+                    android:text="Fecha"
                     android:textSize="10sp"
                     android:fontFamily="@font/arial_bold"
                     />
-                <!-- NOMBRE PROPIETARIO -->
+                <!-- FECHA CREACION -->
                 <TextView
-                    android:id="@+id/creator"
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/no_name"
@@ -54,24 +54,21 @@
         </LinearLayout>
 
 
-        <!-- state -->
-        <TextView
-            android:id="@+id/voteText"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="10dp"
-            android:text="VOTAR"/>
-        <!-- IMAGEN -->
-        <ImageButton
-            android:id="@+id/vote"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_vertical"
-            android:scaleType="fitXY"
-            android:background="@null"
-            android:src="@drawable/vote"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right">
+            <!-- IMAGEN -->
+            <ImageButton
+                android:id="@+id/read_story"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical|right"
+                android:scaleType="fitXY"
+                android:background="@null"
+                android:src="@drawable/read"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

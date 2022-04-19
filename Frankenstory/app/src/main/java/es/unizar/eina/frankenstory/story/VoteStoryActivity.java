@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -92,8 +91,8 @@ public class VoteStoryActivity extends AppCompatActivity{
         ButtonVote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //ASYNC TASK VOTE PARAGRAPH
-                //
-                //
+                AsyncVoteStory myTask = new AsyncVoteStory(VoteStoryActivity.this);
+                myTask.execute(id, String.valueOf(votedParagraph));
 
                 Intent i = new Intent(VoteStoryActivity.this, StoryActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -121,7 +120,7 @@ public class VoteStoryActivity extends AppCompatActivity{
         }
     }
 
-    // ASYNC TASK ADAPTER
+    // ASYNC TASK ADAPTER GET PARAGRAPHS
     public void setupAdapter(AsyncTaskGetParagraphs.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
@@ -133,9 +132,21 @@ public class VoteStoryActivity extends AppCompatActivity{
         }
     }
 
+    //ASYNC TASK ADAPTER VOTE STORY
+    public void setupAdapter(AsyncVoteStory.Result resultado) {
+
+        if (resultado.result!=null && resultado.result.equals("success")){
+
+            Intent i = new Intent(VoteStoryActivity.this, StoryActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(i);
+        }
+
+    }
+
     private void fillParagraphs(List<AsyncTaskGetParagraphs.Paragraph> paragraphs) {
 
-        ListParagraphsAdapter adapter = new ListParagraphsAdapter(this, paragraphs);
+        ListVoteParagraphsAdapter adapter = new ListVoteParagraphsAdapter(this, paragraphs);
 
         mParagraphs.setAdapter(adapter);
 
