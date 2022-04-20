@@ -40,7 +40,7 @@ public class AsyncVoteStory extends AsyncTask<String, Void, AsyncVoteStory.Resul
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":"+id+"\",\"indexParagraph\":"+indexParagraph+"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":"+id+",\"indexParagraph\":"+indexParagraph+"}";
             Log.d("VoteStory",jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
