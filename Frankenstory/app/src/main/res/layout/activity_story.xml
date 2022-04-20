@@ -68,7 +68,8 @@
                     android:id="@+id/my_stories"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    tools:listitem="@layout/row_story_games"/>
+                    tools:listitem="@layout/row_story_games"
+                    android:fadeScrollbars="false"/>
                 <!--Texto partidas de amigos-->
                 <TextView
                     android:layout_width="match_parent"
@@ -97,7 +98,8 @@
                     android:id="@+id/friends_games"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    tools:listitem="@layout/row_story_games"/>
+                    tools:listitem="@layout/row_story_games"
+                    android:fadeScrollbars="false"/>
                 <!--Texto partidas públicas-->
                 <TextView
                     android:layout_width="match_parent"
@@ -128,7 +130,8 @@
                     android:id="@+id/public_games"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    tools:listitem="@layout/row_story_games"/>
+                    tools:listitem="@layout/row_story_games"
+                    android:fadeScrollbars="false"/>
                 <!--Texto partidas públicas-->
                 <TextView
                     android:layout_width="match_parent"
@@ -157,7 +160,8 @@
                     android:id="@+id/VoteGames"
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
-                    tools:listitem="@layout/row_story_vote"/>
+                    tools:listitem="@layout/row_story_vote"
+                    android:fadeScrollbars="false"/>
             </LinearLayout>
             <!---Parte inferior-->
     <include

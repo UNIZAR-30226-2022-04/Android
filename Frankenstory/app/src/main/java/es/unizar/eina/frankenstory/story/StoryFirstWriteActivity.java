@@ -125,6 +125,7 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
             public void onClick(View v) {
                 String first_paragraph = String.valueOf(content.getText());
 
+                if (!first_paragraph.equals("")) {
                     // CALL ASYNC TASK
                     AsyncTaskCreateStory myTask = new AsyncTaskCreateStory(StoryFirstWriteActivity.this);
                     myTask.execute(title, number_writings, number_chars, isPrivate_game, first_paragraph);
@@ -133,6 +134,7 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
                     startActivity(i);
                     CreateStoryActivity.handlerTofinish.sendEmptyMessage(0);
                     finish();
+                }
 
             }
         });

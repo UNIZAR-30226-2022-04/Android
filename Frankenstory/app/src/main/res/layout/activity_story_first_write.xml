@@ -58,7 +58,7 @@
                     android:fontFamily="@font/arial_regular"
                     android:hint="@string/write"
                     android:inputType="text|textMultiLine"
-                    android:paddingStart="12dp"
+                    android:paddingHorizontal="12dp"
                     android:textSize="15sp"
                     tools:ignore="RtlSymmetry" />
 

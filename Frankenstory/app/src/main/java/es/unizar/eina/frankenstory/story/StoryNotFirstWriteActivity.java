@@ -137,9 +137,11 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
 
                     String new_paragraph = String.valueOf(content.getText());
 
-                    // CALL ASYNC TASK ADD PARAGRAPH
-                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                    myTask.execute(id, new_paragraph, String.valueOf(false));
+                    if (!new_paragraph.equals("")) {
+                        // CALL ASYNC TASK ADD PARAGRAPH
+                        AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                        myTask.execute(id, new_paragraph, String.valueOf(false));
+                    }
                 }
             });
         } else {
@@ -154,9 +156,11 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
 
                     String new_paragraph = String.valueOf(content.getText());
 
-                    // CALL ASYNC TASK ADD PARAGRAPH
-                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                    myTask.execute(id, new_paragraph, String.valueOf(true));
+                    if (!new_paragraph.equals("")) {
+                        // CALL ASYNC TASK ADD PARAGRAPH
+                        AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                        myTask.execute(id, new_paragraph, String.valueOf(true));
+                    }
                 }
             });
         }else{

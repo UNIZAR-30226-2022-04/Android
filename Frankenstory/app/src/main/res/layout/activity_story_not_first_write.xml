@@ -44,7 +44,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    tools:listitem="@layout/row_previous_paragraphs"/>
+                    tools:listitem="@layout/row_previous_paragraphs"
+                    android:fadeScrollbars="false"/>
 
                 <TextView
                     android:id="@+id/charactersToUse"
@@ -57,7 +58,6 @@
                     android:textColor="@color/white"
                     android:textSize="12sp" />
                 <!--Escritura actual-->
-                <!--Escritura actual-->
                 <EditText
                     android:id="@+id/story_content"
                     android:layout_width="match_parent"
@@ -69,7 +69,7 @@
                     android:fontFamily="@font/arial_regular"
                     android:hint="@string/write"
                     android:inputType="text|textMultiLine"
-                    android:paddingStart="12dp"
+                    android:paddingHorizontal="12dp"
                     android:textSize="15sp"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>

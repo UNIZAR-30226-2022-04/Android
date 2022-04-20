@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="match_parent"
-        android:layout_height="22dp"
+        android:layout_height="20dp"
         android:layout_marginTop="7dp"
         android:layout_marginHorizontal="4dp">
     </com.google.android.material.imageview.ShapeableImageView>
@@ -13,26 +13,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <!-- CONTENIDO -->
+        <!-- AUTOR -->
         <TextView
-            android:id="@+id/body"
+            android:id="@+id/autor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/story_begins"
-            android:textSize="14sp"
+            android:text="@string/no_name"
+            android:gravity="center_vertical"
+            android:textSize="10sp"
             android:textColor="@color/white"
             android:fontFamily="@font/arial_bold"
             android:layout_marginStart="10dp"
             android:layout_gravity="center_vertical"/>
-        <!-- AUTOR -->
+        <!-- CONTENIDO -->
         <TextView
-            android:id="@+id/autor"
+            android:id="@+id/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_name"
-            android:gravity="end"
-            android:textSize="10sp"
-            android:layout_marginTop="5dp"
+            android:text="@string/story_begins"
+            android:textSize="14sp"
             android:textColor="@color/white"
             android:fontFamily="@font/arial_bold"
             android:layout_marginStart="10dp"

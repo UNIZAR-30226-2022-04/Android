@@ -28,11 +28,11 @@
             <!---Icono persona-->
         <ImageView
             android:id="@+id/iconUser"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="26dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="-241dp"
-            android:src="@drawable/man" />
+            android:src="@raw/icon1"
+            android:visibility="invisible"/>
 
             <!---Indicador monedas-->
             <TextView
