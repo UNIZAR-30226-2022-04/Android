@@ -49,7 +49,6 @@ public class LibraryActivity extends AppCompatActivity {
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mNotifications = (Button) findViewById(R.id.notifications);
-        mNotifications.setVisibility(View.INVISIBLE);
         mList = (ListView) findViewById(R.id.statistics);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
 

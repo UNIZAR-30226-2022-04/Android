@@ -7,7 +7,7 @@
     android:paddingBottom="5dp"
     android:orientation="horizontal"
     android:id="@+id/rowsearchedfriend"
-    android:background="@null">
+    android:background="@color/gris_claro">
     <!-- NOMBRE PARTICIPANTE -->
     <TextView
         android:id="@+id/friendNameSearched"
@@ -34,5 +34,6 @@
         android:layout_gravity="center_vertical"
         android:scaleType="fitXY"
         android:background="@null"
-        android:src="@drawable/add_friend"/>
+        android:src="@drawable/add_friend"
+        android:layout_marginRight="10dp"/>
 </LinearLayout>

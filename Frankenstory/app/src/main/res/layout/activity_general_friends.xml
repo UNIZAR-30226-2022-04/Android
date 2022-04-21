@@ -52,7 +52,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="6dp"
-                            android:background="@color/white"
+                            android:background="@drawable/rounded_edittext"
                             android:layout_marginVertical="15dp"
                             android:fontFamily="@font/arial_regular"
                             android:hint="@string/insertUserName"
@@ -138,9 +138,9 @@
                         android:dividerHeight="3sp"/>
                 </LinearLayout>
             <!---Parte inferior-->
-            <include
-                layout="@layout/bottom_home"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+    <include
+        layout="@layout/bottom_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

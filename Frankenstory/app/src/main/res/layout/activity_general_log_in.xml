@@ -26,8 +26,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="160dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="160dp"
                 android:fontFamily="@font/arial_bold"
                 android:shadowColor="@color/verde_letras"
                 android:shadowDx="4"
@@ -39,13 +39,13 @@
 
             <!--- Animacion -->
             <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loginanimation"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
-                app:lottie_rawRes="@raw/login"
-                app:lottie_loop="true"
+                android:layout_gravity="center_horizontal"
                 app:lottie_autoPlay="true"
-                android:id="@+id/loginanimation"
-                android:layout_gravity="center_horizontal"/>
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/login" />
 
             <!---Nombre de usuario-->
             <TextView
@@ -53,13 +53,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/arial_bold"
+                android:paddingRight="4dp"
                 android:shadowColor="@color/verde_letras"
                 android:shadowDx="4"
                 android:shadowDy="4"
                 android:shadowRadius="1"
                 android:text="@string/insertUserName"
                 android:textColor="@color/white"
-                android:paddingRight="4dp"
                 android:textSize="18sp" />
 
             <EditText
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="6dp"
-                android:background="@color/white"
+                android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/arial_regular"
                 android:hint="@string/insertUserName"
                 android:inputType="text"
@@ -80,13 +80,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arial_bold"
                 android:paddingTop="10dp"
+                android:paddingRight="4dp"
                 android:shadowColor="@color/verde_letras"
                 android:shadowDx="4"
                 android:shadowDy="4"
                 android:shadowRadius="1"
                 android:text="@string/insertPassWord"
                 android:textColor="@color/white"
-                android:paddingRight="4dp"
                 android:textSize="18sp" />
 
             <EditText
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="6dp"
-                android:background="@color/white"
+                android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/arial_regular"
                 android:hint="@string/insertPassWord"
                 android:inputType="textPassword"
@@ -106,31 +106,31 @@
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginRight="10dp"
+                android:background="@drawable/button_green"
                 android:fontFamily="@font/bangers_regular"
                 android:text="@string/log_in"
                 android:textColor="@color/white"
-                android:textSize="27sp"
-                android:background="@drawable/button" />
+                android:textSize="27sp" />
             <!---Boton crear cuenta-->
             <Button
                 android:id="@+id/createAccountLogIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/bangers_regular"
-                android:text="@string/createAccount"
-                android:textSize="23sp"
-                android:textColor="@color/verde_letras"
                 android:shadowColor="@color/white"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="1"/>
+                android:shadowRadius="1"
+                android:text="@string/createAccount"
+                android:textColor="@color/verde_letras"
+                android:textSize="23sp" />
         </LinearLayout>
 
         <!--- Animation CHARGING -->
