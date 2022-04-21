@@ -2,7 +2,6 @@ package es.unizar.eina.frankenstory.story;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -57,8 +56,8 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         // BACKGROUND ANIMATION
-        ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        RelativeLayout relativeLayout = findViewById(R.id.layoutmain);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
@@ -83,6 +82,10 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
+        send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
+        send_text.setEnabled(false);
+        end_tale.setBackground(getResources().getDrawable(R.drawable.button_grey));
+        end_tale.setEnabled(false);
 
         //ASYNC TASK RESUME_TALE
         AsyncTaskResumeStory myTask = new AsyncTaskResumeStory(this);
@@ -113,12 +116,21 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                 if (chars < 0) {
                     mcharactersToUse.setTextColor(getResources().getColor(R.color.rojo));
                     send_text.setEnabled(false);
+                    send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
                     end_tale.setEnabled(false);
+                    end_tale.setBackground(getResources().getDrawable(R.drawable.button_grey));
+                } else if (chars == Integer.parseInt(number_chars)){
+                    send_text.setEnabled(false);
+                    send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
+                    end_tale.setEnabled(false);
+                    end_tale.setBackground(getResources().getDrawable(R.drawable.button_grey));
                 }
                 else {
                     mcharactersToUse.setTextColor(getResources().getColor(R.color.white));
                     send_text.setEnabled(true);
+                    send_text.setBackground(getResources().getDrawable(R.drawable.button_green));
                     end_tale.setEnabled(true);
+                    end_tale.setBackground(getResources().getDrawable(R.drawable.buttom_finish_story));
                 }
             }
         });
@@ -136,12 +148,9 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                 public void onClick(View v) {
 
                     String new_paragraph = String.valueOf(content.getText());
-
-                    if (!new_paragraph.equals("")) {
-                        // CALL ASYNC TASK ADD PARAGRAPH
-                        AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                        myTask.execute(id, new_paragraph, String.valueOf(false));
-                    }
+                    // CALL ASYNC TASK ADD PARAGRAPH
+                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                    myTask.execute(id, new_paragraph, String.valueOf(false));
                 }
             });
         } else {
@@ -155,12 +164,9 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
                 public void onClick(View v) {
 
                     String new_paragraph = String.valueOf(content.getText());
-
-                    if (!new_paragraph.equals("")) {
-                        // CALL ASYNC TASK ADD PARAGRAPH
-                        AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
-                        myTask.execute(id, new_paragraph, String.valueOf(true));
-                    }
+                    // CALL ASYNC TASK ADD PARAGRAPH
+                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(StoryNotFirstWriteActivity.this);
+                    myTask.execute(id, new_paragraph, String.valueOf(true));
                 }
             });
         }else{
@@ -192,12 +198,25 @@ public class StoryNotFirstWriteActivity extends AppCompatActivity{
             TextView story_title = (TextView) findViewById(R.id.story_name);
             story_title.setText(String.valueOf(resultado.title));
 
-            // update characters
-            number_chars = resultado.maxCharacters.toString();
-            updateCharacters();
-
             fillDataParagraphs(resultado.paragraphs);
 
+            // Comprobación no escribir 2 veces seguidas
+            if (resultado.paragraphs.get(resultado.paragraphs.size()-1).username.equals(mUsername.getText())) {
+                if (!myStory){
+                    mcharactersToUse.setVisibility(View.GONE);
+                    content.setVisibility(View.GONE);
+                    TextView messageCantWrite = (TextView) findViewById(R.id.messageCantWrite);
+                    messageCantWrite.setVisibility(View.VISIBLE);
+                } else {
+                    number_chars = resultado.maxCharacters.toString();
+                    updateCharacters();
+                }
+                send_text.setVisibility(View.GONE);
+            } else {
+                // update characters
+                number_chars = resultado.maxCharacters.toString();
+                updateCharacters();
+            }
         }
     }
 

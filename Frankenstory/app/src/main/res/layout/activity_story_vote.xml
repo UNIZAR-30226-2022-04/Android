@@ -84,13 +84,13 @@
 
                 <ListView
                     android:id="@+id/paragraphs"
-                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    tools:listitem="@layout/row_paragraphs_vote"
-                    android:dividerHeight="5.0sp"
+                    android:layout_marginTop="20dp"
                     android:divider="@android:color/transparent"
-                    android:fadeScrollbars="false"/>
+                    android:dividerHeight="1.0sp"
+                    android:fadeScrollbars="false"
+                    tools:listitem="@layout/row_paragraphs_vote" />
 
             </LinearLayout>
             <!--Terminar escritura-->
@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:background="@drawable/button_ingame"
+                    android:background="@drawable/button_green"
                     android:fontFamily="@font/bangers_regular"
                     android:paddingHorizontal="100dp"
                     android:text="@string/vote"

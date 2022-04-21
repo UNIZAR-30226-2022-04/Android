@@ -2,7 +2,6 @@ package es.unizar.eina.frankenstory.story;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,8 +50,8 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         // BACKGROUND ANIMATION
-        ConstraintLayout constraintLayout = findViewById(R.id.layoutmain);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        RelativeLayout relativeLayout = findViewById(R.id.layoutmain);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
@@ -77,6 +77,8 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
 
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
+        send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
+        send_text.setEnabled(false);
 
         // SET MAX CHAR
         mcharactersToUse.setText(number_chars.toString()+" caracteres");
@@ -98,10 +100,15 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
                 if (chars < 0) {
                     mcharactersToUse.setTextColor(getResources().getColor(R.color.rojo));
                     send_text.setEnabled(false);
+                    send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
+                } else if (chars == Integer.parseInt(number_chars)){
+                    send_text.setEnabled(false);
+                    send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
                 }
                 else {
                     mcharactersToUse.setTextColor(getResources().getColor(R.color.white));
                     send_text.setEnabled(true);
+                    send_text.setBackground(getResources().getDrawable(R.drawable.button_green));
                 }
             }
         });
@@ -124,8 +131,6 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
         send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String first_paragraph = String.valueOf(content.getText());
-
-                if (!first_paragraph.equals("")) {
                     // CALL ASYNC TASK
                     AsyncTaskCreateStory myTask = new AsyncTaskCreateStory(StoryFirstWriteActivity.this);
                     myTask.execute(title, number_writings, number_chars, isPrivate_game, first_paragraph);
@@ -134,8 +139,6 @@ public class StoryFirstWriteActivity extends AppCompatActivity{
                     startActivity(i);
                     CreateStoryActivity.handlerTofinish.sendEmptyMessage(0);
                     finish();
-                }
-
             }
         });
 

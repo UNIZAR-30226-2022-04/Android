@@ -113,7 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:background="@drawable/button_ingame"
+                    android:background="@drawable/button_green"
                     android:fontFamily="@font/bangers_regular"
                     android:paddingHorizontal="100dp"
                     android:text="@string/vote"

@@ -210,7 +210,7 @@
                     android:id="@+id/start_story"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_ingame"
+                    android:background="@drawable/button_green"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/start_story"
                     android:textColor="@color/white"
