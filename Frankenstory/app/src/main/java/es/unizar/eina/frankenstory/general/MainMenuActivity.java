@@ -23,6 +23,7 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.quick.QuickActivity;
 import es.unizar.eina.frankenstory.story.StoryActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -95,7 +96,7 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        // BUTTON TO activity_story
+        // BUTTON TO StoryActivity
         LottieAnimationView lottie = (LottieAnimationView) findViewById(R.id.buttonStory_mode);
         lottie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -110,6 +111,16 @@ public class MainMenuActivity extends AppCompatActivity {
         Buttomlibrary.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(MainMenuActivity.this, LibraryActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+        });
+
+        // BUTTON TO QuickActivity
+        LottieAnimationView lottie_quick = (LottieAnimationView) findViewById(R.id.buttonQuick_game);
+        lottie_quick.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(MainMenuActivity.this, QuickActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }

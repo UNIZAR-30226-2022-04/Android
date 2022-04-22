@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -39,18 +39,18 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/create_room"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:layout_marginTop="10dp"
-                    android:gravity="bottom|start"
                     android:textSize="35sp"
-                    android:background="@drawable/button" />
+                    android:background="@drawable/button_green" />
                 <!--Codigo -->
                 <EditText
                     android:id="@+id/code"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="70dp"
-                    android:background="@color/white"
+                    android:background="@drawable/rounded_edittext"
                     android:fontFamily="@font/arial_regular"
                     android:hint="@string/code"
                     android:inputType="text"
@@ -66,9 +66,9 @@
                     android:text="@string/join_room"
                     android:textColor="@color/white"
                     android:layout_marginTop="10dp"
-                    android:gravity="bottom|start"
+                    android:textAlignment="center"
                     android:textSize="35sp"
-                    android:background="@drawable/button" />
+                    android:background="@drawable/button_green" />
                 <!---Boton Partida aleatoria-->
                 <Button
                     android:id="@+id/random_game"
@@ -78,14 +78,15 @@
                     android:text="@string/random_game"
                     android:textColor="@color/white"
                     android:layout_marginTop="75dp"
-                    android:gravity="bottom|start"
+                    android:textAlignment="center"
                     android:textSize="35sp"
-                    android:background="@drawable/button" />
+                    android:background="@drawable/button_green" />
             </LinearLayout>
             <!---Parte inferior-->
-            <include layout="@layout/bottom_home"
+            <include
+                layout="@layout/bottom_home"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
