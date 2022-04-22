@@ -1,9 +1,11 @@
 package es.unizar.eina.frankenstory.general;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,17 +72,29 @@ public class ListLibraryGamesAdapter extends BaseAdapter{
         textViewItemName.setText(currentItem.title);
         textViewDate.setText(currentItem.date);
 
-        // ON CLICK ON READ GAME
-        /*
-        ImageButton vote = (ImageButton) convertView.findViewById(R.id.read_quick);
-        vote.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(context, StoryNotFirstWriteActivity.class);
-                context.startActivity(i);
-            }
-        });
-        */
-
+        // ON CLICK ON READ QUICK GAME
+        if (currentItem.type == "quick_twitter"){
+            ImageButton read_story = (ImageButton) convertView.findViewById(R.id.read_quick);
+            read_story.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent i = new Intent(context, LibraryStoryActivity.class);
+                    i.putExtra("title", currentItem.title);
+                    context.startActivity(i);
+                }
+            });
+        //ON CLICK ON READ STORY GAME
+        } else {
+            ImageButton read_story = (ImageButton) convertView.findViewById(R.id.read_story);
+            read_story.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent i = new Intent(context, LibraryStoryActivity.class);
+                    i.putExtra("title", currentItem.title);
+                    i.putExtra("id", currentItem.id);
+                    i.putExtra("type",currentItem.type);
+                    context.startActivity(i);
+                }
+            });
+        }
         // returns the view for the current row
         return convertView;
     }

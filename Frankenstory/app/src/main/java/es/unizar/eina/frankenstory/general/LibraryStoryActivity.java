@@ -20,7 +20,7 @@ import java.util.List;
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
-public class LibraryActivity extends AppCompatActivity {
+public class LibraryStoryActivity extends AppCompatActivity {
 
     private TextView mUsername;
     private TextView mStars;
@@ -28,11 +28,13 @@ public class LibraryActivity extends AppCompatActivity {
     private Button mNotifications;
     private ListView mList;
     private ImageView mIconUser;
-    private ListView mListQuickGames;
-    private ListView mListStoryGames;
-    private TextView mNoQuickGames;
-    private TextView mNoStoryGames;
 
+    private TextView mtitle;
+    private TextView mbody;
+
+    private String title;
+    private String id;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,12 @@ public class LibraryActivity extends AppCompatActivity {
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        // GET PARAMETERS
+        Intent intent = getIntent();
+        title = intent.getStringExtra("title");
+        id = intent.getStringExtra("id");
+        type = intent.getStringExtra("type");
+
         // GET VIEWS AND UPDATE DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
@@ -50,10 +58,8 @@ public class LibraryActivity extends AppCompatActivity {
         mList = (ListView) findViewById(R.id.statistics);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
 
-        mListQuickGames = (ListView) findViewById(R.id.quick_games);
-        mListStoryGames = (ListView) findViewById(R.id.story_games);
-        mNoQuickGames = (TextView) findViewById(R.id.noQuickGames);
-        mNoStoryGames = (TextView) findViewById(R.id.noStoryGames);
+        mtitle = (TextView) findViewById(R.id.story_name);
+        mbody = (TextView) findViewById(R.id.story_content);
 
         updateData();
 
@@ -67,17 +73,18 @@ public class LibraryActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-        // CALL ASYNC TASK
-        AsyncTaskGetStories myTask = new AsyncTaskGetStories(this);
-        myTask.execute();
+        // CALL ASYNC TASK WATCH STORY
+        AsyncTaskWatchStory myTask = new AsyncTaskWatchStory(this);
+        myTask.execute(id,type);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // CALL ASYNC TASK
-        AsyncTaskGetStories myTask = new AsyncTaskGetStories(this);
-        myTask.execute();
+        AsyncTaskWatchStory myTask = new AsyncTaskWatchStory(this);
+        myTask.execute(id,type);
 
         updateData();
     }
@@ -91,6 +98,8 @@ public class LibraryActivity extends AppCompatActivity {
         if (Integer.parseInt(((MyApplication) this.getApplication()).getNotifications())>0){
             mNotifications.setText(((MyApplication) this.getApplication()).getNotifications());
         } else mNotifications.setVisibility(View.INVISIBLE);
+
+        mtitle.setText(title);
     }
 
     public void setNavegavilidad(){
@@ -98,7 +107,7 @@ public class LibraryActivity extends AppCompatActivity {
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(LibraryActivity.this, SettingsActivity.class);
+                Intent i = new Intent(LibraryStoryActivity.this, SettingsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -108,7 +117,7 @@ public class LibraryActivity extends AppCompatActivity {
         Button buttonFriends = (Button)findViewById(R.id.friends);
         buttonFriends.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(LibraryActivity.this, FriendsActivity.class);
+                Intent i = new Intent(LibraryStoryActivity.this, FriendsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -118,7 +127,7 @@ public class LibraryActivity extends AppCompatActivity {
         Button buttonHome = (Button)findViewById(R.id.home);
         buttonHome.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(LibraryActivity.this, MainMenuActivity.class);
+                Intent i = new Intent(LibraryStoryActivity.this, MainMenuActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -144,50 +153,14 @@ public class LibraryActivity extends AppCompatActivity {
         }
     }
 
-    // ASYNC TASK GET STORIES ADAPTER
-    public void setupAdapter(AsyncTaskGetStories.Result resultado)
+    // ASYNC TASK WATCH STORIES ADAPTER
+    public void setupAdapter(AsyncTaskWatchStory.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
-
-            List<AsyncTaskGetStories.Story> quickStories = null;
-            List<AsyncTaskGetStories.Story> storyStories = null;
-
-            for (int i = 0; i < resultado.stories.size(); i++ ) {
-                AsyncTaskGetStories.Story aux = resultado.stories.get(i);
-                if (aux.type.equals("story")) { storyStories.add(aux);
-                }else { quickStories.add(aux); }
-            }
-
-            fillDataQuickGames(quickStories);
-            fillDataStoryGames(storyStories);
+            mbody.setText(resultado.body);
 
         }
     }
-
-   private void fillDataQuickGames(List<AsyncTaskGetStories.Story> stories) {
-        // instantiate the custom list adapter
-        ListLibraryGamesAdapter adapter = new ListLibraryGamesAdapter(this, stories);
-
-        // get the ListView and attach the adapter
-        mListQuickGames.setAdapter(adapter);
-
-        // Message no my games
-        if (stories.isEmpty()) mNoQuickGames.setVisibility(View.VISIBLE);
-        else mNoQuickGames.setVisibility(View.GONE);
-    }
-
-    private void fillDataStoryGames(List<AsyncTaskGetStories.Story> stories) {
-        // instantiate the custom list adapter
-        ListLibraryGamesAdapter adapter = new ListLibraryGamesAdapter(this, stories);
-
-        // get the ListView and attach the adapter
-        mListStoryGames.setAdapter(adapter);
-
-        // Message no my games
-        if (stories.isEmpty()) mNoStoryGames.setVisibility(View.VISIBLE);
-        else mNoStoryGames.setVisibility(View.GONE);
-    }
-
 
     // SET ICON USER
     @SuppressLint("ResourceType")
