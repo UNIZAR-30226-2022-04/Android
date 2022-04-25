@@ -32,17 +32,17 @@ public class AsyncTaskWatchStory extends AsyncTask<String, Void, AsyncTaskWatchS
     protected AsyncTaskWatchStory.Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
-        int id = Integer.parseInt(params[0]);
+        String id = params[0];
         String type = params[1];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/watch_story").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/watch_story").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":"+id+"\",\"type\":\""+type+"\"}";
+            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"id\":"+id+",\"type\":\""+type+"\"}";
             Log.d("WatchStory",jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();

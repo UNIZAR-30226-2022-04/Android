@@ -37,7 +37,7 @@ public class AsyncTaskFriends extends AsyncTask<String, Void, AsyncTaskFriends.R
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/friends").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/friends").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

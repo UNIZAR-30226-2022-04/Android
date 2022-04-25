@@ -32,7 +32,7 @@ public class AsyncTaskDeleterUser extends AsyncTask<String, Void, AsyncTaskDelet
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/delete_user").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/delete_user").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

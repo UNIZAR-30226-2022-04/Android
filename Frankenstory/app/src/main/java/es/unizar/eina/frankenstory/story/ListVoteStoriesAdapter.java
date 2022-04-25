@@ -1,6 +1,7 @@
 package es.unizar.eina.frankenstory.story;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,15 +68,24 @@ public class ListVoteStoriesAdapter extends BaseAdapter{
             imageVote.setImageResource(R.drawable.wait);
             textVote.setTextSize(9);
             textVote.setText("ESPERANDO");
-        } else {
-
-            // ON CLICK ON BUTTON VOTE GAME
-            ImageButton joinGame = (ImageButton)
-                    convertView.findViewById(R.id.vote);
-            joinGame.setOnClickListener(new View.OnClickListener() {
+            imageVote.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(), VoteStoryActivity.class);
                     i.putExtra("id", currentItem.story_id.toString());
+                    i.putExtra("alreadyVoted", currentItem.meVoted);
+                    context.startActivity(i);
+                }
+            });
+        } else {
+            // ON CLICK ON BUTTON VOTE GAME
+            imageVote.setImageResource(R.drawable.vote);
+            textVote.setTextSize(12);
+            textVote.setText("VOTAR");
+            imageVote.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), VoteStoryActivity.class);
+                    i.putExtra("id", currentItem.story_id.toString());
+                    i.putExtra("alreadyVoted", currentItem.meVoted);
                     context.startActivity(i);
                 }
             });

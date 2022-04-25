@@ -34,7 +34,7 @@ public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddP
         String isLast = params[2];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/add_tale_paragraph").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/tale_mode/add_tale_paragraph").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

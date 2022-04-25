@@ -29,9 +29,6 @@ public class LibraryStoryActivity extends AppCompatActivity {
     private ListView mList;
     private ImageView mIconUser;
 
-    private TextView mtitle;
-    private TextView mbody;
-
     private String title;
     private String id;
     private String type;
@@ -39,7 +36,7 @@ public class LibraryStoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_general_library);
+        setContentView(R.layout.activity_general_library_story);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -57,9 +54,6 @@ public class LibraryStoryActivity extends AppCompatActivity {
         mNotifications = (Button) findViewById(R.id.notifications);
         mList = (ListView) findViewById(R.id.statistics);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-
-        mtitle = (TextView) findViewById(R.id.story_name);
-        mbody = (TextView) findViewById(R.id.story_content);
 
         updateData();
 
@@ -99,6 +93,7 @@ public class LibraryStoryActivity extends AppCompatActivity {
             mNotifications.setText(((MyApplication) this.getApplication()).getNotifications());
         } else mNotifications.setVisibility(View.INVISIBLE);
 
+        TextView mtitle = (TextView) findViewById(R.id.story_name);
         mtitle.setText(title);
     }
 
@@ -157,8 +152,8 @@ public class LibraryStoryActivity extends AppCompatActivity {
     public void setupAdapter(AsyncTaskWatchStory.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
+            TextView mbody = (TextView) findViewById(R.id.story_content);
             mbody.setText(resultado.body);
-
         }
     }
 

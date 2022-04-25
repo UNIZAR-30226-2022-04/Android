@@ -38,7 +38,7 @@ public class AsyncTaskGetStories extends AsyncTask<String, Void, AsyncTaskGetSto
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/get_stories").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/get_stories").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

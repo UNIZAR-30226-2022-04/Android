@@ -34,7 +34,7 @@ public class AsyncTaskCreateStory extends AsyncTask<String, Void, AsyncTaskCreat
         String first_paragraph = params[4].replaceAll("\n","\\\\n");
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/create_tale").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/tale_mode/create_tale").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

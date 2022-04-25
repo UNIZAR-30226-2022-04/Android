@@ -42,7 +42,7 @@ public class AsyncTaskMainMenu extends AsyncTask<String, Void, AsyncTaskMainMenu
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/home").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/home").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

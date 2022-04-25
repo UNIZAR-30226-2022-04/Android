@@ -34,7 +34,7 @@ public class AsyncVoteStory extends AsyncTask<String, Void, AsyncVoteStory.Resul
         int indexParagraph = Integer.parseInt(params[1]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/vote_story").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/tale_mode/vote_story").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

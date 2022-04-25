@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
@@ -149,24 +150,38 @@ public class LibraryActivity extends AppCompatActivity {
     {
         if (resultado.result!=null && resultado.result.equals("success")){
 
-            List<AsyncTaskGetStories.Story> quickStories = null;
-            List<AsyncTaskGetStories.Story> storyStories = null;
+            List<AsyncTaskGetStories.Story> quickStories = new ArrayList<>();
+            List<AsyncTaskGetStories.Story> storyStories = new ArrayList<>();
 
-            for (int i = 0; i < resultado.stories.size(); i++ ) {
-                AsyncTaskGetStories.Story aux = resultado.stories.get(i);
-                if (aux.type.equals("story")) { storyStories.add(aux);
-                }else { quickStories.add(aux); }
+            for (AsyncTaskGetStories.Story s : resultado.stories) {
+                if (s.type.equals("tale")) { storyStories.add(s);
+                } else { quickStories.add(s); }
             }
+
+            //--------------------
+            // Datos de prueba
+            AsyncTaskGetStories.Story quickHarcodeada = new AsyncTaskGetStories.Story();
+            quickHarcodeada.id = 99;
+            quickHarcodeada.date = "25/3/2022";
+            quickHarcodeada.title = "Historia Twitter Hardcodeada";
+            quickHarcodeada.type = "quick_twitter";
+            quickStories.add(quickHarcodeada);
+            AsyncTaskGetStories.Story quickHarcodeada2 = new AsyncTaskGetStories.Story();
+            quickHarcodeada2.id = 99;
+            quickHarcodeada2.date = "25/3/2022";
+            quickHarcodeada2.title = "Historia Aleatorias Hardcodeada";
+            quickHarcodeada2.type = "quick_random";
+            quickStories.add(quickHarcodeada2);
+            //--------------------
 
             fillDataQuickGames(quickStories);
             fillDataStoryGames(storyStories);
-
         }
     }
 
    private void fillDataQuickGames(List<AsyncTaskGetStories.Story> stories) {
         // instantiate the custom list adapter
-        ListLibraryGamesAdapter adapter = new ListLibraryGamesAdapter(this, stories);
+        ListLibraryQuickGamesAdapter adapter = new ListLibraryQuickGamesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mListQuickGames.setAdapter(adapter);
@@ -178,7 +193,7 @@ public class LibraryActivity extends AppCompatActivity {
 
     private void fillDataStoryGames(List<AsyncTaskGetStories.Story> stories) {
         // instantiate the custom list adapter
-        ListLibraryGamesAdapter adapter = new ListLibraryGamesAdapter(this, stories);
+        ListLibraryTaleGamesAdapter adapter = new ListLibraryTaleGamesAdapter(this, stories);
 
         // get the ListView and attach the adapter
         mListStoryGames.setAdapter(adapter);

@@ -7,7 +7,6 @@
     android:paddingBottom="5dp"
     android:orientation="horizontal"
     android:id="@+id/rowStory"
-    android:background="@color/verde_top"
     android:paddingHorizontal="10dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,18 +66,7 @@
                 android:layout_gravity="center_vertical|right"
                 android:scaleType="fitXY"
                 android:background="@null"
-                android:src="@drawable/random_words"
-                android:layout_marginEnd="20dp"
-                tools:ignore="RtlHardcoded" />
-            <!-- IMAGEN -->
-            <ImageButton
-                android:id="@+id/read_quick"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center_vertical|right"
-                android:scaleType="fitXY"
-                android:background="@null"
-                android:src="@drawable/read"
+                android:src="@drawable/twitter_trend"
                 tools:ignore="RtlHardcoded" />
         </LinearLayout>
     </LinearLayout>

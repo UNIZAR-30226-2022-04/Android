@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -31,7 +32,9 @@ public class VoteStoryActivity extends AppCompatActivity{
     private TextView mTitle;
 
     private String id;
-    int votedParagraph;
+    Integer votedParagraph;
+    View selectedView;
+    boolean alreadyVoted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class VoteStoryActivity extends AppCompatActivity{
 
         Intent i = getIntent();
         id = i.getStringExtra("id");
+        alreadyVoted = i.getBooleanExtra("alreadyVoted", true);
 
         setNavegavilidad();
 
@@ -86,20 +90,19 @@ public class VoteStoryActivity extends AppCompatActivity{
     }
 
     public void setNavegavilidad(){
-        // BUTTON VOTE
         Button ButtonVote = (Button)findViewById(R.id.vote);
-        ButtonVote.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //ASYNC TASK VOTE PARAGRAPH
-                AsyncVoteStory myTask = new AsyncVoteStory(VoteStoryActivity.this);
-                myTask.execute(id, String.valueOf(votedParagraph));
-
-                Intent i = new Intent(VoteStoryActivity.this, StoryActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
-
+        if (!alreadyVoted){
+            // BUTTON VOTE
+            ButtonVote.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //ASYNC TASK VOTE PARAGRAPH
+                    AsyncVoteStory myTask = new AsyncVoteStory(VoteStoryActivity.this);
+                    myTask.execute(id, String.valueOf(votedParagraph));
+                }
+            });
+        } else {
+            ButtonVote.setVisibility(View.GONE);
+        }
     }
 
     // Para ocultar Navigation bar y lo de arriba.
@@ -124,10 +127,8 @@ public class VoteStoryActivity extends AppCompatActivity{
     public void setupAdapter(AsyncTaskGetParagraphs.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
-
             mTitle.setText(resultado.title);
             mCreator.setText(resultado.paragraphs.get(0).username);
-
             fillParagraphs(resultado.paragraphs);
         }
     }
@@ -140,6 +141,7 @@ public class VoteStoryActivity extends AppCompatActivity{
             Intent i = new Intent(VoteStoryActivity.this, StoryActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(i);
+            finish();
         }
 
     }
@@ -147,17 +149,28 @@ public class VoteStoryActivity extends AppCompatActivity{
     private void fillParagraphs(List<AsyncTaskGetParagraphs.Paragraph> paragraphs) {
 
         ListVoteParagraphsAdapter adapter = new ListVoteParagraphsAdapter(this, paragraphs);
-
         mParagraphs.setAdapter(adapter);
 
-        mParagraphs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            votedParagraph = position;
-            adapter.notifyDataSetChanged();
+        if (!alreadyVoted) {
+            mParagraphs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    // INVISIBLE LAST HEART
+                    ImageView heart = (ImageView) selectedView.findViewById(R.id.imageVote);
+                    heart.setVisibility(View.GONE);
+                    TextView textViewItem = (TextView) selectedView.findViewById(R.id.body);
+                    textViewItem.setBackgroundColor(getResources().getColor(R.color.verde_parrafo));
+                    // VISIBLE NEW HEART
+                    selectedView = view;
+                    textViewItem = (TextView) selectedView.findViewById(R.id.body);
+                    textViewItem.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
+                    heart = (ImageView) view.findViewById(R.id.imageVote);
+                    heart.setVisibility(View.VISIBLE);
+                    votedParagraph = position;
+                    Log.d("VOTED PARAGRAPH", votedParagraph.toString());
+                }
+            });
         }
-    });
-
     }
 
     // SET ICON USER
