@@ -9,16 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
-import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
@@ -26,46 +21,47 @@ import es.unizar.eina.frankenstory.general.FriendsActivity;
 import es.unizar.eina.frankenstory.general.LibraryActivity;
 import es.unizar.eina.frankenstory.general.MainMenuActivity;
 import es.unizar.eina.frankenstory.general.SettingsActivity;
-import es.unizar.eina.frankenstory.story.AsyncTaskStories;
-import es.unizar.eina.frankenstory.story.CreateStoryActivity;
-import es.unizar.eina.frankenstory.story.ListMyStoriesAdapter;
-import es.unizar.eina.frankenstory.story.ListOtherStoriesAdapter;
-import es.unizar.eina.frankenstory.story.ListVoteStoriesAdapter;
 
-public class QuickActivity extends AppCompatActivity {
+public class QuickGameRoom extends AppCompatActivity {
 
     private TextView mUsername;
     private TextView mStars;
     private TextView mCoins;
-    private Button mNotifications;
     private ImageView mIconUser;
 
-    private EditText mCode;
-    private Button mCreateRoom;
-    private Button mJoinRoom;
-    private Button mRandomGame;
+    private TextView mParticipants;
+    private TextView mCode;
+    private Button mStartGame;
+    private TextView mTwitter_mode;
+    private TextView mRandom_mode;
 
     private String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quick_game);
+        setContentView(R.layout.activity_quick_game_room);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        //GET PARAMETERS
+        Intent i = this.getIntent();
+        code = i.getExtras().getString("code");
 
         // GET VIEWS AND UPDATE DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
-        mNotifications = (Button) findViewById(R.id.notifications);
-        mIconUser = (ImageView) findViewById(R.id.iconUser);
 
+        mParticipants = (TextView) findViewById(R.id.number_participants);
+        mIconUser = (ImageView) findViewById(R.id.iconUser);
         mCode = (EditText) findViewById(R.id.code);
-        mCreateRoom = (Button) findViewById(R.id.quick_game);
-        mJoinRoom = (Button) findViewById(R.id.join_room);
-        mRandomGame = (Button) findViewById(R.id.random_game);
+        mStartGame = (Button) findViewById(R.id.start_game);
+        mTwitter_mode = (TextView) findViewById(R.id.twitter_mode);
+        mRandom_mode = (TextView) findViewById(R.id.random_mode);
+
+        mCode.setText("CODIGO DE SALA: #" + code);
 
         updateData();
 
@@ -78,6 +74,10 @@ public class QuickActivity extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
+
+        // CALL ASYNC TASK GET ROOM
+        //AsyncTaskStories myTask = new AsyncTaskStories(this);
+        //myTask.execute(code);
 
     }
 
@@ -93,9 +93,6 @@ public class QuickActivity extends AppCompatActivity {
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
-        if (Integer.parseInt(((MyApplication) this.getApplication()).getNotifications())>0){
-            mNotifications.setText(((MyApplication) this.getApplication()).getNotifications());
-        } else mNotifications.setVisibility(View.INVISIBLE);
     }
 
     public void setNavegavilidad(){
@@ -103,73 +100,20 @@ public class QuickActivity extends AppCompatActivity {
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(QuickActivity.this, SettingsActivity.class);
+                Intent i = new Intent(QuickGameRoom.this, SettingsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
         });
 
-        // BUTTON TO FriendsActivity
-        Button buttonFriends = (Button)findViewById(R.id.friends);
-        buttonFriends.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(QuickActivity.this, FriendsActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
-
-        // BUTTON TO MainMenuActivity
-        Button buttonHome = (Button)findViewById(R.id.home);
-        buttonHome.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(QuickActivity.this, MainMenuActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
-
-        // BUTTON TO LibraryActivity
-        Button Buttomlibrary = (Button) findViewById(R.id.your_stories);
-        Buttomlibrary.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(QuickActivity.this, LibraryActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-            }
-        });
-
-        // BUTTON TO CREATE ROOM
+        // BUTTON TO START GAME
         /*
         mCreateRoom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                // CALL ASYNC TASK CREATE ROOM
+                // CALL ASYNC TASK PLAY QUICK GAME
                 //AsyncTaskStories myTask = new AsyncTaskStories(this);
                 //myTask.execute(code);
-            }
-        });
-        */
-
-        // BUTTON TO JOIN ROOM
-        mJoinRoom.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                code = mCode.getText().toString();
-
-                // CALL ASYNC TASK JOIN ROOM
-                AsyncTaskJoinRoom myTask = new AsyncTaskJoinRoom(QuickActivity.this);
-                myTask.execute(code);
-            }
-        });
-
-        // BUTTON TO RANDOM ROOM
-        /*
-        mRandomGame.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // CALL ASYNC TASK JOIN RANDOM ROOM
-                //AsyncTaskStories myTask = new AsyncTaskStories(this);
-                //myTask.execute();
             }
         });
         */
@@ -194,45 +138,22 @@ public class QuickActivity extends AppCompatActivity {
         }
     }
 
-    // ASYNC TASK JOIN ROOM ADAPTER
-
+    // ASYNC TASK GET ROOM ADAPTER
+    /*
     public void setupAdapter(AsyncTaskJoinRoom.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
 
-            Intent i = new Intent(QuickActivity.this, QuickGameRoom.class);
+            Intent i = new Intent(QuickGameRoom.this, QuickGameRoom.class);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            i.putExtra("code",code);
-            startActivity(i);
-        }else {
-            if (resultado.reason == null) {
-                Toast.makeText(QuickActivity.this, "NO EXISTE LA SALA", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(QuickActivity.this, resultado.reason, Toast.LENGTH_LONG).show();
-
-            }
-        }
-    }
-
-    // ASYNC TASK JOIN RANDOM ROOM ADAPTER
-    /*
-    public void setupAdapter(AsyncTaskJoinRandomRoom.Result resultado)
-    {
-        if (resultado.result!=null && resultado.result.equals("success")){
-
-            String id = resultado.result id;
-
-            Intent i = new Intent(QuickActivity.this, QuickRoom.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            i.putExtra("id", id);
             startActivity(i);
         }
     }
     */
 
-    // ASYNC TASK CREATE ROOM ADAPTER
+    // ASYNC TASK PLAY QUICK GAME ADAPTER
     /*
-    public void setupAdapter(AsyncTaskCreateRoom.Result resultado)
+    public void setupAdapter(AsyncTaskJoinRandomRoom.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
 

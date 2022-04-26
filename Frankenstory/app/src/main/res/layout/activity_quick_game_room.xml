@@ -25,6 +25,7 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml">
                 <!--Número de participantes-->
                 <TextView
+                    android:id="@+id/number_participants"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
@@ -38,6 +39,7 @@
                     android:textSize="25sp" />
                 <!--Código de la sala-->
                 <TextView
+                    android:id="@+id/code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
@@ -62,6 +64,7 @@
                     android:layout_height="match_parent">
                     <!--Modo de juego RANDOM WORDS-->
                     <TextView
+                        android:id="@+id/random_mode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/bangers_regular"
@@ -75,14 +78,15 @@
                         android:textSize="25sp" />
                     <!--Modo de juego TWITTER-->
                     <TextView
+                        android:id="@+id/twitter_mode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/bangers_regular"
                         android:layout_marginTop="20dp"
+                        android:background="@drawable/button_blue_twitter"
+                        android:fontFamily="@font/bangers_regular"
                         android:gravity="left"
                         android:paddingLeft="10dp"
                         android:paddingBottom="5dp"
-                        android:background="@drawable/button_blue_twitter"
                         android:text="@string/mode_twitter"
                         android:textColor="@color/white"
                         android:textSize="27sp" />
@@ -95,18 +99,19 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="400dp"
                 android:gravity="center_horizontal|bottom"
-                android:paddingBottom="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/start_game"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="100dp"
+                    android:background="@drawable/button_green"
                     android:fontFamily="@font/bangers_regular"
+                    android:paddingHorizontal="100dp"
                     android:text="@string/start_game"
                     android:textColor="@color/white"
-                    android:textSize="27sp"
-                    android:background="@drawable/button_green" />
+                    android:textSize="27sp" />
             </LinearLayout>
         </RelativeLayout>
 
