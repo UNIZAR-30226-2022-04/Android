@@ -40,8 +40,8 @@ public class AsyncTaskJoinRoom extends AsyncTask<String, Void, AsyncTaskJoinRoom
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
-                     "\",\"id\":\"" + id + "}";
+            String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password +
+                     "\",\"id\":\"" + id + "\"}";
             Log.d("JoinRoom", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();

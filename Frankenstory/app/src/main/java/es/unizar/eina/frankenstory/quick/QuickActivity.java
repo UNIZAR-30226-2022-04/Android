@@ -197,8 +197,10 @@ public class QuickActivity extends AppCompatActivity {
 
     public void setupAdapter(AsyncTaskJoinRoom.Result resultado)
     {
+        System.out.println(resultado.result);
+        System.out.println(resultado.reason);
         if (resultado.result!=null && resultado.result.equals("success")){
-
+            System.out.println("DENTRO");
             Intent i = new Intent(QuickActivity.this, QuickGameRoom.class);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             i.putExtra("code",code);

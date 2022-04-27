@@ -49,8 +49,8 @@ public class AsyncTaskGetRoom extends AsyncTask<String, Void, AsyncTaskGetRoom.R
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
-                     "\",\"id\":\"" + id + "}";
+            String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password +
+                     "\",\"id\":\"" + id + "\"}";
             Log.d("GetRoom", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
@@ -68,7 +68,7 @@ public class AsyncTaskGetRoom extends AsyncTask<String, Void, AsyncTaskGetRoom.R
         }
         return new Result();
     }
-
+//636w0
     protected void onPostExecute(AsyncTaskGetRoom.Result resultado) { mActivity.setupAdapter(resultado); }
 
 }
