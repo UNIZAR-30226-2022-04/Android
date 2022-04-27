@@ -140,16 +140,15 @@ public class QuickActivity extends AppCompatActivity {
         });
 
         // BUTTON TO CREATE ROOM
-        /*
         mCreateRoom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                // CALL ASYNC TASK CREATE ROOM
-                //AsyncTaskStories myTask = new AsyncTaskStories(this);
-                //myTask.execute(code);
+                //GO TO CREATE ROOM ACTIVITY
+                Intent i = new Intent(QuickActivity.this, CreateQuickActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
             }
         });
-        */
 
         // BUTTON TO JOIN ROOM
         mJoinRoom.setOnClickListener(new View.OnClickListener() {
@@ -217,22 +216,6 @@ public class QuickActivity extends AppCompatActivity {
     // ASYNC TASK JOIN RANDOM ROOM ADAPTER
     /*
     public void setupAdapter(AsyncTaskJoinRandomRoom.Result resultado)
-    {
-        if (resultado.result!=null && resultado.result.equals("success")){
-
-            String id = resultado.result id;
-
-            Intent i = new Intent(QuickActivity.this, QuickRoom.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            i.putExtra("id", id);
-            startActivity(i);
-        }
-    }
-    */
-
-    // ASYNC TASK CREATE ROOM ADAPTER
-    /*
-    public void setupAdapter(AsyncTaskCreateRoom.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
 

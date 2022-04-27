@@ -9,14 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.util.List;
+
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
+import es.unizar.eina.frankenstory.general.AsyncTaskGetStories;
 import es.unizar.eina.frankenstory.general.FriendsActivity;
 import es.unizar.eina.frankenstory.general.LibraryActivity;
 import es.unizar.eina.frankenstory.general.MainMenuActivity;
@@ -34,8 +38,10 @@ public class QuickGameRoom extends AppCompatActivity {
     private Button mStartGame;
     private TextView mTwitter_mode;
     private TextView mRandom_mode;
+    private ListView mListParticipants;
 
     private String code;
+    private int gameState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +62,13 @@ public class QuickGameRoom extends AppCompatActivity {
 
         mParticipants = (TextView) findViewById(R.id.number_participants);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-        mCode = (EditText) findViewById(R.id.code);
+        mCode = (TextView) findViewById(R.id.code);
         mStartGame = (Button) findViewById(R.id.start_game);
         mTwitter_mode = (TextView) findViewById(R.id.twitter_mode);
         mRandom_mode = (TextView) findViewById(R.id.random_mode);
+        mListParticipants = (ListView) findViewById(R.id.participants);
 
-        mCode.setText("CODIGO DE SALA: #" + code);
+        mCode.setText("CODIGO DE SALA: " + code);
 
         updateData();
 
@@ -76,8 +83,8 @@ public class QuickGameRoom extends AppCompatActivity {
         animationDrawable.start();
 
         // CALL ASYNC TASK GET ROOM
-        //AsyncTaskStories myTask = new AsyncTaskStories(this);
-        //myTask.execute(code);
+        AsyncTaskGetRoom myTask = new AsyncTaskGetRoom(this);
+        myTask.execute(code);
 
     }
 
@@ -139,17 +146,36 @@ public class QuickGameRoom extends AppCompatActivity {
     }
 
     // ASYNC TASK GET ROOM ADAPTER
-    /*
-    public void setupAdapter(AsyncTaskJoinRoom.Result resultado)
+    public void setupAdapter(AsyncTaskGetRoom.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
 
-            Intent i = new Intent(QuickGameRoom.this, QuickGameRoom.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(i);
+            mParticipants.setText(resultado.participants.size() + "/10 Participantes");
+            gameState = resultado.hasStarted;
+
+            if (resultado.mode.equals("random")) {
+                mTwitter_mode.setVisibility(View.GONE);
+                mRandom_mode.setVisibility(View.VISIBLE);
+
+            } else if (resultado.mode.equals("twitter")){
+                mTwitter_mode.setVisibility(View.VISIBLE);
+                mRandom_mode.setVisibility(View.GONE);
+            }
+
+            fillDataParticipants(resultado.participants);
+
         }
     }
-    */
+
+   private void fillDataParticipants(List<AsyncTaskGetRoom.Participants> participants) {
+        // instantiate the custom list adapter
+        ListParticipantsAdapter adapter = new ListParticipantsAdapter(this, participants);
+
+        // get the ListView and attach the adapter
+        mListParticipants.setAdapter(adapter);
+
+    }
+
 
     // ASYNC TASK PLAY QUICK GAME ADAPTER
     /*

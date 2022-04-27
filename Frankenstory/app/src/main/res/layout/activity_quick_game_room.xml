@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                     android:background="@color/verde_top"
                     android:text="@string/code_room"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
                 <!--Lista participantes-->
                 <ListView
                     android:id="@+id/participants"
@@ -60,7 +60,7 @@
                     android:layout_height="400dp"
                     tools:listitem="@layout/row_participants"/>
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent">
                     <!--Modo de juego RANDOM WORDS-->
                     <TextView
@@ -75,7 +75,7 @@
                         android:background="@drawable/button_yellow_random"
                         android:text="@string/mode_random_words"
                         android:textColor="@color/white"
-                        android:textSize="25sp" />
+                        android:textSize="23sp" />
                     <!--Modo de juego TWITTER-->
                     <TextView
                         android:id="@+id/twitter_mode"
@@ -89,7 +89,7 @@
                         android:paddingBottom="5dp"
                         android:text="@string/mode_twitter"
                         android:textColor="@color/white"
-                        android:textSize="27sp" />
+                        android:textSize="23sp" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -108,11 +108,11 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_green"
                     android:fontFamily="@font/bangers_regular"
-                    android:paddingHorizontal="100dp"
+                    android:paddingHorizontal="75dp"
                     android:text="@string/start_game"
                     android:textColor="@color/white"
                     android:textSize="27sp" />
             </LinearLayout>
         </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

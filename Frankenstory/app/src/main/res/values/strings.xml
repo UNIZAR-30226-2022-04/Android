@@ -15,7 +15,7 @@
     <string name="create_room">CREAR SALA</string>
     <string name="join_room">UNIRSE A SALA</string>
     <string name="random_game">PARTIDA ALEATORIA</string>
-    <string name="code">Código</string>
+    <string name="code">Código #XXXX</string>
     <string name="write_time">Tiempo de escritura</string>
     <string name="game_type">Tipo de partida</string>
     <string name="gamemode">Modo de juego</string>

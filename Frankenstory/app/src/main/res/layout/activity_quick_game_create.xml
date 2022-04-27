@@ -48,7 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="start"
-                        android:layout_marginLeft="-40dp" />
+                        android:layout_marginLeft="-20dp" />
                     <!--Botón mas-->
                     <Button
                         android:id="@+id/plus_time"
@@ -100,8 +100,10 @@
                         android:text="@string/private_game"
                         android:fontFamily="@font/arial_bold"
                         android:textColor="@color/white"
+                        android:layout_gravity="center"
                         android:textSize="25sp" />
                     <Switch
+                        android:id="@+id/private_game"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"/>
@@ -129,7 +131,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
                 <Button
-                    android:id="@+id/story_game_main"
+                    android:id="@+id/random_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
@@ -145,7 +147,7 @@
                     tools:ignore="RtlSymmetry">
                 </Button>
                 <Button
-                    android:id="@+id/quick_game_main"
+                    android:id="@+id/twitter_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
@@ -170,7 +172,7 @@
                 android:paddingBottom="20dp"
                 android:orientation="horizontal">
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/create_room"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="100dp"
