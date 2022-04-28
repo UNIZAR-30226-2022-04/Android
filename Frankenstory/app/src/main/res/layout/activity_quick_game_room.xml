@@ -6,113 +6,116 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     android:id="@+id/layoutmain">
-        <RelativeLayout
-            android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <!---TOP-->
+        <include
+            layout="@layout/top2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
-            <!---TOP-->
-            <include layout="@layout/top2"
+            android:layout_marginTop="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical"
+            tools:ignore="UseSwitchCompatOrMaterialXml">
+            <!--Número de participantes-->
+            <TextView
+                android:id="@+id/number_participants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"/>
-
-            <LinearLayout
+                android:fontFamily="@font/arial_bold"
+                android:gravity="center"
+                android:shadowColor="@color/verde_letras"
+                android:shadowDx="6"
+                android:shadowDy="6"
+                android:shadowRadius="1"
+                android:text="@string/participants"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+            <!--Código de la sala-->
+            <TextView
+                android:id="@+id/code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginTop="80dp"
-                android:orientation="vertical"
-                tools:ignore="UseSwitchCompatOrMaterialXml">
-                <!--Número de participantes-->
-                <TextView
-                    android:id="@+id/number_participants"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:gravity="center"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
-                    android:shadowRadius="1"
-                    android:text="@string/participants"
-                    android:textColor="@color/white"
-                    android:textSize="25sp" />
-                <!--Código de la sala-->
-                <TextView
-                    android:id="@+id/code"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:gravity="center"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
-                    android:shadowRadius="1"
-                    android:background="@color/verde_top"
-                    android:text="@string/code_room"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-                <!--Lista participantes-->
-                <ListView
-                    android:id="@+id/participants"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_height="400dp"
-                    tools:listitem="@layout/row_participants"/>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-                    <!--Modo de juego RANDOM WORDS-->
-                    <TextView
-                        android:id="@+id/random_mode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/bangers_regular"
-                        android:layout_marginTop="20dp"
-                        android:gravity="left"
-                        android:paddingLeft="10dp"
-                        android:paddingBottom="5dp"
-                        android:background="@drawable/button_yellow_random"
-                        android:text="@string/mode_random_words"
-                        android:textColor="@color/white"
-                        android:textSize="23sp" />
-                    <!--Modo de juego TWITTER-->
-                    <TextView
-                        android:id="@+id/twitter_mode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/button_blue_twitter"
-                        android:fontFamily="@font/bangers_regular"
-                        android:gravity="left"
-                        android:paddingLeft="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="@string/mode_twitter"
-                        android:textColor="@color/white"
-                        android:textSize="23sp" />
-                </RelativeLayout>
-
-            </LinearLayout>
-            <!--Crear sala-->
-            <LinearLayout
+                android:background="@color/verde_top"
+                android:fontFamily="@font/arial_bold"
+                android:gravity="center"
+                android:shadowColor="@color/verde_letras"
+                android:shadowDx="6"
+                android:shadowDy="6"
+                android:shadowRadius="1"
+                android:text="@string/code_room"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+            <!--Lista participantes-->
+            <ListView
+                android:id="@+id/participants"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="400dp"
-                android:gravity="center_horizontal|bottom"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp">
+                android:layout_height="400dp"
+                android:layout_marginTop="20dp"
+                tools:listitem="@layout/row_participants" />
 
-                <Button
-                    android:id="@+id/start_game"
-                    android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <!--Modo de juego TWITTER-->
+                <TextView
+                    android:id="@+id/twitter_mode"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_green"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/button_blue_twitter"
                     android:fontFamily="@font/bangers_regular"
-                    android:paddingHorizontal="75dp"
-                    android:text="@string/start_game"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/mode_twitter"
                     android:textColor="@color/white"
-                    android:textSize="27sp" />
-            </LinearLayout>
-        </RelativeLayout>
+                    android:textSize="21sp" />
+                <!--Modo de juego RANDOM WORDS-->
+                <TextView
+                    android:id="@+id/random_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/button_yellow_random"
+                    android:fontFamily="@font/bangers_regular"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/mode_random_words"
+                    android:textColor="@color/white"
+                    android:textSize="21sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+        <!--Crear sala-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="400dp"
+            android:gravity="center_horizontal|bottom"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp">
+
+            <Button
+                android:id="@+id/start_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_green"
+                android:fontFamily="@font/bangers_regular"
+                android:paddingHorizontal="75dp"
+                android:text="@string/start_game"
+                android:textColor="@color/white"
+                android:textSize="27sp" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

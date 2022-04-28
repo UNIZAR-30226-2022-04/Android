@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="50dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="60dp"
                 android:orientation="vertical"
                 tools:ignore="UseSwitchCompatOrMaterialXml">
                 <!--Tiempo de escritura-->
@@ -29,6 +29,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
+                    android:gravity="center"
                     android:shadowDx="6"
                     android:shadowDy="6"
                     android:shadowRadius="1"
@@ -39,7 +40,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
                     <!--Reloj-->
@@ -47,7 +48,7 @@
                         layout="@layout/stopwatch"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="start"
+                        android:gravity="center"
                         android:layout_marginLeft="-20dp" />
                     <!--Botón mas-->
                     <Button
@@ -79,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:gravity="center"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
                     android:shadowDx="6"
@@ -91,7 +93,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="30dp"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
                     <TextView
@@ -113,6 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:gravity="center"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
                     android:shadowDx="6"

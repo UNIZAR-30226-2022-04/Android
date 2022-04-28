@@ -163,15 +163,14 @@ public class QuickActivity extends AppCompatActivity {
         });
 
         // BUTTON TO RANDOM ROOM
-        /*
         mRandomGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 // CALL ASYNC TASK JOIN RANDOM ROOM
-                //AsyncTaskStories myTask = new AsyncTaskStories(this);
-                //myTask.execute();
+                AsyncTaskJoinRandomRoom myTask = new AsyncTaskJoinRandomRoom(QuickActivity.this);
+                myTask.execute();
             }
         });
-        */
 
     }
 
@@ -200,7 +199,7 @@ public class QuickActivity extends AppCompatActivity {
         System.out.println(resultado.result);
         System.out.println(resultado.reason);
         if (resultado.result!=null && resultado.result.equals("success")){
-            System.out.println("DENTRO");
+
             Intent i = new Intent(QuickActivity.this, QuickGameRoom.class);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             i.putExtra("code",code);
@@ -208,28 +207,30 @@ public class QuickActivity extends AppCompatActivity {
         }else {
             if (resultado.reason == null) {
                 Toast.makeText(QuickActivity.this, "NO EXISTE LA SALA", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(QuickActivity.this, resultado.reason, Toast.LENGTH_LONG).show();
-
             }
         }
     }
 
     // ASYNC TASK JOIN RANDOM ROOM ADAPTER
-    /*
     public void setupAdapter(AsyncTaskJoinRandomRoom.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
 
-            String id = resultado.result id;
+            String id = resultado.id;
 
-            Intent i = new Intent(QuickActivity.this, QuickRoom.class);
+            Intent i = new Intent(QuickActivity.this, QuickGameRoom.class);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            i.putExtra("id", id);
+            i.putExtra("code", id);
             startActivity(i);
+        } else {
+            if (resultado.reason.equals("no_rooms_available")){
+                Toast.makeText(QuickActivity.this, "NO HAY SALAS DISPONIBLES", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(QuickActivity.this, "ERROR AL UNIRSE A LA SALA", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
-    */
 
     // SET ICON USER
     @SuppressLint("ResourceType")
