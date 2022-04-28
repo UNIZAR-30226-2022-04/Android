@@ -196,8 +196,6 @@ public class QuickActivity extends AppCompatActivity {
 
     public void setupAdapter(AsyncTaskJoinRoom.Result resultado)
     {
-        System.out.println(resultado.result);
-        System.out.println(resultado.reason);
         if (resultado.result!=null && resultado.result.equals("success")){
 
             Intent i = new Intent(QuickActivity.this, QuickGameRoom.class);
@@ -214,6 +212,9 @@ public class QuickActivity extends AppCompatActivity {
     // ASYNC TASK JOIN RANDOM ROOM ADAPTER
     public void setupAdapter(AsyncTaskJoinRandomRoom.Result resultado)
     {
+                System.out.println(resultado.result);
+        System.out.println(resultado.reason);
+        System.out.println(resultado.id);
         if (resultado.result!=null && resultado.result.equals("success")){
 
             String id = resultado.id;
