@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 import es.unizar.eina.frankenstory.story.StoryFirstWriteActivity;
@@ -101,7 +103,7 @@ public class CreateQuickActivity extends AppCompatActivity{
         });
 
         //BUTTON SET MODE RANDOM
-        Button random = (Button)findViewById(R.id.random_mode);
+        LottieAnimationView random = (LottieAnimationView)findViewById(R.id.random_mode);
         random.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mode = "random";
@@ -109,7 +111,7 @@ public class CreateQuickActivity extends AppCompatActivity{
         });
 
         //BUTTON SET MODE TWITTER
-        Button twitter = (Button)findViewById(R.id.twitter_mode);
+        LottieAnimationView twitter = (LottieAnimationView)findViewById(R.id.twitter_mode);
         twitter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mode = "twitter";

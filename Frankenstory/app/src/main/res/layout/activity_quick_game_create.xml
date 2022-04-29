@@ -120,7 +120,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="100dp"
                     android:fontFamily="@font/arial_bold"
                     android:gravity="left"
                     android:shadowColor="@color/verde_letras"
@@ -138,39 +138,28 @@
                 android:layout_marginTop="400dp"
                 android:layout_marginBottom="130dp"
                 android:gravity="center"
-                android:orientation="horizontal">
-                <Button
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/random_mode"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/random_words_button"
-                    android:text="@string/random_words"
-                    android:textSize="25sp"
-                    android:fontFamily="@font/bangers_regular"
-                    android:textColor="@color/white"
-                    android:gravity="bottom"
-                    android:paddingBottom="40dp"
-                    android:paddingStart="18dp"
-                    android:singleLine="true"
-                    tools:ignore="RtlSymmetry">
-                </Button>
-                <Button
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    app:lottie_rawRes="@raw/boton_palabras_obligatorias"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"
+                    android:layout_gravity="fill"/>
+                <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/twitter_mode"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/twitter_trend_button"
-                    android:text="@string/twitter_trend"
-                    android:textSize="24sp"
-                    android:fontFamily="@font/bangers_regular"
-                    android:textColor="@color/white"
-                    android:gravity="bottom"
-                    android:paddingBottom="40dp"
-                    android:paddingStart="12dp"
-                    android:singleLine="true"
-                    tools:ignore="RtlSymmetry">
-                </Button>
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    app:lottie_rawRes="@raw/boton_tendencias_twitter"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"
+                    android:layout_gravity="fill"/>
             </LinearLayout>
             <!--Crear sala-->
             <LinearLayout
