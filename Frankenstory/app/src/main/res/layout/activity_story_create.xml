@@ -177,24 +177,31 @@
                     android:textColor="@color/white"
                     android:textSize="20sp" />
                 <!--Selector de privacidad-->
+                <!--Selector de privacidad-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/private_game"
-                        android:fontFamily="@font/arial_bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <Button
+                        android:id="@+id/buttonPublic"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:textColor="@color/white"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="20sp" />
-                    <Switch
-                        android:id="@+id/private_game"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"/>
+                        android:textStyle="bold"
+                        android:text="PÚBLICA"/>
+                    <Button
+                        android:id="@+id/buttonPrivate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="PRIVADA"/>
+
                 </LinearLayout>
             </LinearLayout>
             <!-- BUTTON CREAR RELATO -->

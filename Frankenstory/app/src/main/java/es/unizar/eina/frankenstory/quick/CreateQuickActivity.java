@@ -33,6 +33,8 @@ public class CreateQuickActivity extends AppCompatActivity{
     private ImageView mIconUser;
     private TextView mTime;
     public static Handler handlerTofinish;
+    private Button buttonPublic;
+    private Button butttonPrivate;
 
     int time;
     boolean isPrivate_game;
@@ -53,7 +55,8 @@ public class CreateQuickActivity extends AppCompatActivity{
         mTitle = (TextView) findViewById(R.id.story_name);
         mList = (ListView) findViewById(R.id.statistics);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-
+        buttonPublic = (Button)findViewById(R.id.buttonPublic);
+        butttonPrivate = (Button)findViewById(R.id.buttonPrivate);
         mTime = (TextView) findViewById(R.id.time);
 
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
@@ -75,6 +78,8 @@ public class CreateQuickActivity extends AppCompatActivity{
         time = 30;
         mode = "random";
         isPrivate_game = false;
+        buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+        butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
         setContenido();
 
         //BUTTON PLUS TIME
@@ -112,10 +117,21 @@ public class CreateQuickActivity extends AppCompatActivity{
         });
 
         //SWITCH PRIVATE GAME
-        Switch private_game = (Switch) findViewById(R.id.private_game);
-        private_game.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                isPrivate_game = !isPrivate_game;
+        buttonPublic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPrivate_game = false;
+                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+            }
+        });
+
+        butttonPrivate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPrivate_game = true;
+                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_letras));
             }
         });
 
@@ -169,7 +185,7 @@ public class CreateQuickActivity extends AppCompatActivity{
     }
 
     public void setContenido() {
-        mTime.setText(String.valueOf(time));
+        mTime.setText(String.valueOf(time)+" seg");
     }
 
     // Para ocultar Navigation bar y lo de arriba.

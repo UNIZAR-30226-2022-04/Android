@@ -37,6 +37,8 @@ public class CreateStoryActivity extends AppCompatActivity{
     private TextView writings;
     private TextView length;
     public static Handler handlerTofinish;
+    private Button buttonPublic;
+    private Button butttonPrivate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class CreateStoryActivity extends AppCompatActivity{
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         writings = (TextView) findViewById(R.id.writings);
         length = (TextView) findViewById(R.id.length);
+        buttonPublic = (Button)findViewById(R.id.buttonPublic);
+        butttonPrivate = (Button)findViewById(R.id.buttonPrivate);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
@@ -74,6 +78,8 @@ public class CreateStoryActivity extends AppCompatActivity{
         number_writings = 10;
         number_chars = 120;
         isPrivate_game = false;
+        buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+        butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
         setContenido();
 
         //BUTTON PLUS WRITINGS
@@ -113,10 +119,21 @@ public class CreateStoryActivity extends AppCompatActivity{
         });
 
         //SWITCH PRIVATE GAME
-        Switch private_game = (Switch) findViewById(R.id.private_game);
-        private_game.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                isPrivate_game = !isPrivate_game;
+        buttonPublic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPrivate_game = false;
+                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+            }
+        });
+
+        butttonPrivate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPrivate_game = true;
+                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_letras));
             }
         });
 

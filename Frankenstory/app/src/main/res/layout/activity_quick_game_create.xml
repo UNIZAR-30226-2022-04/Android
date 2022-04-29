@@ -19,8 +19,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="80dp"
                 android:orientation="vertical"
                 tools:ignore="UseSwitchCompatOrMaterialXml">
                 <!--Tiempo de escritura-->
@@ -29,18 +29,18 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:gravity="center"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
+                    android:gravity="left"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
                     android:shadowRadius="1"
                     android:text="@string/write_time"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
                     <!--Reloj-->
@@ -53,8 +53,8 @@
                     <!--Botón mas-->
                     <Button
                         android:id="@+id/plus_time"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginStart="-120dp"
                         android:background="@drawable/button_plus_minus"
                         android:gravity="center"
@@ -62,68 +62,74 @@
                         android:text="@string/plus"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="30sp" />
+                        android:textSize="25sp" />
                     <!--Botón menos-->
                     <Button
                         android:id="@+id/minus_time"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/button_plus_minus"
+                        android:paddingHorizontal="0dp"
                         android:text="@string/minus"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="30sp" />
+                        android:textSize="25sp" />
                 </LinearLayout>
                 <!--Tipo de partida-->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="left"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
                     android:shadowRadius="1"
                     android:text="@string/game_type"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
                 <!--Selector de privacidad-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/private_game"
-                        android:fontFamily="@font/arial_bold"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <Button
+                        android:id="@+id/buttonPublic"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:textColor="@color/white"
-                        android:layout_gravity="center"
-                        android:textSize="25sp" />
-                    <Switch
-                        android:id="@+id/private_game"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"/>
+                        android:textStyle="bold"
+                        android:text="PÚBLICA"/>
+                    <Button
+                        android:id="@+id/buttonPrivate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="PRIVADA"/>
+
                 </LinearLayout>
                 <!--Modo de juego-->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/arial_bold"
+                    android:gravity="left"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
                     android:shadowRadius="1"
                     android:text="@string/gamemode"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
             <!---BUTTONS MODE-->
             <LinearLayout
@@ -170,20 +176,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="400dp"
-                android:gravity="center_horizontal|bottom"
-                android:paddingBottom="20dp"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="bottom"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/create_room"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="100dp"
+                    android:background="@drawable/button_green"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/create_room"
                     android:textColor="@color/white"
-                    android:textSize="27sp"
-                    android:background="@drawable/button_green" />
+                    android:textSize="27sp" />
             </LinearLayout>
         </RelativeLayout>
 

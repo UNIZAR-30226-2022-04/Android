@@ -12,6 +12,7 @@
     <color name="degradado_arriba">#31ECCF</color>
     <color name="degradado_abajo">#AAEF5E</color>
     <color name="verde_letras">#0ca789</color>
+    <color name="verde_publico_seleccionado">#09cc8d</color>
     <color name="verde_top">#32d298</color>
     <color name="verde_parrafo">#3fb78f</color>
     <color name="verde_parrafo_seleccionado">#8fd14f</color>
