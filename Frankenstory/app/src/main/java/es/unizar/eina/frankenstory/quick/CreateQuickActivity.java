@@ -37,6 +37,8 @@ public class CreateQuickActivity extends AppCompatActivity{
     public static Handler handlerTofinish;
     private Button buttonPublic;
     private Button butttonPrivate;
+    private LottieAnimationView random;
+    private LottieAnimationView twitter;
 
     int time;
     boolean isPrivate_game;
@@ -60,7 +62,8 @@ public class CreateQuickActivity extends AppCompatActivity{
         buttonPublic = (Button)findViewById(R.id.buttonPublic);
         butttonPrivate = (Button)findViewById(R.id.buttonPrivate);
         mTime = (TextView) findViewById(R.id.time);
-
+        random = (LottieAnimationView)findViewById(R.id.random_mode);
+        twitter = (LottieAnimationView)findViewById(R.id.twitter_mode);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
@@ -79,9 +82,10 @@ public class CreateQuickActivity extends AppCompatActivity{
         // INITIALIZE VARIABLES
         time = 30;
         mode = "random";
+        twitter.pauseAnimation();
         isPrivate_game = false;
-        buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
-        butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
         setContenido();
 
         //BUTTON PLUS TIME
@@ -103,18 +107,20 @@ public class CreateQuickActivity extends AppCompatActivity{
         });
 
         //BUTTON SET MODE RANDOM
-        LottieAnimationView random = (LottieAnimationView)findViewById(R.id.random_mode);
         random.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mode = "random";
+                random.resumeAnimation();
+                twitter.pauseAnimation();
             }
         });
 
         //BUTTON SET MODE TWITTER
-        LottieAnimationView twitter = (LottieAnimationView)findViewById(R.id.twitter_mode);
         twitter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mode = "twitter";
+                twitter.resumeAnimation();
+                random.pauseAnimation();
             }
         });
 
@@ -123,8 +129,8 @@ public class CreateQuickActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 isPrivate_game = false;
-                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
-                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
             }
         });
 
@@ -132,8 +138,8 @@ public class CreateQuickActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 isPrivate_game = true;
-                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
-                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
             }
         });
 

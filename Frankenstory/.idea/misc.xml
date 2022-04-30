@@ -108,6 +108,7 @@
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/button2.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/button_crear_relato.xml" value="0.275" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/button_green.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/button_green_quick.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/button_grey.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/button_ingame.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/button_plus_minus.xml" value="0.33177083333333335" />
@@ -123,6 +124,7 @@
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/perfil_icon.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/random_words_button.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/rounded_edittext.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/rounded_edittext_line.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/splash.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/story_button.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/drawable/twitter_trend_button.xml" value="0.3769230769230769" />
@@ -139,7 +141,7 @@
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/layout/activity_my_stories.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/layout/activity_quick_game.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/layout/activity_quick_game.xml" value="0.25" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/layout/activity_quick_game_create.xml" value="0.33" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/layout/activity_quick_game_room.xml" value="0.33" />
         <entry key="..\:/Users/jaime/Documents/GitHub/Android/Frankenstory/app/src/main/res/layout/activity_quick_game_twitter_not_first.xml" value="0.20520833333333333" />

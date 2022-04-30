@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#ffffff00</color>
     <!---Creados-->
+    <color name="black_transparent">#33000000</color>
     <color name="degradado_arriba">#31ECCF</color>
     <color name="degradado_abajo">#AAEF5E</color>
     <color name="verde_letras">#0ca789</color>

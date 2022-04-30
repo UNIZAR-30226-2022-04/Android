@@ -6,7 +6,7 @@
             <corners android:radius="10dp" />
         </shape>
     </item>
-    <item android:drawable="@drawable/random_words"
+    <item android:drawable="@drawable/palabras_aleatorias"
         android:height="40dp"
         android:width="40dp"
         android:gravity="right"

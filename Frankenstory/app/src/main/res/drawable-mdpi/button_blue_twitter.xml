@@ -6,7 +6,7 @@
             <corners android:radius="10dp" />
         </shape>
     </item>
-    <item android:drawable="@drawable/twitter_trend"
+    <item android:drawable="@drawable/tendencias_twitter"
         android:height="50dp"
         android:width="50dp"
         android:gravity="right"/>

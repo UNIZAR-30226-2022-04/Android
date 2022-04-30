@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="120dp"
                 android:orientation="vertical"
                 tools:ignore="UseSwitchCompatOrMaterialXml">
                 <!--Tiempo de escritura-->
@@ -80,7 +80,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:gravity="left"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
@@ -120,7 +120,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/arial_bold"
                     android:gravity="left"
                     android:shadowColor="@color/verde_letras"
@@ -166,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="40dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="40dp"
                 android:gravity="bottom"
                 android:orientation="horizontal">
 

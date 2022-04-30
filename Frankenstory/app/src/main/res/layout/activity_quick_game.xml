@@ -19,15 +19,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="100dp"
-                android:layout_marginHorizontal="50dp">
+                android:layout_marginTop="70dp"
+                android:layout_marginHorizontal="40dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arial_bold"
                     android:shadowColor="@color/verde_letras"
-                    android:shadowDx="8"
-                    android:shadowDy="8"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
                     android:shadowRadius="1"
                     android:text="@string/quick_game"
                     android:textColor="@color/white"
@@ -36,21 +36,25 @@
                 <Button
                     android:id="@+id/quick_game"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/create_room"
-                    android:textAlignment="center"
+                    android:gravity="left|bottom"
                     android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:textSize="35sp"
-                    android:background="@drawable/button_green" />
+                    android:layout_marginTop="20dp"
+                    android:textSize="32sp"
+                    android:shadowColor="#329272"
+                    android:shadowDy="5"
+                    android:shadowDx="4"
+                    android:shadowRadius="1"
+                    android:background="@drawable/button_green_quick" />
                 <!--Codigo -->
                 <EditText
                     android:id="@+id/code"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="70dp"
-                    android:background="@drawable/rounded_edittext"
+                    android:background="@drawable/rounded_edittext_line"
                     android:fontFamily="@font/arial_regular"
                     android:hint="@string/code"
                     android:inputType="text"
@@ -61,26 +65,34 @@
                 <Button
                     android:id="@+id/join_room"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/join_room"
                     android:textColor="@color/white"
                     android:layout_marginTop="10dp"
-                    android:textAlignment="center"
-                    android:textSize="35sp"
-                    android:background="@drawable/button_green" />
+                    android:gravity="left|bottom"
+                    android:textSize="32sp"
+                    android:shadowColor="#329272"
+                    android:shadowDy="5"
+                    android:shadowDx="4"
+                    android:shadowRadius="1"
+                    android:background="@drawable/button_green_quick" />
                 <!---Boton Partida aleatoria-->
                 <Button
                     android:id="@+id/random_game"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:fontFamily="@font/bangers_regular"
                     android:text="@string/random_game"
                     android:textColor="@color/white"
                     android:layout_marginTop="75dp"
-                    android:textAlignment="center"
-                    android:textSize="35sp"
-                    android:background="@drawable/button_green" />
+                    android:gravity="left|bottom"
+                    android:textSize="32sp"
+                    android:shadowColor="#329272"
+                    android:shadowDy="5"
+                    android:shadowDx="4"
+                    android:shadowRadius="1"
+                    android:background="@drawable/button_green_quick" />
             </LinearLayout>
             <!---Parte inferior-->
             <include

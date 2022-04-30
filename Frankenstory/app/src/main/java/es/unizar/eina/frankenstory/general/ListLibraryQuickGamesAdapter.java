@@ -59,9 +59,9 @@ public class ListLibraryQuickGamesAdapter extends BaseAdapter{
         textViewItemName.setText(currentItem.title);
         textViewDate.setText(currentItem.date);
         if (currentItem.type.equals("quick_twitter")) {
-            imageMode.setImageResource(R.drawable.twitter_trend);
+            imageMode.setImageResource(R.drawable.tendencias_twitter);
         } else if (currentItem.type.equals("quick_random")) {
-            imageMode.setImageResource(R.drawable.random_words);
+            imageMode.setImageResource(R.drawable.palabras_aleatorias);
         }
 
         // ON CLICK ON READ QUICK GAME
