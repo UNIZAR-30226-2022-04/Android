@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
@@ -86,12 +88,27 @@ public class QuickGameRoom extends AppCompatActivity {
         AsyncTaskGetRoom myTask = new AsyncTaskGetRoom(this);
         myTask.execute(code);
 
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                updateParticipants();
+            }
+        }, 0, 5000);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         updateData();
+    }
+
+    // UPDATE PARTICIPANTS
+    public void updateParticipants() {
+        System.out.println("jkdfkjlsdhfkldsjhfdjsklhskljhsd");
+        // CALL ASYNC TASK GET ROOM
+        AsyncTaskGetRoom myTask = new AsyncTaskGetRoom(this);
+        myTask.execute(code);
     }
 
     // UPDATE DATA
