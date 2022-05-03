@@ -32,9 +32,19 @@
     <string name="add_friends">Añadir</string>
     <string name="refuse_friend">Rechazar</string>
     <string name="story">Modo relato</string>
+    <!-- https://www.codetable.net/unicodecharacters?page=33 -->
     <string name="my_games">Mis partidas</string>
+    <string name="my_games_opened">Mis partidas ▾</string>
+    <string name="my_games_closed">Mis partidas ▸</string>
     <string name="friend_games">Partidas de amig@s</string>
+    <string name="friend_games_opened">Partidas de amig@s ▾</string>
+    <string name="friend_games_closed">Partidas de amig@s ▸</string>
     <string name="public_games">Partidas públicas</string>
+    <string name="public_games_opened">Partidas públicas ▾</string>
+    <string name="public_games_closed">Partidas públicas ▸</string>
+    <string name="no_voted">Partidas en votación</string>
+    <string name="no_voted_opened">Partidas en votación ▾</string>
+    <string name="no_voted_closed">Partidas en votación ▸</string>
     <string name="create_sotry">Crear relato</string>
     <string name="my_stories">Biblioteca</string>
     <string name="story_content">Contenido historia</string>
@@ -65,7 +75,6 @@
     <string name="previous_text">Párrafo anterior</string>
     <string name="words_to_write">PALABRAS A INTRODUCIR</string>
     <string name="choose"> ELIGE EL PÁRRAFO QUE MÁS TE GUSTE  </string>
-    <string name="no_voted">Partidas en votación</string>
     <string name="spaces">0/10</string>
     <string name="voted">Esperando…</string>
 </resources>

@@ -7,15 +7,18 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Random;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
@@ -38,7 +41,7 @@ public class StoryActivity extends AppCompatActivity {
     private ListView mVotingGames;
     private ImageButton mJoinGame;
     private ImageButton mVoteGame;
-    private Button mButtonCreateStory;
+    private ImageView mButtonCreateStory;
     private TextView mNoMyGames;
     private TextView mNoFriendsGames;
     private TextView mNoPublicGames;
@@ -66,7 +69,7 @@ public class StoryActivity extends AppCompatActivity {
         mVotingGames = (ListView) findViewById(R.id.VoteGames);
         mJoinGame = (ImageButton) findViewById(R.id.joinGame);
         mVoteGame = (ImageButton) findViewById(R.id.vote);
-        mButtonCreateStory = (Button)findViewById(R.id.create_story);
+        mButtonCreateStory = (ImageView)findViewById(R.id.create_story);
         mNoMyGames = (TextView) findViewById(R.id.noMyGames);
         mNoFriendsGames = (TextView) findViewById(R.id.noFriendsGames);
         mNoPublicGames = (TextView) findViewById(R.id.noPublicGames);
@@ -82,16 +85,78 @@ public class StoryActivity extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
-
+        /*
         // BUTTON ANIMATION
         AnimationDrawable animationButton = (AnimationDrawable) mButtonCreateStory.getBackground();
         animationButton.setEnterFadeDuration(2000);
         animationButton.setExitFadeDuration(2000);
-        animationButton.start();
+        animationButton.start();*/
+        mButtonCreateStory.setClipToOutline(true);
 
         // CALL ASYNC TASK
         AsyncTaskStories myTask = new AsyncTaskStories(this);
         myTask.execute();
+
+        // OPEN LISTS
+        TextView mispartidas = (TextView) findViewById(R.id.mispartidas);
+        mispartidas.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                LinearLayout content = (LinearLayout) findViewById(R.id.mispartidasContent);
+                if (content.getVisibility()==View.VISIBLE) {
+                    content.setVisibility(View.GONE);
+                    mispartidas.setText(getText(R.string.my_games_closed));
+                }
+                else {
+                    content.setVisibility(View.VISIBLE);
+                    mispartidas.setText(getText(R.string.my_games_opened));
+                }
+            }
+        });
+
+        TextView partidasamigos = (TextView) findViewById(R.id.partidasamigos);
+        partidasamigos.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                LinearLayout content = (LinearLayout) findViewById(R.id.partidasamigosContent);
+                if (content.getVisibility()==View.VISIBLE) {
+                    content.setVisibility(View.GONE);
+                    partidasamigos.setText(getText(R.string.friend_games_closed));
+                }
+                else {
+                    content.setVisibility(View.VISIBLE);
+                    partidasamigos.setText(getText(R.string.friend_games_opened));
+                }
+            }
+        });
+
+        TextView partidaspublicas = (TextView) findViewById(R.id.partidaspublicas);
+        partidaspublicas.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                LinearLayout content = (LinearLayout) findViewById(R.id.partidaspublicasContent);
+                if (content.getVisibility()==View.VISIBLE) {
+                    content.setVisibility(View.GONE);
+                    partidaspublicas.setText(getText(R.string.public_games_closed));
+                }
+                else {
+                    content.setVisibility(View.VISIBLE);
+                    partidaspublicas.setText(getText(R.string.public_games_opened));
+                }
+            }
+        });
+
+        TextView partidasvotar = (TextView) findViewById(R.id.partidasvotar);
+        partidasvotar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                LinearLayout content = (LinearLayout) findViewById(R.id.partidasvotarContent);
+                if (content.getVisibility()==View.VISIBLE) {
+                    content.setVisibility(View.GONE);
+                    partidasvotar.setText(getText(R.string.no_voted_closed));
+                }
+                else {
+                    content.setVisibility(View.VISIBLE);
+                    partidasvotar.setText(getText(R.string.no_voted_opened));
+                }
+            }
+        });
     }
 
     @Override
@@ -101,6 +166,24 @@ public class StoryActivity extends AppCompatActivity {
         AsyncTaskStories myTask = new AsyncTaskStories(this);
         myTask.execute();
         updateData();
+
+        // IMAGEN ALEATORIA
+        int min = 0;
+        int max = 3;
+        int random = new Random().nextInt((max - min) + 1) + min;
+        switch (random){
+            case 1:
+                mButtonCreateStory.setImageResource(R.drawable.caperucita_roja);
+                break;
+            case 2:
+                mButtonCreateStory.setImageResource(R.drawable.los_tres_cerditos);
+                break;
+            case 3:
+                mButtonCreateStory.setImageResource(R.drawable.alicia_en_el_pais_maravillas);
+                break;
+            default:
+                mButtonCreateStory.setImageResource(R.drawable.caperucita_roja);
+        }
     }
 
     // UPDATE DATA

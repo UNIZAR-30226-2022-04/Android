@@ -30,7 +30,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 6000);
+        }, 6000); // EL TIEMPO BUENO SON 6000
 
         // SOUND
         final MediaPlayer sound = MediaPlayer.create(this, R.raw.splash_sound);

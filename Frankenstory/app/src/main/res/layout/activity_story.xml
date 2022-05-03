@@ -29,19 +29,33 @@
                     android:text="@string/story"
                     android:textColor="@color/white"
                     android:textSize="35sp" />
-                <!---Boton crear relato-->
-                <Button
-                    android:id="@+id/create_story"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/bangers_regular"
-                    android:text="@string/create_sotry"
-                    android:textColor="@color/white"
-                    android:textSize="27sp"
-                    android:background="@drawable/button_crear_relato" />
+                    android:layout_height="80dp">
+                    <!---Boton crear relato-->
+                    <ImageView
+                        android:id="@+id/create_story"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/button_create_tale"
+                        android:src="@drawable/los_tres_cerditos"
+                        android:scaleType="centerCrop"
+                        android:clipToOutline="true"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/bangers_regular"
+                        android:text="@string/create_sotry"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:gravity="center">
+                    </TextView>
+                </RelativeLayout>
+
                 <!--Texto mis partidas-->
                 <TextView
+                    android:id="@+id/mispartidas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -50,10 +64,16 @@
                     android:shadowDx="4"
                     android:shadowDy="4"
                     android:shadowRadius="1"
-                    android:text="@string/my_games"
+                    android:text="@string/my_games_opened"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
-                <TextView
+
+                <LinearLayout
+                    android:id="@+id/mispartidasContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
                         android:id="@+id/noMyGames"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -63,15 +83,17 @@
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="5dp"/>
-                <!--Lista mis partidas-->
-                <ListView
-                    android:id="@+id/my_stories"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    tools:listitem="@layout/row_story_games"
-                    android:fadeScrollbars="false"/>
+                    <!--Lista mis partidas-->
+                    <ListView
+                        android:id="@+id/my_stories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/row_story_games"
+                        android:fadeScrollbars="false"/>
+                </LinearLayout>
                 <!--Texto partidas de amigos-->
                 <TextView
+                    android:id="@+id/partidasamigos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -80,9 +102,14 @@
                     android:shadowDx="4"
                     android:shadowDy="4"
                     android:shadowRadius="1"
-                    android:text="@string/friend_games"
+                    android:text="@string/friend_games_opened"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
+                <LinearLayout
+                    android:id="@+id/partidasamigosContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                 <TextView
                         android:id="@+id/noFriendsGames"
                         android:layout_width="wrap_content"
@@ -97,11 +124,13 @@
                 <ListView
                     android:id="@+id/friends_games"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     tools:listitem="@layout/row_story_games"
                     android:fadeScrollbars="false"/>
+                </LinearLayout>
                 <!--Texto partidas públicas-->
                 <TextView
+                    android:id="@+id/partidaspublicas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -110,10 +139,14 @@
                     android:shadowDx="4"
                     android:shadowDy="4"
                     android:shadowRadius="1"
-                    android:text="@string/public_games"
+                    android:text="@string/public_games_opened"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
-
+                <LinearLayout
+                    android:id="@+id/partidaspublicasContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                 <!--Lista partidas públicas-->
                 <TextView
                     android:id="@+id/noPublicGames"
@@ -125,15 +158,16 @@
                     android:fontFamily="@font/arial_bold"
                     android:text="Parece que no hay relatos públicos"
                     android:textSize="14sp" />
-
                 <ListView
                     android:id="@+id/public_games"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     tools:listitem="@layout/row_story_games"
                     android:fadeScrollbars="false"/>
+                </LinearLayout>
                 <!--Texto partidas públicas-->
                 <TextView
+                    android:id="@+id/partidasvotar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -142,9 +176,14 @@
                     android:shadowDx="4"
                     android:shadowDy="4"
                     android:shadowRadius="1"
-                    android:text="@string/no_voted"
+                    android:text="@string/no_voted_opened"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
+                <LinearLayout
+                    android:id="@+id/partidasvotarContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                  <TextView
                         android:id="@+id/noVoteGames"
                         android:layout_width="wrap_content"
@@ -159,9 +198,10 @@
                 <ListView
                     android:id="@+id/VoteGames"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
+                    android:layout_height="wrap_content"
                     tools:listitem="@layout/row_story_vote"
                     android:fadeScrollbars="false"/>
+                </LinearLayout>
             </LinearLayout>
             <!---Parte inferior-->
     <include
