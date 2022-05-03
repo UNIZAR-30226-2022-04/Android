@@ -1,6 +1,8 @@
 package es.unizar.eina.frankenstory.quick;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -60,6 +63,11 @@ public class QuickGameRoom extends AppCompatActivity {
         //GET PARAMETERS
         Intent i = this.getIntent();
         code = i.getExtras().getString("code");
+        // COPIAR AL PORTAPAPELES
+        ClipData clip = ClipData.newPlainText("text", code);
+        ClipboardManager clipboard = (ClipboardManager)this.getSystemService(CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(this, "Código copiado al portapapeles", Toast.LENGTH_SHORT).show();
 
         // GET VIEWS AND UPDATE DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);

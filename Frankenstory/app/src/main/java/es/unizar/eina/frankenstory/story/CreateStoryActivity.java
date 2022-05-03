@@ -104,7 +104,7 @@ public class CreateStoryActivity extends AppCompatActivity{
         Button plusLength = (Button)findViewById(R.id.plus_lenght);
         plusLength.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                number_chars++;
+                number_chars+=5;
                 setContenido();
             }
         });
@@ -113,7 +113,7 @@ public class CreateStoryActivity extends AppCompatActivity{
         Button minusLenght = (Button)findViewById(R.id.minus_length);
         minusLenght.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (number_chars > 30) number_chars--;
+                if (number_chars > 30) number_chars-=5;
                 setContenido();
             }
         });
