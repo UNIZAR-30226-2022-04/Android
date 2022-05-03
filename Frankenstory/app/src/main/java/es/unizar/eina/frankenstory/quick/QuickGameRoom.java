@@ -45,6 +45,10 @@ public class QuickGameRoom extends AppCompatActivity {
     private String code;
     private int gameState;
 
+    private Timer myTimer;
+    private TimerTask doThis;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,13 +92,22 @@ public class QuickGameRoom extends AppCompatActivity {
         AsyncTaskGetRoom myTask = new AsyncTaskGetRoom(this);
         myTask.execute(code);
 
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+        //UPDATE PARTICIPANTS EVERY 5 sec
+        myTimer = new Timer();
+        doThis = new TimerTask() {
             @Override
             public void run() {
                 updateParticipants();
             }
-        }, 0, 5000);
+        };
+        myTimer.scheduleAtFixedRate(doThis,0,5000);
 
+    }
+
+    @Override
+    public void onPause() {
+        myTimer.cancel();
+        super.onPause();
     }
 
     @Override
@@ -105,7 +118,6 @@ public class QuickGameRoom extends AppCompatActivity {
 
     // UPDATE PARTICIPANTS
     public void updateParticipants() {
-        System.out.println("jkdfkjlsdhfkldsjhfdjsklhskljhsd");
         // CALL ASYNC TASK GET ROOM
         AsyncTaskGetRoom myTask = new AsyncTaskGetRoom(this);
         myTask.execute(code);
@@ -131,16 +143,22 @@ public class QuickGameRoom extends AppCompatActivity {
         });
 
         // BUTTON TO START GAME
-        /*
-        mCreateRoom.setOnClickListener(new View.OnClickListener() {
+        mStartGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 // CALL ASYNC TASK PLAY QUICK GAME
                 //AsyncTaskStories myTask = new AsyncTaskStories(this);
                 //myTask.execute(code);
+
+                //Dejamos de actualizar cada 5 segundos
+                onPause();
+
+                Intent i = new Intent(QuickGameRoom.this, QuickFirstWriteTwitterActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                i.putExtra("code",code);
+                startActivity(i);
             }
         });
-        */
 
     }
 

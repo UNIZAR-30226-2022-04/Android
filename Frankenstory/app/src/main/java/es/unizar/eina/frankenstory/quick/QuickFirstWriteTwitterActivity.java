@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.util.concurrent.TimeUnit;
+
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 import es.unizar.eina.frankenstory.story.AsyncTaskCreateStory;
@@ -28,12 +31,14 @@ public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
 
 
     private TextView mUsername;
-    private TextView mStars;
     private TextView mCoins;
     private ImageView mIconUser;
     private EditText content;
     private TextView mTheme;
     private Button send_text;
+    private TextView mTime;
+
+    private String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,24 +55,30 @@ public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
+        //GET PARAMETERS
+        Intent i = this.getIntent();
+        code = i.getExtras().getString("code");
+
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
-        mStars = (TextView) findViewById(R.id.starsTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         content = (EditText) findViewById(R.id.story_content);
-        send_text = (Button)findViewById(R.id.finish);
+        send_text = (Button)findViewById(R.id.sendText);
         mTheme = (TextView) findViewById(R.id.twitter_trend);
+        mTime = (TextView) findViewById(R.id.time);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
-        mStars.setText(((MyApplication) this.getApplication()).getStars());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
 
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
-        send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
-        send_text.setEnabled(false);
 
         //SEND TEXT
         setNavegavilidad();
+
+        // CALL ASYNC TASK PLAY QUICK GAME
+        AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
+        myTask.execute(code);
+
 
     }
 
@@ -97,6 +108,27 @@ public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
     {
         if (resultado.result!=null && !resultado.result.equals("error")) {
             mTheme.setText(resultado.topic);
+
+            new CountDownTimer(resultado.s * 1000L,1000){
+
+                public void onTick (long millisUntilFinished) {
+
+                     mTime.setText(""+String.format("%d min %d sec",
+                    TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+
+                }
+
+                public void onFinish() {
+
+                    //GO TO NOT FIRST WRITE
+
+                    System.out.println("Terminado ----------------------------------------------");
+                }
+
+            }.start();
+
         }
     }
 

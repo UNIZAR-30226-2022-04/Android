@@ -10,45 +10,44 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPlayQuickGame.Result>{
+public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddParagraph.Result>{
 
-        private QuickFirstWriteTwitterActivity mActivity = null;
+        private CreateQuickActivity mActivity = null;
 
     static class Result {
         String result;
-        String reason;
-        int s;
-        String topic;
-        List<String> randomWords;
-        String lastParagraph;
-        boolean isLast;
-        String puneta;
     }
 
-    public AsyncTaskPlayQuickGame(QuickFirstWriteTwitterActivity activity)
+    public AsyncTaskAddParagraph(CreateQuickActivity activity)
     {
         mActivity = activity;
     }
 
-    protected AsyncTaskPlayQuickGame.Result doInBackground(String... params) {
+    protected AsyncTaskAddParagraph.Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         String id = params[0];
+        String body = params[1];
+        String turn = params[2];
+        boolean isLast = Boolean.parseBoolean(params[3]);
+        List<String> punetas = Collections.singletonList(params[4]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/play_quick_game").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/add_quick_game_paragraph").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password +
-                     "\",\"id\":\"" + id + "\"}";
-            Log.d("GetRoom", jsonInputString.toString());
+            String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
+                    "\"id\":" + id + "," + "\"body\":" + body + "," +
+                    "\"turn\":\"" + turn + "," + "isLast:" + isLast + "" + punetas + "\"}";
+            Log.d("AddParagraph", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -59,13 +58,13 @@ public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPla
             return gson.fromJson(reader, Result.class);
 
         } catch (IOException e) {
-            Log.e("AsyncTaskPlayQuickGame",e.getMessage());
+            Log.e("AsyscTaskAddParagraph",e.getMessage());
         } catch (Exception e) {
-            Log.e("AsyncTaskPlayQuickGame",e.getMessage());
+            Log.e("AsyscTaskAddParagraph",e.getMessage());
         }
         return new Result();
     }
-//636w0
-    protected void onPostExecute(AsyncTaskPlayQuickGame.Result resultado) { mActivity.setupAdapter(resultado); }
+
+    //protected void onPostExecute(AsyncTaskAddParagraph.Result resultado) { mActivity.setupAdapter(resultado); }
 
 }

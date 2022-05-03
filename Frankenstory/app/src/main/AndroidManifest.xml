@@ -96,6 +96,11 @@
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".quick.QuickFirstWriteTwitterActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
