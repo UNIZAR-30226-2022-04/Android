@@ -8,7 +8,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -25,10 +24,6 @@ import java.util.TimerTask;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
-import es.unizar.eina.frankenstory.general.AsyncTaskGetStories;
-import es.unizar.eina.frankenstory.general.FriendsActivity;
-import es.unizar.eina.frankenstory.general.LibraryActivity;
-import es.unizar.eina.frankenstory.general.MainMenuActivity;
 import es.unizar.eina.frankenstory.general.SettingsActivity;
 
 public class QuickGameRoom extends AppCompatActivity {
@@ -46,6 +41,7 @@ public class QuickGameRoom extends AppCompatActivity {
     private ListView mListParticipants;
 
     private String code;
+    private String mode;
     private int gameState;
 
     private Timer myTimer;
@@ -63,6 +59,7 @@ public class QuickGameRoom extends AppCompatActivity {
         //GET PARAMETERS
         Intent i = this.getIntent();
         code = i.getExtras().getString("code");
+
         // COPIAR AL PORTAPAPELES
         ClipData clip = ClipData.newPlainText("text", code);
         ClipboardManager clipboard = (ClipboardManager)this.getSystemService(CLIPBOARD_SERVICE);
@@ -161,9 +158,10 @@ public class QuickGameRoom extends AppCompatActivity {
                 //Dejamos de actualizar cada 5 segundos
                 onPause();
 
-                Intent i = new Intent(QuickGameRoom.this, QuickFirstWriteTwitterActivity.class);
+                Intent i = new Intent(QuickGameRoom.this, QuickFirstWriteActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 i.putExtra("code",code);
+                i.putExtra("mode",mode);
                 startActivity(i);
             }
         });
@@ -195,6 +193,7 @@ public class QuickGameRoom extends AppCompatActivity {
 
             mParticipants.setText(resultado.participants.size() + "/10 Participantes");
             gameState = resultado.hasStarted;
+            mode = resultado.mode;
 
             if (resultado.mode.equals("random")) {
                 mTwitter_mode.setVisibility(View.GONE);

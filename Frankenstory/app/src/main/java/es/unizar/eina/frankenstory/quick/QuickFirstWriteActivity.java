@@ -27,7 +27,7 @@ import es.unizar.eina.frankenstory.story.AsyncTaskCreateStory;
 import es.unizar.eina.frankenstory.story.CreateStoryActivity;
 import es.unizar.eina.frankenstory.story.StoryActivity;
 
-public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
+public class QuickFirstWriteActivity extends AppCompatActivity{
 
 
     private TextView mUsername;
@@ -35,15 +35,28 @@ public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
     private ImageView mIconUser;
     private EditText content;
     private TextView mTheme;
+    private TextView mFirstWord;
+    private TextView mSecondWord;
+    private TextView mThirdWord;
     private Button send_text;
     private TextView mTime;
 
     private String code;
+    private String mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quick_game_twitter_first);
+
+        // GET PARAMETERS
+        Intent intent = getIntent();
+        mode = intent.getStringExtra("mode");
+
+        if (mode.equals("twitter"))
+            setContentView(R.layout.activity_quick_game_twitter_first);
+        else {
+            setContentView(R.layout.activity_quick_game_random_first);
+        }
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -65,7 +78,15 @@ public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         content = (EditText) findViewById(R.id.story_content);
         send_text = (Button)findViewById(R.id.sendText);
-        mTheme = (TextView) findViewById(R.id.twitter_trend);
+
+        if (mode.equals("twitter")) {
+            mTheme = (TextView) findViewById(R.id.twitter_trend);
+        }else {
+            mFirstWord = (TextView) findViewById(R.id.first_Word);
+            mSecondWord = (TextView) findViewById(R.id.second_word);
+            mThirdWord = (TextView) findViewById(R.id.third_word);
+        }
+
         mTime = (TextView) findViewById(R.id.time);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
@@ -88,8 +109,9 @@ public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
         send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String first_paragraph = String.valueOf(content.getText());
-                    // CALL ASYNC TASK ADD PARAGRAPH
-                    //
+                // CALL ASYNC TASK ADD PARAGRAPH
+                // AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(this);
+                // myTask.execute(code,first_paragraph,1,false,punetas);
             }
         });
 
@@ -107,8 +129,14 @@ public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
     public void setupAdapter(AsyncTaskPlayQuickGame.Result resultado)
     {
         if (resultado.result!=null && !resultado.result.equals("error")) {
-            mTheme.setText(resultado.topic);
 
+            if (mode.equals("twitter")) {
+                mTheme.setText(resultado.topic);
+            }else {
+                mFirstWord.setText(resultado.randomWords.get(0));
+                mSecondWord.setText(resultado.randomWords.get(1));
+                mThirdWord.setText(resultado.randomWords.get(2));
+            }
             new CountDownTimer(resultado.s * 1000L,1000){
 
                 public void onTick (long millisUntilFinished) {
@@ -124,7 +152,6 @@ public class QuickFirstWriteTwitterActivity extends AppCompatActivity{
 
                     //GO TO NOT FIRST WRITE
 
-                    System.out.println("Terminado ----------------------------------------------");
                 }
 
             }.start();

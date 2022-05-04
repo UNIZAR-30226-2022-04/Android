@@ -16,7 +16,7 @@ import es.unizar.eina.frankenstory.MyApplication;
 
 public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPlayQuickGame.Result>{
 
-        private QuickFirstWriteTwitterActivity mActivity = null;
+        private QuickFirstWriteActivity mActivity = null;
 
     static class Result {
         String result;
@@ -29,10 +29,7 @@ public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPla
         String puneta;
     }
 
-    public AsyncTaskPlayQuickGame(QuickFirstWriteTwitterActivity activity)
-    {
-        mActivity = activity;
-    }
+    public AsyncTaskPlayQuickGame(QuickFirstWriteActivity activity) { mActivity = activity; }
 
     protected AsyncTaskPlayQuickGame.Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();

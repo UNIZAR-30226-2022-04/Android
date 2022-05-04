@@ -10,11 +10,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
-            <!---TOP-->
-            <include layout="@layout/top_quick_game"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"/>
+                android:orientation="horizontal">
+
+                <!---TOP-->
+                <include layout="@layout/top_quick_game"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"/>
+
+                <!---PUNETAS-->
+                <Spinner
+                    android:id="@+id/punetas"
+                    android:layout_width="100dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/spinner_background"/>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,13 +79,13 @@
 
                     <TextView
                         android:id="@+id/twitter_trend"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/text_background"
                         android:fontFamily="@font/bangers_regular"
-                        android:paddingHorizontal="25dp"
+                        android:paddingHorizontal="15dp"
                         android:text="@string/story_theme"
                         android:textColor="@color/white"
                         android:textSize="18sp" />

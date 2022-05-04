@@ -10,11 +10,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
-            <!---TOP-->
-            <include layout="@layout/top_quick_game"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"/>
+                android:orientation="horizontal">
+
+                <!---TOP-->
+                <include layout="@layout/top_quick_game"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"/>
+
+                <!---PUNETAS-->
+                <Spinner
+                    android:id="@+id/punetas"
+                    android:layout_width="100dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/spinner_background"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,7 +54,7 @@
                     android:layout_marginTop="20dp"
                     android:text="@string/previous_text"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -68,26 +85,21 @@
                     android:textSize="20sp" />
                 <include
                     android:id="@+id/words"
-                    android:layout="@layout/random_words"
+                    layout="@layout/random_words"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <!--Reloj-->
-                <include
-                    android:id="@+id/time"
-                    android:layout="@layout/stopwatch"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginBottom="12dp"/>
+                <!--Reloj-->
+                <include layout="@layout/stopwatch" />
                 <!--Escritura actual-->
                 <EditText
                     android:id="@+id/story_content"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="300dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/white"
+                    android:background="@drawable/rounded_edittext"
                     android:fontFamily="@font/arial_regular"
                     android:gravity="top"
                     android:hint="@string/write"

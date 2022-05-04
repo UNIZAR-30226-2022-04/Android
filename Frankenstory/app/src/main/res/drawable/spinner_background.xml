@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+
+    <item>
+        <layer-list>
+            <item>
+                    <shape android:shape="rectangle">
+                        <corners android:radius="5dp"/>
+                        <padding android:right="12dp"
+                            android:left="12dp"/>
+                        <solid android:color="@color/verde_punetas"/>
+                    </shape>
+            </item>
+
+            <item
+                android:height="30dp"
+                android:width="30dp"
+                android:drawable="@drawable/plus_punetas"
+                android:gravity="start"/>
+
+        </layer-list>
+
+    </item>
+</selector>
