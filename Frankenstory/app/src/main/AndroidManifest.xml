@@ -87,17 +87,17 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".quick.QuickGameRoom"
+            android:name=".quick.QuickRoomActivity"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".quick.CreateQuickActivity"
+            android:name=".quick.QuickCreateActivity"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".quick.QuickFirstWriteActivity"
+            android:name=".quick.QuickPlayActivity"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>

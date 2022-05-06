@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,19 +16,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import java.util.List;
-
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 import es.unizar.eina.frankenstory.general.FriendsActivity;
 import es.unizar.eina.frankenstory.general.LibraryActivity;
 import es.unizar.eina.frankenstory.general.MainMenuActivity;
 import es.unizar.eina.frankenstory.general.SettingsActivity;
-import es.unizar.eina.frankenstory.story.AsyncTaskStories;
-import es.unizar.eina.frankenstory.story.CreateStoryActivity;
-import es.unizar.eina.frankenstory.story.ListMyStoriesAdapter;
-import es.unizar.eina.frankenstory.story.ListOtherStoriesAdapter;
-import es.unizar.eina.frankenstory.story.ListVoteStoriesAdapter;
 
 public class QuickActivity extends AppCompatActivity {
 
@@ -144,7 +135,7 @@ public class QuickActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //GO TO CREATE ROOM ACTIVITY
-                Intent i = new Intent(QuickActivity.this, CreateQuickActivity.class);
+                Intent i = new Intent(QuickActivity.this, QuickCreateActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -198,7 +189,7 @@ public class QuickActivity extends AppCompatActivity {
     {
         if (resultado.result!=null && resultado.result.equals("success")){
 
-            Intent i = new Intent(QuickActivity.this, QuickGameRoom.class);
+            Intent i = new Intent(QuickActivity.this, QuickRoomActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             i.putExtra("code",code);
             startActivity(i);
@@ -219,7 +210,7 @@ public class QuickActivity extends AppCompatActivity {
 
             String id = resultado.id;
 
-            Intent i = new Intent(QuickActivity.this, QuickGameRoom.class);
+            Intent i = new Intent(QuickActivity.this, QuickRoomActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             i.putExtra("code", id);
             startActivity(i);

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +22,8 @@ import com.airbnb.lottie.LottieAnimationView;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
-import es.unizar.eina.frankenstory.story.StoryFirstWriteActivity;
 
-public class CreateQuickActivity extends AppCompatActivity{
+public class QuickCreateActivity extends AppCompatActivity{
 
     private TextView mUsername;
     private TextView mStars;
@@ -167,7 +165,7 @@ public class CreateQuickActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 // CALL ASYNC TASK CREATE ROOM
-                AsyncTaskCreateRoom myTask = new AsyncTaskCreateRoom(CreateQuickActivity.this);
+                AsyncTaskCreateRoom myTask = new AsyncTaskCreateRoom(QuickCreateActivity.this);
                 myTask.execute(String.valueOf(time), String.valueOf(isPrivate_game), mode);
 
             }
@@ -181,12 +179,12 @@ public class CreateQuickActivity extends AppCompatActivity{
             Toast.makeText(getApplicationContext(),"ERROR CREANDO LA SALA",Toast.LENGTH_SHORT).show();
         } else {
 
-            Intent i = new Intent(CreateQuickActivity.this, QuickGameRoom.class);
+            Intent i = new Intent(QuickCreateActivity.this, QuickRoomActivity.class);
             i.putExtra("code", String.valueOf(resultado.id));
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(i);
 
-            CreateQuickActivity.handlerTofinish.sendEmptyMessage(0);
+            QuickCreateActivity.handlerTofinish.sendEmptyMessage(0);
             finish();
 
         }

@@ -26,7 +26,7 @@ import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 import es.unizar.eina.frankenstory.general.SettingsActivity;
 
-public class QuickGameRoom extends AppCompatActivity {
+public class QuickRoomActivity extends AppCompatActivity {
 
     private TextView mUsername;
     private TextView mStars;
@@ -141,7 +141,7 @@ public class QuickGameRoom extends AppCompatActivity {
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(QuickGameRoom.this, SettingsActivity.class);
+                Intent i = new Intent(QuickRoomActivity.this, SettingsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
@@ -158,7 +158,7 @@ public class QuickGameRoom extends AppCompatActivity {
                 //Dejamos de actualizar cada 5 segundos
                 onPause();
 
-                Intent i = new Intent(QuickGameRoom.this, QuickFirstWriteActivity.class);
+                Intent i = new Intent(QuickRoomActivity.this, QuickPlayActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 i.putExtra("code",code);
                 i.putExtra("mode",mode);

@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -23,11 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
-import es.unizar.eina.frankenstory.story.AsyncTaskCreateStory;
-import es.unizar.eina.frankenstory.story.CreateStoryActivity;
-import es.unizar.eina.frankenstory.story.StoryActivity;
 
-public class QuickFirstWriteActivity extends AppCompatActivity{
+public class QuickPlayActivity extends AppCompatActivity{
 
 
     private TextView mUsername;
@@ -40,6 +34,7 @@ public class QuickFirstWriteActivity extends AppCompatActivity{
     private TextView mThirdWord;
     private Button send_text;
     private TextView mTime;
+    private TextView previous_content;
 
     private String code;
     private String mode;
@@ -51,12 +46,7 @@ public class QuickFirstWriteActivity extends AppCompatActivity{
         // GET PARAMETERS
         Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
-
-        if (mode.equals("twitter"))
-            setContentView(R.layout.activity_quick_game_twitter_first);
-        else {
-            setContentView(R.layout.activity_quick_game_random_first);
-        }
+        setContentView(R.layout.activity_quick_game_play);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -78,16 +68,12 @@ public class QuickFirstWriteActivity extends AppCompatActivity{
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         content = (EditText) findViewById(R.id.story_content);
         send_text = (Button)findViewById(R.id.sendText);
-
-        if (mode.equals("twitter")) {
-            mTheme = (TextView) findViewById(R.id.twitter_trend);
-        }else {
-            mFirstWord = (TextView) findViewById(R.id.first_Word);
-            mSecondWord = (TextView) findViewById(R.id.second_word);
-            mThirdWord = (TextView) findViewById(R.id.third_word);
-        }
-
+        mTheme = (TextView) findViewById(R.id.twitter_trend);
+        mFirstWord = (TextView) findViewById(R.id.first_Word);
+        mSecondWord = (TextView) findViewById(R.id.second_word);
+        mThirdWord = (TextView) findViewById(R.id.third_word);
         mTime = (TextView) findViewById(R.id.time);
+        previous_content = (TextView) findViewById(R.id.previous_content);
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
 
@@ -99,6 +85,19 @@ public class QuickFirstWriteActivity extends AppCompatActivity{
         // CALL ASYNC TASK PLAY QUICK GAME
         AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
         myTask.execute(code);
+
+        // HIDE UNUSED BCS OF MODE
+        if (mode.equals("twitter")){
+            LinearLayout mWords = (LinearLayout) findViewById(R.id.random_words);
+            mWords.setVisibility(View.GONE);
+        } else {
+            LinearLayout mTwitter = (LinearLayout) findViewById(R.id.twitter);
+            mTwitter.setVisibility(View.GONE);
+        }
+
+        if(/*first paragraph*/true){
+            previous_content.setVisibility(View.GONE);
+        }
 
 
     }

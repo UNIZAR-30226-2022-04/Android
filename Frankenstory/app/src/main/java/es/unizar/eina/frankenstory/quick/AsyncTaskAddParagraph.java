@@ -17,13 +17,13 @@ import es.unizar.eina.frankenstory.MyApplication;
 
 public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddParagraph.Result>{
 
-        private CreateQuickActivity mActivity = null;
+        private QuickCreateActivity mActivity = null;
 
     static class Result {
         String result;
     }
 
-    public AsyncTaskAddParagraph(CreateQuickActivity activity)
+    public AsyncTaskAddParagraph(QuickCreateActivity activity)
     {
         mActivity = activity;
     }

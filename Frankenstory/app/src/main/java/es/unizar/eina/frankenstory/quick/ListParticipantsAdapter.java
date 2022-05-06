@@ -1,28 +1,23 @@
 package es.unizar.eina.frankenstory.quick;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
-import es.unizar.eina.frankenstory.story.AsyncTaskStories;
-import es.unizar.eina.frankenstory.story.StoryActivity;
-import es.unizar.eina.frankenstory.story.StoryNotFirstWriteActivity;
 
 public class ListParticipantsAdapter extends BaseAdapter{
 
-    private QuickGameRoom context; //context
+    private QuickRoomActivity context; //context
     private List<AsyncTaskGetRoom.Participants> items; //data source of the list adapter
 
     //public constructor
-    public ListParticipantsAdapter(QuickGameRoom context, List<AsyncTaskGetRoom.Participants> items) {
+    public ListParticipantsAdapter(QuickRoomActivity context, List<AsyncTaskGetRoom.Participants> items) {
         this.context = context;
         this.items = items;
     }

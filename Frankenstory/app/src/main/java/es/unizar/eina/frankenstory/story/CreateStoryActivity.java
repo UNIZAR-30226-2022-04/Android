@@ -78,8 +78,8 @@ public class CreateStoryActivity extends AppCompatActivity{
         number_writings = 10;
         number_chars = 120;
         isPrivate_game = false;
-        buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
-        butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
         setContenido();
 
         //BUTTON PLUS WRITINGS
@@ -123,8 +123,8 @@ public class CreateStoryActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 isPrivate_game = false;
-                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
-                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
             }
         });
 
@@ -132,8 +132,8 @@ public class CreateStoryActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 isPrivate_game = true;
-                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
-                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+                butttonPrivate.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+                buttonPublic.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
             }
         });
 

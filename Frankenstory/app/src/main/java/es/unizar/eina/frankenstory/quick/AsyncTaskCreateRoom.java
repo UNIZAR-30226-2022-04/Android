@@ -15,14 +15,14 @@ import es.unizar.eina.frankenstory.MyApplication;
 
 public class AsyncTaskCreateRoom extends AsyncTask<String, Void, AsyncTaskCreateRoom.Result>{
 
-        private CreateQuickActivity mActivity = null;
+        private QuickCreateActivity mActivity = null;
 
     static class Result {
         String result;
         String id;
     }
 
-    public AsyncTaskCreateRoom(CreateQuickActivity activity)
+    public AsyncTaskCreateRoom(QuickCreateActivity activity)
     {
         mActivity = activity;
     }

@@ -16,7 +16,7 @@ import es.unizar.eina.frankenstory.MyApplication;
 
 public class AsyncTaskGetRoom extends AsyncTask<String, Void, AsyncTaskGetRoom.Result>{
 
-        private QuickGameRoom mActivity = null;
+        private QuickRoomActivity mActivity = null;
 
     static class Participants {
         String username;
@@ -32,7 +32,7 @@ public class AsyncTaskGetRoom extends AsyncTask<String, Void, AsyncTaskGetRoom.R
         int hasStarted;
     }
 
-    public AsyncTaskGetRoom(QuickGameRoom activity)
+    public AsyncTaskGetRoom(QuickRoomActivity activity)
     {
         mActivity = activity;
     }

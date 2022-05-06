@@ -1,62 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:stretchColumns="4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingHorizontal="5dp">
+
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            tools:ignore="MissingConstraints">
-
-            <!---Indicador nombre de usuario-->
-            <TextView
-                android:id="@+id/usernameTop"
-                android:layout_width="120dp"
-                android:backgroundTint="@color/verde_top"
+            android:layout_height="match_parent">
+            <!-- NOMBRE DEL USUARIO-->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/indicator"
-                android:layout_marginRight="10dp"
-                android:paddingLeft="5dp"
-                android:text="@string/no_name"
-                android:fontFamily="@font/arial_bold"
-                android:textSize="15sp"
-                android:textColor="@color/white"
-                android:gravity="center" />
-            <!---Icono persona-->
-        <ImageView
-            android:id="@+id/iconUser"
-            android:layout_width="26dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:src="@raw/icon1"
-            android:visibility="invisible"/>
-
-            <!---Indicador monedas-->
-            <TextView
-                android:id="@+id/coinsTop"
-                android:layout_width="90dp"
+                android:layout_weight="1"
+                android:paddingRight="5dp">
+                <!---Indicador nombre de usuario-->
+                <TextView
+                    android:id="@+id/usernameTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/indicator"
+                    android:backgroundTint="@color/verde_top"
+                    android:fontFamily="@font/arial_bold"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="30dp"
+                    android:text="@string/no_name"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+                <!---Icono persona-->
+                <ImageView
+                    android:id="@+id/iconUser"
+                    android:layout_width="26dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:src="@raw/icon1"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+            <!-- ESTRELLAS -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/verde_letras"
-                android:text="@string/no_points"
-                android:paddingEnd="5dp"
-                android:gravity="right|center_vertical"
-                android:background="@drawable/indicator"
-                android:fontFamily="@font/arial_bold"
-                android:textSize="15sp"
-                android:textColor="@color/white"
-                android:layout_toRightOf="@+id/usernameTop" />
-
-            <!---Icono mooncoin-->
-            <ImageView
-                android:id="@+id/iconmooncoin"
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp">
+                <!---Indicador nº estrellas-->
+                <TextView
+                    android:id="@+id/starsTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/indicator"
+                    android:backgroundTint="@color/verde_letras"
+                    android:fontFamily="@font/arial_bold"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="9dp"
+                    android:text=""
+                    android:visibility="invisible"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+            <!-- MONEDAS -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/usernameTop"
-                android:layout_marginLeft="-45dp"
-                android:src="@drawable/mooncoin2"/>
+                android:layout_weight="1">
+                <!---Indicador nº monedas-->
+                <TextView
+                    android:id="@+id/coinsTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/indicator"
+                    android:backgroundTint="@color/verde_letras"
+                    android:fontFamily="@font/arial_bold"
+                    android:gravity="center_vertical|right"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+                <!---Icono moneda-->
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="2dp"
+                    android:src="@drawable/mooncoin2"/>
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
 
-        </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
