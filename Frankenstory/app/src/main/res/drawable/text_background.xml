@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 <!-- This is the line -->
-<item>
+<item android:left="3dp" android:top="3dp">
     <shape>
         <solid android:color="@color/azul_oscuro_twitter" />
     </shape>
 </item>
 <!-- This is the main color -->
-<item android:bottom="2dp" android:right="2dp">
+<item android:bottom="3dp" android:right="3dp">
     <shape>
-        <solid android:color="@color/azul_claro_twitter" />
+        <solid android:color="@color/azul_claro_twitter"/>
     </shape>
+</item>
+<item android:drawable="@drawable/bird_twitter"
+    android:height="28dp"
+    android:width="28dp"
+    android:gravity="right|bottom"
+    android:right="3dp"
+    android:bottom="3dp">
 </item>
 </layer-list>

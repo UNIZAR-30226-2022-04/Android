@@ -36,6 +36,12 @@ public class QuickPlayActivity extends AppCompatActivity{
     private TextView mTime;
     private TextView previous_content;
 
+    private Button buttonPunetas;
+    private LinearLayout letras_reves;
+    private LinearLayout escribe_ciegas;
+    private LinearLayout desorden_total;
+    private TextView textPunetas;
+
     private String code;
     private String mode;
 
@@ -90,6 +96,8 @@ public class QuickPlayActivity extends AppCompatActivity{
         if (mode.equals("twitter")){
             LinearLayout mWords = (LinearLayout) findViewById(R.id.random_words);
             mWords.setVisibility(View.GONE);
+            TextView mTextRandomWords = (TextView) findViewById(R.id.text_random_words);
+            mTextRandomWords.setVisibility(View.GONE);
         } else {
             LinearLayout mTwitter = (LinearLayout) findViewById(R.id.twitter);
             mTwitter.setVisibility(View.GONE);
@@ -99,6 +107,55 @@ public class QuickPlayActivity extends AppCompatActivity{
             previous_content.setVisibility(View.GONE);
         }
 
+
+        // PUÑETAS
+        buttonPunetas = (Button) findViewById(R.id.buttonPunetas);
+        letras_reves = (LinearLayout) findViewById(R.id.letras_reves);
+        escribe_ciegas = (LinearLayout) findViewById(R.id.escribe_ciegas);
+        desorden_total = (LinearLayout) findViewById(R.id.desorden_total);
+        textPunetas = (TextView) findViewById(R.id.textPunetas);
+        buttonPunetas.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (buttonPunetas.getText().equals("+")){
+                    // OPEN
+                    buttonPunetas.setText("-");
+                    textPunetas.setText("Comprar puñetas");
+                    letras_reves.setVisibility(View.VISIBLE);
+                    escribe_ciegas.setVisibility(View.VISIBLE);
+                    desorden_total.setVisibility(View.VISIBLE);
+                } else {
+                    // CLOSE
+                    buttonPunetas.setText("+");
+                    letras_reves.setVisibility(View.GONE);
+                    escribe_ciegas.setVisibility(View.GONE);
+                    desorden_total.setVisibility(View.GONE);
+                }
+            }
+        });
+        letras_reves.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                textPunetas.setText("¿A quién envías la puñeta?");
+                letras_reves.setVisibility(View.GONE);
+                escribe_ciegas.setVisibility(View.GONE);
+                desorden_total.setVisibility(View.GONE);
+            }
+        });
+        escribe_ciegas.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                textPunetas.setText("¿A quién envías la puñeta?");
+                letras_reves.setVisibility(View.GONE);
+                escribe_ciegas.setVisibility(View.GONE);
+                desorden_total.setVisibility(View.GONE);
+            }
+        });
+        desorden_total.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                textPunetas.setText("¿A quién envías la puñeta?");
+                letras_reves.setVisibility(View.GONE);
+                escribe_ciegas.setVisibility(View.GONE);
+                desorden_total.setVisibility(View.GONE);
+            }
+        });
 
     }
 
@@ -130,7 +187,10 @@ public class QuickPlayActivity extends AppCompatActivity{
         if (resultado.result!=null && !resultado.result.equals("error")) {
 
             if (mode.equals("twitter")) {
-                mTheme.setText(resultado.topic);
+                // Add hashtag if it has not
+                String hashtag = "";
+                if (resultado.topic.charAt(0)!='#') hashtag +="#";
+                mTheme.setText(hashtag + resultado.topic);
             }else {
                 mFirstWord.setText(resultado.randomWords.get(0));
                 mSecondWord.setText(resultado.randomWords.get(1));

@@ -7,8 +7,10 @@
         </shape>
     </item>
     <item android:drawable="@drawable/tendencias_twitter"
-        android:height="50dp"
-        android:width="50dp"
-        android:gravity="right"/>
+        android:height="40dp"
+        android:width="40dp"
+        android:gravity="right"
+        android:right="10dp"
+        android:top="2dp"/>
 
 </layer-list>

@@ -13,20 +13,10 @@ android:id="@+id/layoutmain">
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"/>
 
-    <!---PUNETAS-->
-    <Spinner
-        android:id="@+id/punetas"
-        android:layout_width="150dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:background="@drawable/spinner_background"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="50dp"
+        android:layout_marginHorizontal="40dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="120dp"
         android:orientation="vertical"
@@ -38,8 +28,8 @@ android:id="@+id/layoutmain">
             android:layout_marginTop="20dp"
             android:fontFamily="@font/arial_bold"
             android:shadowColor="@color/verde_letras"
-            android:shadowDx="6"
-            android:shadowDy="6"
+            android:shadowDx="4"
+            android:shadowDy="4"
             android:shadowRadius="1"
             android:text="@string/previous_text"
             android:textAlignment="center"
@@ -48,20 +38,21 @@ android:id="@+id/layoutmain">
 
         <LinearLayout
             android:id="@+id/twitter"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/bangers_regular"
                 android:shadowColor="@color/azul_oscuro"
-                android:shadowDx="6"
-                android:shadowDy="6"
+                android:shadowDx="4"
+                android:shadowDy="4"
                 android:shadowRadius="1"
                 android:text="@string/story_theme"
                 android:textAlignment="center"
@@ -71,22 +62,21 @@ android:id="@+id/layoutmain">
             <TextView
                 android:id="@+id/twitter_trend"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/text_background"
                 android:fontFamily="@font/bangers_regular"
                 android:paddingHorizontal="15dp"
+                android:paddingBottom="3dp"
                 android:text="@string/story_theme"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/previous_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:background="@color/verde_letras"
             android:fontFamily="@font/arial_bold"
@@ -95,9 +85,9 @@ android:id="@+id/layoutmain">
             android:textColor="@color/white"></TextView>
 
         <TextView
+            android:id="@+id/text_random_words"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/bangers_regular"
             android:shadowColor="@color/verde_letras"
@@ -154,42 +144,79 @@ android:id="@+id/layoutmain">
                 android:layout_toRightOf="@+id/second_word" />
         </LinearLayout>
         <!--Reloj-->
-        <include layout="@layout/stopwatch" />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dp">
+            <!---Icono Reloj-->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/clock"/>
+            <!---Tiempo-->
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Tiempo"
+                android:fontFamily="@font/arial_bold"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:shadowColor="@color/verde_top"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"
+                android:gravity="center_vertical" />
+        </LinearLayout>
         <!--Escritura actual-->
         <EditText
             android:id="@+id/story_content"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
             android:background="@drawable/rounded_edittext"
-            android:fontFamily="@font/arial_regular"
-            android:gravity="top"
-            android:hint="@string/write"
-            android:inputType="text"
-            android:paddingStart="12dp"
             android:paddingTop="12dp"
-            android:textSize="20sp"
+            android:gravity="top"
+            android:fontFamily="@font/arial_regular"
+            android:hint="@string/write"
+            android:inputType="text|textMultiLine"
+            android:paddingHorizontal="12dp"
+            android:textSize="15sp"
             tools:ignore="RtlSymmetry" />
     </LinearLayout>
     <!--Terminar escritura-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="400dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center_horizontal|bottom"
-        android:orientation="vertical"
-        android:paddingBottom="20dp">
-        <!--Boton terminar parrafo-->
+        android:orientation="vertical">
+        <!--Boton terminar escritura-->
         <Button
             android:id="@+id/sendText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
             android:background="@drawable/button_green"
             android:fontFamily="@font/bangers_regular"
-            android:paddingHorizontal="100dp"
             android:text="@string/finish_text"
             android:textColor="@color/white"
-            android:textSize="26sp" />
+            android:textSize="27sp" />
     </LinearLayout>
+
+    <!---PUNETAS-->
+    <include
+        layout="@layout/punetas"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="5dp" />
+
 </RelativeLayout>

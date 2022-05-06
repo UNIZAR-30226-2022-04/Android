@@ -28,6 +28,6 @@
     <color name="rojo_oscuro">#C9386C</color>
     <color name="gris">#676567</color>
     <color name="gris_claro">#e6e6e6</color>
-    <color name="azul_oscuro_twitter">#0009ff</color>
-    <color name="azul_claro_twitter">#00c3ff</color>
+    <color name="azul_oscuro_twitter">#2d9bf0</color>
+    <color name="azul_claro_twitter">#53acee</color>
 </resources>
