@@ -99,7 +99,17 @@ public class QuickRoomActivity extends AppCompatActivity {
         // CALL ASYNC TASK GET ROOM
         AsyncTaskGetRoom myTask = new AsyncTaskGetRoom(this);
         myTask.execute(code);
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        myTimer.cancel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         //UPDATE PARTICIPANTS EVERY 5 sec
         myTimer = new Timer();
         doThis = new TimerTask() {
@@ -108,20 +118,7 @@ public class QuickRoomActivity extends AppCompatActivity {
                 updateParticipants();
             }
         };
-        myTimer.scheduleAtFixedRate(doThis,0,5000);
-
-    }
-
-    @Override
-    public void onPause() {
-        myTimer.cancel();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateData();
+        myTimer.scheduleAtFixedRate(doThis,0,3000);
     }
 
     // UPDATE PARTICIPANTS
@@ -163,9 +160,9 @@ public class QuickRoomActivity extends AppCompatActivity {
                 onPause();
 
                 Intent i = new Intent(QuickRoomActivity.this, QuickPlayActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 i.putExtra("code",code);
                 i.putExtra("mode",mode);
+                i.putExtra("turn","1");
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
                 startActivity(i);
                 finish();
@@ -210,6 +207,31 @@ public class QuickRoomActivity extends AppCompatActivity {
                 mRandom_mode.setVisibility(View.GONE);
             }
 
+            if (gameState == 1) { // IF HAS STARTED
+                Intent i = new Intent(QuickRoomActivity.this, QuickPlayActivity.class);
+                i.putExtra("code",code);
+                i.putExtra("mode",mode);
+                i.putExtra("turn","1");
+                i.putExtra("gameParticipants", (Serializable) gameParticipants);
+                startActivity(i);
+                finish();
+            } else if (gameState == 2){ // IF VOTING
+                Intent i = new Intent(QuickRoomActivity.this, QuickVoteActivity.class);
+                i.putExtra("code",code);
+                i.putExtra("mode",mode);
+                i.putExtra("gameParticipants", (Serializable) gameParticipants);
+                startActivity(i);
+                finish();
+            }
+
+
+            // IF IM NOT THE CREATOR (first in participant's list)
+            if(!resultado.participants.get(0).username.equals(mUsername.getText())){
+                // DONT LET START
+                mStartGame.setVisibility(View.INVISIBLE);
+                mStartGame.setClickable(false);
+            }
+
             fillDataParticipants(resultado.participants);
 
         }
@@ -225,23 +247,6 @@ public class QuickRoomActivity extends AppCompatActivity {
 
     }
 
-
-    // ASYNC TASK PLAY QUICK GAME ADAPTER
-    /*
-    public void setupAdapter(AsyncTaskJoinRandomRoom.Result resultado)
-    {
-        if (resultado.result!=null && resultado.result.equals("success")){
-
-            String id = resultado.result id;
-
-            Intent i = new Intent(QuickActivity.this, QuickRoom.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            i.putExtra("id", id);
-            startActivity(i);
-            finish();
-        }
-    }
-    */
 
     // SET ICON USER
     @SuppressLint("ResourceType")

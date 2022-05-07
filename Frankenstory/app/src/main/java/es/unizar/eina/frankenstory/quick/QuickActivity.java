@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.io.Serializable;
+
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 import es.unizar.eina.frankenstory.general.FriendsActivity;
@@ -184,43 +186,36 @@ public class QuickActivity extends AppCompatActivity {
     }
 
     // ASYNC TASK JOIN ROOM ADAPTER
-
     public void setupAdapter(AsyncTaskJoinRoom.Result resultado)
     {
-        if (resultado.result!=null && resultado.result.equals("success")){
+        if ((resultado.result!=null && resultado.result.equals("success"))){
 
             Intent i = new Intent(QuickActivity.this, QuickRoomActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             i.putExtra("code",code);
             startActivity(i);
-        }else {
-            if (resultado.reason == null) {
-                Toast.makeText(QuickActivity.this, "NO EXISTE LA SALA", Toast.LENGTH_LONG).show();
-            }
+        } else if ((resultado.reason!=null && resultado.reason.equals("game_started"))) {
+            // SI LA PARTIDA ESTA EMPEZADA
+            Toast.makeText(QuickActivity.this, resultado.reason, Toast.LENGTH_LONG).show();
+            Intent i = new Intent(QuickActivity.this, QuickRoomActivity.class);
+            i.putExtra("code",code);
+            startActivity(i);
+            finish();
+        } else {
+        Toast.makeText(QuickActivity.this, resultado.reason, Toast.LENGTH_LONG).show();
         }
     }
 
     // ASYNC TASK JOIN RANDOM ROOM ADAPTER
     public void setupAdapter(AsyncTaskJoinRandomRoom.Result resultado)
     {
-                System.out.println(resultado.result);
-        System.out.println(resultado.reason);
-        System.out.println(resultado.id);
         if (resultado.result!=null && resultado.result.equals("success")){
-
             String id = resultado.id;
-
             Intent i = new Intent(QuickActivity.this, QuickRoomActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             i.putExtra("code", id);
             startActivity(i);
         } else {
-            if (resultado.reason.equals("no_rooms_available")){
-                Toast.makeText(QuickActivity.this, "NO HAY SALAS DISPONIBLES", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(QuickActivity.this, "ERROR AL UNIRSE A LA SALA", Toast.LENGTH_LONG).show();
-            }
-
+            Toast.makeText(QuickActivity.this, resultado.reason, Toast.LENGTH_LONG).show();
         }
     }
 

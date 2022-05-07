@@ -18,7 +18,7 @@ import es.unizar.eina.frankenstory.MyApplication;
 
 public class AsyncTaskAddParagraph extends AsyncTask<QuickPlayActivity.ParagraphToSend, Void, AsyncTaskAddParagraph.Result>{
 
-        private QuickCreateActivity mActivity = null;
+    private QuickPlayActivity mActivity = null;
 
     static class Punetas {
         String puneta;
@@ -29,7 +29,7 @@ public class AsyncTaskAddParagraph extends AsyncTask<QuickPlayActivity.Paragraph
         String result;
     }
 
-    public AsyncTaskAddParagraph(QuickCreateActivity activity)
+    public AsyncTaskAddParagraph(QuickPlayActivity activity)
     {
         mActivity = activity;
     }
@@ -56,8 +56,8 @@ public class AsyncTaskAddParagraph extends AsyncTask<QuickPlayActivity.Paragraph
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
-                    "\"id\":\"" + params[0].id + "\"," + "\"body\":" + params[0].body + "\"," +
-                    "\"turn\":\"" + params[0].turn + "\"," + "\"isLast\":" + params[0].isLast.toString() + ",\"punetas\":" + punetas + "}";
+                    "\"id\":\"" + params[0].id + "\"," + "\"body\":\"" + params[0].body.replaceAll("\n","\\\\n") + "\"," +
+                    "\"turn\":" + params[0].turn + "," + "\"isLast\":" + params[0].isLast.toString() + ",\"punetas\":" + punetas + "}";
             Log.d("AddParagraph", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
@@ -76,6 +76,7 @@ public class AsyncTaskAddParagraph extends AsyncTask<QuickPlayActivity.Paragraph
         return new Result();
     }
 
-    //protected void onPostExecute(AsyncTaskAddParagraph.Result resultado) { mActivity.setupAdapter(resultado); }
-
+    protected void onPostExecute(AsyncTaskAddParagraph.Result resultado) {
+        if (resultado.result !=null) Log.d("AddParagraph.Result: ", resultado.result);
+        mActivity.setupAdapter(resultado); }
 }

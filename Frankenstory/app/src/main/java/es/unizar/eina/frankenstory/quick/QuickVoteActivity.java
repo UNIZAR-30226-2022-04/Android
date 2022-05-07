@@ -81,9 +81,6 @@ public class QuickVoteActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        // CALL ASYNC TASK RESUME VOTE QUICK GAME
-        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(this);
-        myTask.execute(code);
     }
 
     // UPDATE DATA

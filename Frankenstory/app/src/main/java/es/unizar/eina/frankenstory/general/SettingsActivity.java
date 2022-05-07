@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,6 +42,9 @@ public class SettingsActivity extends AppCompatActivity {
     private ImageButton mIcon6; private ImageButton mIcon7;
     private ImageButton mIcon8; private ImageButton mIcon9;
     private Button mchangeIcon;
+    private LinearLayout messageDelete;
+    private Button cancelDelete;
+    private Button keepDelete;
     String newPassw;
     Integer iconSelected;
 
@@ -79,6 +83,9 @@ public class SettingsActivity extends AppCompatActivity {
         mchangeIcon = (Button) findViewById(R.id.change_icon);
         mNewPassw = (EditText) findViewById(R.id.passwordRegister);
         mNewPassw2 = (EditText) findViewById(R.id.secondpasswordRegister);
+        messageDelete = (LinearLayout) findViewById(R.id.messageDelete);
+        cancelDelete = (Button) findViewById(R.id.cancelDelete);
+        keepDelete = (Button) findViewById(R.id.keepDelete);
         updateData();
 
         // BUTTONS FROM TOP AND BOTTOM
@@ -128,9 +135,23 @@ public class SettingsActivity extends AppCompatActivity {
         mDeleteAccount.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // LLAMAR A LA TAREA ASINCRONA
+                messageDelete.setVisibility(View.VISIBLE);
+            }
+        });
+
+        cancelDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // LLAMAR A LA TAREA ASINCRONA
+                messageDelete.setVisibility(View.GONE);
+            }
+        });
+
+        keepDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // LLAMAR A LA TAREA ASINCRONA
+                messageDelete.setVisibility(View.GONE);
                 AsyncTaskDeleterUser myTask = new AsyncTaskDeleterUser(SettingsActivity.this);
                 myTask.execute();
-                mDeleteAccount.setClickable(false);
             }
         });
 

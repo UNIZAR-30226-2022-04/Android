@@ -18,6 +18,8 @@
     <color name="verde_parrafo">#3fb78f</color>
     <color name="verde_parrafo_seleccionado">#8fd14f</color>
     <color name="verde_punetas">#015d52</color>
+    <color name="verde_plus_minus">#2ecc71</color>
+    <color name="verde_plus_minus_back">#27ae60</color>
     <color name="negro_transparente">#80000000</color>
     <color name="amarillo_claro">#FFFF33</color>
     <color name="amarillo_oscuro">#FFBB33</color>

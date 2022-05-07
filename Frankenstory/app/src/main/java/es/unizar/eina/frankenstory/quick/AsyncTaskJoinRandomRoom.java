@@ -58,6 +58,9 @@ public class AsyncTaskJoinRandomRoom extends AsyncTask<String, Void, AsyncTaskJo
         return new Result();
     }
 
-    protected void onPostExecute(AsyncTaskJoinRandomRoom.Result resultado) { mActivity.setupAdapter(resultado); }
+    protected void onPostExecute(AsyncTaskJoinRandomRoom.Result resultado) {
+        if (resultado.result !=null && resultado.reason!=null) Log.d("JoinRandomRoomRes:",resultado.result+"("+resultado.reason+")");
+        mActivity.setupAdapter(resultado);
+    }
 
 }

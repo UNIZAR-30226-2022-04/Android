@@ -74,11 +74,8 @@
                         android:id="@+id/minus_writings"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/button_plus_minus"
+                        android:background="@drawable/button_minus"
                         android:textSize="30sp"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:text="@string/minus"
                         tools:ignore="RtlCompat"/>
                     <TextView
                         android:id="@+id/writings"
@@ -96,12 +93,9 @@
                         android:id="@+id/plus_writings"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/button_plus_minus"
+                        android:background="@drawable/button_plus"
                         android:textSize="30sp"
                         android:paddingHorizontal="0dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:text="@string/plus"
                         tools:ignore="RtlCompat"/>
 
                 </LinearLayout>
@@ -131,11 +125,8 @@
                         android:id="@+id/minus_length"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/button_plus_minus"
+                        android:background="@drawable/button_minus"
                         android:textSize="30sp"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:text="@string/minus"
                         tools:ignore="RtlCompat"/>
                     <TextView
                         android:id="@+id/length"
@@ -153,12 +144,9 @@
                         android:id="@+id/plus_lenght"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/button_plus_minus"
+                        android:background="@drawable/button_plus"
                         android:textSize="30sp"
                         android:paddingHorizontal="0dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:text="@string/plus"
                         tools:ignore="RtlCompat"/>
 
                 </LinearLayout>

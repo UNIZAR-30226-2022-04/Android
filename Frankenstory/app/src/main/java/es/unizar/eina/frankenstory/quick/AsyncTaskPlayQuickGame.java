@@ -62,7 +62,8 @@ public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPla
         }
         return new Result();
     }
-//636w0
-    protected void onPostExecute(AsyncTaskPlayQuickGame.Result resultado) { mActivity.setupAdapter(resultado); }
 
+    protected void onPostExecute(AsyncTaskPlayQuickGame.Result resultado) {
+        if (resultado.result !=null && resultado.reason!=null) Log.d("AsyncPlayQuickGameRes:",resultado.result+"("+resultado.reason+")");
+        mActivity.setupAdapter(resultado); }
 }

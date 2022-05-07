@@ -18,4 +18,9 @@
             <corners android:radius="15dp" />
         </shape>
     </item>
+    <item android:drawable="@drawable/ic_baseline_remove_24"
+        android:height="30dp"
+        android:width="30dp"
+        android:gravity="center"
+        android:top="10dp"/>
 </layer-list>

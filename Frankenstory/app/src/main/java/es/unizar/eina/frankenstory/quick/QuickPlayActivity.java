@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,10 +21,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import es.unizar.eina.frankenstory.MyApplication;
@@ -56,6 +61,11 @@ public class QuickPlayActivity extends AppCompatActivity{
     private String word2;
     private String word3;
 
+    private Boolean tryingToStartAnother;
+    private Boolean alreadyStartedTimer;
+
+    private Timer myTimer;
+
     static class FriendPuneta {
         String username;
         String puneta;
@@ -77,11 +87,14 @@ public class QuickPlayActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         paragraphToSend = new ParagraphToSend();
-        
+        tryingToStartAnother = false;
+        alreadyStartedTimer = false;
+
         // GET PARAMETERS
         Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
         setContentView(R.layout.activity_quick_game_play);
+        paragraphToSend.turn = Integer.parseInt(intent.getStringExtra("turn"));
         paragraphToSend.id = intent.getStringExtra("code");
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) intent.getSerializableExtra("gameParticipants");
 
@@ -118,7 +131,7 @@ public class QuickPlayActivity extends AppCompatActivity{
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
-        paragraphToSend.turn = 0;
+
 
         //SEND TEXT
         setNavegavilidad();
@@ -140,7 +153,23 @@ public class QuickPlayActivity extends AppCompatActivity{
 
         previous_content.setVisibility(View.GONE);
 
+        // UPDATE CONTENT
+        content.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!mode.equals("twitter")) UpdateUsedWords();
+            }
+        });
 
         // PUÑETAS
         paragraphToSend.listFriendPuneta = new ArrayList<FriendPuneta>();
@@ -201,6 +230,12 @@ public class QuickPlayActivity extends AppCompatActivity{
             }
         });
 
+
+        // IF ITS LAST PARAGRAPH
+        if (paragraphToSend.turn == gameParticipants.size()) {
+            paragraphToSend.isLast = true;
+            send_text.setBackgroundResource(R.drawable.buttom_finish_story);
+        } else paragraphToSend.isLast = false;
     }
 
     public void closePunetas(){
@@ -218,18 +253,9 @@ public class QuickPlayActivity extends AppCompatActivity{
         send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 paragraphToSend.body = String.valueOf(content.getText());
-                paragraphToSend.isLast = true; /*Debuggear*/
-                /*PARA DEBUG*/
-                //GO TO QUICK GAME VOTE
-                Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                i.putExtra("code",code);
-                i.putExtra("mode",mode);
-                startActivity(i);
-
                 // CALL ASYNC TASK ADD PARAGRAPH
-                // AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(this);
-                // myTask.execute(paragraphToSend);
+                AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(QuickPlayActivity.this);
+                myTask.execute(paragraphToSend);
             }
         });
 
@@ -241,29 +267,30 @@ public class QuickPlayActivity extends AppCompatActivity{
         if (resultado.result==null || resultado.result.equals("error")) {
             Toast.makeText(getApplicationContext(),"ERROR ENVIANDO APORTACION", Toast.LENGTH_SHORT).show();
         }else {
-            paragraphToSend.turn++;
-
-            if (paragraphToSend.turn == 9) send_text.setBackgroundResource(R.drawable.buttom_finish_story);
-            if (paragraphToSend.turn == 10) {
+            send_text.setClickable(false);
+            send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
+            TextView waiting = (TextView) findViewById(R.id.waitingPlayers);
+            waiting.setVisibility(View.VISIBLE);
+            if (paragraphToSend.turn == gameParticipants.size()) {
                 //GO TO QUICK GAME VOTE
                 Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                i.putExtra("code",code);
+                i.putExtra("mode",mode);
+                i.putExtra("gameParticipants", (Serializable) gameParticipants);
                 startActivity(i);
+                finish();
+            } else {
+                tryingToStartAnother = true;
+                AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
+                myTask.execute(code);
             }
-
-            previous_content.setVisibility(View.VISIBLE);
-
-            // CALL ASYNC TASK PLAY QUICK GAME
-            AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
-            myTask.execute(code);
         }
     }
 
     // ASYNC TASK ADAPTER PLAY QUICK GAME
     public void setupAdapter(AsyncTaskPlayQuickGame.Result resultado)
     {
-        if (resultado.result!=null && !resultado.result.equals("error")) {
-
+        if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == false) {
             if (mode.equals("twitter")) {
                 // Add hashtag if it has not
                 String hashtag = "";
@@ -281,45 +308,60 @@ public class QuickPlayActivity extends AppCompatActivity{
             }
 
             if (paragraphToSend.turn > 0) previous_content.setText(resultado.lastParagraph);
-
             new CountDownTimer(resultado.s * 1000L,1000){
-
                 public void onTick (long millisUntilFinished) {
-
                      mTime.setText(""+String.format("%d min %d sec",
                     TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
                     TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
-
-                    if (!mode.equals("twitter")) UpdateUsedWords();
-
                 }
-
                 public void onFinish() {
-
                     //GO TO NOT FIRST WRITE
 
                 }
-
             }.start();
-
+        } else if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == true){
+            if (myTimer != null) myTimer.cancel();
+            Intent i = new Intent(QuickPlayActivity.this, QuickPlayActivity.class);
+            startActivity(i);
+            i.putExtra("code",code);
+            i.putExtra("mode",mode);
+            i.putExtra("turn",paragraphToSend.turn.toString()+1);
+            i.putExtra("gameParticipants", (Serializable) gameParticipants);
+            finish();
+        } else if (resultado.result!=null && resultado.result.equals("waiting_players") && tryingToStartAnother == true){
+            if (!alreadyStartedTimer){
+                alreadyStartedTimer = true;
+                myTimer = new Timer();
+                TimerTask doThis;
+                doThis = new TimerTask() {
+                    @Override
+                    public void run() {
+                        askIfWaiting();
+                    }
+                };
+                myTimer.scheduleAtFixedRate(doThis,0,3000);
+            }
         }
+    }
+
+    public void askIfWaiting (){
+        AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
+        myTask.execute(code);
     }
 
     //Update colours of random words in editText
     public void UpdateUsedWords() {
-
         String text = String.valueOf(content.getText());
 
-        if (text.contains(word1) || text.contains(word1.toLowerCase(Locale.ROOT)) ) mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
-        else mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        if (text.contains(word1) || text.contains(word1.toLowerCase(Locale.ROOT)) ) mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        else mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
 
-        if (text.contains(word2) || text.contains(word2.toLowerCase(Locale.ROOT))) mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
-        else mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        if (text.contains(word2) || text.contains(word2.toLowerCase(Locale.ROOT))) mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        else mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
 
-        if (text.contains(word3) || text.contains(word3.toLowerCase(Locale.ROOT))) mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
-        else mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
-
+        if (text.contains(word3) || text.contains(word3.toLowerCase(Locale.ROOT))) mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+        else mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
     }
 
     public void subtractMooncoins(Integer mooncoinsPayed) {

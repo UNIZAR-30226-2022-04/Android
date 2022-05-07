@@ -50,29 +50,27 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:layout_marginStart="-20dp" />
-                    <!--Botón mas-->
-                    <Button
-                        android:id="@+id/plus_time"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="-120dp"
-                        android:background="@drawable/button_plus_minus"
-                        android:gravity="center"
-                        android:paddingHorizontal="0dp"
-                        android:text="@string/plus"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="25sp" />
+
                     <!--Botón menos-->
                     <Button
                         android:id="@+id/minus_time"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="-120dp"
+                        android:background="@drawable/button_minus"
+                        android:paddingHorizontal="2dp"
+                        android:paddingBottom="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="25sp" />
+                    <!--Botón mas-->
+                    <Button
+                        android:id="@+id/plus_time"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/button_plus_minus"
-                        android:paddingHorizontal="0dp"
-                        android:text="@string/minus"
-                        android:textAlignment="center"
+                        android:background="@drawable/button_plus"
+                        android:paddingHorizontal="2dp"
+                        android:paddingBottom="10dp"
                         android:textColor="@color/white"
                         android:textSize="25sp" />
                 </LinearLayout>
