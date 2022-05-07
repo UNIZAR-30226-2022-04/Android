@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -94,9 +94,14 @@
                         android:textSize="18sp" />
                 </LinearLayout>
                 <ListView
-                    android:id="@+id/voting_options"
+                    android:id="@+id/paragraphs"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"/>
+                    android:layout_height="380dp"
+                    android:layout_marginTop="10dp"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="1.0sp"
+                    android:fadeScrollbars="false"
+                    tools:listitem="@layout/row_quick_paragraphs_vote" />
 
             </LinearLayout>
             <!--Terminar escritura-->
@@ -122,4 +127,4 @@
             </LinearLayout>
         </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

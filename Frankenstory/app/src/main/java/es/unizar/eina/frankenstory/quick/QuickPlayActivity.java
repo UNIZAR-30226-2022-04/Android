@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,10 +13,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import es.unizar.eina.frankenstory.MyApplication;
@@ -44,6 +48,10 @@ public class QuickPlayActivity extends AppCompatActivity{
 
     private String code;
     private String mode;
+    private Integer turn;
+    private String word1;
+    private String word2;
+    private String word3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +93,8 @@ public class QuickPlayActivity extends AppCompatActivity{
 
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
+        turn = 0;
+
         //SEND TEXT
         setNavegavilidad();
 
@@ -103,9 +113,8 @@ public class QuickPlayActivity extends AppCompatActivity{
             mTwitter.setVisibility(View.GONE);
         }
 
-        if(/*first paragraph*/true){
-            previous_content.setVisibility(View.GONE);
-        }
+        previous_content.setVisibility(View.GONE);
+
 
 
         // PUÑETAS
@@ -165,6 +174,15 @@ public class QuickPlayActivity extends AppCompatActivity{
         send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String first_paragraph = String.valueOf(content.getText());
+
+                /*PARA DEBUG*/
+                //GO TO QUICK GAME VOTE
+                Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                i.putExtra("code",code);
+                i.putExtra("mode",mode);
+                startActivity(i);
+
                 // CALL ASYNC TASK ADD PARAGRAPH
                 // AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(this);
                 // myTask.execute(code,first_paragraph,1,false,punetas);
@@ -174,12 +192,28 @@ public class QuickPlayActivity extends AppCompatActivity{
     }
 
     // ASYNC TASK ADAPTER ADD PARAGRAPH
-    /*public void setupAdapter(AsyncTaskCreateStory.Result resultado)
+    public void setupAdapter(AsyncTaskAddParagraph.Result resultado)
     {
         if (resultado.result==null || resultado.result.equals("error")) {
-            Toast.makeText(getApplicationContext(),"ERROR CREANDO RELATO",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"ERROR ENVIANDO APORTACION", Toast.LENGTH_SHORT).show();
+        }else {
+            turn++;
+
+            if (turn == 9) send_text.setBackgroundResource(R.drawable.buttom_finish_story);
+            if (turn == 10) {
+                //GO TO QUICK GAME VOTE
+                Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+
+            previous_content.setVisibility(View.VISIBLE);
+
+            // CALL ASYNC TASK PLAY QUICK GAME
+            AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
+            myTask.execute(code);
         }
-    }*/
+    }
 
     // ASYNC TASK ADAPTER PLAY QUICK GAME
     public void setupAdapter(AsyncTaskPlayQuickGame.Result resultado)
@@ -195,7 +229,15 @@ public class QuickPlayActivity extends AppCompatActivity{
                 mFirstWord.setText(resultado.randomWords.get(0));
                 mSecondWord.setText(resultado.randomWords.get(1));
                 mThirdWord.setText(resultado.randomWords.get(2));
+
+                word1 = resultado.randomWords.get(0);
+                word2 = resultado.randomWords.get(1);
+                word3 = resultado.randomWords.get(2);
+
             }
+
+            if (turn > 0) previous_content.setText(resultado.lastParagraph);
+
             new CountDownTimer(resultado.s * 1000L,1000){
 
                 public void onTick (long millisUntilFinished) {
@@ -204,6 +246,8 @@ public class QuickPlayActivity extends AppCompatActivity{
                     TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
                     TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+
+                    if (!mode.equals("twitter")) UpdateUsedWords();
 
                 }
 
@@ -216,6 +260,22 @@ public class QuickPlayActivity extends AppCompatActivity{
             }.start();
 
         }
+    }
+
+    //Update colours of random words in editText
+    public void UpdateUsedWords() {
+
+        String text = String.valueOf(content.getText());
+
+        if (text.contains(word1) || text.contains(word1.toLowerCase(Locale.ROOT)) ) mFirstWord.setVisibility(View.GONE);
+        else mFirstWord.setVisibility(View.VISIBLE);
+
+        if (text.contains(word2) || text.contains(word2.toLowerCase(Locale.ROOT))) mSecondWord.setVisibility(View.GONE);
+        else mSecondWord.setVisibility(View.VISIBLE);
+
+        if (text.contains(word3) || text.contains(word3.toLowerCase(Locale.ROOT))) mThirdWord.setVisibility(View.GONE);
+        else mThirdWord.setVisibility(View.VISIBLE);
+
     }
 
     // Para ocultar Navigation bar y lo de arriba.

@@ -10,54 +10,38 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddParagraph.Result>{
+public class AsyncTaskVoteQuick extends AsyncTask<String, Void, AsyncTaskVoteQuick.Result>{
 
-        private QuickCreateActivity mActivity = null;
-
-    static class Punetas {
-        String puneta;
-        String username;
-    }
+        private QuickVoteActivity mActivity = null;
 
     static class Result {
         String result;
     }
 
-    public AsyncTaskAddParagraph(QuickCreateActivity activity)
+    public AsyncTaskVoteQuick(QuickVoteActivity activity)
     {
         mActivity = activity;
     }
 
-    protected AsyncTaskAddParagraph.Result doInBackground(String... params) {
+    protected AsyncTaskVoteQuick.Result doInBackground(String... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         String id = params[0];
-        String body = params[1];
-        String turn = params[2];
-        boolean isLast = Boolean.parseBoolean(params[3]);
-
-        String punetas = null;
-        //List<String> punetas_aux = Collections.singletonList(params[4]);
-        //List<String> usernames_aux = Collections.singletonList(params[5]);
-
+        int paragraph = Integer.parseInt(params[1]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/add_quick_game_paragraph").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/vote_quick_game").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
-                    "\"id\":\"" + id + "\"," + "\"body\":" + body + "\"," +
-                    "\"turn\":\"" + turn + "\"," + "\"isLast\":" + isLast + ",\"punetas\":" + punetas + "\"}";
-            Log.d("AddParagraph", jsonInputString.toString());
+                    "\"id\":\"" + id + "\"," + "\"paragraph\":" + paragraph + "}";
+            Log.d("VoteQuick", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -68,13 +52,13 @@ public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddP
             return gson.fromJson(reader, Result.class);
 
         } catch (IOException e) {
-            Log.e("AsyscTaskAddParagraph",e.getMessage());
+            Log.e("AsyscTaskVoteQuick",e.getMessage());
         } catch (Exception e) {
-            Log.e("AsyscTaskAddParagraph",e.getMessage());
+            Log.e("AsyscTaskVoteQuick",e.getMessage());
         }
         return new Result();
     }
 
-    //protected void onPostExecute(AsyncTaskAddParagraph.Result resultado) { mActivity.setupAdapter(resultado); }
+    protected void onPostExecute(AsyncTaskVoteQuick.Result resultado) { mActivity.setupAdapter(resultado); }
 
 }
