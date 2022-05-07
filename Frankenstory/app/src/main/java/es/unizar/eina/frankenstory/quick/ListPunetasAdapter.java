@@ -12,15 +12,19 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.R;
 
-public class ListParticipantsAdapter extends BaseAdapter{
+public class ListPunetasAdapter extends BaseAdapter {
 
-    private QuickRoomActivity context; //context
+    private QuickPlayActivity context; //context
     private List<AsyncTaskGetRoom.Participants> items; //data source of the list adapter
+    private String punetaSelected;
+    private Integer mooncoinsPayed;
 
     //public constructor
-    public ListParticipantsAdapter(QuickRoomActivity context, List<AsyncTaskGetRoom.Participants> items) {
+    public ListPunetasAdapter(QuickPlayActivity context, List<AsyncTaskGetRoom.Participants> items, String punetaSelected, Integer mooncoinsPayed) {
         this.context = context;
         this.items = items;
+        this.punetaSelected = punetaSelected;
+        this.mooncoinsPayed = mooncoinsPayed;
     }
 
     @Override
@@ -44,16 +48,15 @@ public class ListParticipantsAdapter extends BaseAdapter{
         // inflate the layout for each list row
         if (convertView == null) {
             convertView = LayoutInflater.from(context).
-                    inflate(R.layout.row_participants, parent, false);
+                    inflate(R.layout.row_punetas, parent, false);
         }
 
         // get current item to be displayed
         AsyncTaskGetRoom.Participants currentItem = (AsyncTaskGetRoom.Participants) getItem(position);
 
         // get VIEWS
-        ImageView playerImage = (ImageView) convertView.findViewById(R.id.playerImage);
-        TextView playerName = (TextView) convertView.findViewById(R.id.playerName);
-        TextView playerStars = (TextView) convertView.findViewById(R.id.playerStars);
+        ImageView playerImage = (ImageView) convertView.findViewById(R.id.iconPunetaName);
+        TextView playerName = (TextView) convertView.findViewById(R.id.namePunetaFriend);
 
         // set DATA
         if (currentItem.picture == 0) playerImage.setImageResource(R.raw.icon0);
@@ -68,7 +71,18 @@ public class ListParticipantsAdapter extends BaseAdapter{
         else if (currentItem.picture == 9) playerImage.setImageResource(R.raw.icon9);
 
         playerName.setText(currentItem.username);
-        playerStars.setText("x" + currentItem.stars);
+
+        // On click on savePuneta
+        convertView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                QuickPlayActivity.FriendPuneta newPuneta = new QuickPlayActivity.FriendPuneta();
+                newPuneta.puneta = punetaSelected;
+                newPuneta.username = currentItem.username;
+                context.paragraphToSend.listFriendPuneta.add(newPuneta);
+                context.subtractMooncoins(mooncoinsPayed);
+                context.closePunetas();
+            }
+        });
 
         // returns the view for the current row
         return convertView;

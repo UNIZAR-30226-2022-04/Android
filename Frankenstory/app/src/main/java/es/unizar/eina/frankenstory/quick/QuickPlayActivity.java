@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -45,22 +48,43 @@ public class QuickPlayActivity extends AppCompatActivity{
     private LinearLayout escribe_ciegas;
     private LinearLayout desorden_total;
     private TextView textPunetas;
+    private ListView mlistfriendsToSend;
 
     private String code;
     private String mode;
-    private Integer turn;
     private String word1;
     private String word2;
     private String word3;
+
+    static class FriendPuneta {
+        String username;
+        String puneta;
+    }
+
+    static class ParagraphToSend extends Object {
+        String id;
+        String body;
+        Integer turn;
+        Boolean isLast;
+        List<FriendPuneta> listFriendPuneta;
+    }
+    ParagraphToSend paragraphToSend;
+    private List<AsyncTaskGetRoom.Participants> gameParticipants;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        paragraphToSend = new ParagraphToSend();
+        
         // GET PARAMETERS
         Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
         setContentView(R.layout.activity_quick_game_play);
+        paragraphToSend.id = intent.getStringExtra("code");
+        gameParticipants = (List<AsyncTaskGetRoom.Participants>) intent.getSerializableExtra("gameParticipants");
+
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -88,12 +112,13 @@ public class QuickPlayActivity extends AppCompatActivity{
         mThirdWord = (TextView) findViewById(R.id.third_word);
         mTime = (TextView) findViewById(R.id.time);
         previous_content = (TextView) findViewById(R.id.previous_content);
+        mlistfriendsToSend = (ListView) findViewById(R.id.listfriendsToSend);
+
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
-
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
-        turn = 0;
+        paragraphToSend.turn = 0;
 
         //SEND TEXT
         setNavegavilidad();
@@ -118,6 +143,7 @@ public class QuickPlayActivity extends AppCompatActivity{
 
 
         // PUÑETAS
+        paragraphToSend.listFriendPuneta = new ArrayList<FriendPuneta>();
         buttonPunetas = (Button) findViewById(R.id.buttonPunetas);
         letras_reves = (LinearLayout) findViewById(R.id.letras_reves);
         escribe_ciegas = (LinearLayout) findViewById(R.id.escribe_ciegas);
@@ -134,10 +160,7 @@ public class QuickPlayActivity extends AppCompatActivity{
                     desorden_total.setVisibility(View.VISIBLE);
                 } else {
                     // CLOSE
-                    buttonPunetas.setText("+");
-                    letras_reves.setVisibility(View.GONE);
-                    escribe_ciegas.setVisibility(View.GONE);
-                    desorden_total.setVisibility(View.GONE);
+                    closePunetas();
                 }
             }
         });
@@ -147,6 +170,10 @@ public class QuickPlayActivity extends AppCompatActivity{
                 letras_reves.setVisibility(View.GONE);
                 escribe_ciegas.setVisibility(View.GONE);
                 desorden_total.setVisibility(View.GONE);
+                // INFLATE LIST
+                mlistfriendsToSend.setVisibility(View.VISIBLE);
+                ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "reves",150);
+                mlistfriendsToSend.setAdapter(adapter);
             }
         });
         escribe_ciegas.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +182,10 @@ public class QuickPlayActivity extends AppCompatActivity{
                 letras_reves.setVisibility(View.GONE);
                 escribe_ciegas.setVisibility(View.GONE);
                 desorden_total.setVisibility(View.GONE);
+                // INFLATE LIST
+                mlistfriendsToSend.setVisibility(View.VISIBLE);
+                ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "ciego",300);
+                mlistfriendsToSend.setAdapter(adapter);
             }
         });
         desorden_total.setOnClickListener(new View.OnClickListener() {
@@ -163,9 +194,22 @@ public class QuickPlayActivity extends AppCompatActivity{
                 letras_reves.setVisibility(View.GONE);
                 escribe_ciegas.setVisibility(View.GONE);
                 desorden_total.setVisibility(View.GONE);
+                // INFLATE LIST
+                mlistfriendsToSend.setVisibility(View.VISIBLE);
+                ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "desorden",500);
+                mlistfriendsToSend.setAdapter(adapter);
             }
         });
 
+    }
+
+    public void closePunetas(){
+        buttonPunetas.setText("+");
+        textPunetas.setText("Comprar puñetas");
+        letras_reves.setVisibility(View.GONE);
+        escribe_ciegas.setVisibility(View.GONE);
+        desorden_total.setVisibility(View.GONE);
+        mlistfriendsToSend.setVisibility(View.GONE);
     }
 
     public void setNavegavilidad(){
@@ -173,8 +217,8 @@ public class QuickPlayActivity extends AppCompatActivity{
         // BUTTON SEND TEXT
         send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String first_paragraph = String.valueOf(content.getText());
-
+                paragraphToSend.body = String.valueOf(content.getText());
+                paragraphToSend.isLast = true; /*Debuggear*/
                 /*PARA DEBUG*/
                 //GO TO QUICK GAME VOTE
                 Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
@@ -185,7 +229,7 @@ public class QuickPlayActivity extends AppCompatActivity{
 
                 // CALL ASYNC TASK ADD PARAGRAPH
                 // AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(this);
-                // myTask.execute(code,first_paragraph,1,false,punetas);
+                // myTask.execute(paragraphToSend);
             }
         });
 
@@ -197,10 +241,10 @@ public class QuickPlayActivity extends AppCompatActivity{
         if (resultado.result==null || resultado.result.equals("error")) {
             Toast.makeText(getApplicationContext(),"ERROR ENVIANDO APORTACION", Toast.LENGTH_SHORT).show();
         }else {
-            turn++;
+            paragraphToSend.turn++;
 
-            if (turn == 9) send_text.setBackgroundResource(R.drawable.buttom_finish_story);
-            if (turn == 10) {
+            if (paragraphToSend.turn == 9) send_text.setBackgroundResource(R.drawable.buttom_finish_story);
+            if (paragraphToSend.turn == 10) {
                 //GO TO QUICK GAME VOTE
                 Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -236,7 +280,7 @@ public class QuickPlayActivity extends AppCompatActivity{
 
             }
 
-            if (turn > 0) previous_content.setText(resultado.lastParagraph);
+            if (paragraphToSend.turn > 0) previous_content.setText(resultado.lastParagraph);
 
             new CountDownTimer(resultado.s * 1000L,1000){
 
@@ -267,15 +311,22 @@ public class QuickPlayActivity extends AppCompatActivity{
 
         String text = String.valueOf(content.getText());
 
-        if (text.contains(word1) || text.contains(word1.toLowerCase(Locale.ROOT)) ) mFirstWord.setVisibility(View.GONE);
-        else mFirstWord.setVisibility(View.VISIBLE);
+        if (text.contains(word1) || text.contains(word1.toLowerCase(Locale.ROOT)) ) mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
+        else mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
 
-        if (text.contains(word2) || text.contains(word2.toLowerCase(Locale.ROOT))) mSecondWord.setVisibility(View.GONE);
-        else mSecondWord.setVisibility(View.VISIBLE);
+        if (text.contains(word2) || text.contains(word2.toLowerCase(Locale.ROOT))) mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
+        else mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
 
-        if (text.contains(word3) || text.contains(word3.toLowerCase(Locale.ROOT))) mThirdWord.setVisibility(View.GONE);
-        else mThirdWord.setVisibility(View.VISIBLE);
+        if (text.contains(word3) || text.contains(word3.toLowerCase(Locale.ROOT))) mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
+        else mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
 
+    }
+
+    public void subtractMooncoins(Integer mooncoinsPayed) {
+        Integer pocket = Integer.parseInt(((MyApplication) this.getApplication()).getCoins());
+        pocket -= mooncoinsPayed;
+        ((MyApplication) this.getApplication()).setCoins(pocket.toString());
+        mCoins.setText(pocket.toString());
     }
 
     // Para ocultar Navigation bar y lo de arriba.

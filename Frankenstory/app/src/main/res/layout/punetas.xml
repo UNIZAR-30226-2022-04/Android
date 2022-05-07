@@ -189,15 +189,15 @@
             </LinearLayout>
         </LinearLayout>
         <!-- PERSONAS A ENVIAR -->
-        <!--
         <ListView
-            android:id="@+id/friendsToSend"
+            android:id="@+id/listfriendsToSend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
-            tools:listitem="@layout/row_searched_friends"
-            android:visibility="visible"/>-->
+            tools:listitem="@layout/row_punetas"
+            android:visibility="gone"
+            android:dividerHeight="8dp"/>
     </LinearLayout>
     <!-- Icono puneta -->
     <ImageView

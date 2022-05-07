@@ -16,7 +16,7 @@ import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
 
-public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddParagraph.Result>{
+public class AsyncTaskAddParagraph extends AsyncTask<QuickPlayActivity.ParagraphToSend, Void, AsyncTaskAddParagraph.Result>{
 
         private QuickCreateActivity mActivity = null;
 
@@ -34,17 +34,18 @@ public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddP
         mActivity = activity;
     }
 
-    protected AsyncTaskAddParagraph.Result doInBackground(String... params) {
+    protected AsyncTaskAddParagraph.Result doInBackground(QuickPlayActivity.ParagraphToSend... params) {
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
-        String id = params[0];
-        String body = params[1];
-        String turn = params[2];
-        boolean isLast = Boolean.parseBoolean(params[3]);
-
-        String punetas = null;
-        //List<String> punetas_aux = Collections.singletonList(params[4]);
-        //List<String> usernames_aux = Collections.singletonList(params[5]);
+        String punetas = "[";
+        for (QuickPlayActivity.FriendPuneta f : params[0].listFriendPuneta){
+            punetas+= "{\"puneta\":\""+f.puneta+"\",\"username\":\""+f.username+"\"},";
+        }
+        if (punetas.charAt(punetas.length()-1) == ',') {
+            punetas = punetas.substring(0,punetas.length()-1) + "]";
+        } else {
+            punetas += "]";
+        }
 
         HttpURLConnection con;
         try {
@@ -55,8 +56,8 @@ public class AsyncTaskAddParagraph extends AsyncTask<String, Void, AsyncTaskAddP
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
-                    "\"id\":\"" + id + "\"," + "\"body\":" + body + "\"," +
-                    "\"turn\":\"" + turn + "\"," + "\"isLast\":" + isLast + ",\"punetas\":" + punetas + "\"}";
+                    "\"id\":\"" + params[0].id + "\"," + "\"body\":" + params[0].body + "\"," +
+                    "\"turn\":\"" + params[0].turn + "\"," + "\"isLast\":" + params[0].isLast.toString() + ",\"punetas\":" + punetas + "}";
             Log.d("AddParagraph", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();

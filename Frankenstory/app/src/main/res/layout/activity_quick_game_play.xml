@@ -104,7 +104,8 @@ android:id="@+id/layoutmain">
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginTop="5dp">
             <TextView
                 android:id="@+id/first_Word"
                 android:layout_width="80dp"
@@ -149,7 +150,7 @@ android:id="@+id/layoutmain">
             android:layout_width="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="right"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="15dp">
             <!---Icono Reloj-->
             <ImageView
                 android:layout_width="30dp"

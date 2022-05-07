@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -18,7 +19,7 @@ public class AsyncTaskGetRoom extends AsyncTask<String, Void, AsyncTaskGetRoom.R
 
         private QuickRoomActivity mActivity = null;
 
-    static class Participants {
+    static class Participants implements Serializable {
         String username;
         int picture;
         int stars;

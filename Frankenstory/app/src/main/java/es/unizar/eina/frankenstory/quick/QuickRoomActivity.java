@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -47,6 +49,7 @@ public class QuickRoomActivity extends AppCompatActivity {
     private Timer myTimer;
     private TimerTask doThis;
 
+    private List<AsyncTaskGetRoom.Participants> gameParticipants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +147,7 @@ public class QuickRoomActivity extends AppCompatActivity {
                 Intent i = new Intent(QuickRoomActivity.this, SettingsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -162,7 +166,9 @@ public class QuickRoomActivity extends AppCompatActivity {
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 i.putExtra("code",code);
                 i.putExtra("mode",mode);
+                i.putExtra("gameParticipants", (Serializable) gameParticipants);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -211,6 +217,7 @@ public class QuickRoomActivity extends AppCompatActivity {
 
    private void fillDataParticipants(List<AsyncTaskGetRoom.Participants> participants) {
         // instantiate the custom list adapter
+        gameParticipants = participants; // Save it for sendind to next activities
         ListParticipantsAdapter adapter = new ListParticipantsAdapter(this, participants);
 
         // get the ListView and attach the adapter
@@ -231,6 +238,7 @@ public class QuickRoomActivity extends AppCompatActivity {
             i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             i.putExtra("id", id);
             startActivity(i);
+            finish();
         }
     }
     */
