@@ -28,6 +28,7 @@ public class QuickVoteActivity extends AppCompatActivity{
     private ListView mParagraphs;
     private ImageView mIconUser;
     private TextView mTheme;
+    private TextView mTittleTheme;
 
     private String code;
     private String mode;
@@ -48,6 +49,7 @@ public class QuickVoteActivity extends AppCompatActivity{
         mParagraphs = (ListView) findViewById(R.id.paragraphs);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         mTheme = (TextView) findViewById(R.id.twitter_trend);
+        mTittleTheme = (TextView) findViewById(R.id.title_theme);
 
         updateData();
         votedParagraph = 0;
@@ -67,6 +69,7 @@ public class QuickVoteActivity extends AppCompatActivity{
 
         if (!mode.equals("twitter")) {
             mTheme.setVisibility(View.GONE);
+            mTittleTheme.setVisibility(View.GONE);
         }
 
         // CALL ASYNC TASK RESUME VOTE QUICK GAME
@@ -132,8 +135,12 @@ public class QuickVoteActivity extends AppCompatActivity{
     // ASYNC TASK RESUME VOTE QUICK GAME
     public void setupAdapter(AsyncTaskResumeQuickVote.Result resultado)
     {
+
         if (resultado.result!=null && resultado.result.equals("success")){
+
+            mTheme.setText(resultado.topic);
             fillParagraphs(resultado.paragraphs);
+
         }
     }
 

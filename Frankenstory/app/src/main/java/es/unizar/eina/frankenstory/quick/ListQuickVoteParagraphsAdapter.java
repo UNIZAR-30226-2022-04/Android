@@ -1,5 +1,6 @@
 package es.unizar.eina.frankenstory.quick;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,12 +63,14 @@ public class ListQuickVoteParagraphsAdapter extends BaseAdapter {
         // get VIEWS
         TextView textViewItemName = (TextView) convertView.findViewById(R.id.body);
 
-        // set DATA
-        textViewItemName.setText(currentItem.body);
+        //SET COLOURS TO WORDS
+        String content = currentItem.body;
+        content = content.replace(currentItem.words.get(0), "<font color='#0ca789'>" + currentItem.words.get(0) + "</font>");
+        content = content.replace(currentItem.words.get(1), "<font color='#0ca789'>" + currentItem.words.get(1) + "</font>");
+        content = content.replace(currentItem.words.get(2), "<font color='#0ca789'>" + currentItem.words.get(2) + "</font>");
 
-        //SET COLOURS TO RANDOM WORDS
-        //
-        //
+        // set DATA
+        textViewItemName.setText(Html.fromHtml(content));
 
         // returns the view for the current row
         return convertView;
