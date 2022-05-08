@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -350,18 +351,26 @@ public class QuickPlayActivity extends AppCompatActivity{
         myTask.execute(code);
     }
 
-    //Update colours of random words in editText
+    //Update used random words in editText
     public void UpdateUsedWords() {
-        String text = String.valueOf(content.getText());
+        if (!TextUtils.isEmpty(content.getText().toString())) {
+            String text = String.valueOf(content.getText());
 
-        if (text.contains(word1) || text.contains(word1.toLowerCase(Locale.ROOT)) ) mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
-        else mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+            if (text.contains(word1) || text.contains(word1.toLowerCase(Locale.ROOT)))
+                mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+            else
+                mFirstWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
 
-        if (text.contains(word2) || text.contains(word2.toLowerCase(Locale.ROOT))) mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
-        else mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+            if (text.contains(word2) || text.contains(word2.toLowerCase(Locale.ROOT)))
+                mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+            else
+                mSecondWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
 
-        if (text.contains(word3) || text.contains(word3.toLowerCase(Locale.ROOT))) mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
-        else mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+            if (text.contains(word3) || text.contains(word3.toLowerCase(Locale.ROOT)))
+                mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_letras));
+            else
+                mThirdWord.setBackgroundColor(getResources().getColor(R.color.verde_publico_seleccionado));
+        }
     }
 
     public void subtractMooncoins(Integer mooncoinsPayed) {

@@ -25,15 +25,12 @@ import java.util.TimerTask;
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
-public class QuickVoteActivity extends AppCompatActivity{
+public class QuickVotedActivity extends AppCompatActivity{
 
     private TextView mUsername;
     private TextView mCoins;
     private ListView mParagraphs;
     private ImageView mIconUser;
-    private TextView mTheme;
-    private TextView mTittleTheme;
-    private Button mVote;
 
     private String code;
     private String mode;
@@ -41,17 +38,14 @@ public class QuickVoteActivity extends AppCompatActivity{
     Integer votedParagraph;
     View selectedView;
     private List<AsyncTaskGetRoom.Participants> gameParticipants;
-
-    private Boolean alreadyStartedTimer;
-
     private Timer myTimer;
+
+    public Integer winner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quick_game_vote);
-
-        alreadyStartedTimer = false;
+        setContentView(R.layout.activity_quick_game_voted);
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -61,9 +55,6 @@ public class QuickVoteActivity extends AppCompatActivity{
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mParagraphs = (ListView) findViewById(R.id.paragraphs);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
-        mTheme = (TextView) findViewById(R.id.twitter_trend);
-        mTittleTheme = (TextView) findViewById(R.id.title_theme);
-        mVote = (Button) findViewById(R.id.vote);
 
         updateData();
         votedParagraph = 0;
@@ -71,8 +62,8 @@ public class QuickVoteActivity extends AppCompatActivity{
         Intent i = getIntent();
         code = i.getStringExtra("code");
         mode = i.getStringExtra("mode");
+        turn = Integer.parseInt(i.getStringExtra("turn"));
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) i.getSerializableExtra("gameParticipants");
-        setNavegavilidad();
 
         // BACKGROUND ANIMATION
         RelativeLayout relativeLayout = findViewById(R.id.layoutmain);
@@ -81,13 +72,8 @@ public class QuickVoteActivity extends AppCompatActivity{
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-        if (!mode.equals("twitter")) {
-            mTheme.setVisibility(View.GONE);
-            mTittleTheme.setVisibility(View.GONE);
-        }
-
-        // CALL ASYNC TASK RESUME VOTE QUICK GAME
-        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(QuickVoteActivity.this, null);
+        // CALL ASYNC TASK RESUME VOTED QUICK GAME
+        AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(null,QuickVotedActivity.this);
         myTask.execute(code);
 
     }
@@ -102,20 +88,6 @@ public class QuickVoteActivity extends AppCompatActivity{
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
-    }
-
-    public void setNavegavilidad(){
-        Button ButtonVote = (Button)findViewById(R.id.vote);
-
-        // BUTTON VOTE
-        ButtonVote.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //ASYNC TASK VOTE PARAGRAPH
-                AsyncTaskVoteQuick myTask = new AsyncTaskVoteQuick(QuickVoteActivity.this);
-                myTask.execute(code, String.valueOf(votedParagraph));
-
-            }
-        });
     }
 
     // Para ocultar Navigation bar y lo de arriba.
@@ -136,92 +108,61 @@ public class QuickVoteActivity extends AppCompatActivity{
         }
     }
 
-    // ASYNC TASK RESUME VOTE QUICK GAME
-    public void setupAdapter(AsyncTaskResumeQuickVote.Result resultado)
-    {
-        if (resultado.result!=null && resultado.result.equals("success")){
-            mTheme.setText(resultado.topic);
-            turn = resultado.turn;
-            fillParagraphs(resultado.paragraphs);
-
-        }
-    }
-
-    //ASYNC TASK ADAPTER VOTE QUICK
-    public void setupAdapter(AsyncTaskVoteQuick.Result resultado) {
-
-        if (resultado.result==null || resultado.result.equals("error")) {
-            Toast.makeText(getApplicationContext(), "ERROR ENVIANDO VOTACION", Toast.LENGTH_SHORT).show();
-        } else {
-            mVote.setClickable(false);
-            mVote.setBackground(getResources().getDrawable(R.drawable.button_grey));
-            TextView waiting = (TextView) findViewById(R.id.waitingPlayers);
-            waiting.setVisibility(View.VISIBLE);
-
-            AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(QuickVoteActivity.this, null);
-            myTask.execute(code);
-        }
-
-    }
-
     // ASYNC TASK ADAPTER RESUME QUICK VOTED
     public void setupAdapter(AsyncTaskResumeQuickVoted.Result resultado) {
 
-        if (resultado.result!=null && resultado.result.equals("success")) {
-            if (myTimer != null) myTimer.cancel();
-            //GO TO QUICK GAME VOTED
-            Intent i = new Intent(QuickVoteActivity.this, QuickVotedActivity.class);
-            i.putExtra("code",code);
-            i.putExtra("mode",mode);
-            i.putExtra("turn",turn);
-            i.putExtra("gameParticipants", (Serializable) gameParticipants);
-            startActivity(i);
-            finish();
+        if (resultado.result!=null && resultado.result.equals("success")){
 
-        } else if (resultado.result!=null && resultado.result.equals("waiting_players")) {
-            if (!alreadyStartedTimer) {
-                alreadyStartedTimer = true;
+            TextView mUsername = (TextView) findViewById(R.id.user_story);
+            mUsername.setText("Historia de "+ resultado.paragraphs.get(0).username);
+            fillParagraphs(resultado.paragraphs);
+            winner = resultado.winner;
+
+            if (turn == gameParticipants.size()) {    //TO QUICK POINTS
+                //GO TO QUICK POINTS
+                //
+                //
+
+            } else {  //TO QUICK VOTE
                 myTimer = new Timer();
                 TimerTask doThis;
                 doThis = new TimerTask() {
-                    @Override
-                    public void run() {
-                        askIfWaiting();
-                    }
-                };
+                      @Override
+                      public void run() {
+                          askIfWaiting();
+                      }
+                  };
                 myTimer.scheduleAtFixedRate(doThis, 0, 3000);
             }
         }
     }
 
+    // ASYNC TASK ADAPTER RESUME QUICK VOTE
+    public void setupAdapter(AsyncTaskResumeQuickVote.Result resultado) {
+
+        if (resultado.result!=null && resultado.result.equals("success")){
+
+            //GO TO QUICK GAME VOTE
+            Intent i = new Intent(QuickVotedActivity.this, QuickVoteActivity.class);
+            i.putExtra("code",code);
+            i.putExtra("mode",mode);
+            i.putExtra("gameParticipants", (Serializable) gameParticipants);
+            startActivity(i);
+            finish();
+
+        }
+    }
+
     public void askIfWaiting (){
-        AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(QuickVoteActivity.this, null);
+        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(null, QuickVotedActivity.this);
         myTask.execute(code);
     }
 
-    private void fillParagraphs(List<AsyncTaskResumeQuickVote.Paragraph> paragraphs) {
+    private void fillParagraphs(List<AsyncTaskResumeQuickVoted.Paragraph> paragraphs) {
 
-        ListQuickVoteParagraphsAdapter adapter = new ListQuickVoteParagraphsAdapter(this, paragraphs);
+        ListQuickVotedParagraphsAdapter adapter = new ListQuickVotedParagraphsAdapter(this, paragraphs);
         mParagraphs.setAdapter(adapter);
 
-        mParagraphs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // INVISIBLE LAST HEART
-                ImageView heart = (ImageView) selectedView.findViewById(R.id.imageVote);
-                heart.setVisibility(View.GONE);
-                TextView textViewItem = (TextView) selectedView.findViewById(R.id.body);
-                textViewItem.setBackgroundColor(getResources().getColor(R.color.verde_parrafo));
-                // VISIBLE NEW HEART
-                selectedView = view;
-                textViewItem = (TextView) selectedView.findViewById(R.id.body);
-                textViewItem.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
-                heart = (ImageView) view.findViewById(R.id.imageVote);
-                heart.setVisibility(View.VISIBLE);
-                votedParagraph = position;
-                Log.d("VOTED PARAGRAPH", votedParagraph.toString());
-            }
-        });
     }
 
     // SET ICON USER

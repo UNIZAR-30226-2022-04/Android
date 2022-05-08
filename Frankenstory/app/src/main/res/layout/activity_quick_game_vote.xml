@@ -50,24 +50,11 @@
                     android:id="@+id/previous_content"
                     android:textSize="15sp">
                 </TextView>
-                <TextView
-                    android:id="@+id/user_story"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arial_bold"
-                    android:textAlignment="center"
-                    android:layout_marginTop="10dp"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="6"
-                    android:shadowDy="6"
-                    android:shadowRadius="1"
-                    android:text="@string/story_name"
-                    android:textColor="@color/white"
-                    android:textSize="32sp" />
                     <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
                     <TextView
                         android:id="@+id/title_theme"
                         android:layout_width="match_parent"
@@ -125,7 +112,26 @@
                     android:text="@string/vote"
                     android:textColor="@color/white"
                     android:textSize="27sp" />
+
             </LinearLayout>
+
+            <TextView
+            android:id="@+id/waitingPlayers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Esperando a los demás jugadores"
+            android:gravity="center"
+            android:fontFamily="@font/bangers_regular"
+            android:textSize="30dp"
+            android:textColor="@color/verde_letras"
+            android:shadowRadius="1"
+            android:shadowDx="6"
+            android:shadowDy="6"
+            android:shadowColor="@color/black"
+            android:paddingHorizontal="50dp"
+            android:visibility="gone"/>
+
         </RelativeLayout>
+
 
 </RelativeLayout>

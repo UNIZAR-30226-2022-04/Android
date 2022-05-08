@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -56,7 +56,8 @@
                     android:id="@+id/voted"
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"/>
+                    android:layout_height="400dp"
+                    tools:listitem="@layout/row_quick_paragraphs_voted"/>
 
             </LinearLayout>
             <!--Terminar escritura-->
@@ -67,19 +68,8 @@
                 android:gravity="center_horizontal|bottom"
                 android:orientation="vertical"
                 android:paddingBottom="20dp">
-                <!--Boton terminar parrafo-->
-                <Button
-                    android:id="@+id/next"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:background="@drawable/button_green"
-                    android:fontFamily="@font/bangers_regular"
-                    android:paddingHorizontal="100dp"
-                    android:text="@string/next"
-                    android:textColor="@color/white"
-                    android:textSize="27sp" />
+
             </LinearLayout>
         </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
