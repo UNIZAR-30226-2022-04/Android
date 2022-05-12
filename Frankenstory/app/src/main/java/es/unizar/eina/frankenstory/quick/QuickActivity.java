@@ -201,7 +201,7 @@ public class QuickActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         } else {
-        Toast.makeText(QuickActivity.this, resultado.reason, Toast.LENGTH_LONG).show();
+            Toast.makeText(QuickActivity.this, resultado.reason, Toast.LENGTH_LONG).show();
         }
     }
 

@@ -83,7 +83,7 @@ public class QuickRoomActivity extends AppCompatActivity {
         mListParticipants = (ListView) findViewById(R.id.participants);
 
         mCode.setText("CODIGO DE SALA: " + code);
-
+        mStartGame.setClickable(false);
         updateData();
 
         // BUTTONS FROM TOP AND BOTTOM
@@ -157,7 +157,7 @@ public class QuickRoomActivity extends AppCompatActivity {
                 //myTask.execute(code);
 
                 //Dejamos de actualizar cada 5 segundos
-                onPause();
+                myTimer.cancel();
 
                 Intent i = new Intent(QuickRoomActivity.this, QuickPlayActivity.class);
                 i.putExtra("code",code);
@@ -211,7 +211,7 @@ public class QuickRoomActivity extends AppCompatActivity {
                 Intent i = new Intent(QuickRoomActivity.this, QuickPlayActivity.class);
                 i.putExtra("code",code);
                 i.putExtra("mode",mode);
-                i.putExtra("turn","1");
+                i.putExtra("turn","0");
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
                 startActivity(i);
                 finish();
@@ -219,6 +219,7 @@ public class QuickRoomActivity extends AppCompatActivity {
                 Intent i = new Intent(QuickRoomActivity.this, QuickVoteActivity.class);
                 i.putExtra("code",code);
                 i.putExtra("mode",mode);
+                i.putExtra("turn","0");
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
                 startActivity(i);
                 finish();
@@ -230,6 +231,8 @@ public class QuickRoomActivity extends AppCompatActivity {
                 // DONT LET START
                 mStartGame.setVisibility(View.INVISIBLE);
                 mStartGame.setClickable(false);
+            } else {
+                mStartGame.setClickable(true);
             }
 
             fillDataParticipants(resultado.participants);

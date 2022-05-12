@@ -139,7 +139,7 @@ public class QuickPlayActivity extends AppCompatActivity{
 
         // CALL ASYNC TASK PLAY QUICK GAME
         AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
-        myTask.execute(code);
+        myTask.execute(code, paragraphToSend.turn.toString());
 
         // HIDE UNUSED BCS OF MODE
         if (mode.equals("twitter")){
@@ -231,12 +231,6 @@ public class QuickPlayActivity extends AppCompatActivity{
             }
         });
 
-
-        // IF ITS LAST PARAGRAPH
-        if (paragraphToSend.turn == gameParticipants.size()) {
-            paragraphToSend.isLast = true;
-            send_text.setBackgroundResource(R.drawable.buttom_finish_story);
-        } else paragraphToSend.isLast = false;
     }
 
     public void closePunetas(){
@@ -272,18 +266,20 @@ public class QuickPlayActivity extends AppCompatActivity{
             send_text.setBackground(getResources().getDrawable(R.drawable.button_grey));
             TextView waiting = (TextView) findViewById(R.id.waitingPlayers);
             waiting.setVisibility(View.VISIBLE);
-            if (paragraphToSend.turn == gameParticipants.size()) {
+            if (paragraphToSend.isLast) {
                 //GO TO QUICK GAME VOTE
                 Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
                 i.putExtra("code",code);
                 i.putExtra("mode",mode);
+                i.putExtra("turn",1);
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
                 startActivity(i);
                 finish();
             } else {
                 tryingToStartAnother = true;
+                Integer newTurn = paragraphToSend.turn + 1;
                 AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
-                myTask.execute(code);
+                myTask.execute(code, newTurn.toString());
             }
         }
     }
@@ -305,10 +301,35 @@ public class QuickPlayActivity extends AppCompatActivity{
                 word1 = resultado.randomWords.get(0);
                 word2 = resultado.randomWords.get(1);
                 word3 = resultado.randomWords.get(2);
-
             }
 
-            if (paragraphToSend.turn > 0) previous_content.setText(resultado.lastParagraph);
+            // SET TURN
+            paragraphToSend.turn = resultado.turn;
+
+            // IF ITS LAST PARAGRAPH
+            paragraphToSend.isLast = resultado.isLast;
+            if (resultado.isLast) send_text.setBackgroundResource(R.drawable.buttom_finish_story);
+
+            // IF ITS NOT FIRST WRITE
+            if (paragraphToSend.turn > 1) {
+                previous_content.setText(resultado.lastParagraph);
+                previous_content.setVisibility(View.VISIBLE);
+                mTheme.setVisibility(View.GONE);
+            }
+
+            // SET PUNETA AND CHANGE LAYOUT
+            if (resultado.puneta != null && resultado.puneta.equals("reves")){
+                Toast.makeText(this,"PUÑETA DEL REVES", Toast.LENGTH_SHORT);
+                //...
+            } else if (resultado.puneta != null && resultado.puneta.equals("ciego")){
+                Toast.makeText(this,"PUÑETA CIEGO", Toast.LENGTH_SHORT);
+                //...
+            } else if (resultado.puneta != null && resultado.puneta.equals("desorden")){
+                Toast.makeText(this,"PUÑETA DEL DESORDEN", Toast.LENGTH_SHORT);
+                //...
+            }
+
+            // WAIT UNTIL TIME AND SET TIMER
             new CountDownTimer(resultado.s * 1000L,1000){
                 public void onTick (long millisUntilFinished) {
                      mTime.setText(""+String.format("%d min %d sec",
@@ -324,11 +345,12 @@ public class QuickPlayActivity extends AppCompatActivity{
         } else if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == true){
             if (myTimer != null) myTimer.cancel();
             Intent i = new Intent(QuickPlayActivity.this, QuickPlayActivity.class);
-            startActivity(i);
             i.putExtra("code",code);
             i.putExtra("mode",mode);
-            i.putExtra("turn",paragraphToSend.turn.toString()+1);
+            Integer newTurn = paragraphToSend.turn + 1;
+            i.putExtra("turn",newTurn.toString());
             i.putExtra("gameParticipants", (Serializable) gameParticipants);
+            startActivity(i);
             finish();
         } else if (resultado.result!=null && resultado.result.equals("waiting_players") && tryingToStartAnother == true){
             if (!alreadyStartedTimer){
@@ -347,8 +369,9 @@ public class QuickPlayActivity extends AppCompatActivity{
     }
 
     public void askIfWaiting (){
+        Integer newTurn = paragraphToSend.turn + 1;
         AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
-        myTask.execute(code);
+        myTask.execute(code, newTurn.toString());
     }
 
     //Update used random words in editText

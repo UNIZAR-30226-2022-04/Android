@@ -2,6 +2,7 @@ package es.unizar.eina.frankenstory.quick;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -16,17 +17,17 @@ import es.unizar.eina.frankenstory.MyApplication;
 
 public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPlayQuickGame.Result>{
 
-        private QuickPlayActivity mActivity = null;
+    private QuickPlayActivity mActivity = null;
 
     static class Result {
         String result;
-        String reason;
         int s;
         String topic;
         List<String> randomWords;
         String lastParagraph;
         boolean isLast;
         String puneta;
+        Integer turn;
     }
 
     public AsyncTaskPlayQuickGame(QuickPlayActivity activity) { mActivity = activity; }
@@ -35,6 +36,7 @@ public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPla
         String username = ((MyApplication) mActivity.getApplication()).getUsername();
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         String id = params[0];
+        String turn = params[1];
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/play_quick_game").openConnection();
@@ -44,8 +46,8 @@ public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPla
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password +
-                     "\",\"id\":\"" + id + "\"}";
-            Log.d("GetRoom", jsonInputString.toString());
+                     "\",\"id\":\"" + id + "\",\"turn\":"+turn+"}";
+            Log.d("PlayQuick", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -64,6 +66,8 @@ public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPla
     }
 
     protected void onPostExecute(AsyncTaskPlayQuickGame.Result resultado) {
-        if (resultado.result !=null && resultado.reason!=null) Log.d("AsyncPlayQuickGameRes:",resultado.result+"("+resultado.reason+")");
-        mActivity.setupAdapter(resultado); }
+        if (resultado != null)
+        mActivity.setupAdapter(resultado);
+        else Toast.makeText(mActivity, "PlayResponse null", Toast.LENGTH_SHORT).show();
+    }
 }
