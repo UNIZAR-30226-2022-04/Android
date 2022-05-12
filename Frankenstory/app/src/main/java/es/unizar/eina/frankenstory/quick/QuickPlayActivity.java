@@ -196,38 +196,44 @@ public class QuickPlayActivity extends AppCompatActivity{
         });
         letras_reves.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                textPunetas.setText("¿A quién envías la puñeta?");
-                letras_reves.setVisibility(View.GONE);
-                escribe_ciegas.setVisibility(View.GONE);
-                desorden_total.setVisibility(View.GONE);
-                // INFLATE LIST
-                mlistfriendsToSend.setVisibility(View.VISIBLE);
-                ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "reves",150);
-                mlistfriendsToSend.setAdapter(adapter);
+                if (Integer.parseInt(((MyApplication) getApplication()).getCoins()) >= 150){
+                    textPunetas.setText("¿A quién envías la puñeta?");
+                    letras_reves.setVisibility(View.GONE);
+                    escribe_ciegas.setVisibility(View.GONE);
+                    desorden_total.setVisibility(View.GONE);
+                    // INFLATE LIST
+                    mlistfriendsToSend.setVisibility(View.VISIBLE);
+                    ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "reves",150);
+                    mlistfriendsToSend.setAdapter(adapter);
+                }
             }
         });
         escribe_ciegas.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                textPunetas.setText("¿A quién envías la puñeta?");
-                letras_reves.setVisibility(View.GONE);
-                escribe_ciegas.setVisibility(View.GONE);
-                desorden_total.setVisibility(View.GONE);
-                // INFLATE LIST
-                mlistfriendsToSend.setVisibility(View.VISIBLE);
-                ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "ciego",300);
-                mlistfriendsToSend.setAdapter(adapter);
+                if (Integer.parseInt(((MyApplication) getApplication()).getCoins()) >= 300){
+                    textPunetas.setText("¿A quién envías la puñeta?");
+                    letras_reves.setVisibility(View.GONE);
+                    escribe_ciegas.setVisibility(View.GONE);
+                    desorden_total.setVisibility(View.GONE);
+                    // INFLATE LIST
+                    mlistfriendsToSend.setVisibility(View.VISIBLE);
+                    ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "ciego",300);
+                    mlistfriendsToSend.setAdapter(adapter);
+                }
             }
         });
         desorden_total.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                textPunetas.setText("¿A quién envías la puñeta?");
-                letras_reves.setVisibility(View.GONE);
-                escribe_ciegas.setVisibility(View.GONE);
-                desorden_total.setVisibility(View.GONE);
-                // INFLATE LIST
-                mlistfriendsToSend.setVisibility(View.VISIBLE);
-                ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "desorden",500);
-                mlistfriendsToSend.setAdapter(adapter);
+                if (Integer.parseInt(((MyApplication) getApplication()).getCoins()) >= 500){
+                    textPunetas.setText("¿A quién envías la puñeta?");
+                    letras_reves.setVisibility(View.GONE);
+                    escribe_ciegas.setVisibility(View.GONE);
+                    desorden_total.setVisibility(View.GONE);
+                    // INFLATE LIST
+                    mlistfriendsToSend.setVisibility(View.VISIBLE);
+                    ListPunetasAdapter adapter = new ListPunetasAdapter(QuickPlayActivity.this, gameParticipants, "desorden",500);
+                    mlistfriendsToSend.setAdapter(adapter);
+                }
             }
         });
 
