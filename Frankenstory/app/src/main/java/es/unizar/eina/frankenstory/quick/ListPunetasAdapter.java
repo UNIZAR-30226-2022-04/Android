@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
 public class ListPunetasAdapter extends BaseAdapter {
@@ -22,7 +24,13 @@ public class ListPunetasAdapter extends BaseAdapter {
     //public constructor
     public ListPunetasAdapter(QuickPlayActivity context, List<AsyncTaskGetRoom.Participants> items, String punetaSelected, Integer mooncoinsPayed) {
         this.context = context;
-        this.items = items;
+        // CANT SEND TO MYSELF OR ANYONE WHO ALREADY HAS A PUNETA
+        List<AsyncTaskGetRoom.Participants> itemsWithoutMe = new ArrayList<AsyncTaskGetRoom.Participants>();
+        String me = ((MyApplication) context.getApplication()).getUsername();
+        for (AsyncTaskGetRoom.Participants p : items){
+            if (!p.username.equals(me) && !context.alreadyHasAPuneta(p.username)) itemsWithoutMe.add(p);
+        }
+        this.items = itemsWithoutMe;
         this.punetaSelected = punetaSelected;
         this.mooncoinsPayed = mooncoinsPayed;
     }

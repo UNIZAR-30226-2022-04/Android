@@ -13,28 +13,36 @@ android:id="@+id/layoutmain">
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"/>
 
+    <!--Terminar escritura-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="90dp"
+        android:gravity="center_horizontal|top"
+        android:orientation="vertical">
+        <!--Boton terminar escritura-->
+        <Button
+            android:id="@+id/sendText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_green"
+            android:fontFamily="@font/bangers_regular"
+            android:text="@string/finish_text"
+            android:textColor="@color/white"
+            android:textSize="27sp" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="70dp"
         android:orientation="vertical"
         tools:ignore="UseSwitchCompatOrMaterialXml">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/arial_bold"
-            android:shadowColor="@color/verde_letras"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowRadius="1"
-            android:text="@string/previous_text"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+
 
         <LinearLayout
             android:id="@+id/twitter"
@@ -43,7 +51,8 @@ android:id="@+id/layoutmain">
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:rotation="180">
 
             <TextView
                 android:layout_width="match_parent"
@@ -73,32 +82,9 @@ android:id="@+id/layoutmain">
                 android:textSize="18sp"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/previous_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="30dp"
-            android:background="@color/verde_parrafo"
-            android:fontFamily="@font/arial_bold"
-            android:paddingHorizontal="8dp"
-            android:text="@string/story_content"
-            android:textColor="@color/white"/>
 
-        <TextView
-            android:id="@+id/text_random_words"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/bangers_regular"
-            android:shadowColor="@color/verde_letras"
-            android:shadowDx="6"
-            android:shadowDy="6"
-            android:shadowRadius="1"
-            android:text="@string/words_to_write"
-            android:textAlignment="textStart"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+
+
 
         <LinearLayout
             android:id="@+id/random_words"
@@ -106,7 +92,8 @@ android:id="@+id/layoutmain">
             android:layout_height="28dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:rotation="180">
             <TextView
                 android:id="@+id/first_Word"
                 android:layout_width="80dp"
@@ -145,12 +132,27 @@ android:id="@+id/layoutmain">
                 android:textColor="@color/white"
                 android:layout_toRightOf="@+id/second_word" />
         </LinearLayout>
+        <TextView
+            android:id="@+id/text_random_words"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/bangers_regular"
+            android:shadowColor="@color/verde_letras"
+            android:shadowDx="6"
+            android:shadowDy="6"
+            android:shadowRadius="1"
+            android:text="@string/words_to_write"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:rotation="180"/>
         <!--Reloj-->
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="right"
+            android:layout_gravity="left"
             android:layout_marginTop="15dp">
             <!---Icono Reloj-->
             <ImageView
@@ -179,11 +181,12 @@ android:id="@+id/layoutmain">
         <!--Escritura actual-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="150dp">
+
             <EditText
                 android:id="@+id/story_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/arial_regular"
@@ -192,44 +195,57 @@ android:id="@+id/layoutmain">
                 android:inputType="text|textMultiLine"
                 android:paddingHorizontal="12dp"
                 android:paddingTop="12dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:rotation="90"/>
+
             <ImageView
                 android:id="@+id/iconblind"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/escribe_ciegas_blanco"/>
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/desorden_total"
+                android:layout_alignParentRight="true"
+                android:visibility="visible" />
         </RelativeLayout>
 
-    </LinearLayout>
-    <!--Terminar escritura-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginBottom="30dp"
-        android:gravity="center_horizontal|bottom"
-        android:orientation="vertical">
-        <!--Boton terminar escritura-->
-        <Button
-            android:id="@+id/sendText"
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_green"
-            android:fontFamily="@font/bangers_regular"
-            android:text="@string/finish_text"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/arial_bold"
+            android:shadowColor="@color/verde_letras"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="1"
+            android:text="@string/previous_text"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="27sp" />
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/previous_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/verde_parrafo"
+            android:fontFamily="@font/arial_bold"
+            android:paddingHorizontal="8dp"
+            android:text="@string/story_content"
+            android:textColor="@color/white"/>
+
     </LinearLayout>
+
 
     <!---PUNETAS-->
     <include
         layout="@layout/punetas"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="5dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp" />
 
     <TextView
         android:id="@+id/waitingPlayers"

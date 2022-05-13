@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,7 +100,15 @@ public class QuickPlayActivity extends AppCompatActivity{
         paragraphToSend.id = intent.getStringExtra("code");
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) intent.getSerializableExtra("gameParticipants");
 
+        everythingDoneOnCreate();
 
+        // CALL ASYNC TASK PLAY QUICK GAME
+        AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
+        myTask.execute(code, paragraphToSend.turn.toString());
+
+    }
+
+    public void everythingDoneOnCreate(){
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
@@ -137,9 +146,7 @@ public class QuickPlayActivity extends AppCompatActivity{
         //SEND TEXT
         setNavegavilidad();
 
-        // CALL ASYNC TASK PLAY QUICK GAME
-        AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
-        myTask.execute(code, paragraphToSend.turn.toString());
+
 
         // HIDE UNUSED BCS OF MODE
         if (mode.equals("twitter")){
@@ -236,7 +243,6 @@ public class QuickPlayActivity extends AppCompatActivity{
                 }
             }
         });
-
     }
 
     public void closePunetas(){
@@ -246,6 +252,13 @@ public class QuickPlayActivity extends AppCompatActivity{
         escribe_ciegas.setVisibility(View.GONE);
         desorden_total.setVisibility(View.GONE);
         mlistfriendsToSend.setVisibility(View.GONE);
+    }
+
+    public boolean alreadyHasAPuneta(String name){
+        for (FriendPuneta f : paragraphToSend.listFriendPuneta){
+            if (f.username.equals(name)) return true;
+        }
+        return false;
     }
 
     public void setNavegavilidad(){
@@ -294,6 +307,23 @@ public class QuickPlayActivity extends AppCompatActivity{
     public void setupAdapter(AsyncTaskPlayQuickGame.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == false) {
+
+            // SET PUNETA AND CHANGE LAYOUT
+            if (resultado.puneta != null && resultado.puneta.equals("reves")){
+                Log.d("PUÑETA", "del revés");
+                content.setRotation(180);
+                content.setRotationX(180);
+            } else if (resultado.puneta != null && resultado.puneta.equals("ciego")){
+                Log.d("PUÑETA", "a ciegas");
+                content.setBackgroundTintList(getResources().getColorStateList(R.color.black));
+                ImageView iconblind = (ImageView) findViewById(R.id.iconblind);
+                iconblind.setVisibility(View.VISIBLE);
+            } else if (resultado.puneta != null && resultado.puneta.equals("desorden")){
+                Log.d("PUÑETA", "desorden total");
+                setContentView(R.layout.activity_quick_game_play_desorden);
+                everythingDoneOnCreate();
+            }
+
             if (mode.equals("twitter")) {
                 // Add hashtag if it has not
                 String hashtag = "";
@@ -314,7 +344,13 @@ public class QuickPlayActivity extends AppCompatActivity{
 
             // IF ITS LAST PARAGRAPH
             paragraphToSend.isLast = resultado.isLast;
-            if (resultado.isLast) send_text.setBackgroundResource(R.drawable.buttom_finish_story);
+            if (resultado.isLast) {
+                send_text.setBackgroundResource(R.drawable.buttom_finish_story);
+                send_text.setText("Terminar historia");
+                // CANT SEND PUNETAS ON LAST TURN
+                RelativeLayout punetasRelative = (RelativeLayout) findViewById(R.id.punetasRelative);
+                punetasRelative.setVisibility(View.GONE);
+            }
 
             // IF ITS NOT FIRST WRITE
             if (paragraphToSend.turn > 1) {
@@ -323,17 +359,7 @@ public class QuickPlayActivity extends AppCompatActivity{
                 mTheme.setVisibility(View.GONE);
             }
 
-            // SET PUNETA AND CHANGE LAYOUT
-            if (resultado.puneta != null && resultado.puneta.equals("reves")){
-                Toast.makeText(this,"PUÑETA DEL REVES", Toast.LENGTH_SHORT);
-                //...
-            } else if (resultado.puneta != null && resultado.puneta.equals("ciego")){
-                Toast.makeText(this,"PUÑETA CIEGO", Toast.LENGTH_SHORT);
-                //...
-            } else if (resultado.puneta != null && resultado.puneta.equals("desorden")){
-                Toast.makeText(this,"PUÑETA DEL DESORDEN", Toast.LENGTH_SHORT);
-                //...
-            }
+
 
             // WAIT UNTIL TIME AND SET TIMER
             new CountDownTimer(resultado.s * 1000L,1000){
