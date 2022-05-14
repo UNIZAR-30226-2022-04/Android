@@ -142,10 +142,8 @@ public class QuickPlayActivity extends AppCompatActivity{
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
 
-
         //SEND TEXT
         setNavegavilidad();
-
 
 
         // HIDE UNUSED BCS OF MODE
@@ -347,6 +345,7 @@ public class QuickPlayActivity extends AppCompatActivity{
             if (resultado.isLast) {
                 send_text.setBackgroundResource(R.drawable.buttom_finish_story);
                 send_text.setText("Terminar historia");
+                send_text.setTextSize(23);
                 // CANT SEND PUNETAS ON LAST TURN
                 RelativeLayout punetasRelative = (RelativeLayout) findViewById(R.id.punetasRelative);
                 punetasRelative.setVisibility(View.GONE);
@@ -356,10 +355,9 @@ public class QuickPlayActivity extends AppCompatActivity{
             if (paragraphToSend.turn > 1) {
                 previous_content.setText(resultado.lastParagraph);
                 previous_content.setVisibility(View.VISIBLE);
-                mTheme.setVisibility(View.GONE);
+                LinearLayout mTwitter = (LinearLayout) findViewById(R.id.twitter);
+                mTwitter.setVisibility(View.GONE);
             }
-
-
 
             // WAIT UNTIL TIME AND SET TIMER
             new CountDownTimer(resultado.s * 1000L,1000){
@@ -370,8 +368,11 @@ public class QuickPlayActivity extends AppCompatActivity{
                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
                 }
                 public void onFinish() {
-                    //GO TO NOT FIRST WRITE
-
+                    // IF TIME FINISH -> SAME AS CLICK SEND TEXT
+                    paragraphToSend.body = String.valueOf(content.getText());
+                    // CALL ASYNC TASK ADD PARAGRAPH
+                    AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(QuickPlayActivity.this);
+                    myTask.execute(paragraphToSend);
                 }
             }.start();
         } else if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == true){

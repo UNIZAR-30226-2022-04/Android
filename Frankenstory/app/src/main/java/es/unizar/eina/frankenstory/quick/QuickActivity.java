@@ -146,9 +146,9 @@ public class QuickActivity extends AppCompatActivity {
         // BUTTON TO JOIN ROOM
         mJoinRoom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                // IF IT HAS NO HASTAG PUT IT
                 code = mCode.getText().toString();
-
+                if (code.charAt(0)!='#') code = "#" + code;
                 // CALL ASYNC TASK JOIN ROOM
                 AsyncTaskJoinRoom myTask = new AsyncTaskJoinRoom(QuickActivity.this);
                 myTask.execute(code);
