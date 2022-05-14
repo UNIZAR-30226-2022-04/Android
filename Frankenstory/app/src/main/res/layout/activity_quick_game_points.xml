@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
-    android:id="@+id/layoutmain">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/gradient_background"
+android:id="@+id/layoutmain">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,6 +42,7 @@
                     android:gravity="center_horizontal">
 
                     <ImageView
+                        android:id="@+id/medal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/position" />
@@ -49,7 +50,7 @@
                     <TextView android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
-                        android:id="@+id/user_name"
+                        android:id="@+id/winner_user_name"
                         android:fontFamily="@font/arial_bold"
                         android:textAlignment="center"
                         android:shadowColor="@color/verde_letras"
@@ -90,9 +91,10 @@
                     android:textColor="@color/white"
                     android:textSize="25sp" />
                 <ListView
-                    android:id="@+id/voting_options"
+                    android:id="@+id/clasification"
                     android:layout_width="match_parent"
-                    android:layout_height="390dp"/>
+                    android:layout_height="330dp"
+                    tools:listitem="@layout/row_main_menu"/>
 
 
             </LinearLayout>
@@ -106,17 +108,17 @@
                 android:paddingBottom="20dp">
                 <!--Boton terminar parrafo-->
                 <Button
-                    android:id="@+id/vote"
+                    android:id="@+id/take"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:background="@drawable/button_green"
                     android:fontFamily="@font/bangers_regular"
                     android:paddingHorizontal="100dp"
-                    android:text="@string/vote"
+                    android:text="RECOGER"
                     android:textColor="@color/white"
                     android:textSize="27sp" />
             </LinearLayout>
         </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

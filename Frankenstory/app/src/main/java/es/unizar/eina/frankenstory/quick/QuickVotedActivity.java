@@ -120,8 +120,9 @@ public class QuickVotedActivity extends AppCompatActivity{
 
             if (turn == gameParticipants.size()) {    //TO QUICK POINTS
                 //GO TO QUICK POINTS
-                //
-                //
+                Intent i = new Intent(QuickVotedActivity.this, QuickPointsActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
 
             } else {  //TO QUICK VOTE
                 myTimer = new Timer();

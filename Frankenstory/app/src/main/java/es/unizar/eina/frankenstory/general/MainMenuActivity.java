@@ -165,7 +165,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 mNotifications.setVisibility(View.VISIBLE);
             } else mNotifications.setVisibility(View.INVISIBLE);
             // STATISTICS
-            fillData(resultado.bestFour);
+            fillDataBestFour(resultado.bestFour);
         } else {
             // IF USER/PASSW IS NOT OKAY COME BACK TO LOGIN
             finish();
@@ -188,24 +188,13 @@ public class MainMenuActivity extends AppCompatActivity {
         imagen.setVisibility(View.VISIBLE);
     }
 
-    private void fillData(List<AsyncTaskMainMenu.Statistic> list) {
-        // CREANDO CURSOR CON LOS RESULTADOS
-        String[] columns = new String[] { "_id", "position", "friendName", "friendStars"};
-        MatrixCursor matrixCursor= new MatrixCursor(columns);
+    private void fillDataBestFour(List<AsyncTaskMainMenu.Statistic> bestFour) {
+        // instantiate the custom list adapter
+        ListMainMenuStadisticsAdapter adapter = new ListMainMenuStadisticsAdapter(this, bestFour);
 
-        Integer i=1;
-        for(AsyncTaskMainMenu.Statistic p : list){
-            matrixCursor.addRow(new Object[]{i-1,i.toString()+"º",p.username,"x "+p.stars.toString()});
-            i++;
-        }
+        // get the ListView and attach the adapter
+        mList.setAdapter(adapter);
 
-        // PARSEANDO CURSOR A LISTVIEW
-        String[] from = new String[] { "position", "friendName", "friendStars" };
-        int[] to = new int[] { R.id.position, R.id.friendName, R.id.friendStars };
-
-        SimpleCursorAdapter photos =
-                new SimpleCursorAdapter(this, R.layout.row_main_menu, matrixCursor, from, to);
-        mList.setAdapter(photos);
     }
 
 }

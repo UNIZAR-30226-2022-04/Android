@@ -30,6 +30,7 @@
             android:layout_gravity="center_vertical"/>
         <!-- IMAGEN -->
         <ImageView
+            android:id="@+id/crown"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="3dp"
@@ -44,7 +45,7 @@
             android:textSize="14sp"
             android:textColor="@color/verde_letras"
             android:fontFamily="@font/graduate"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="15dp"
             android:layout_gravity="center_vertical"/>
         <!-- ESTRELLAS -->
         <TextView android:id="@+id/friendStars"
