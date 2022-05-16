@@ -11,35 +11,33 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AsyncTaskRegister extends AsyncTask<String, Void, AsyncTaskRegister.ResultRegister> {
+public class AsyncTaskGetSalt extends AsyncTask<String, Void, AsyncTaskGetSalt.Result> {
 
-    private RegisterActivity mActivity = null;
+    private LogInActivity mActivity = null;
 
-    static class ResultRegister {
+    static class Result {
+        String salt;
         String result;
         String reason;
     }
 
-    public AsyncTaskRegister(RegisterActivity activity)
+    public AsyncTaskGetSalt(LogInActivity activity)
     {
         mActivity = activity;
     }
 
-    protected ResultRegister doInBackground(String... params) {
+    protected Result doInBackground(String... params) {
         String username = params[0];
-        String password = params[1];
-        String email = params[2];
-        String salt = params[3];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/register").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/get_salt").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{\"username\":\""+username+"\",\"password\":\""+password+"\",\"email\":\""+email+"\",\"salt\":\""+salt+"\"}";
-            Log.d("REGISTER", jsonInputString.toString());
+            String jsonInputString = "{\"username\":\""+username+"\"}";
+            Log.d("GETSATL ", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
                 os.write(input, 0, input.length);
@@ -47,16 +45,15 @@ public class AsyncTaskRegister extends AsyncTask<String, Void, AsyncTaskRegister
 
             InputStreamReader reader = new InputStreamReader(con.getInputStream());
             Gson gson = new Gson();
-            return gson.fromJson(reader, ResultRegister.class);
+            return gson.fromJson(reader, Result.class);
 
         } catch (IOException e) {
-            Log.e("ERROR_AsyncTaskRegister",e.getMessage());
+            Log.e("ERROR_AsyncTaskSalt",e.getMessage());
         }
-        return new ResultRegister();
+        return new Result();
     }
 
-    protected void onPostExecute(ResultRegister resultado) {
+    protected void onPostExecute(Result resultado) {
         mActivity.setupAdapter(resultado);
     }
-
 }

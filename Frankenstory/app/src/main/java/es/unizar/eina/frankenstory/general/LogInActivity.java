@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
 
@@ -72,8 +76,9 @@ public class LogInActivity extends AppCompatActivity {
 
                 // LLAMAR A LA TAREA ASINCRONA
                 if (camposLlenos){
-                    AsyncTaskLogIn myTask = new AsyncTaskLogIn(LogInActivity.this);
-                    myTask.execute(username, password);
+                    // SEND GET SALT
+                    AsyncTaskGetSalt myTask = new AsyncTaskGetSalt(LogInActivity.this);
+                    myTask.execute(username);
                     // INFORMAR CARGANDO
                     //Toast.makeText(LogInActivity.this, "Preguntando a la web", Toast.LENGTH_LONG).show();
                     mchargeAnimation.setVisibility(View.VISIBLE);
@@ -113,7 +118,7 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
-    // ASYNC TASK ADAPTER
+    // ASYNC TASK ADAPTER LOGIN
     public void setupAdapter(AsyncTaskLogIn.Result resultado)
     {
         mchargeAnimation.setVisibility(View.INVISIBLE);
@@ -138,4 +143,36 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
+    public static String getSHA512(String input){
+
+        String toReturn = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            digest.reset();
+            digest.update(input.getBytes("utf8"));
+            toReturn = String.format("%0128x", new BigInteger(1, digest.digest()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
+
+    // ASYNC TASK ADAPTER GET SALT
+    public void setupAdapter(AsyncTaskGetSalt.Result resultado)
+    {
+        if (resultado.result != null && resultado.result.equals("success")) {
+            // GET HASH
+            String salt = resultado.salt;
+            password = getSHA512(password + salt);
+            // SEND LOGIN
+            AsyncTaskLogIn myTask = new AsyncTaskLogIn(LogInActivity.this);
+            myTask.execute(username, password);
+        } else {
+            // COULDN'T CONNECT
+            mUserName.setError("ERROR EN EL SALT");
+            mchargeAnimation.setVisibility(View.VISIBLE);
+            button.setClickable(false);
+        }
+    }
 }

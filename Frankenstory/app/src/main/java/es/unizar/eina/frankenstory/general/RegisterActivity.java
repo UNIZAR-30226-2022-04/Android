@@ -7,12 +7,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.airbnb.lottie.LottieAnimationView;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
 
 import es.unizar.eina.frankenstory.R;
 
@@ -24,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mRepeatPassword;
     private LottieAnimationView mchargeAnimation;
     private Button button;
+    private String salt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +94,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 // LLAMAR A LA TAREA ASINCRONA
                 if (camposLlenos){
+                    // GENERATE SALT
+                    salt = getSalt();
+                    // HASH
+                    //password = getSecurePassword(password, salt);
+                    password = getSHA512(password + salt);
+                    // SEND
                     AsyncTaskRegister myTask = new AsyncTaskRegister(RegisterActivity.this);
-                    myTask.execute(username, password, email);
+                    myTask.execute(username, password, email, salt);
                     // INFORMAR CARGANDO
                     mchargeAnimation.setVisibility(View.VISIBLE);
                     button.setClickable(false);
@@ -95,6 +109,44 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static String getSHA512(String input){
+
+        String toReturn = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            digest.reset();
+            digest.update(input.getBytes("utf8"));
+            toReturn = String.format("%0128x", new BigInteger(1, digest.digest()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
+
+    private static String getSalt() {
+        try {
+            // Always use a SecureRandom generator
+            SecureRandom sr = new SecureRandom();
+
+            // Create array for salt
+            byte[] salt = new byte[16];
+
+            // Get a random salt
+            sr.nextBytes(salt);
+
+            // return salt
+            return salt.toString();
+        } /*catch (NoSuchAlgorithmException e){
+            Log.e("ERROR SALT", e.getMessage());
+        } catch (NoSuchProviderException e){
+            Log.e("ERROR SALT", e.getMessage());
+        }*/ catch (Exception e){
+            Log.e("ERROR SALT", e.getMessage());
+        }
+        return "";
     }
 
     // Para ocultar Navigation bar y lo de arriba.

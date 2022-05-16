@@ -90,7 +90,7 @@ public class QuickCreateActivity extends AppCompatActivity{
         Button plusTime = (Button)findViewById(R.id.plus_time);
         plusTime.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (time < 300) time++;
+                if (time < 300) time+= 5;
                 setContenido();
             }
         });
@@ -99,7 +99,7 @@ public class QuickCreateActivity extends AppCompatActivity{
         Button minusTime = (Button)findViewById(R.id.minus_time);
         minusTime.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (time > 5) time--;
+                if (time > 5) time-=5 ;
                 setContenido();
             }
         });
