@@ -113,9 +113,8 @@ public class SettingsActivity extends AppCompatActivity {
 
                 // LLAMAR A LA TAREA ASINCRONA
                 if (camposLlenos) {
-                    AsyncTaskChangePassw myTask = new AsyncTaskChangePassw(SettingsActivity.this);
-                    myTask.execute(newPassw);
-                    mChangePassw.setClickable(false);
+                    AsyncTaskGetSaltForPassw asyncTaskGetSaltForPassw = new AsyncTaskGetSaltForPassw(SettingsActivity.this);
+                    asyncTaskGetSaltForPassw.execute(((MyApplication) getApplication()).getUsername());
                 }
             }
 
@@ -233,6 +232,22 @@ public class SettingsActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
+        }
+    }
+
+    // ASYNC TASK ADAPTER GET SALT FOR PASSW
+    public void setupAdapter(AsyncTaskGetSaltForPassw.Result resultado)
+    {
+        if (resultado.result != null && resultado.result.equals("success")) {
+            // GET HASH
+            newPassw = LogInActivity.getSHA512(newPassw + resultado.salt);
+            // SEND LOGIN
+            AsyncTaskChangePassw myTask = new AsyncTaskChangePassw(SettingsActivity.this);
+            myTask.execute(newPassw);
+            mChangePassw.setClickable(false);
+        } else {
+            // COULDN'T CONNECT
+            mUsername.setError("ERROR EN EL SALT");
         }
     }
 
