@@ -27,7 +27,9 @@ public class AsyncTaskResumeQuickVote extends AsyncTask<String, Void, AsyncTaskR
     static class Result {
         String result;
         String topic;
+        Boolean isLast;
         Integer turn;
+        Integer s;
         List<Paragraph> paragraphs;
     }
 
@@ -48,6 +50,7 @@ public class AsyncTaskResumeQuickVote extends AsyncTask<String, Void, AsyncTaskR
         }
 
         String id = params[0];
+        int turn = Integer.parseInt(params[1]);
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/resume_vote_quick_game").openConnection();
@@ -57,7 +60,7 @@ public class AsyncTaskResumeQuickVote extends AsyncTask<String, Void, AsyncTaskR
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password +
-                     "\",\"id\":\"" + id + "\"}";
+                     "\",\"turn\":\"" + turn + "\",\"id\":\"" + id + "\"}";
             Log.d("ResumeVoteQuick", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();

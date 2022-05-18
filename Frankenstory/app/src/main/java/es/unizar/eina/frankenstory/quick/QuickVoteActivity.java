@@ -34,6 +34,8 @@ public class QuickVoteActivity extends AppCompatActivity{
     private TextView mTheme;
     private TextView mTittleTheme;
     private Button mVote;
+    private Boolean isLast;
+    private Integer s;
 
     private String code;
     private String mode;
@@ -52,6 +54,8 @@ public class QuickVoteActivity extends AppCompatActivity{
         setContentView(R.layout.activity_quick_game_vote);
 
         alreadyStartedTimer = false;
+        isLast = false;
+        turn = 0;
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -88,7 +92,7 @@ public class QuickVoteActivity extends AppCompatActivity{
 
         // CALL ASYNC TASK RESUME VOTE QUICK GAME
         AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(QuickVoteActivity.this, null);
-        myTask.execute(code);
+        myTask.execute(code, String.valueOf(turn));
 
     }
 
@@ -142,6 +146,8 @@ public class QuickVoteActivity extends AppCompatActivity{
         if (resultado.result!=null && resultado.result.equals("success")){
             mTheme.setText(resultado.topic);
             turn = resultado.turn;
+            isLast = resultado.isLast;
+            s = resultado.s;
             fillParagraphs(resultado.paragraphs);
 
         }
@@ -174,6 +180,8 @@ public class QuickVoteActivity extends AppCompatActivity{
             i.putExtra("code",code);
             i.putExtra("mode",mode);
             i.putExtra("turn",turn);
+            i.putExtra("isLast", isLast);
+            i.putExtra("s",s);
             i.putExtra("gameParticipants", (Serializable) gameParticipants);
             startActivity(i);
             finish();

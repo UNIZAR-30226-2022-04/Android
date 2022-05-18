@@ -35,6 +35,8 @@ public class QuickVotedActivity extends AppCompatActivity{
     private String code;
     private String mode;
     private Integer turn;
+    private Boolean isLast;
+    private Integer s;
     Integer votedParagraph;
     View selectedView;
     private List<AsyncTaskGetRoom.Participants> gameParticipants;
@@ -62,6 +64,8 @@ public class QuickVotedActivity extends AppCompatActivity{
         Intent i = getIntent();
         code = i.getStringExtra("code");
         mode = i.getStringExtra("mode");
+        isLast = Boolean.parseBoolean(i.getStringExtra("isLast"));
+        s = Integer.parseInt(i.getStringExtra("s"));
         turn = Integer.parseInt(i.getStringExtra("turn"));
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) i.getSerializableExtra("gameParticipants");
 
@@ -118,7 +122,7 @@ public class QuickVotedActivity extends AppCompatActivity{
             fillParagraphs(resultado.paragraphs);
             winner = resultado.winner;
 
-            if (turn == gameParticipants.size()) {    //TO QUICK POINTS
+            if (isLast) {    //TO QUICK POINTS
                 //GO TO QUICK POINTS
                 Intent i = new Intent(QuickVotedActivity.this, QuickPointsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
