@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,7 +36,6 @@ public class QuickVoteActivity extends AppCompatActivity{
     private TextView mTittleTheme;
     private Button mVote;
     private Boolean isLast;
-    private Integer s;
 
     private String code;
     private String mode;
@@ -55,7 +55,6 @@ public class QuickVoteActivity extends AppCompatActivity{
 
         alreadyStartedTimer = false;
         isLast = false;
-        turn = 0;
 
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -75,6 +74,7 @@ public class QuickVoteActivity extends AppCompatActivity{
         Intent i = getIntent();
         code = i.getStringExtra("code");
         mode = i.getStringExtra("mode");
+        turn = Integer.parseInt(i.getStringExtra("turn"));
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) i.getSerializableExtra("gameParticipants");
         setNavegavilidad();
 
@@ -140,16 +140,25 @@ public class QuickVoteActivity extends AppCompatActivity{
         }
     }
 
-    // ASYNC TASK RESUME VOTE QUICK GAME
+    // ASYNC TASK ADAPTER RESUME QUICK VOTE
     public void setupAdapter(AsyncTaskResumeQuickVote.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
             mTheme.setText(resultado.topic);
             turn = resultado.turn;
             isLast = resultado.isLast;
-            s = resultado.s;
             fillParagraphs(resultado.paragraphs);
 
+            // WAIT UNTIL TIME AND SET TIMER
+            new CountDownTimer(resultado.s * 1000L,1000){
+                @Override
+                public void onTick(long millisUntilFinished) {}
+                public void onFinish() {
+                    //ASYNC TASK VOTE PARAGRAPH
+                    AsyncTaskVoteQuick myTask = new AsyncTaskVoteQuick(QuickVoteActivity.this);
+                    myTask.execute(code, String.valueOf(votedParagraph));
+                }
+            }.start();
         }
     }
 
@@ -165,9 +174,8 @@ public class QuickVoteActivity extends AppCompatActivity{
             waiting.setVisibility(View.VISIBLE);
 
             AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(QuickVoteActivity.this, null);
-            myTask.execute(code);
+            myTask.execute(code, String.valueOf(turn+1));
         }
-
     }
 
     // ASYNC TASK ADAPTER RESUME QUICK VOTED
@@ -181,7 +189,6 @@ public class QuickVoteActivity extends AppCompatActivity{
             i.putExtra("mode",mode);
             i.putExtra("turn",turn);
             i.putExtra("isLast", isLast);
-            i.putExtra("s",s);
             i.putExtra("gameParticipants", (Serializable) gameParticipants);
             startActivity(i);
             finish();
@@ -204,7 +211,7 @@ public class QuickVoteActivity extends AppCompatActivity{
 
     public void askIfWaiting (){
         AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(QuickVoteActivity.this, null);
-        myTask.execute(code);
+        myTask.execute(code, String.valueOf(turn+1));
     }
 
     private void fillParagraphs(List<AsyncTaskResumeQuickVote.Paragraph> paragraphs) {
@@ -227,7 +234,6 @@ public class QuickVoteActivity extends AppCompatActivity{
                 heart = (ImageView) view.findViewById(R.id.imageVote);
                 heart.setVisibility(View.VISIBLE);
                 votedParagraph = position;
-                Log.d("VOTED PARAGRAPH", votedParagraph.toString());
             }
         });
     }

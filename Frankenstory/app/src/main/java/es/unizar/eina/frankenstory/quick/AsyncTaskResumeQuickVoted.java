@@ -27,6 +27,7 @@ public class AsyncTaskResumeQuickVoted extends AsyncTask<String, Void, AsyncTask
     static class Result {
         String result;
         List<Paragraph> paragraphs;
+        Integer s;
         Integer winner;
     }
 
@@ -47,6 +48,7 @@ public class AsyncTaskResumeQuickVoted extends AsyncTask<String, Void, AsyncTask
          }
 
         String id = params[0];
+        int turn = Integer.parseInt(params[1]);
         HttpURLConnection con;
         try {
             con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/resume_voted_quick_game").openConnection();
@@ -56,7 +58,7 @@ public class AsyncTaskResumeQuickVoted extends AsyncTask<String, Void, AsyncTask
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password +
-                     "\",\"id\":\"" + id + "\"}";
+                     "\",\"turn\":\"" + turn + "\",\"id\":\"" + id + "\"}";
             Log.d("ResumeVotedQuick", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
@@ -76,8 +78,8 @@ public class AsyncTaskResumeQuickVoted extends AsyncTask<String, Void, AsyncTask
     }
 
     protected void onPostExecute(AsyncTaskResumeQuickVoted.Result resultado) {
-        if (mActivity_voted == null) mActivity_voted.setupAdapter(resultado);
-        else mActivity_vote.setupAdapter(resultado);
+        if (mActivity_voted == null) mActivity_vote.setupAdapter(resultado);
+        else mActivity_voted.setupAdapter(resultado);
     }
 
 }

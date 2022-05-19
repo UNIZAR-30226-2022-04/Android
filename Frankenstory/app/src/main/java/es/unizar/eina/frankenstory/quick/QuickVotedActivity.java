@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,11 +37,12 @@ public class QuickVotedActivity extends AppCompatActivity{
     private String mode;
     private Integer turn;
     private Boolean isLast;
-    private Integer s;
+    private Boolean alreadyStartedTimer;
     Integer votedParagraph;
     View selectedView;
     private List<AsyncTaskGetRoom.Participants> gameParticipants;
     private Timer myTimer;
+
 
     public Integer winner;
 
@@ -60,12 +62,12 @@ public class QuickVotedActivity extends AppCompatActivity{
 
         updateData();
         votedParagraph = 0;
+        alreadyStartedTimer = false;
 
         Intent i = getIntent();
         code = i.getStringExtra("code");
         mode = i.getStringExtra("mode");
         isLast = Boolean.parseBoolean(i.getStringExtra("isLast"));
-        s = Integer.parseInt(i.getStringExtra("s"));
         turn = Integer.parseInt(i.getStringExtra("turn"));
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) i.getSerializableExtra("gameParticipants");
 
@@ -78,7 +80,7 @@ public class QuickVotedActivity extends AppCompatActivity{
 
         // CALL ASYNC TASK RESUME VOTED QUICK GAME
         AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(null,QuickVotedActivity.this);
-        myTask.execute(code);
+        myTask.execute(code, String.valueOf(turn));
 
     }
 
@@ -119,26 +121,33 @@ public class QuickVotedActivity extends AppCompatActivity{
 
             TextView mUsername = (TextView) findViewById(R.id.user_story);
             mUsername.setText("Historia de "+ resultado.paragraphs.get(0).username);
-            fillParagraphs(resultado.paragraphs);
             winner = resultado.winner;
+            fillParagraphs(resultado.paragraphs);
 
-            if (isLast) {    //TO QUICK POINTS
-                //GO TO QUICK POINTS
-                Intent i = new Intent(QuickVotedActivity.this, QuickPointsActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
+            // WAIT UNTIL TIME AND SET TIMER
+            new CountDownTimer(resultado.s * 1000L,1000){
+                @Override
+                public void onTick(long millisUntilFinished) {}
+                public void onFinish() {
+                    if (isLast) {
+                        //GO TO QUICK POINTS
+                        Intent i = new Intent(QuickVotedActivity.this, QuickPointsActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        startActivity(i);
 
-            } else {  //TO QUICK VOTE
-                myTimer = new Timer();
-                TimerTask doThis;
-                doThis = new TimerTask() {
-                      @Override
-                      public void run() {
-                          askIfWaiting();
-                      }
-                  };
-                myTimer.scheduleAtFixedRate(doThis, 0, 3000);
-            }
+                    } else {  //TO QUICK VOTE
+                        myTimer = new Timer();
+                        TimerTask doThis;
+                        doThis = new TimerTask() {
+                              @Override
+                              public void run() {
+                                  askIfWaiting();
+                              }
+                          };
+                        myTimer.scheduleAtFixedRate(doThis, 0, 3000);
+                    }
+                }
+            }.start();
         }
     }
 
@@ -146,15 +155,29 @@ public class QuickVotedActivity extends AppCompatActivity{
     public void setupAdapter(AsyncTaskResumeQuickVote.Result resultado) {
 
         if (resultado.result!=null && resultado.result.equals("success")){
-
+            if (myTimer != null) myTimer.cancel();
             //GO TO QUICK GAME VOTE
             Intent i = new Intent(QuickVotedActivity.this, QuickVoteActivity.class);
             i.putExtra("code",code);
             i.putExtra("mode",mode);
+            i.putExtra("turn",turn+1);
             i.putExtra("gameParticipants", (Serializable) gameParticipants);
             startActivity(i);
             finish();
 
+        } else if (resultado.result!=null && resultado.result.equals("waiting_players")) {
+            if (!alreadyStartedTimer) {
+                alreadyStartedTimer = true;
+                myTimer = new Timer();
+                TimerTask doThis;
+                doThis = new TimerTask() {
+                    @Override
+                    public void run() {
+                        askIfWaiting();
+                    }
+                };
+                myTimer.scheduleAtFixedRate(doThis, 0, 3000);
+            }
         }
     }
 
@@ -164,10 +187,8 @@ public class QuickVotedActivity extends AppCompatActivity{
     }
 
     private void fillParagraphs(List<AsyncTaskResumeQuickVoted.Paragraph> paragraphs) {
-
         ListQuickVotedParagraphsAdapter adapter = new ListQuickVotedParagraphsAdapter(this, paragraphs);
         mParagraphs.setAdapter(adapter);
-
     }
 
     // SET ICON USER

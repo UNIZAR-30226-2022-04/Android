@@ -288,7 +288,7 @@ public class QuickPlayActivity extends AppCompatActivity{
                 Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
                 i.putExtra("code",code);
                 i.putExtra("mode",mode);
-                i.putExtra("turn",1);
+                i.putExtra("turn","1");
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
                 startActivity(i);
                 finish();
