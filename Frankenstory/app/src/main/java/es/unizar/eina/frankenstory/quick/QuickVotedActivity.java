@@ -36,15 +36,15 @@ public class QuickVotedActivity extends AppCompatActivity{
     private String code;
     private String mode;
     private Integer turn;
+    public Integer winner;
     private Boolean isLast;
     private Boolean alreadyStartedTimer;
     Integer votedParagraph;
     View selectedView;
     private List<AsyncTaskGetRoom.Participants> gameParticipants;
+
     private Timer myTimer;
-
-
-    public Integer winner;
+    private CountDownTimer addParagraphCountDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,14 +118,13 @@ public class QuickVotedActivity extends AppCompatActivity{
     public void setupAdapter(AsyncTaskResumeQuickVoted.Result resultado) {
 
         if (resultado.result!=null && resultado.result.equals("success")){
-
             TextView mUsername = (TextView) findViewById(R.id.user_story);
             mUsername.setText("Historia de "+ resultado.paragraphs.get(0).username);
             winner = resultado.winner;
             fillParagraphs(resultado.paragraphs);
 
             // WAIT UNTIL TIME AND SET TIMER
-            new CountDownTimer(resultado.s * 1000L,1000){
+            addParagraphCountDown = new CountDownTimer(resultado.s * 1000L,1000){
                 @Override
                 public void onTick(long millisUntilFinished) {}
                 public void onFinish() {
@@ -136,15 +135,7 @@ public class QuickVotedActivity extends AppCompatActivity{
                         startActivity(i);
 
                     } else {  //TO QUICK VOTE
-                        myTimer = new Timer();
-                        TimerTask doThis;
-                        doThis = new TimerTask() {
-                              @Override
-                              public void run() {
-                                  askIfWaiting();
-                              }
-                          };
-                        myTimer.scheduleAtFixedRate(doThis, 0, 3000);
+                        askIfWaiting();
                     }
                 }
             }.start();
@@ -156,6 +147,7 @@ public class QuickVotedActivity extends AppCompatActivity{
 
         if (resultado.result!=null && resultado.result.equals("success")){
             if (myTimer != null) myTimer.cancel();
+            addParagraphCountDown.cancel();
             //GO TO QUICK GAME VOTE
             Intent i = new Intent(QuickVotedActivity.this, QuickVoteActivity.class);
             i.putExtra("code",code);
@@ -166,6 +158,7 @@ public class QuickVotedActivity extends AppCompatActivity{
             finish();
 
         } else if (resultado.result!=null && resultado.result.equals("waiting_players")) {
+
             if (!alreadyStartedTimer) {
                 alreadyStartedTimer = true;
                 myTimer = new Timer();
@@ -183,7 +176,7 @@ public class QuickVotedActivity extends AppCompatActivity{
 
     public void askIfWaiting (){
         AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(null, QuickVotedActivity.this);
-        myTask.execute(code);
+        myTask.execute(code, String.valueOf(turn+1));
     }
 
     private void fillParagraphs(List<AsyncTaskResumeQuickVoted.Paragraph> paragraphs) {

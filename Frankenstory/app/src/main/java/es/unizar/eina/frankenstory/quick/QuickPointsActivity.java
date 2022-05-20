@@ -139,8 +139,7 @@ public class QuickPointsActivity extends AppCompatActivity {
     public void setupAdapter(AsyncTaskPointsQuickGame.Result resultado)
     {
         if ((resultado.result!=null && resultado.result.equals("success"))){
-            if (resultado.coins > 0) mWinnedCoins.setText("+"+resultado.coins);
-            else mWinnedCoins.setText("0");
+            mWinnedCoins.setText("+"+resultado.coins);
             fillDataClasification(resultado.clasification);
 
             int position = 0;

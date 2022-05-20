@@ -67,6 +67,7 @@ public class QuickPlayActivity extends AppCompatActivity{
     private Boolean alreadyStartedTimer;
 
     private Timer myTimer;
+    private CountDownTimer addParagraphCountDown;
 
     static class FriendPuneta {
         String username;
@@ -284,6 +285,7 @@ public class QuickPlayActivity extends AppCompatActivity{
             TextView waiting = (TextView) findViewById(R.id.waitingPlayers);
             waiting.setVisibility(View.VISIBLE);
             if (paragraphToSend.isLast) {
+                addParagraphCountDown.cancel();
                 //GO TO QUICK GAME VOTE
                 Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
                 i.putExtra("code",code);
@@ -360,7 +362,7 @@ public class QuickPlayActivity extends AppCompatActivity{
             }
 
             // WAIT UNTIL TIME AND SET TIMER
-            new CountDownTimer(resultado.s * 1000L,1000){
+            addParagraphCountDown = new CountDownTimer(resultado.s * 1000L,1000){
                 public void onTick (long millisUntilFinished) {
                      mTime.setText(""+String.format("%d min %d sec",
                     TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
@@ -377,6 +379,7 @@ public class QuickPlayActivity extends AppCompatActivity{
             }.start();
         } else if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == true){
             if (myTimer != null) myTimer.cancel();
+            addParagraphCountDown.cancel();
             Intent i = new Intent(QuickPlayActivity.this, QuickPlayActivity.class);
             i.putExtra("code",code);
             i.putExtra("mode",mode);

@@ -47,6 +47,7 @@ public class QuickVoteActivity extends AppCompatActivity{
     private Boolean alreadyStartedTimer;
 
     private Timer myTimer;
+    private CountDownTimer addParagraphCountDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +144,7 @@ public class QuickVoteActivity extends AppCompatActivity{
     // ASYNC TASK ADAPTER RESUME QUICK VOTE
     public void setupAdapter(AsyncTaskResumeQuickVote.Result resultado)
     {
+
         if (resultado.result!=null && resultado.result.equals("success")){
             mTheme.setText(resultado.topic);
             turn = resultado.turn;
@@ -150,7 +152,7 @@ public class QuickVoteActivity extends AppCompatActivity{
             fillParagraphs(resultado.paragraphs);
 
             // WAIT UNTIL TIME AND SET TIMER
-            new CountDownTimer(resultado.s * 1000L,1000){
+            addParagraphCountDown = new CountDownTimer(resultado.s * 1000L,1000){
                 @Override
                 public void onTick(long millisUntilFinished) {}
                 public void onFinish() {
@@ -183,6 +185,7 @@ public class QuickVoteActivity extends AppCompatActivity{
 
         if (resultado.result!=null && resultado.result.equals("success")) {
             if (myTimer != null) myTimer.cancel();
+            addParagraphCountDown.cancel();
             //GO TO QUICK GAME VOTED
             Intent i = new Intent(QuickVoteActivity.this, QuickVotedActivity.class);
             i.putExtra("code",code);
