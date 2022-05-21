@@ -58,7 +58,7 @@ public class QuickVotedActivity extends AppCompatActivity{
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
-        mParagraphs = (ListView) findViewById(R.id.paragraphs);
+        mParagraphs = (ListView) findViewById(R.id.voted);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         mTime = (TextView) findViewById(R.id.time);
 
@@ -69,7 +69,7 @@ public class QuickVotedActivity extends AppCompatActivity{
         Intent i = getIntent();
         code = i.getStringExtra("code");
         mode = i.getStringExtra("mode");
-        isLast = Boolean.parseBoolean(i.getStringExtra("isLast"));
+        isLast = i.getBooleanExtra("isLast", false);
         turn = Integer.parseInt(i.getStringExtra("turn"));
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) i.getSerializableExtra("gameParticipants");
 
