@@ -95,6 +95,7 @@ public class LibraryStoryActivity extends AppCompatActivity {
 
         TextView mtitle = (TextView) findViewById(R.id.story_name);
         mtitle.setText(title);
+        if (!type.equals("tale")) mtitle.setText("Partida rápida");
     }
 
     public void setNavegavilidad(){

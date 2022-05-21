@@ -159,6 +159,7 @@ public class LibraryActivity extends AppCompatActivity {
             }
 
             //--------------------
+            /*
             // Datos de prueba
             AsyncTaskGetStories.Story quickHarcodeada = new AsyncTaskGetStories.Story();
             quickHarcodeada.id = 99;
@@ -171,7 +172,7 @@ public class LibraryActivity extends AppCompatActivity {
             quickHarcodeada2.date = "25/3/2022";
             quickHarcodeada2.title = "Historia Aleatorias Hardcodeada";
             quickHarcodeada2.type = "quick_random";
-            quickStories.add(quickHarcodeada2);
+            quickStories.add(quickHarcodeada2);*/
             //--------------------
 
             fillDataQuickGames(quickStories);

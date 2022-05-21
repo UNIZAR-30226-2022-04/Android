@@ -26,7 +26,7 @@ public class AsyncTaskPointsQuickGame extends AsyncTask<String, Void, AsyncTaskP
 
     static class Result {
         String result;
-        List<Participant> clasification;
+        List<Participant> classification;
         int coins;
     }
 
@@ -41,7 +41,7 @@ public class AsyncTaskPointsQuickGame extends AsyncTask<String, Void, AsyncTaskP
         String id = params[0];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/points_voted_quick_game").openConnection();
+            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/points_quick_game").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

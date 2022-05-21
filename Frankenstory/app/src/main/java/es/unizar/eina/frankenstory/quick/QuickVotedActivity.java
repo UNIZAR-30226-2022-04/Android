@@ -137,6 +137,7 @@ public class QuickVotedActivity extends AppCompatActivity{
                     if (isLast) {
                         //GO TO QUICK POINTS
                         Intent i = new Intent(QuickVotedActivity.this, QuickPointsActivity.class);
+                        i.putExtra("code",code);
                         startActivity(i);
                         finish();
                     } else {  //TO QUICK VOTE

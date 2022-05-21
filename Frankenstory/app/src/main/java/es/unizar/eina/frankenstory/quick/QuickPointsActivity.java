@@ -49,6 +49,9 @@ public class QuickPointsActivity extends AppCompatActivity {
         // MODE NIGHT OFF
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        Intent intent = getIntent();
+        code = intent.getStringExtra("code");
+
         // GET VIEWS AND UPDATE DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mStars = (TextView) findViewById(R.id.starsTop);
@@ -142,11 +145,11 @@ public class QuickPointsActivity extends AppCompatActivity {
     {
         if ((resultado.result!=null && resultado.result.equals("success"))){
             mWinnedCoins.setText("+"+resultado.coins);
-            fillDataClasification(resultado.clasification);
+            fillDataClasification(resultado.classification);
 
             int position = 0;
-            for (int i = 0; i < resultado.clasification.size(); i++) {
-                if (resultado.clasification.get(i).username.equals(((MyApplication) this.getApplication()).getUsername())) {
+            for (int i = 0; i < resultado.classification.size(); i++) {
+                if (resultado.classification.get(i).username.equals(((MyApplication) this.getApplication()).getUsername())) {
                     position = i;
                     break;
                 }

@@ -56,7 +56,7 @@ public class ListLibraryQuickGamesAdapter extends BaseAdapter{
         ImageView imageMode = (ImageView) convertView.findViewById(R.id.mode);
 
         // set DATA
-        textViewItemName.setText(currentItem.title);
+        textViewItemName.setText("Partida rápida");
         textViewDate.setText(currentItem.date);
         if (currentItem.type.equals("quick_twitter")) {
             imageMode.setImageResource(R.drawable.tendencias_twitter);
@@ -69,7 +69,7 @@ public class ListLibraryQuickGamesAdapter extends BaseAdapter{
             public void onClick(View v) {
                 Intent i = new Intent(context, LibraryStoryActivity.class);
                 i.putExtra("title", currentItem.title);
-                i.putExtra("id", currentItem.id);
+                i.putExtra("id", currentItem.id.toString());
                 i.putExtra("type","quick");
                 context.startActivity(i);
             }
