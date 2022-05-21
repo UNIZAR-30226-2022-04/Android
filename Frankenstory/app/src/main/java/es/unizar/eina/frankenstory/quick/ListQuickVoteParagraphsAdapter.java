@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 import es.unizar.eina.frankenstory.R;
 import es.unizar.eina.frankenstory.story.AsyncTaskGetParagraphs;
@@ -65,9 +66,21 @@ public class ListQuickVoteParagraphsAdapter extends BaseAdapter {
 
         //SET COLOURS TO WORDS
         String content = currentItem.body;
-        //content = content.replace(currentItem.words.get(0), "<font color='#0ca789'>" + currentItem.words.get(0) + "</font>");
-        //content = content.replace(currentItem.words.get(1), "<font color='#0ca789'>" + currentItem.words.get(1) + "</font>");
-        //content = content.replace(currentItem.words.get(2), "<font color='#0ca789'>" + currentItem.words.get(2) + "</font>");
+
+        content = content.replace(currentItem.words.get(0),
+                "<font color='#0ca789'>" + currentItem.words.get(0) + "</font>");
+        content = content.replace(currentItem.words.get(0).toLowerCase(),
+                "<font color='#0ca789'>" + currentItem.words.get(0).toLowerCase() + "</font>");
+
+        content = content.replace(currentItem.words.get(1),
+                "<font color='#0ca789'>" + currentItem.words.get(1) + "</font>");
+        content = content.replace(currentItem.words.get(1).toLowerCase(),
+                "<font color='#0ca789'>" + currentItem.words.get(1).toLowerCase() + "</font>");
+
+        content = content.replace(currentItem.words.get(2),
+                "<font color='#0ca789'>" + currentItem.words.get(2) + "</font>");
+        content = content.replace(currentItem.words.get(2).toLowerCase(),
+                "<font color='#0ca789'>" + currentItem.words.get(2).toLowerCase() + "</font>");
 
         // set DATA
         textViewItemName.setText(Html.fromHtml(content));

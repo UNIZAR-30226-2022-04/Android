@@ -57,7 +57,7 @@ public class AsyncTaskAddParagraph extends AsyncTask<QuickPlayActivity.Paragraph
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"," +
                     "\"id\":\"" + params[0].id + "\"," + "\"body\":\"" + params[0].body.replaceAll("\n","\\\\n") + "\"," +
-                    "\"turn\":" + params[0].turn + "," + "\"isLast\":" + params[0].isLast.toString() + ",\"punetas\":" + punetas + "}";
+                    "\"turn\":\"" + params[0].turn + "\"," + "\"isLast\":" + params[0].isLast.toString() + ",\"punetas\":" + punetas + "}";
             Log.d("AddParagraph", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();

@@ -115,6 +115,7 @@ public class QuickVoteActivity extends AppCompatActivity{
         // BUTTON VOTE
         ButtonVote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                addParagraphCountDown.cancel();
                 //ASYNC TASK VOTE PARAGRAPH
                 AsyncTaskVoteQuick myTask = new AsyncTaskVoteQuick(QuickVoteActivity.this);
                 myTask.execute(code, String.valueOf(votedParagraph));

@@ -266,6 +266,7 @@ public class QuickPlayActivity extends AppCompatActivity{
         send_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 paragraphToSend.body = String.valueOf(content.getText());
+                addParagraphCountDown.cancel();
                 // CALL ASYNC TASK ADD PARAGRAPH
                 AsyncTaskAddParagraph myTask = new AsyncTaskAddParagraph(QuickPlayActivity.this);
                 myTask.execute(paragraphToSend);
@@ -285,7 +286,6 @@ public class QuickPlayActivity extends AppCompatActivity{
             TextView waiting = (TextView) findViewById(R.id.waitingPlayers);
             waiting.setVisibility(View.VISIBLE);
             if (paragraphToSend.isLast) {
-                addParagraphCountDown.cancel();
                 //GO TO QUICK GAME VOTE
                 Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
                 i.putExtra("code",code);
