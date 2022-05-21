@@ -19,7 +19,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="50dp"
+                android:layout_marginHorizontal="40dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="120dp"
                 android:orientation="vertical"
@@ -51,10 +51,39 @@
                     android:text="@string/story_name"
                     android:textColor="@color/white"
                     android:textSize="32sp" />
-
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="15dp">
+                    <!---Icono Reloj-->
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="2dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="2dp"
+                        android:src="@drawable/clock"/>
+                    <!---Tiempo-->
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Tiempo"
+                        android:fontFamily="@font/arial_bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:shadowColor="@color/verde_top"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
                 <ListView
                     android:id="@+id/voted"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     tools:listitem="@layout/row_quick_paragraphs_voted"/>

@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
@@ -36,6 +37,7 @@ public class QuickVoteActivity extends AppCompatActivity{
     private TextView mTittleTheme;
     private Button mVote;
     private Boolean isLast;
+    private TextView mTime;
 
     private String code;
     private String mode;
@@ -68,6 +70,7 @@ public class QuickVoteActivity extends AppCompatActivity{
         mTheme = (TextView) findViewById(R.id.twitter_trend);
         mTittleTheme = (TextView) findViewById(R.id.title_theme);
         mVote = (Button) findViewById(R.id.vote);
+        mTime = (TextView) findViewById(R.id.time);
 
         updateData();
         votedParagraph = 0;
@@ -155,7 +158,11 @@ public class QuickVoteActivity extends AppCompatActivity{
             // WAIT UNTIL TIME AND SET TIMER
             addParagraphCountDown = new CountDownTimer(resultado.s * 1000L,1000){
                 @Override
-                public void onTick(long millisUntilFinished) {}
+                public void onTick(long millisUntilFinished) {
+                    mTime.setText(""+String.format("%d min %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));}
                 public void onFinish() {
                     //ASYNC TASK VOTE PARAGRAPH
                     AsyncTaskVoteQuick myTask = new AsyncTaskVoteQuick(QuickVoteActivity.this);
@@ -191,7 +198,7 @@ public class QuickVoteActivity extends AppCompatActivity{
             Intent i = new Intent(QuickVoteActivity.this, QuickVotedActivity.class);
             i.putExtra("code",code);
             i.putExtra("mode",mode);
-            i.putExtra("turn",turn);
+            i.putExtra("turn",turn.toString());
             i.putExtra("isLast", isLast);
             i.putExtra("gameParticipants", (Serializable) gameParticipants);
             startActivity(i);

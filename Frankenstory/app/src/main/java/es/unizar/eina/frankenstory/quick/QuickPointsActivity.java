@@ -103,6 +103,7 @@ public class QuickPointsActivity extends AppCompatActivity {
                 Intent i = new Intent(QuickPointsActivity.this, SettingsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -113,6 +114,7 @@ public class QuickPointsActivity extends AppCompatActivity {
                 Intent i = new Intent(QuickPointsActivity.this, MainMenuActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
+                finish();
             }
         });
     }

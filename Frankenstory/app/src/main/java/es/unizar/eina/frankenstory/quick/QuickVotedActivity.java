@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import es.unizar.eina.frankenstory.MyApplication;
 import es.unizar.eina.frankenstory.R;
@@ -39,8 +40,8 @@ public class QuickVotedActivity extends AppCompatActivity{
     public Integer winner;
     private Boolean isLast;
     private Boolean alreadyStartedTimer;
+    private TextView mTime;
     Integer votedParagraph;
-    View selectedView;
     private List<AsyncTaskGetRoom.Participants> gameParticipants;
 
     private Timer myTimer;
@@ -59,6 +60,7 @@ public class QuickVotedActivity extends AppCompatActivity{
         mCoins = (TextView) findViewById(R.id.coinsTop);
         mParagraphs = (ListView) findViewById(R.id.paragraphs);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
+        mTime = (TextView) findViewById(R.id.time);
 
         updateData();
         votedParagraph = 0;
@@ -79,7 +81,7 @@ public class QuickVotedActivity extends AppCompatActivity{
         animationDrawable.start();
 
         // CALL ASYNC TASK RESUME VOTED QUICK GAME
-        AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(null,QuickVotedActivity.this);
+        AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(null,this);
         myTask.execute(code, String.valueOf(turn));
 
     }
@@ -126,14 +128,17 @@ public class QuickVotedActivity extends AppCompatActivity{
             // WAIT UNTIL TIME AND SET TIMER
             addParagraphCountDown = new CountDownTimer(resultado.s * 1000L,1000){
                 @Override
-                public void onTick(long millisUntilFinished) {}
+                public void onTick(long millisUntilFinished) {
+                    mTime.setText(""+String.format("%d min %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));}
                 public void onFinish() {
                     if (isLast) {
                         //GO TO QUICK POINTS
                         Intent i = new Intent(QuickVotedActivity.this, QuickPointsActivity.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(i);
-
+                        finish();
                     } else {  //TO QUICK VOTE
                         askIfWaiting();
                     }
@@ -152,7 +157,8 @@ public class QuickVotedActivity extends AppCompatActivity{
             Intent i = new Intent(QuickVotedActivity.this, QuickVoteActivity.class);
             i.putExtra("code",code);
             i.putExtra("mode",mode);
-            i.putExtra("turn",turn+1);
+            Integer newTurn = turn+1;
+            i.putExtra("turn",newTurn.toString());
             i.putExtra("gameParticipants", (Serializable) gameParticipants);
             startActivity(i);
             finish();
