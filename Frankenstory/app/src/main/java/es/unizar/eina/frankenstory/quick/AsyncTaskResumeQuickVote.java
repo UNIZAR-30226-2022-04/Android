@@ -16,6 +16,7 @@ import es.unizar.eina.frankenstory.MyApplication;
 
 public class AsyncTaskResumeQuickVote extends AsyncTask<String, Void, AsyncTaskResumeQuickVote.Result>{
 
+        private QuickPlayActivity mActivity_play = null;
         private QuickVoteActivity mActivity_vote = null;
         private QuickVotedActivity mActivity_voted = null;
 
@@ -33,20 +34,24 @@ public class AsyncTaskResumeQuickVote extends AsyncTask<String, Void, AsyncTaskR
         List<Paragraph> paragraphs;
     }
 
-    public AsyncTaskResumeQuickVote(QuickVoteActivity activity_vote, QuickVotedActivity activity_voted)
+    public AsyncTaskResumeQuickVote(QuickVoteActivity activity_vote, QuickVotedActivity activity_voted, QuickPlayActivity activity_play)
     {
         mActivity_vote = activity_vote;
         mActivity_voted = activity_voted;
+        mActivity_play = activity_play;
     }
 
     protected AsyncTaskResumeQuickVote.Result doInBackground(String... params) {
         String username, password;
-        if (mActivity_voted == null){
+        if (mActivity_vote != null){
             username = ((MyApplication) mActivity_vote.getApplication()).getUsername();
             password = ((MyApplication) mActivity_vote.getApplication()).getPassword();
-        } else {
+        } else if (mActivity_voted != null){
             username = ((MyApplication) mActivity_voted.getApplication()).getUsername();
             password = ((MyApplication) mActivity_voted.getApplication()).getPassword();
+        } else {
+            username = ((MyApplication) mActivity_play.getApplication()).getUsername();
+            password = ((MyApplication) mActivity_play.getApplication()).getPassword();
         }
 
         String id = params[0];
@@ -80,8 +85,9 @@ public class AsyncTaskResumeQuickVote extends AsyncTask<String, Void, AsyncTaskR
     }
 
     protected void onPostExecute(AsyncTaskResumeQuickVote.Result resultado) {
-        if (mActivity_voted == null) mActivity_vote.setupAdapter(resultado);
-        else mActivity_voted.setupAdapter(resultado);
+        if (mActivity_vote != null) mActivity_vote.setupAdapter(resultado);
+        else if (mActivity_voted != null) mActivity_voted.setupAdapter(resultado);
+        else if (mActivity_play != null) mActivity_play.setupAdapter(resultado);
     }
 
 }

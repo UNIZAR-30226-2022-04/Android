@@ -175,7 +175,7 @@ public class QuickVotedActivity extends AppCompatActivity{
     }
 
     public void askIfWaiting (){
-        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(null, QuickVotedActivity.this);
+        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(null, QuickVotedActivity.this, null);
         myTask.execute(code, String.valueOf(turn+1));
     }
 

@@ -287,18 +287,41 @@ public class QuickPlayActivity extends AppCompatActivity{
             waiting.setVisibility(View.VISIBLE);
             if (paragraphToSend.isLast) {
                 //GO TO QUICK GAME VOTE
-                Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
-                i.putExtra("code",code);
-                i.putExtra("mode",mode);
-                i.putExtra("turn","1");
-                i.putExtra("gameParticipants", (Serializable) gameParticipants);
-                startActivity(i);
-                finish();
+                AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(null, null, QuickPlayActivity.this);
+                myTask.execute(code,"1");
             } else {
                 tryingToStartAnother = true;
                 Integer newTurn = paragraphToSend.turn + 1;
                 AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
                 myTask.execute(code, newTurn.toString());
+            }
+        }
+    }
+
+    // ASYNC TASK ADAPTER RESUME QUICK VOTE
+    public void setupAdapter(AsyncTaskResumeQuickVote.Result resultado){
+        // IF SUCCESS THEN SEND
+        if (resultado.result!=null && resultado.result.equals("success")) {
+            if (myTimer != null) myTimer.cancel();
+            Intent i = new Intent(QuickPlayActivity.this, QuickVoteActivity.class);
+            i.putExtra("code",code);
+            i.putExtra("mode",mode);
+            i.putExtra("turn","1");
+            i.putExtra("gameParticipants", (Serializable) gameParticipants);
+            startActivity(i);
+            finish();
+        } else if (resultado.result!=null && resultado.result.equals("waiting_players")){
+            if (!alreadyStartedTimer){
+                alreadyStartedTimer = true;
+                myTimer = new Timer();
+                TimerTask doThis;
+                doThis = new TimerTask() {
+                    @Override
+                    public void run() {
+                        askIfWaitingForVote();
+                    }
+                };
+                myTimer.scheduleAtFixedRate(doThis,0,3000);
             }
         }
     }
@@ -408,6 +431,11 @@ public class QuickPlayActivity extends AppCompatActivity{
         Integer newTurn = paragraphToSend.turn + 1;
         AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
         myTask.execute(code, newTurn.toString());
+    }
+
+    public void askIfWaitingForVote (){
+        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(null, null, QuickPlayActivity.this);
+        myTask.execute(code,"1");
     }
 
     //Update used random words in editText

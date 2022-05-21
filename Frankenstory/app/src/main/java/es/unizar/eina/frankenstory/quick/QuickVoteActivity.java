@@ -92,7 +92,7 @@ public class QuickVoteActivity extends AppCompatActivity{
         }
 
         // CALL ASYNC TASK RESUME VOTE QUICK GAME
-        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(QuickVoteActivity.this, null);
+        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(QuickVoteActivity.this, null, null);
         myTask.execute(code, String.valueOf(turn));
 
     }
