@@ -58,7 +58,7 @@ public class AsyncTaskResumeQuickVoted extends AsyncTask<String, Void, AsyncTask
             con.setDoOutput(true);
 
             String jsonInputString = "{\"username\":\"" + username + "\",\"password\":\"" + password +
-                     "\",\"turn\":\"" + turn + "\",\"id\":\"" + id + "\"}";
+                     "\",\"turn\":" + turn + ",\"id\":\"" + id + "\"}";
             Log.d("ResumeVotedQuick", jsonInputString.toString());
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes();
