@@ -167,7 +167,8 @@ public class QuickVoteActivity extends AppCompatActivity{
 
     //ASYNC TASK ADAPTER VOTE QUICK
     public void setupAdapter(AsyncTaskVoteQuick.Result resultado) {
-
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        System.out.println(resultado.result);
         if (resultado.result==null || resultado.result.equals("error")) {
             Toast.makeText(getApplicationContext(), "ERROR ENVIANDO VOTACION", Toast.LENGTH_SHORT).show();
         } else {
