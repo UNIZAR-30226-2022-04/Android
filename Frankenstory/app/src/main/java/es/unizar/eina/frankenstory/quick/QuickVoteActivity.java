@@ -167,8 +167,7 @@ public class QuickVoteActivity extends AppCompatActivity{
 
     //ASYNC TASK ADAPTER VOTE QUICK
     public void setupAdapter(AsyncTaskVoteQuick.Result resultado) {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        System.out.println(resultado.result);
+
         if (resultado.result==null || resultado.result.equals("error")) {
             Toast.makeText(getApplicationContext(), "ERROR ENVIANDO VOTACION", Toast.LENGTH_SHORT).show();
         } else {
@@ -178,7 +177,7 @@ public class QuickVoteActivity extends AppCompatActivity{
             waiting.setVisibility(View.VISIBLE);
 
             AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(QuickVoteActivity.this, null);
-            myTask.execute(code, String.valueOf(turn+1));
+            myTask.execute(code, String.valueOf(turn));
         }
     }
 
@@ -216,7 +215,7 @@ public class QuickVoteActivity extends AppCompatActivity{
 
     public void askIfWaiting (){
         AsyncTaskResumeQuickVoted myTask = new AsyncTaskResumeQuickVoted(QuickVoteActivity.this, null);
-        myTask.execute(code, String.valueOf(turn+1));
+        myTask.execute(code, String.valueOf(turn));
     }
 
     private void fillParagraphs(List<AsyncTaskResumeQuickVote.Paragraph> paragraphs) {
