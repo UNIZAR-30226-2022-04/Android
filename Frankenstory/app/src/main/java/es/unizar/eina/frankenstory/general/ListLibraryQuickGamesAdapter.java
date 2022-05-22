@@ -56,11 +56,13 @@ public class ListLibraryQuickGamesAdapter extends BaseAdapter{
         ImageView imageMode = (ImageView) convertView.findViewById(R.id.mode);
 
         // set DATA
-        textViewItemName.setText("Partida rápida");
         textViewDate.setText(currentItem.date);
-        if (currentItem.type.equals("quick_twitter")) {
+
+        if (currentItem.type.equals("1")) {
+            textViewItemName.setText("Historia Twitter");
             imageMode.setImageResource(R.drawable.tendencias_twitter);
-        } else if (currentItem.type.equals("quick_random")) {
+        } else if (currentItem.type.equals("0")) {
+            textViewItemName.setText("Historia Aleatoria");
             imageMode.setImageResource(R.drawable.palabras_aleatorias);
         }
 

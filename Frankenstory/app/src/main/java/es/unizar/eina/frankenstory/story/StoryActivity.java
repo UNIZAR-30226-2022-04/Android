@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Random;
@@ -47,6 +48,7 @@ public class StoryActivity extends AppCompatActivity {
     private TextView mNoPublicGames;
     private TextView mNoVoteGames;
 
+    private Integer num_OwnTales;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,9 +244,13 @@ public class StoryActivity extends AppCompatActivity {
 
         mButtonCreateStory.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(StoryActivity.this, CreateStoryActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
+                if (num_OwnTales < 3) {
+                    Intent i = new Intent(StoryActivity.this, CreateStoryActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(StoryActivity.this,"Has alcanzado el limite de historias (3)", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -272,7 +278,7 @@ public class StoryActivity extends AppCompatActivity {
     public void setupAdapter(AsyncTaskStories.Result resultado)
     {
         if (resultado.result!=null && resultado.result.equals("success")){
-
+            num_OwnTales = resultado.myTales.size();
             fillDataMyGames(resultado.myTales);
             fillDataFriendGames(resultado.friendTales);
             fillDataPublicGames(resultado.publicTales);

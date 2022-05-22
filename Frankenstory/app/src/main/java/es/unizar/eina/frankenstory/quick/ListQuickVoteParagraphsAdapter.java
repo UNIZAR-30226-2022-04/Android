@@ -67,21 +67,22 @@ public class ListQuickVoteParagraphsAdapter extends BaseAdapter {
         //SET COLOURS TO WORDS
         String content = currentItem.body;
 
-        content = content.replace(currentItem.words.get(0),
-                "<font color='#0ca789'>" + currentItem.words.get(0) + "</font>");
-        content = content.replace(currentItem.words.get(0).toLowerCase(),
-                "<font color='#0ca789'>" + currentItem.words.get(0) + "</font>");
+        if (!currentItem.words.isEmpty()) {
+            content = content.replace(currentItem.words.get(0),
+                    "<font color='#0ca789'>" + currentItem.words.get(0) + "</font>");
+            content = content.replace(currentItem.words.get(0).toLowerCase(),
+                    "<font color='#0ca789'>" + currentItem.words.get(0) + "</font>");
 
-        content = content.replace(currentItem.words.get(1),
-                "<font color='#0ca789'>" + currentItem.words.get(1) + "</font>");
-        content = content.replace(currentItem.words.get(1).toLowerCase(),
-                "<font color='#0ca789'>" + currentItem.words.get(1) + "</font>");
+            content = content.replace(currentItem.words.get(1),
+                    "<font color='#0ca789'>" + currentItem.words.get(1) + "</font>");
+            content = content.replace(currentItem.words.get(1).toLowerCase(),
+                    "<font color='#0ca789'>" + currentItem.words.get(1) + "</font>");
 
-        content = content.replace(currentItem.words.get(2),
-                "<font color='#0ca789'>" + currentItem.words.get(2) + "</font>");
-        content = content.replace(currentItem.words.get(2).toLowerCase(),
-                "<font color='#0ca789'>" + currentItem.words.get(2) + "</font>");
-
+            content = content.replace(currentItem.words.get(2),
+                    "<font color='#0ca789'>" + currentItem.words.get(2) + "</font>");
+            content = content.replace(currentItem.words.get(2).toLowerCase(),
+                    "<font color='#0ca789'>" + currentItem.words.get(2) + "</font>");
+        }
         // set DATA
         textViewItemName.setText(Html.fromHtml(content));
 
