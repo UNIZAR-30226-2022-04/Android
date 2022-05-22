@@ -47,6 +47,7 @@ public class QuickVoteActivity extends AppCompatActivity{
     private List<AsyncTaskGetRoom.Participants> gameParticipants;
 
     private Boolean alreadyStartedTimer;
+    private Boolean alreadyStartedTimerRecargar;
 
     private Timer myTimer;
     private CountDownTimer addParagraphCountDown;
@@ -57,6 +58,7 @@ public class QuickVoteActivity extends AppCompatActivity{
         setContentView(R.layout.activity_quick_game_vote);
 
         alreadyStartedTimer = false;
+        alreadyStartedTimerRecargar=false;
         isLast = false;
 
         // MODE NIGHT OFF
@@ -157,6 +159,7 @@ public class QuickVoteActivity extends AppCompatActivity{
     {
 
         if (resultado.result!=null && resultado.result.equals("success")){
+            if (myTimer != null) myTimer.cancel();
             mTheme.setText(resultado.topic);
             turn = resultado.turn;
             isLast = resultado.isLast;
@@ -176,7 +179,27 @@ public class QuickVoteActivity extends AppCompatActivity{
                     myTask.execute(code, String.valueOf(votedParagraph));
                 }
             }.start();
+        // CASO EN QUE SE UNE A VOTACIONES (espera a que terminen de ver las de dicho turno si ya ha terminado, y recarga el de el siguiente)
+        } else if (resultado.result!=null && resultado.result.equals("waiting_players")){
+            if (!alreadyStartedTimerRecargar){
+                alreadyStartedTimerRecargar = true;
+                myTimer = new Timer();
+                TimerTask doThis;
+                doThis = new TimerTask() {
+                    @Override
+                    public void run() {
+                        chargeAgain();
+                    }
+                };
+                myTimer.scheduleAtFixedRate(doThis,0,3000);
+            }
         }
+    }
+
+    public void chargeAgain(){
+        // CALL ASYNC TASK RESUME VOTE QUICK GAME
+        AsyncTaskResumeQuickVote myTask = new AsyncTaskResumeQuickVote(QuickVoteActivity.this, null, null);
+        myTask.execute(code, String.valueOf(turn));
     }
 
     //ASYNC TASK ADAPTER VOTE QUICK

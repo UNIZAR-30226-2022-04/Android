@@ -212,7 +212,6 @@ public class QuickRoomActivity extends AppCompatActivity {
                 i.putExtra("code",code);
                 i.putExtra("mode",mode);
                 i.putExtra("turn","0");
-                i.putExtra("tryingToStartAnother",true);
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
                 startActivity(i);
                 finish();

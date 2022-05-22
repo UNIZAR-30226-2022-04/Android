@@ -93,6 +93,7 @@ public class QuickPlayActivity extends AppCompatActivity{
         paragraphToSend = new ParagraphToSend();
         alreadyStartedTimer = false;
         desordenTotalActivado = false;
+        tryingToStartAnother = false;
 
         // GET PARAMETERS
         Intent intent = getIntent();
@@ -100,7 +101,6 @@ public class QuickPlayActivity extends AppCompatActivity{
         setContentView(R.layout.activity_quick_game_play);
         paragraphToSend.turn = Integer.parseInt(intent.getStringExtra("turn"));
         paragraphToSend.id = intent.getStringExtra("code");
-        tryingToStartAnother = intent.getBooleanExtra("tryingToStartAnother", false);
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) intent.getSerializableExtra("gameParticipants");
 
         everythingDoneOnCreate();
@@ -108,6 +108,9 @@ public class QuickPlayActivity extends AppCompatActivity{
         // CALL ASYNC TASK PLAY QUICK GAME
         AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
         myTask.execute(code, paragraphToSend.turn.toString());
+
+        TextView waiting = (TextView) findViewById(R.id.waitingPlayers);
+        waiting.setVisibility(View.VISIBLE);
 
     }
 
@@ -331,8 +334,10 @@ public class QuickPlayActivity extends AppCompatActivity{
     // ASYNC TASK ADAPTER PLAY QUICK GAME
     public void setupAdapter(AsyncTaskPlayQuickGame.Result resultado)
     {
+        // CASO 1: AUN NO SE HA ENVIADO PÁRRAFO Y PODEMOS ESCRIBIR
         if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == false) {
-
+            TextView waiting = (TextView) findViewById(R.id.waitingPlayers);
+            waiting.setVisibility(View.INVISIBLE);
             // SET PUNETA AND CHANGE LAYOUT
             if (resultado.puneta != null && resultado.puneta.equals("reves")){
                 Log.d("PUÑETA", "del revés");
@@ -403,6 +408,7 @@ public class QuickPlayActivity extends AppCompatActivity{
                     myTask.execute(paragraphToSend);
                 }
             }.start();
+        // CASO 2: YA SE HA ENVÍADO PÁRRAFO Y PODEMOS PASAR A LA SIGUIENTE
         } else if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == true){
             if (myTimer != null) myTimer.cancel();
             addParagraphCountDown.cancel();
@@ -414,7 +420,8 @@ public class QuickPlayActivity extends AppCompatActivity{
             i.putExtra("gameParticipants", (Serializable) gameParticipants);
             startActivity(i);
             finish();
-        } else if (resultado.result!=null && resultado.result.equals("waiting_players") && tryingToStartAnother == true){
+        // CASO 3: YA SE HA ENVIADO PÁRRAFO, PERO TENEMOS QUE ESPERAR PARA IR A LA SIGUIENTE.
+        } else if (resultado.result!=null && resultado.result.equals("waiting_players")){
             if (!alreadyStartedTimer){
                 alreadyStartedTimer = true;
                 myTimer = new Timer();
@@ -431,7 +438,8 @@ public class QuickPlayActivity extends AppCompatActivity{
     }
 
     public void askIfWaiting (){
-        Integer newTurn = paragraphToSend.turn + 1;
+        Integer newTurn = paragraphToSend.turn;
+        if (tryingToStartAnother) newTurn++;
         AsyncTaskPlayQuickGame myTask = new AsyncTaskPlayQuickGame(this);
         myTask.execute(code, newTurn.toString());
     }
