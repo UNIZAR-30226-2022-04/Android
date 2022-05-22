@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskCreateRoom extends AsyncTask<String, Void, AsyncTaskCreateRoom.Result>{
 
@@ -35,7 +36,7 @@ public class AsyncTaskCreateRoom extends AsyncTask<String, Void, AsyncTaskCreate
         String mode = params[2];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/create_room").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/quick_game/create_room").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

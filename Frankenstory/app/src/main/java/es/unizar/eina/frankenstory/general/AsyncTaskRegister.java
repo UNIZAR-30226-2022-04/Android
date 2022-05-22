@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import es.unizar.eina.frankenstory.R;
+
 public class AsyncTaskRegister extends AsyncTask<String, Void, AsyncTaskRegister.ResultRegister> {
 
     private RegisterActivity mActivity = null;
@@ -32,7 +34,7 @@ public class AsyncTaskRegister extends AsyncTask<String, Void, AsyncTaskRegister
         String salt = params[3];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/register").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/general/register").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

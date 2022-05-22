@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskFriends extends AsyncTask<String, Void, AsyncTaskFriends.Result> {
     private FriendsActivity mActivity = null;
@@ -37,7 +38,7 @@ public class AsyncTaskFriends extends AsyncTask<String, Void, AsyncTaskFriends.R
         String password = ((MyApplication) mActivity.getApplication()).getPassword();
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/friends").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/general/friends").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

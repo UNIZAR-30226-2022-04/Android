@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskResumeQuickVoted extends AsyncTask<String, Void, AsyncTaskResumeQuickVoted.Result>{
 
@@ -38,20 +39,22 @@ public class AsyncTaskResumeQuickVoted extends AsyncTask<String, Void, AsyncTask
     }
 
     protected AsyncTaskResumeQuickVoted.Result doInBackground(String... params) {
-        String username, password;
+        String username, password, url = "";
          if (mActivity_voted == null) {
              username = ((MyApplication) mActivity_vote.getApplication()).getUsername();
              password = ((MyApplication) mActivity_vote.getApplication()).getPassword();
+             url = mActivity_vote.getResources().getString(R.string.url_server);
          } else {
              username = ((MyApplication) mActivity_voted.getApplication()).getUsername();
              password = ((MyApplication) mActivity_voted.getApplication()).getPassword();
+             url = mActivity_voted.getResources().getString(R.string.url_server);
          }
 
         String id = params[0];
         int turn = Integer.parseInt(params[1]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/resume_voted_quick_game").openConnection();
+            con = (HttpURLConnection) new URL(url+"/quick_game/resume_voted_quick_game").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

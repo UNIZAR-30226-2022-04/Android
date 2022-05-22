@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskAddParagraph extends AsyncTask<QuickPlayActivity.ParagraphToSend, Void, AsyncTaskAddParagraph.Result>{
 
@@ -49,7 +50,7 @@ public class AsyncTaskAddParagraph extends AsyncTask<QuickPlayActivity.Paragraph
 
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/add_quick_game_paragraph").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/quick_game/add_quick_game_paragraph").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

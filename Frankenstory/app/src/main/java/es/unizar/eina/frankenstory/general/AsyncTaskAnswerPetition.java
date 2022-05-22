@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskAnswerPetition extends AsyncTask<String, Void, AsyncTaskAnswerPetition.Result> {
     private FriendsActivity mActivity = null;
@@ -32,7 +33,7 @@ public class AsyncTaskAnswerPetition extends AsyncTask<String, Void, AsyncTaskAn
         String answer = params[1];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/answer_petition").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/general/answer_petition").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

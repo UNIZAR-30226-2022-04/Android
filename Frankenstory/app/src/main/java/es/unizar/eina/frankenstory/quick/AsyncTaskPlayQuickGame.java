@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPlayQuickGame.Result>{
 
@@ -39,7 +40,7 @@ public class AsyncTaskPlayQuickGame extends AsyncTask<String, Void, AsyncTaskPla
         String turn = params[1];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/play_quick_game").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/quick_game/play_quick_game").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

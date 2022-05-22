@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Frankenstory</string>
+    <string name="url_server">https://mooncode-frankenstory-dev.herokuapp.com/api</string>
     <string name="createAccount"> CREAR CUENTA </string>
     <string name="insertUserName">Nombre de usuario</string>
     <string name="insertPassWord">Contraseña</string>

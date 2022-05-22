@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 import es.unizar.eina.frankenstory.story.StoryNotFirstWriteActivity;
 
 public class AsyncTaskWatchStory extends AsyncTask<String, Void, AsyncTaskWatchStory.Result>{
@@ -36,7 +37,7 @@ public class AsyncTaskWatchStory extends AsyncTask<String, Void, AsyncTaskWatchS
         String type = params[1];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/watch_story").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/general/watch_story").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

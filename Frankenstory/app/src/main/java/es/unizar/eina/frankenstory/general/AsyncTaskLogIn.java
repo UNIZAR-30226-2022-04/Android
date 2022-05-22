@@ -12,6 +12,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import es.unizar.eina.frankenstory.R;
+
 public class AsyncTaskLogIn extends AsyncTask<String, Void, AsyncTaskLogIn.Result> {
 
     private LogInActivity mActivity = null;
@@ -31,7 +33,7 @@ public class AsyncTaskLogIn extends AsyncTask<String, Void, AsyncTaskLogIn.Resul
         String password = params[1];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/login").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/general/login").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

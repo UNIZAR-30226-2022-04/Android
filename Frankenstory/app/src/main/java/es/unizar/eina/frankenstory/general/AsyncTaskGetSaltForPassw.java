@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import es.unizar.eina.frankenstory.R;
+
 public class AsyncTaskGetSaltForPassw extends AsyncTask<String, Void, AsyncTaskGetSaltForPassw.Result> {
 
     private SettingsActivity mActivity = null;
@@ -30,7 +32,7 @@ public class AsyncTaskGetSaltForPassw extends AsyncTask<String, Void, AsyncTaskG
         String username = params[0];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/get_salt").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/general/get_salt").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

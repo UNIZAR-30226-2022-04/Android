@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskGetParagraphs extends AsyncTask<String, Void, AsyncTaskGetParagraphs.Result>{
 
@@ -37,7 +38,7 @@ public class AsyncTaskGetParagraphs extends AsyncTask<String, Void, AsyncTaskGet
         int id = Integer.parseInt(params[0]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/tale_mode/get_paragraphs").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/tale_mode/get_paragraphs").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

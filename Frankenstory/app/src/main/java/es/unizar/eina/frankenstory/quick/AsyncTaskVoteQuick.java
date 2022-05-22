@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskVoteQuick extends AsyncTask<String, Void, AsyncTaskVoteQuick.Result>{
 
@@ -33,7 +34,7 @@ public class AsyncTaskVoteQuick extends AsyncTask<String, Void, AsyncTaskVoteQui
         int paragraph = Integer.parseInt(params[1]);
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/quick_game/vote_quick_game").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/quick_game/vote_quick_game").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");

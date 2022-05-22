@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
+import es.unizar.eina.frankenstory.R;
 
 public class AsyncTaskSearchFriends extends AsyncTask<String, Void, AsyncTaskSearchFriends.Result> {
     private FriendsActivity mActivity = null;
@@ -36,7 +37,7 @@ public class AsyncTaskSearchFriends extends AsyncTask<String, Void, AsyncTaskSea
         String searchedName = params[0];
         HttpURLConnection con;
         try {
-            con = (HttpURLConnection) new URL("https://mooncode-frankenstory-dev.herokuapp.com/api/general/search_friends").openConnection();
+            con = (HttpURLConnection) new URL(mActivity.getResources().getString(R.string.url_server)+"/general/search_friends").openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
