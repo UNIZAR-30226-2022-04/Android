@@ -227,11 +227,12 @@ public class QuickRoomActivity extends AppCompatActivity {
 
 
             // IF IM NOT THE CREATOR (first in participant's list)
-            if(!resultado.participants.get(0).username.equals(mUsername.getText())){
+            if(!resultado.participants.get(0).username.equals(mUsername.getText()) || resultado.participants.size()<2){
                 // DONT LET START
                 mStartGame.setVisibility(View.INVISIBLE);
                 mStartGame.setClickable(false);
             } else {
+                mStartGame.setVisibility(View.VISIBLE);
                 mStartGame.setClickable(true);
             }
 

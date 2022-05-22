@@ -65,6 +65,7 @@ public class QuickPlayActivity extends AppCompatActivity{
 
     private Boolean tryingToStartAnother;
     private Boolean alreadyStartedTimer;
+    private Boolean desordenTotalActivado;
 
     private Timer myTimer;
     private CountDownTimer addParagraphCountDown;
@@ -92,6 +93,7 @@ public class QuickPlayActivity extends AppCompatActivity{
         paragraphToSend = new ParagraphToSend();
         tryingToStartAnother = false;
         alreadyStartedTimer = false;
+        desordenTotalActivado = false;
 
         // GET PARAMETERS
         Intent intent = getIntent();
@@ -345,6 +347,7 @@ public class QuickPlayActivity extends AppCompatActivity{
                 Log.d("PUÑETA", "desorden total");
                 setContentView(R.layout.activity_quick_game_play_desorden);
                 everythingDoneOnCreate();
+                desordenTotalActivado = true;
             }
 
             if (mode.equals("twitter")) {
