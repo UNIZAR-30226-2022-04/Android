@@ -91,7 +91,6 @@ public class QuickPlayActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         paragraphToSend = new ParagraphToSend();
-        tryingToStartAnother = false;
         alreadyStartedTimer = false;
         desordenTotalActivado = false;
 
@@ -101,6 +100,7 @@ public class QuickPlayActivity extends AppCompatActivity{
         setContentView(R.layout.activity_quick_game_play);
         paragraphToSend.turn = Integer.parseInt(intent.getStringExtra("turn"));
         paragraphToSend.id = intent.getStringExtra("code");
+        tryingToStartAnother = intent.getBooleanExtra("tryingToStartAnother", false);
         gameParticipants = (List<AsyncTaskGetRoom.Participants>) intent.getSerializableExtra("gameParticipants");
 
         everythingDoneOnCreate();

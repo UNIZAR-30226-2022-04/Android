@@ -101,6 +101,13 @@ public class QuickVoteActivity extends AppCompatActivity{
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (myTimer != null) myTimer.cancel();
+        addParagraphCountDown.cancel();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
     }
