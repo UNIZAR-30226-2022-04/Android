@@ -29,6 +29,7 @@
                         android:text="Amig@s"
                         android:textColor="@color/white"
                         android:textSize="35sp" />
+
                     <!--Texto buscar amigos-->
                     <TextView
                         android:layout_width="match_parent"
@@ -74,68 +75,97 @@
                     <!--Lista resultados amigos-->
                     <include layout="@layout/row_searched_friends"/>
                     <!--Texto tus amigos-->
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/arial_bold"
-                        android:shadowColor="@color/verde_letras"
-                        android:shadowDx="4"
-                        android:shadowDy="4"
-                        android:shadowRadius="1"
-                        android:text="@string/your_friends"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-                    <!-- Message no friends -->
-                    <TextView
-                        android:id="@+id/noFriends"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Parece que no tienes amig@s todavía :)"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/arial_bold"
-                        android:layout_marginLeft="8dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="10dp"/>
-                    <!--Lista amigos-->
-                    <ListView
-                        android:id="@+id/your_friends"
-                        android:layout_width="match_parent"
                         android:layout_marginTop="10dp"
-                        android:layout_height="140dp"
-                        tools:listitem="@layout/row_my_friends"
-                        android:dividerHeight="3sp" />
-                    <!--Texto Peticiones -->
-                    <TextView
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <Button
+                            android:id="@+id/buttonTusAmigos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Tus amig@s"
+                            android:background="@drawable/button_friends_claro"
+                            android:layout_marginRight="2dp"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/verde_letras"
+                            android:textColor="@color/white"/>
+                        <Button
+                            android:id="@+id/buttonPeticiones"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Peticiones"
+                            android:background="@drawable/button_friends_claro"
+                            android:layout_marginLeft="2dp"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/verde_punetas"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ventanaAmigos"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/arial_bold"
-                        android:shadowColor="@color/verde_letras"
-                        android:shadowDx="4"
-                        android:shadowDy="4"
-                        android:shadowRadius="1"
-                        android:text="@string/petitions"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:layout_marginTop="10dp"/>
-                    <!-- Message no friends -->
-                    <TextView
-                        android:id="@+id/noPetitions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="No hay peticiones nuevas"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/arial_bold"
-                        android:layout_marginLeft="8dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="10dp"/>
-                    <!--Lista solicitudes-->
-                    <ListView
-                        android:id="@+id/petitions"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/verde_letras"
+                        android:layout_marginBottom="100dp">
+                        <!-- Message no friends -->
+                        <TextView
+                            android:id="@+id/noFriends"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Parece que no tienes amig@s todavía :)"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/arial_bold"
+                            android:layout_marginLeft="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="10dp"/>
+                        <!--Lista amigos-->
+                        <ListView
+                            android:id="@+id/your_friends"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_height="match_parent"
+                            tools:listitem="@layout/row_my_friends"
+                            android:dividerHeight="3sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ventanaPeticiones"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="140dp"
-                        tools:listitem="@layout/row_friend_petitions"
-                        android:dividerHeight="3sp"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/verde_letras"
+                        android:layout_marginBottom="100dp"
+                        android:visibility="gone">
+                        <!-- Message no friends -->
+                        <TextView
+                            android:id="@+id/noPetitions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No hay peticiones nuevas"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/arial_bold"
+                            android:layout_marginLeft="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="10dp"/>
+                        <!--Lista solicitudes-->
+                        <ListView
+                            android:id="@+id/petitions"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_height="match_parent"
+                            tools:listitem="@layout/row_friend_petitions"
+                            android:dividerHeight="3sp"/>
+                    </LinearLayout>
+
                 </LinearLayout>
             <!---Parte inferior-->
     <include

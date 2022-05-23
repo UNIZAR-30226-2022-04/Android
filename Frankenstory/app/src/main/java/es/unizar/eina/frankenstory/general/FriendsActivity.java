@@ -160,6 +160,31 @@ public class FriendsActivity extends AppCompatActivity {
             }
         });
 
+        //--------------------------------------
+        // TUS AMIGOS <-> PETICONES
+        Button buttonTusAmigos = (Button) findViewById(R.id.buttonTusAmigos);
+        Button buttonPeticiones = (Button) findViewById(R.id.buttonPeticiones);
+        buttonTusAmigos.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                LinearLayout ventanaAmigos = (LinearLayout) findViewById(R.id.ventanaAmigos);
+                ventanaAmigos.setVisibility(View.VISIBLE);
+                LinearLayout ventanaPeticiones = (LinearLayout) findViewById(R.id.ventanaPeticiones);
+                ventanaPeticiones.setVisibility(View.GONE);
+                buttonTusAmigos.setBackgroundTintList(getResources().getColorStateList(R.color.verde_letras));
+                buttonPeticiones.setBackgroundTintList(getResources().getColorStateList(R.color.verde_punetas));
+            }
+        });
+        buttonPeticiones.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                LinearLayout ventanaAmigos = (LinearLayout) findViewById(R.id.ventanaAmigos);
+                ventanaAmigos.setVisibility(View.GONE);
+                LinearLayout ventanaPeticiones = (LinearLayout) findViewById(R.id.ventanaPeticiones);
+                ventanaPeticiones.setVisibility(View.VISIBLE);
+                buttonTusAmigos.setBackgroundTintList(getResources().getColorStateList(R.color.verde_punetas));
+                buttonPeticiones.setBackgroundTintList(getResources().getColorStateList(R.color.verde_letras));
+            }
+        });
+
     }
 
     // Para ocultar Navigation bar y lo de arriba.

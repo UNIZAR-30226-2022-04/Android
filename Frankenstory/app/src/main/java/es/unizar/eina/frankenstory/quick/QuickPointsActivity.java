@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import java.util.List;
 
 import es.unizar.eina.frankenstory.MyApplication;
@@ -151,6 +153,9 @@ public class QuickPointsActivity extends AppCompatActivity {
             switch (position){
                 case 0:
                     mMedal.setImageResource(R.drawable.gold);
+                    LottieAnimationView mConfettiAnimation = (LottieAnimationView) findViewById(R.id.confetti);
+                    mConfettiAnimation.setVisibility(View.VISIBLE);
+                    mConfettiAnimation.playAnimation();
                     break;
                 case 1:
                     mMedal.setImageResource(R.drawable.silver);

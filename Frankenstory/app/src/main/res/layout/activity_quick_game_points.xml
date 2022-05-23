@@ -6,6 +6,9 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@drawable/gradient_background"
 android:id="@+id/layoutmain">
+
+
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,5 +135,14 @@ android:id="@+id/layoutmain">
                     android:textSize="27sp" />
             </LinearLayout>
         </RelativeLayout>
-
+    <!--- Animacion -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/confetti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/confetti"
+        android:visibility="invisible"/>
 </RelativeLayout>
