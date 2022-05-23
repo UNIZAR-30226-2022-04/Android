@@ -28,7 +28,7 @@ public class AsyncTaskPointsQuickGame extends AsyncTask<String, Void, AsyncTaskP
     static class Result {
         String result;
         List<Participant> classification;
-        int coins;
+        Integer coins;
     }
 
     public AsyncTaskPointsQuickGame(QuickPointsActivity activity)

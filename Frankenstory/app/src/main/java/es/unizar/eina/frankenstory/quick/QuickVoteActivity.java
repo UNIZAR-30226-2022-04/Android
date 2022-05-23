@@ -173,6 +173,8 @@ public class QuickVoteActivity extends AppCompatActivity{
             turn = resultado.turn;
             isLast = resultado.isLast;
             fillParagraphs(resultado.paragraphs);
+            mVote.setClickable(true);
+            mVote.setBackground(getResources().getDrawable(R.drawable.button_green));
 
             // WAIT UNTIL TIME AND SET TIMER
             addParagraphCountDown = new CountDownTimer(resultado.s * 1000L,1000){

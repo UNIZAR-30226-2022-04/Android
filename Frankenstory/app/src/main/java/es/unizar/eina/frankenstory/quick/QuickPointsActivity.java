@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -138,6 +139,14 @@ public class QuickPointsActivity extends AppCompatActivity {
     // ASYNC TASK QUICK POINTS ADAPTER
     public void setupAdapter(AsyncTaskPointsQuickGame.Result resultado)
     {
+        //------------------
+        if (resultado.result!=null){
+            Log.d("QuicKPoints Result", resultado.result);
+            Log.d("QuicKPoints Coins", resultado.coins.toString());
+            Log.d("QuicKPoints Classi", resultado.classification.toString());
+        }
+
+        //_---------------
         if ((resultado.result!=null && resultado.result.equals("success"))){
             mWinnedCoins.setText("+"+resultado.coins);
             fillDataClasification(resultado.classification);
@@ -164,7 +173,7 @@ public class QuickPointsActivity extends AppCompatActivity {
                     mMedal.setImageResource(R.drawable.bronze);
                     break;
                 default:
-                    mMedal.setImageResource(0);
+                    mMedal.setImageResource(R.drawable.you_lost);
                     break;
             }
         } else {

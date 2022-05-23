@@ -169,6 +169,7 @@ public class QuickPlayActivity extends AppCompatActivity{
 
         previous_content.setVisibility(View.GONE);
 
+
         // UPDATE CONTENT
         content.addTextChangedListener(new TextWatcher() {
             @Override
@@ -186,6 +187,7 @@ public class QuickPlayActivity extends AppCompatActivity{
                 if (!mode.equals("twitter")) UpdateUsedWords();
             }
         });
+
 
         // PUÑETAS
         paragraphToSend.listFriendPuneta = new ArrayList<FriendPuneta>();
@@ -323,6 +325,10 @@ public class QuickPlayActivity extends AppCompatActivity{
             startActivity(i);
             finish();
         } else if (resultado.result!=null && resultado.result.equals("waiting_players")){
+            Button sendText = (Button) findViewById(R.id.sendText);
+            sendText.setClickable(false);
+            sendText.setBackground(getResources().getDrawable(R.drawable.button_grey));
+            content.setEnabled(false);
             if (!alreadyStartedTimer){
                 alreadyStartedTimer = true;
                 myTimer = new Timer();
@@ -343,6 +349,7 @@ public class QuickPlayActivity extends AppCompatActivity{
     {
         // CASO 1: AUN NO SE HA ENVIADO PÁRRAFO Y PODEMOS ESCRIBIR
         if (resultado.result!=null && resultado.result.equals("success") && tryingToStartAnother == false) {
+            if (myTimer != null) myTimer.cancel();
             TextView waiting = (TextView) findViewById(R.id.waitingPlayers);
             waiting.setVisibility(View.INVISIBLE);
             // SET PUNETA AND CHANGE LAYOUT
@@ -358,8 +365,9 @@ public class QuickPlayActivity extends AppCompatActivity{
             } else if (resultado.puneta != null && resultado.puneta.equals("desorden")){
                 Log.d("PUÑETA", "desorden total");
                 setContentView(R.layout.activity_quick_game_play_desorden);
-                everythingDoneOnCreate();
                 desordenTotalActivado = true;
+                everythingDoneOnCreate();
+
             }
 
             if (mode.equals("twitter")) {
@@ -429,6 +437,10 @@ public class QuickPlayActivity extends AppCompatActivity{
             finish();
         // CASO 3: YA SE HA ENVIADO PÁRRAFO, PERO TENEMOS QUE ESPERAR PARA IR A LA SIGUIENTE.
         } else if (resultado.result!=null && resultado.result.equals("waiting_players")){
+            Button sendText = (Button) findViewById(R.id.sendText);
+            sendText.setClickable(false);
+            sendText.setBackground(getResources().getDrawable(R.drawable.button_grey));
+            content.setEnabled(false);
             if (!alreadyStartedTimer){
                 alreadyStartedTimer = true;
                 myTimer = new Timer();
