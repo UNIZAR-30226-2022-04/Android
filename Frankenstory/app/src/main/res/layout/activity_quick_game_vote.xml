@@ -114,7 +114,7 @@
                 <ListView
                     android:id="@+id/paragraphs"
                     android:layout_width="match_parent"
-                    android:layout_height="380dp"
+                    android:layout_height="480dp"
                     android:layout_marginTop="10dp"
                     android:divider="@android:color/transparent"
                     android:dividerHeight="1.0sp"

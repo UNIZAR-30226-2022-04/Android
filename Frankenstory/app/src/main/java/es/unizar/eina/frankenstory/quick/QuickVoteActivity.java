@@ -157,7 +157,9 @@ public class QuickVoteActivity extends AppCompatActivity{
     // ASYNC TASK ADAPTER RESUME QUICK VOTE
     public void setupAdapter(AsyncTaskResumeQuickVote.Result resultado)
     {
-
+        System.out.println(resultado.paragraphs);
+        System.out.println(resultado.s);
+        System.out.println(resultado.result);
         if (resultado.result!=null && resultado.result.equals("success")){
             if (myTimer != null) myTimer.cancel();
             mTheme.setText(resultado.topic);
@@ -181,6 +183,8 @@ public class QuickVoteActivity extends AppCompatActivity{
             }.start();
         // CASO EN QUE SE UNE A VOTACIONES (espera a que terminen de ver las de dicho turno si ya ha terminado, y recarga el de el siguiente)
         } else if (resultado.result!=null && resultado.result.equals("waiting_players")){
+            mVote.setClickable(false);
+            mVote.setBackground(getResources().getDrawable(R.drawable.button_grey));
             if (!alreadyStartedTimerRecargar){
                 alreadyStartedTimerRecargar = true;
                 myTimer = new Timer();
