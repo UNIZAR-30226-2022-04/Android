@@ -91,7 +91,7 @@
                     android:layout_height="match_parent"
                     android:paddingTop="1dp"
                     android:paddingBottom="2dp"
-                    android:src="@drawable/mooncoin2"/>
+                    android:src="@drawable/mooncoin2" />
             </RelativeLayout>
         </TableRow>
     </TableLayout>

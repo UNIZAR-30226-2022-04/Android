@@ -45,6 +45,7 @@ public class QuickRoomActivity extends AppCompatActivity {
     private String code;
     private String mode;
     private int gameState;
+    private Boolean leavedBcsOfButtons;
 
     private Timer myTimer;
     private TimerTask doThis;
@@ -62,6 +63,8 @@ public class QuickRoomActivity extends AppCompatActivity {
         //GET PARAMETERS
         Intent i = this.getIntent();
         code = i.getExtras().getString("code");
+
+        leavedBcsOfButtons = false;
 
         // COPIAR AL PORTAPAPELES
         ClipData clip = ClipData.newPlainText("text", code);
@@ -121,6 +124,16 @@ public class QuickRoomActivity extends AppCompatActivity {
         myTimer.scheduleAtFixedRate(doThis,0,3000);
     }
 
+    // ON STOP LEAVE ROOM
+    @Override
+    protected void onStop() {
+        if (!leavedBcsOfButtons){
+            AsyncTaskLeaveRoom myTask = new AsyncTaskLeaveRoom(this);
+            myTask.execute();
+        }
+        super.onStop();
+    }
+
     // UPDATE PARTICIPANTS
     public void updateParticipants() {
         // CALL ASYNC TASK GET ROOM
@@ -139,14 +152,7 @@ public class QuickRoomActivity extends AppCompatActivity {
     public void setNavegavilidad(){
         // BUTTON TO SettingsActivity
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(QuickRoomActivity.this, SettingsActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-                finish();
-            }
-        });
+        buttonSettings.setVisibility(View.INVISIBLE);
 
         // BUTTON TO START GAME
         mStartGame.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +170,7 @@ public class QuickRoomActivity extends AppCompatActivity {
                 i.putExtra("mode",mode);
                 i.putExtra("turn","1");
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
+                leavedBcsOfButtons=true;
                 startActivity(i);
                 finish();
             }
@@ -213,6 +220,7 @@ public class QuickRoomActivity extends AppCompatActivity {
                 i.putExtra("mode",mode);
                 i.putExtra("turn","0");
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
+                leavedBcsOfButtons=true;
                 startActivity(i);
                 finish();
             } else if (gameState == 2){ // IF VOTING
@@ -221,6 +229,7 @@ public class QuickRoomActivity extends AppCompatActivity {
                 i.putExtra("mode",mode);
                 i.putExtra("turn","0");
                 i.putExtra("gameParticipants", (Serializable) gameParticipants);
+                leavedBcsOfButtons=true;
                 startActivity(i);
                 finish();
             }

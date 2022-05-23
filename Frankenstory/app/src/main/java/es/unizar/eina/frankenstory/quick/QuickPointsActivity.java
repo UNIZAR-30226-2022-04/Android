@@ -101,14 +101,7 @@ public class QuickPointsActivity extends AppCompatActivity {
     public void setNavegavilidad(){
         // BUTTON TO SettingsActivity
         ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(QuickPointsActivity.this, SettingsActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
-                finish();
-            }
-        });
+        buttonSettings.setVisibility(View.INVISIBLE);
 
         // BUTTON TO MAIN MENU ACTIVITY
         Button buttonTake = (Button)findViewById(R.id.take);

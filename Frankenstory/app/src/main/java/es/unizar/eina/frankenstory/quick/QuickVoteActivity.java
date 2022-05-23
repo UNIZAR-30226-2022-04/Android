@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -31,6 +32,7 @@ public class QuickVoteActivity extends AppCompatActivity{
 
     private TextView mUsername;
     private TextView mCoins;
+    private TextView mStars;
     private ListView mParagraphs;
     private ImageView mIconUser;
     private TextView mTheme;
@@ -67,6 +69,7 @@ public class QuickVoteActivity extends AppCompatActivity{
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
+        mStars = (TextView) findViewById(R.id.starsTop);
         mParagraphs = (ListView) findViewById(R.id.paragraphs);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         mTheme = (TextView) findViewById(R.id.twitter_trend);
@@ -118,6 +121,7 @@ public class QuickVoteActivity extends AppCompatActivity{
     public void updateData(){
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
+        mStars.setText(((MyApplication) this.getApplication()).getStars());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
     }
 
@@ -134,6 +138,9 @@ public class QuickVoteActivity extends AppCompatActivity{
 
             }
         });
+
+        ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
+        buttonSettings.setVisibility(View.INVISIBLE);
     }
 
     // Para ocultar Navigation bar y lo de arriba.

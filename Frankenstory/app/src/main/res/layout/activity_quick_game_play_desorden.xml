@@ -8,7 +8,7 @@ android:background="@drawable/gradient_background"
 android:id="@+id/layoutmain">
 
     <!---TOP-->
-    <include layout="@layout/top_quick_game"
+    <include layout="@layout/top2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"/>

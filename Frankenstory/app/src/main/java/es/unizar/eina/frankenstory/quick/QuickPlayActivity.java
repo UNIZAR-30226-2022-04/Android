@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,6 +41,7 @@ public class QuickPlayActivity extends AppCompatActivity{
 
     private TextView mUsername;
     private TextView mCoins;
+    private TextView mStars;
     private ImageView mIconUser;
     private EditText content;
     private TextView mTheme;
@@ -132,6 +134,7 @@ public class QuickPlayActivity extends AppCompatActivity{
         // GET VIEWS AND SET DATA
         mUsername = (TextView) findViewById(R.id.usernameTop);
         mCoins = (TextView) findViewById(R.id.coinsTop);
+        mStars = (TextView) findViewById(R.id.starsTop);
         mIconUser = (ImageView) findViewById(R.id.iconUser);
         content = (EditText) findViewById(R.id.story_content);
         send_text = (Button)findViewById(R.id.sendText);
@@ -145,6 +148,7 @@ public class QuickPlayActivity extends AppCompatActivity{
 
         mUsername.setText(((MyApplication) this.getApplication()).getUsername());
         mCoins.setText(((MyApplication) this.getApplication()).getCoins());
+        mStars.setText(((MyApplication) this.getApplication()).getStars());
         chooseIconUser(mIconUser, ((MyApplication) this.getApplication()).getIconUser());
 
 
@@ -266,6 +270,9 @@ public class QuickPlayActivity extends AppCompatActivity{
     }
 
     public void setNavegavilidad(){
+
+        ImageButton buttonSettings = (ImageButton)findViewById(R.id.configbutton);
+        buttonSettings.setVisibility(View.INVISIBLE);
 
         // BUTTON SEND TEXT
         send_text.setOnClickListener(new View.OnClickListener() {
