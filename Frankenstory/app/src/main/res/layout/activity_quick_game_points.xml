@@ -108,7 +108,7 @@ android:id="@+id/layoutmain">
                 <ListView
                     android:id="@+id/clasification"
                     android:layout_width="match_parent"
-                    android:layout_height="330dp"
+                    android:layout_height="wrap_content"
                     tools:listitem="@layout/row_main_menu"/>
 
 

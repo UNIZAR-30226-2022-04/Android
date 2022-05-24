@@ -100,6 +100,7 @@ public class StoryActivity extends AppCompatActivity {
         myTask.execute();
 
         // OPEN LISTS
+        /*
         TextView mispartidas = (TextView) findViewById(R.id.mispartidas);
         mispartidas.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -157,6 +158,94 @@ public class StoryActivity extends AppCompatActivity {
                     content.setVisibility(View.VISIBLE);
                     partidasvotar.setText(getText(R.string.no_voted_opened));
                 }
+            }
+        });*/
+        LinearLayout botonesOpcion1 = (LinearLayout) findViewById(R.id.botonesOpcion1);
+        LinearLayout botonesOpcion2 = (LinearLayout) findViewById(R.id.botonesOpcion2);
+        LinearLayout ventanaMisPartidas = (LinearLayout) findViewById(R.id.mispartidasContent);
+        LinearLayout ventanaPartidasAmigos = (LinearLayout) findViewById(R.id.partidasamigosContent);
+        LinearLayout ventanaPartidasPublicas = (LinearLayout) findViewById(R.id.partidaspublicasContent);
+        LinearLayout ventanaPartidasVotacion = (LinearLayout) findViewById(R.id.partidasvotarContent);
+        // Opción 1
+        Button buttonMisPartidas = (Button) findViewById(R.id.buttonMisPartidas);
+        Button buttonPartidasAmigos = (Button) findViewById(R.id.buttonPartidasAmigos);
+        Button buttonPartidasPublicas = (Button) findViewById(R.id.buttonPartidasPublicas);
+        Button buttonPartidasEnVotacion = (Button) findViewById(R.id.buttonPartidasEnVotacion);
+        buttonMisPartidas.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaMisPartidas.setVisibility(View.VISIBLE);
+                ventanaPartidasAmigos.setVisibility(View.GONE);
+                ventanaPartidasPublicas.setVisibility(View.GONE);
+                ventanaPartidasVotacion.setVisibility(View.GONE);
+            }
+        });
+        buttonPartidasAmigos.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaMisPartidas.setVisibility(View.GONE);
+                ventanaPartidasAmigos.setVisibility(View.VISIBLE);
+                ventanaPartidasPublicas.setVisibility(View.GONE);
+                ventanaPartidasVotacion.setVisibility(View.GONE);
+            }
+        });
+        buttonPartidasPublicas.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaMisPartidas.setVisibility(View.GONE);
+                ventanaPartidasAmigos.setVisibility(View.GONE);
+                ventanaPartidasPublicas.setVisibility(View.VISIBLE);
+                ventanaPartidasVotacion.setVisibility(View.GONE);
+                botonesOpcion1.setVisibility(View.GONE);
+                botonesOpcion2.setVisibility(View.VISIBLE);
+            }
+        });
+        buttonPartidasEnVotacion.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaMisPartidas.setVisibility(View.GONE);
+                ventanaPartidasAmigos.setVisibility(View.GONE);
+                ventanaPartidasPublicas.setVisibility(View.GONE);
+                ventanaPartidasVotacion.setVisibility(View.VISIBLE);
+                botonesOpcion1.setVisibility(View.GONE);
+                botonesOpcion2.setVisibility(View.VISIBLE);
+            }
+        });
+        // Opción 2
+        Button buttonMisPartidas2 = (Button) findViewById(R.id.buttonMisPartidas2);
+        Button buttonPartidasAmigos2 = (Button) findViewById(R.id.buttonPartidasAmigos2);
+        Button buttonPartidasPublicas2 = (Button) findViewById(R.id.buttonPartidasPublicas2);
+        Button buttonPartidasEnVotacion2 = (Button) findViewById(R.id.buttonPartidasEnVotacion2);
+        buttonMisPartidas2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaMisPartidas.setVisibility(View.VISIBLE);
+                ventanaPartidasAmigos.setVisibility(View.GONE);
+                ventanaPartidasPublicas.setVisibility(View.GONE);
+                ventanaPartidasVotacion.setVisibility(View.GONE);
+                botonesOpcion1.setVisibility(View.VISIBLE);
+                botonesOpcion2.setVisibility(View.GONE);
+            }
+        });
+        buttonPartidasAmigos2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaMisPartidas.setVisibility(View.GONE);
+                ventanaPartidasAmigos.setVisibility(View.VISIBLE);
+                ventanaPartidasPublicas.setVisibility(View.GONE);
+                ventanaPartidasVotacion.setVisibility(View.GONE);
+                botonesOpcion1.setVisibility(View.VISIBLE);
+                botonesOpcion2.setVisibility(View.GONE);
+            }
+        });
+        buttonPartidasPublicas2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaMisPartidas.setVisibility(View.GONE);
+                ventanaPartidasAmigos.setVisibility(View.GONE);
+                ventanaPartidasPublicas.setVisibility(View.VISIBLE);
+                ventanaPartidasVotacion.setVisibility(View.GONE);
+            }
+        });
+        buttonPartidasEnVotacion2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaMisPartidas.setVisibility(View.GONE);
+                ventanaPartidasAmigos.setVisibility(View.GONE);
+                ventanaPartidasPublicas.setVisibility(View.GONE);
+                ventanaPartidasVotacion.setVisibility(View.VISIBLE);
             }
         });
     }

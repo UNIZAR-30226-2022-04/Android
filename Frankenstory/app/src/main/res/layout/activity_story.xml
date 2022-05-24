@@ -13,7 +13,7 @@
                 android:layout_marginTop="12dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="70dp"
                 android:layout_marginHorizontal="40dp">
@@ -53,26 +53,161 @@
                     </TextView>
                 </RelativeLayout>
 
-                <!--Texto mis partidas-->
-                <TextView
-                    android:id="@+id/mispartidas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="4"
-                    android:shadowDy="4"
-                    android:shadowRadius="1"
-                    android:text="@string/my_games_opened"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
+                <!--Botones-->
                 <LinearLayout
-                    android:id="@+id/mispartidasContent"
+                    android:id="@+id/botonesOpcion1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="-10dp"
+                        android:weightSum="2">
+                        <Button
+                            android:id="@+id/buttonPartidasPublicas"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="Partidas públicas"
+                            android:background="@drawable/button_corners_rounded_up"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/partidasPublicas"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:paddingHorizontal="5dp"/>
+                        <Button
+                            android:id="@+id/buttonPartidasEnVotacion"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="Partidas en votación"
+                            android:background="@drawable/button_corners_rounded_up"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/partidasVotacion"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:paddingHorizontal="5dp"/>
+
+                    </LinearLayout>
+                    <!--Botones-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <Button
+                            android:id="@+id/buttonMisPartidas"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="Mis partidas"
+                            android:background="@drawable/button_corners_rounded_up"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/misPartidas"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:paddingHorizontal="5dp"/>
+                        <Button
+                            android:id="@+id/buttonPartidasAmigos"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="Partidas de amigos"
+                            android:background="@drawable/button_corners_rounded_up"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/partidasAmigos"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:paddingHorizontal="5dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/botonesOpcion2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <!--Botones-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="-10dp"
+                        android:weightSum="2">
+                        <Button
+                            android:id="@+id/buttonMisPartidas2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="Mis partidas"
+                            android:background="@drawable/button_corners_rounded_up"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/misPartidas"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:paddingHorizontal="5dp"/>
+                        <Button
+                            android:id="@+id/buttonPartidasAmigos2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="Partidas de amigos"
+                            android:background="@drawable/button_corners_rounded_up"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/partidasAmigos"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:paddingHorizontal="5dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <Button
+                            android:id="@+id/buttonPartidasPublicas2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="Partidas públicas"
+                            android:background="@drawable/button_corners_rounded_up"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/partidasPublicas"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:paddingHorizontal="5dp"/>
+                        <Button
+                            android:id="@+id/buttonPartidasEnVotacion2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:text="Partidas en votación"
+                            android:background="@drawable/button_corners_rounded_up"
+                            android:fontFamily="@font/arial_bold"
+                            android:backgroundTint="@color/partidasVotacion"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:paddingHorizontal="5dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--PARTIDAS PUBLICAS-->
+                <LinearLayout
+                    android:id="@+id/mispartidasContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/button_corners_rounded_down"
+                    android:backgroundTint="@color/misPartidas"
+                    android:layout_marginBottom="100dp">
                     <TextView
                         android:id="@+id/noMyGames"
                         android:layout_width="wrap_content"
@@ -82,34 +217,27 @@
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"/>
                     <!--Lista mis partidas-->
                     <ListView
                         android:id="@+id/my_stories"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:listitem="@layout/row_story_games"
+                        android:layout_margin="10dp"
                         android:fadeScrollbars="false"/>
                 </LinearLayout>
-                <!--Texto partidas de amigos-->
-                <TextView
-                    android:id="@+id/partidasamigos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="4"
-                    android:shadowDy="4"
-                    android:shadowRadius="1"
-                    android:text="@string/friend_games_opened"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                <!-- partidas de amigos-->
                 <LinearLayout
                     android:id="@+id/partidasamigosContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/button_corners_rounded_down"
+                    android:backgroundTint="@color/partidasAmigos"
+                    android:layout_marginBottom="100dp"
+                    android:visibility="gone">
                 <TextView
                         android:id="@+id/noFriendsGames"
                         android:layout_width="wrap_content"
@@ -119,71 +247,57 @@
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"/>
                 <!--Lista partidas de amigos-->
                 <ListView
                     android:id="@+id/friends_games"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/row_story_games"
+                    android:layout_margin="10dp"
                     android:fadeScrollbars="false"/>
                 </LinearLayout>
-                <!--Texto partidas públicas-->
-                <TextView
-                    android:id="@+id/partidaspublicas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="4"
-                    android:shadowDy="4"
-                    android:shadowRadius="1"
-                    android:text="@string/public_games_opened"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                <!-- partidas públicas-->
                 <LinearLayout
                     android:id="@+id/partidaspublicasContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                <!--Lista partidas públicas-->
-                <TextView
-                    android:id="@+id/noPublicGames"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/arial_bold"
-                    android:text="Parece que no hay relatos públicos"
-                    android:textSize="14sp" />
-                <ListView
-                    android:id="@+id/public_games"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/row_story_games"
-                    android:fadeScrollbars="false"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/button_corners_rounded_down"
+                    android:backgroundTint="@color/partidasPublicas"
+                    android:layout_marginBottom="100dp"
+                    android:visibility="gone">
+                    <!--Lista partidas públicas-->
+                    <TextView
+                        android:id="@+id/noPublicGames"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/arial_bold"
+                        android:text="Parece que no hay relatos públicos"
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
+                    <ListView
+                        android:id="@+id/public_games"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/row_story_games"
+                        android:layout_margin="10dp"
+                        android:fadeScrollbars="false"/>
                 </LinearLayout>
-                <!--Texto partidas públicas-->
-                <TextView
-                    android:id="@+id/partidasvotar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="4"
-                    android:shadowDy="4"
-                    android:shadowRadius="1"
-                    android:text="@string/no_voted_opened"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                <!-- partidas públicas-->
                 <LinearLayout
                     android:id="@+id/partidasvotarContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/button_corners_rounded_down"
+                    android:backgroundTint="@color/partidasVotacion"
+                    android:layout_marginBottom="100dp"
+                    android:visibility="gone">
                  <TextView
                         android:id="@+id/noVoteGames"
                         android:layout_width="wrap_content"
@@ -193,13 +307,15 @@
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"/>
                 <!--Lista partidas públicas-->
                 <ListView
                     android:id="@+id/VoteGames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/row_story_vote"
+                    android:layout_margin="10dp"
                     android:fadeScrollbars="false"/>
                 </LinearLayout>
             </LinearLayout>

@@ -32,4 +32,8 @@
     <color name="gris_claro">#e6e6e6</color>
     <color name="azul_oscuro_twitter">#2d9bf0</color>
     <color name="azul_claro_twitter">#53acee</color>
+    <color name="misPartidas">#1cbbc4</color>
+    <color name="partidasAmigos">#4fd190</color>
+    <color name="partidasPublicas">#ffb762</color>
+    <color name="partidasVotacion">#ff9459</color>
 </resources>
