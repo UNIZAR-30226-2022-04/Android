@@ -74,7 +74,7 @@
                     </LinearLayout>
                     <!--Lista resultados amigos-->
                     <include layout="@layout/row_searched_friends"/>
-                    <!--Texto tus amigos-->
+                    <!--Botones-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Tus amig@s"
-                            android:background="@drawable/button_friends_claro"
+                            android:background="@drawable/button_corners_rounded_up"
                             android:layout_marginRight="2dp"
                             android:fontFamily="@font/arial_bold"
                             android:backgroundTint="@color/verde_letras"
@@ -98,7 +98,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Peticiones"
-                            android:background="@drawable/button_friends_claro"
+                            android:background="@drawable/button_corners_rounded_up"
                             android:layout_marginLeft="2dp"
                             android:fontFamily="@font/arial_bold"
                             android:backgroundTint="@color/verde_punetas"
@@ -109,7 +109,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:background="@color/verde_letras"
+                        android:background="@drawable/button_corners_rounded_down"
+                        android:backgroundTint="@color/verde_letras"
                         android:layout_marginBottom="100dp">
                         <!-- Message no friends -->
                         <TextView
@@ -128,8 +129,8 @@
                             android:id="@+id/your_friends"
                             android:layout_width="match_parent"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginHorizontal="10dp"
                             android:layout_height="match_parent"
                             tools:listitem="@layout/row_my_friends"
                             android:dividerHeight="3sp" />
@@ -139,7 +140,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:background="@color/verde_letras"
+                        android:background="@drawable/button_corners_rounded_down"
+                        android:backgroundTint="@color/verde_letras"
                         android:layout_marginBottom="100dp"
                         android:visibility="gone">
                         <!-- Message no friends -->
@@ -159,8 +161,8 @@
                             android:id="@+id/petitions"
                             android:layout_width="match_parent"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginHorizontal="10dp"
                             android:layout_height="match_parent"
                             tools:listitem="@layout/row_friend_petitions"
                             android:dividerHeight="3sp"/>

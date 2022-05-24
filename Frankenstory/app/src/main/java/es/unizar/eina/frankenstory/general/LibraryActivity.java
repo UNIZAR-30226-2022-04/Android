@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -122,6 +123,25 @@ public class LibraryActivity extends AppCompatActivity {
                 Intent i = new Intent(LibraryActivity.this, MainMenuActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
+            }
+        });
+
+        //--------------------------------------
+        // PARTIDAS RÁPIDAS <-> RELATOS
+        Button buttonPartidasRapidas = (Button) findViewById(R.id.buttonPartidasRapidas);
+        Button buttonRelatos = (Button) findViewById(R.id.buttonRelatos);
+        LinearLayout ventanaPartidasRapidas = (LinearLayout) findViewById(R.id.ventanaPartidasRapidas);
+        LinearLayout ventanaRelatos = (LinearLayout) findViewById(R.id.ventanaRelatos);
+        buttonPartidasRapidas.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaPartidasRapidas.setVisibility(View.VISIBLE);
+                ventanaRelatos.setVisibility(View.GONE);
+            }
+        });
+        buttonRelatos.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ventanaPartidasRapidas.setVisibility(View.GONE);
+                ventanaRelatos.setVisibility(View.VISIBLE);
             }
         });
 

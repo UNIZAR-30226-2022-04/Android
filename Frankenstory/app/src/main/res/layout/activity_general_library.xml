@@ -17,7 +17,7 @@
                 android:layout_marginTop="12dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="70dp"
                 android:layout_marginHorizontal="40dp">
@@ -33,48 +33,76 @@
                     android:text="@string/my_stories"
                     android:textColor="@color/white"
                     android:textSize="35sp" />
-                <!--Texto Partidas rapidas-->
-                <TextView
+                <!--Botones-->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="4"
-                    android:shadowDy="4"
-                    android:shadowRadius="1"
-                    android:text="Partidas rapidas"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <Button
+                        android:id="@+id/buttonPartidasRapidas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Partidas rápidas"
+                        android:background="@drawable/button_corners_rounded_up"
+                        android:layout_marginRight="2dp"
+                        android:fontFamily="@font/arial_bold"
+                        android:backgroundTint="@color/azul_oscuro"
+                        android:textColor="@color/white"
+                        android:textSize="13dp"/>
+                    <Button
+                        android:id="@+id/buttonRelatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Relatos"
+                        android:background="@drawable/button_corners_rounded_up"
+                        android:layout_marginLeft="2dp"
+                        android:fontFamily="@font/arial_bold"
+                        android:backgroundTint="@color/amarillo_oscuro"
+                        android:textColor="@color/white"
+                        android:textSize="13dp"/>
+                </LinearLayout>
+                <!--VENTANA PARTIDAS RÁPIDAS -->
+                <LinearLayout
+                    android:id="@+id/ventanaPartidasRapidas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/button_corners_rounded_down"
+                    android:backgroundTint="@color/azul_oscuro"
+                    android:layout_marginBottom="100dp">
                 <TextView
                         android:id="@+id/noQuickGames"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Aun no has jugado ninguna partida rápida"
                         android:textSize="14sp"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/arial_bold"
                         android:layout_marginLeft="8dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="10dp"/>
                 <!--Lista mis partidas rapidas-->
                 <ListView
                     android:id="@+id/quick_games"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    tools:listitem="@layout/row_quick_library"/>
-                <!--Texto Partidas rapidas-->
-                <TextView
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/arial_bold"
-                    android:shadowColor="@color/verde_letras"
-                    android:shadowDx="4"
-                    android:shadowDy="4"
-                    android:shadowRadius="1"
-                    android:text="Relatos"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:layout_margin="10dp"
+                    tools:listitem="@layout/row_quick_library"/>
+                </LinearLayout>
+            <!--VENTANA RELATOS -->
+            <LinearLayout
+                android:id="@+id/ventanaRelatos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/button_corners_rounded_down"
+                android:backgroundTint="@color/amarillo_oscuro"
+                android:layout_marginBottom="100dp"
+                android:visibility="gone">
                 <TextView
                         android:id="@+id/noStoryGames"
                         android:layout_width="wrap_content"
@@ -89,9 +117,10 @@
                 <ListView
                     android:id="@+id/story_games"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     tools:listitem="@layout/row_story_library"/>
-
+            </LinearLayout>
             </LinearLayout>
             <!---Parte inferior-->
             <include

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -312,86 +313,86 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 0;
-                mIcon0.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon0.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 1;
-                mIcon1.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon1.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 2;
-                mIcon2.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon2.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 3;
-                mIcon3.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon3.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 4;
-                mIcon4.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon4.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 5;
-                mIcon5.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon5.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 6;
-                mIcon6.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon6.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon7.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 7;
-                mIcon7.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon7.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon8.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 8;
-                mIcon8.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon8.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
         mIcon9.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setIconTransparent(iconSelected);
                 iconSelected = 9;
-                mIcon9.setBackgroundColor(getResources().getColor(R.color.verde_top));
+                mIcon9.setBackgroundTintList(getResources().getColorStateList(R.color.white));
             }
         });
     }
 
     // Sets color transparend
     public void setIconTransparent(Integer picture){
-        if (picture==0) mIcon0.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==1) mIcon1.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==2) mIcon2.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==3) mIcon3.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==4) mIcon4.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==5) mIcon5.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==6) mIcon6.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==7) mIcon7.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==8) mIcon8.setBackgroundColor(Color.TRANSPARENT);
-        else if (picture==9) mIcon9.setBackgroundColor(Color.TRANSPARENT);
+        if (picture==0) mIcon0.setBackgroundTintList(null);
+        else if (picture==1) mIcon1.setBackgroundTintList(null);
+        else if (picture==2) mIcon2.setBackgroundTintList(null);
+        else if (picture==3) mIcon3.setBackgroundTintList(null);
+        else if (picture==4) mIcon4.setBackgroundTintList(null);
+        else if (picture==5) mIcon5.setBackgroundTintList(null);
+        else if (picture==6) mIcon6.setBackgroundTintList(null);
+        else if (picture==7) mIcon7.setBackgroundTintList(null);
+        else if (picture==8) mIcon8.setBackgroundTintList(null);
+        else if (picture==9) mIcon9.setBackgroundTintList(null);
     }
 
 }
