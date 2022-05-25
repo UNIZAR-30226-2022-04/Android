@@ -277,6 +277,8 @@ public class QuickVoteActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 votedParagraph = position;
+                mParagraphs.setAdapter(adapter);
+                /*
                 // INVISIBLE LAST HEART
                 ImageView heart = (ImageView) selectedView.findViewById(R.id.imageVote);
                 heart.setVisibility(View.GONE);
@@ -288,7 +290,7 @@ public class QuickVoteActivity extends AppCompatActivity{
                 textViewItem.setBackgroundColor(getResources().getColor(R.color.verde_parrafo_seleccionado));
                 heart = (ImageView) view.findViewById(R.id.imageVote);
                 heart.setVisibility(View.VISIBLE);
-                Log.d("VOTED PARAGRAPH", votedParagraph.toString());
+                Log.d("VOTED PARAGRAPH", votedParagraph.toString());*/
             }
         });
     }

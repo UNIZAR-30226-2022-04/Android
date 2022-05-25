@@ -68,15 +68,15 @@ public class ListQuickVoteParagraphsAdapter extends BaseAdapter {
 
         // ONLY HEART ON FIRST ONE
         ImageView heart = (ImageView) convertView.findViewById(R.id.imageVote);
-        TextView textViewItem = (TextView) convertView.findViewById(R.id.body);
+        TextView textViewItemName = (TextView) convertView.findViewById(R.id.body);
         if (position == context.votedParagraph){
             heart.setVisibility(View.VISIBLE);
-            textViewItem.setBackgroundColor(context.getResources().getColor(R.color.verde_parrafo_seleccionado));
+            textViewItemName.setBackgroundColor(context.getResources().getColor(R.color.verde_parrafo_seleccionado));
             context.selectedView = convertView;
             Log.d("PUESTO EL VOTADO",position+"-");
         } else {
             heart.setVisibility(View.GONE);
-            textViewItem.setBackgroundColor(context.getResources().getColor(R.color.verde_parrafo));
+            textViewItemName.setBackgroundColor(context.getResources().getColor(R.color.verde_parrafo));
             Log.d("NO VOTADO",position+"-");
         }
 
@@ -92,7 +92,7 @@ public class ListQuickVoteParagraphsAdapter extends BaseAdapter {
         */
 
         // get VIEWS
-        TextView textViewItemName = (TextView) convertView.findViewById(R.id.body);
+
 
         //SET COLOURS TO WORDS
         String content = currentItem.body;
