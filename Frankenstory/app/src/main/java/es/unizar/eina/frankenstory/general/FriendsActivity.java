@@ -110,6 +110,7 @@ public class FriendsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateData();
+        refreshPage();
     }
 
     // UPDATE DATA
@@ -121,6 +122,7 @@ public class FriendsActivity extends AppCompatActivity {
         if (Integer.parseInt(((MyApplication) this.getApplication()).getNotifications())>0){
             mNotifications.setText(((MyApplication) this.getApplication()).getNotifications());
         } else mNotifications.setVisibility(View.INVISIBLE);
+
     }
 
     public void refreshPage(){
