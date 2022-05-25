@@ -1,6 +1,7 @@
 package es.unizar.eina.frankenstory.quick;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,19 @@ public class ListQuickVoteParagraphsAdapter extends BaseAdapter {
         return position;
     }
 
+    //-------------------
+
+    @Override
+    public int getViewTypeCount() {
+        return getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+    //_--------------
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // inflate the layout for each list row
@@ -49,6 +63,24 @@ public class ListQuickVoteParagraphsAdapter extends BaseAdapter {
                     inflate(R.layout.row_quick_paragraphs_vote, parent, false);
         }
 
+        // get current item to be displayed
+        AsyncTaskResumeQuickVote.Paragraph currentItem = (AsyncTaskResumeQuickVote.Paragraph) getItem(position);
+
+        // ONLY HEART ON FIRST ONE
+        ImageView heart = (ImageView) convertView.findViewById(R.id.imageVote);
+        TextView textViewItem = (TextView) convertView.findViewById(R.id.body);
+        if (position == context.votedParagraph){
+            heart.setVisibility(View.VISIBLE);
+            textViewItem.setBackgroundColor(context.getResources().getColor(R.color.verde_parrafo_seleccionado));
+            context.selectedView = convertView;
+            Log.d("PUESTO EL VOTADO",position+"-");
+        } else {
+            heart.setVisibility(View.GONE);
+            textViewItem.setBackgroundColor(context.getResources().getColor(R.color.verde_parrafo));
+            Log.d("NO VOTADO",position+"-");
+        }
+
+        /*
         // ONLY HEART ON FIRST ONE
         ImageView heart = (ImageView) convertView.findViewById(R.id.imageVote);
         if (position == 0){
@@ -57,9 +89,7 @@ public class ListQuickVoteParagraphsAdapter extends BaseAdapter {
             textViewItem.setBackgroundColor(context.getResources().getColor(R.color.verde_parrafo_seleccionado));
             context.selectedView = convertView;
         } else heart.setVisibility(View.GONE);
-
-        // get current item to be displayed
-        AsyncTaskResumeQuickVote.Paragraph currentItem = (AsyncTaskResumeQuickVote.Paragraph) getItem(position);
+        */
 
         // get VIEWS
         TextView textViewItemName = (TextView) convertView.findViewById(R.id.body);
